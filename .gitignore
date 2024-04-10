@@ -1,0 +1,7 @@
+#Utilize este arquivo para configurar os arquivos que não serão enviados para o GITHUB
+
+# diretório de dependêcias
+node_modules/
+#arquivo de variáveis de ambiente
+.env
+
