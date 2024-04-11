@@ -57,6 +57,33 @@ main ul li:last-child {
     margin-right: 0;
 }
 
+.carousel {
+    overflow: hidden;
+    width: 100%;
+    position: relative;
+}
+
+.carousel input[type="radio"] {
+    display: none;
+}
+
+.carousel figure {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.carousel input[type="radio"]:checked + figure {
+    opacity: 1;
+}
+
+.carousel figure img {
+    max-width: 100%;
+    height: auto;
+}
+
 
 footer {
     padding: 20px;
@@ -83,4 +110,9 @@ footer {
         flex: 0 0 100%;
         margin-right: 0;
     }
+
+    .carousel figure {
+        width: 100%;
+}
+
 }
