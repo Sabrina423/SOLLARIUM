@@ -40,13 +40,36 @@ main img {
     margin-bottom: 20px;
 }
 
+.imagem-com-botao {
+    position: relative;
+    display: inline-block;
+}
+
+.imagem-com-botao img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.botao-sobre-imagem {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+
 main ul {
     list-style: none;
     display: flex;
     flex-wrap: wrap;
 }
-
-
 
 main ul li {
     flex: 0 0 calc(50% - 20px);
