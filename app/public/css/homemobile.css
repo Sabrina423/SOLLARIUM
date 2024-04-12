@@ -35,7 +35,7 @@ main {
 }
 
 main img {
-    max-width: 100%;
+    max-width: 500;
     height: auto;
     margin-bottom: 20px;
 }
