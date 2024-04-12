@@ -10,7 +10,6 @@ body {
     font-family: 'Roboto', sans-serif;
 }
 
-
 header {
     padding: 20px;
     background-color: #111;
@@ -41,6 +40,31 @@ main img {
     margin-bottom: 20px;
 }
 
+.imagem-com-botao {
+    position: relative;
+    display: inline-block;
+}
+
+.imagem-com-botao img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.botao-sobre-imagem {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+
 main ul {
     list-style: none;
     display: flex;
@@ -55,6 +79,33 @@ main ul li {
 
 main ul li:last-child {
     margin-right: 0;
+}
+
+.carousel {
+    overflow: hidden;
+    width: 100%;
+    position: relative;
+}
+
+.carousel input[type="radio"] {
+    display: none;
+}
+
+.carousel figure {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.carousel input[type="radio"]:checked + figure {
+    opacity: 1;
+}
+
+.carousel figure img {
+    max-width: 100%;
+    height: auto;
 }
 
 
@@ -83,4 +134,9 @@ footer {
         flex: 0 0 100%;
         margin-right: 0;
     }
+
+    .carousel figure {
+        width: 100%;
+}
+
 }
