@@ -12,8 +12,8 @@ body {
 
 header {
     padding: 20px;
-    background-color: #111;
-    color: #fff;
+    background-color:none;
+    color: rgb(31, 27, 27);
     display: flex;
     justify-content: space-between;
     align-items: center;
