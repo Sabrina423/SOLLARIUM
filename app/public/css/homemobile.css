@@ -12,7 +12,7 @@ body {
 
 header {
     padding: 20px;
-    background-color:none;
+    background-color:black;
     color: rgb(31, 27, 27);
     display: flex;
     justify-content: space-between;
