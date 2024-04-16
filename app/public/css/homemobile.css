@@ -1,89 +1,16 @@
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-
-body {
-    font-family: 'Roboto', sans-serif;
-}
-
-header {
-    padding: 20px;
-    background-color:black;
-    color: rgb(31, 27, 27);
+/* Estilos para o layout da página */
+main {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
     align-items: center;
 }
 
-nav ul {
-    display: flex;
-    list-style: none;
-}
-
-nav ul li {
-    margin-right: 20px;
-    cursor: pointer;
-}
-
-
-main {
-    padding: 20px;
-}
-
-main img {
-    max-width: 500;
-    height: auto;
-    margin-bottom: 20px;
-}
-
-.imagem-com-botao {
-    position: relative;
-    display: inline-block;
-}
-
-.imagem-com-botao img {
-    display: block;
-    width: 100%;
-    height: auto;
-}
-
-.botao-sobre-imagem {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: #007bff;
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    text-decoration: none;
-}
-
-
-main ul {
-    list-style: none;
-    display: flex;
-    flex-wrap: wrap;
-}
-
-main ul li {
-    flex: 0 0 calc(50% - 20px);
-    margin-right: 20px;
-    margin-bottom: 20px;
-}
-
-main ul li:last-child {
-    margin-right: 0;
-}
-
+/* Estilos para o carrossel */
 .carousel {
     overflow: hidden;
     width: 100%;
+    max-width: 600px; /* Defina o tamanho máximo do carrossel */
     position: relative;
 }
 
@@ -104,39 +31,13 @@ main ul li:last-child {
 }
 
 .carousel figure img {
-    max-width: 100%;
+    width: 100%;
     height: auto;
 }
 
-
-footer {
-    padding: 20px;
-    background-color: #111;
-    color: #fff;
-    text-align: center;
-}
-
-@media only screen and (max-width: 767px) {
-    header {
-        flex-direction: column;
-        align-items: center;
+/* Estilos para tornar o carrossel responsivo */
+@media screen and (max-width: 768px) {
+    .carousel {
+        max-width: 90%; /* Defina o tamanho máximo do carrossel para dispositivos móveis */
     }
-
-    nav ul {
-        margin-top: 10px;
-    }
-
-    nav ul li {
-        margin: 0 10px;
-    }
-
-    main ul li {
-        flex: 0 0 100%;
-        margin-right: 0;
-    }
-
-    .carousel figure {
-        width: 100%;
-}
-
 }
