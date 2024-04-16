@@ -1,5 +1,4 @@
 
-/* Reset de estilos */
 * {
     margin: 0;
     padding: 0;
@@ -9,6 +8,8 @@
 /* Estilos gerais */
 body {
     font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
 }
 
 .container {
@@ -47,16 +48,23 @@ nav ul li a {
     color: #333;
 }
 
+/* Estilos para todas as imagens */
+img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
 /* Estilos para o carrossel */
 .carousel-container {
-    max-width: 100%;
+    width: 100%;
     overflow: hidden;
-    margin-bottom: 20px;
+    position: relative;
 }
 
 .carousel {
     display: flex;
-    transition: transform 0.5s ease;
+    width: 100%;
 }
 
 .carousel input[type="radio"] {
@@ -66,11 +74,13 @@ nav ul li a {
 .carousel figure {
     flex: 0 0 auto;
     width: 100%;
+    margin: 0;
 }
 
 .carousel figure img {
     width: 100%;
     height: auto;
+    object-fit: cover; /* Para garantir que a imagem preencha a área do contêiner */
 }
 
 /* Estilos para o rodapé */
