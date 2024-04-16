@@ -1,25 +1,34 @@
-
+/* Reset de estilos */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+/* Estilos gerais */
 body {
     font-family: 'Roboto', sans-serif;
     margin: 0;
     padding: 0;
 }
 
-header {
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
     padding: 20px;
-    background-color: #111;
-    color: #fff;
+}
+
+/* Estilos para o cabeçalho */
+header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 10px 0;
 }
 
+header img {
+    max-width: 150px;
+}
 
 nav ul {
     list-style: none;
@@ -39,14 +48,14 @@ nav ul li a {
     color: #333;
 }
 
-
+/* Estilos para todas as imagens */
 img {
-    width: 100vw; 
+    width: 100%;
     height: auto;
     display: block;
 }
 
-
+/* Estilos para o carrossel */
 .carousel-container {
     width: 100%;
     overflow: hidden;
@@ -71,7 +80,7 @@ img {
 .carousel figure img {
     width: 100%;
     height: auto;
-    object-fit: cover;  
+    object-fit: cover; /* Para garantir que a imagem preencha a área do contêiner */
 }
 
 /* Estilos para o rodapé */
@@ -80,6 +89,7 @@ footer {
     padding: 20px 0;
 }
 
+/* Estilos específicos para dispositivos móveis */
 @media screen and (max-width: 768px) {
     .container {
         padding: 10px;
