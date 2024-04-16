@@ -12,13 +12,15 @@ body {
 }
 
 header {
-    padding: 20px;
-    background-color: #111;
-    color: #fff;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.8); /* Cor de fundo com transparência */
+    backdrop-filter: blur(10px); /* Aplicando um efeito de desfoque no fundo */
+    z-index: 1000; /* Certifique-se de que o cabeçalho esteja acima de outros elementos */
 }
+
 
 
 nav ul {
