@@ -17,7 +17,7 @@ header {
     width: 100%; /* Garante que o cabeçalho ocupe toda a largura da tela */
     background-color: rgba(255, 255, 255, 0.5); /* Define a cor de fundo com transparência */
     backdrop-filter: blur(10px); /* Aplica um efeito de desfoque no fundo */
-    z-index: 1000; /* Certifica-se de que o cabeçalho esteja acima de outros elementos */
+    z-index: 10; /* Certifica-se de que o cabeçalho esteja acima de outros elementos */
 }
 
 nav ul {
