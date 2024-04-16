@@ -48,12 +48,15 @@ nav ul li a {
 }
 
 /* Estilos para o carrossel */
-.carousel {
+.carousel-container {
+    max-width: 100%;
     overflow: hidden;
-    width: 100%;
-    max-width: 600px;
-    position: relative;
     margin-bottom: 20px;
+}
+
+.carousel {
+    display: flex;
+    transition: transform 0.5s ease;
 }
 
 .carousel input[type="radio"] {
@@ -61,15 +64,8 @@ nav ul li a {
 }
 
 .carousel figure {
-    position: absolute;
-    top: 0;
-    left: 0;
-    opacity: 0;
-    transition: opacity 0.5s ease;
-}
-
-.carousel input[type="radio"]:checked + figure {
-    opacity: 1;
+    flex: 0 0 auto;
+    width: 100%;
 }
 
 .carousel figure img {
@@ -95,7 +91,7 @@ footer {
     header nav {
         margin-top: 10px;
     }
-    .carousel {
+    .carousel-container {
         max-width: 90%;
     }
 }
