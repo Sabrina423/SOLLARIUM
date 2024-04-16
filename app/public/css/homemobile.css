@@ -10,12 +10,17 @@ body {
     margin: 0;
     padding: 0;
 }
+
 header {
+    padding: 20px;
+    background-color: #111;
+    color: #fff;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 0;
 }
+
+
 nav ul {
     list-style: none;
     display: flex;
