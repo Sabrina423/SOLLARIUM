@@ -50,7 +50,7 @@ nav ul li a {
 
 /* Estilos para todas as imagens */
 img {
-    width: 100%;
+    width: 100vw; /* 100% da largura da viewport */
     height: auto;
     display: block;
 }
