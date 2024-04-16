@@ -1,17 +1,59 @@
 
-/* Estilos para o layout da página */
-main {
+/* Reset de estilos */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Estilos gerais */
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Estilos para o cabeçalho */
+header {
     display: flex;
-    flex-direction: column;
+    justify-content: space-between;
     align-items: center;
+    padding: 10px 0;
+}
+
+header img {
+    max-width: 150px;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+}
+
+nav ul li {
+    margin-right: 20px;
+}
+
+nav ul li:last-child {
+    margin-right: 0;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #333;
 }
 
 /* Estilos para o carrossel */
 .carousel {
     overflow: hidden;
     width: 100%;
-    max-width: 600px; /* Defina o tamanho máximo do carrossel */
+    max-width: 600px;
     position: relative;
+    margin-bottom: 20px;
 }
 
 .carousel input[type="radio"] {
@@ -35,9 +77,25 @@ main {
     height: auto;
 }
 
-/* Estilos para tornar o carrossel responsivo */
+/* Estilos para o rodapé */
+footer {
+    text-align: center;
+    padding: 20px 0;
+}
+
+/* Estilos específicos para dispositivos móveis */
 @media screen and (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+    header {
+        flex-direction: column;
+        align-items: center;
+    }
+    header nav {
+        margin-top: 10px;
+    }
     .carousel {
-        max-width: 90%; /* Defina o tamanho máximo do carrossel para dispositivos móveis */
+        max-width: 90%;
     }
 }
