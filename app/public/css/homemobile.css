@@ -11,6 +11,22 @@ body {
     padding: 0;
 }
 
+/* Estilos para a transição do cabeçalho */
+.header-fixed {
+    position: fixed;
+    top: -100px; /* Inicialmente, o cabeçalho estará acima da tela */
+    left: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.8); /* Cor de fundo com transparência */
+    transition: top 0.3s ease; /* Adiciona uma transição suave */
+    z-index: 1000;
+}
+
+/* Estilos para a transição do conteúdo principal */
+.main-transition {
+    transition: margin-top 0.3s ease; /* Adiciona uma transição suave para o conteúdo principal */
+}
+
 
 
 nav ul {
