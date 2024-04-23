@@ -10,18 +10,25 @@ body {
     margin: 0;
     padding: 0;
 }
-
-/* Estilos para a transição do cabeçalho */
-.header-fixed {
+/* Estilos para o cabeçalho */
+header {
     position: fixed;
-    top: -100px; /* Inicialmente, o cabeçalho estará acima da tela */
+    top: 0;
     left: 0;
     width: 100%;
-    background-color: rgba(0, 0, 0, 0.8); /* Cor de fundo com transparência */
-    transition: top 0.3s ease; /* Adiciona uma transição suave */
+    height: 60px; /* Defina a altura desejada para o cabeçalho */
+    background-color: rgba(0, 0, 0, 0.8);
+    transition: height 0.3s ease; /* Adiciona uma transição suave para a altura */
     z-index: 1000;
 }
 
+/* Estilos para a logo */
+header img {
+    max-width: 200px; /* Defina a largura máxima desejada para a logo */
+    height: auto;
+    margin-left: 20px; /* Adiciona um espaço à esquerda da logo */
+    margin-top: 10px; /* Adiciona um espaço acima da logo */
+}
 /* Estilos para a transição do conteúdo principal */
 .main-transition {
     transition: margin-top 0.3s ease; /* Adiciona uma transição suave para o conteúdo principal */
