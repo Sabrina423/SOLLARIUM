@@ -1,0 +1,81 @@
+<h2>Alterar dados do cliente</h2>
+<form action="" method="post">
+
+    <nav class="form-horizontal">
+        <hr/>
+        <nav class="form-group">
+            <label for="nome" class = "control-label col-md-2">Nome</label>
+            <nav class="col-md-10">
+                <input  class = "form-control"type="text" name="nome" id="">
+            </nav>
+        </nav>
+        
+        <nav class="form-group">
+            <label for="cep" class = "control-label col-md-2">CEP</label>
+            <nav class="col-md-10">
+                <input  class = "form-control" type="text" name="cep" id="">            
+            </nav>
+        </nav>
+        
+        <nav class="form-group" style="display:flex">
+            <label for="" class = "control-label col-md-2">Imagem Perfil</label>
+            <nav class="col-md-5">
+                <input  class = "form-control" type="file" name="ImagemPerfil" id="">    
+            </div>
+            <img id="img-preview" src="imagem/img_login.png" style="max-width:80px; max-height:80px;"/>
+        </div>
+        
+        <div class="form-group">
+            <label for="nomeUsuario" class = "control-label col-md-2">Nome de Usuário</label>
+            <div class="col-md-10">
+                <input  class = "form-control"type="text" name="nomeUsuario" id="">  
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label for="email" class = "control-label col-md-2">E-mail</label>
+            <div class="col-md-10">
+                <input  class = "form-control"type="text" name="email" id="">  
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label for="senha" class = "control-label col-md-2">Senha</label>
+            <div class="col-md-10">
+                <input  class = "form-control" type="password" name="senha" id="">  
+             </div>
+        </div>
+        
+        <div class="form-group">
+            <label for="tipo" class = "control-label col-md-2">Tipo Usuario</label>
+            <div class="col-md-10">
+               <select name="tipo" id=""  class = "form-control">
+                    <option value="1">Comum</option>
+                    <option value="2">Gerente</option>
+               </select>
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label for="status" class = "control-label col-md-2">Status</label>
+            <div class="col-md-10">
+                <select   class = "form-control" name="status" id="">
+                    <option value="1">Ativo</option>
+                    <option value="0">Inativo</option>
+               </select>
+            </div>
+        </div>
+    
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Salvar" class="btn btn-success" />
+            </div>
+        </div>
+    </div>
+    </form>
+    
+    <div>
+        <a class="btn btn-primary btn-lg" href="/adm-cliente" role="button">voltar</a>
+    
+    </div>
+    
