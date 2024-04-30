@@ -5,7 +5,7 @@ router.get("/", function (req,res){
     res.render ("pages/home");
 });
 router.get("html", function (req,res){
-    res.render("pages/html");
+    res.render("pages/soucliente");
 });
 router.get("/jquery", function (req,res){
     res.render("pages/jquery");
