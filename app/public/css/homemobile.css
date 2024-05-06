@@ -26,8 +26,6 @@ header {
 header img {
     max-width: 200px; /* Defina a largura máxima desejada para a logo */
     height: auto;
-    margin-left: 20px; /* Adiciona um espaço à esquerda da logo */
-    margin-top: 10px; /* Adiciona um espaço acima da logo */
 }
 /* Estilos para a transição do conteúdo principal */
 .main-transition {
