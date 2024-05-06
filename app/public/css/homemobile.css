@@ -24,7 +24,7 @@ header {
 
 /* Estilos para a logo */
 header img {
-    max-width: 200px; /* Defina a largura máxima desejada para a logo */
+    max-width: 200px; 
     height: auto;
 }
 /* Estilos para a transição do conteúdo principal */
