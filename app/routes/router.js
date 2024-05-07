@@ -8,7 +8,7 @@ router.get("html", function (req,res){
     res.render("pages/soucliente");
 });
 router.get("/jquery", function (req,res){
-    res.render("pages/jquery");
+    res.render("pages/souprofissional");
 });
 router.post("html", function (req, res){
     res.json(req.body);
