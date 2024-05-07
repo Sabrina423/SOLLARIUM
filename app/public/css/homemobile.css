@@ -66,25 +66,13 @@ img {
     position: relative;
 }
 
-.carousel {
-    display: flex;
-    width: 100%;
+.carousel-item {
+    height: 400px;
 }
-
-.carousel input[type="radio"] {
-    display: none;
-}
-
-.carousel figure {
-    flex: 0 0 auto;
+.carousel-item img {
+    object-fit: cover;
+    height: 100%;
     width: 100%;
-    margin: 0;
-}
-
-.carousel figure img {
-    width: 100%;
-    height: auto;
-    object-fit: cover;  
 }
 
 /* Estilos para o rodapé */

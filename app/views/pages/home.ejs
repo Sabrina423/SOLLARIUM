@@ -9,7 +9,6 @@
     <link rel="icon" type="imagens/LOGO_SOLLARIUM (8).png" href="/images/favicon.ico">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/css/homemobile.css">
-    <script src="js/carrocel.js"></script>
     <script src="js/animacao.js"></script>
     <script src="js/menumobile.js"></script>
 </head>
@@ -30,41 +29,65 @@
        </header>
        <main>
          <img src="imagens/_mobile_7 (2).png" alt="">
-         <nav>
-            <figure class="carousel">
-                <input type="radio" name="carousel" id="slide1" checked>
-                <input type="radio" name="carousel" id="slide2">
-                <input type="radio" name="carousel" id="slide3">
-                <input type="radio" name="carousel" id="slide4">
-                <input type="radio" name="carousel" id="slide5">
-                <input type="radio" name="carousel" id="slide6">
-            
-                <figcaption for="slide1">
-                    <img src="imagens/Instalação.png" alt="">
-                </figcaption>
-            
-                <figcaption for="slide2">
-                    <img src="imagens/Manutenção.png" alt="">
-                </figcaption>
-            
-                <figcaption for="slide3">
-                    <img src="imagens/Vistoria.png" alt="">
-                </figcaption>
-            
-                <figcaption for="slide4">
-                    <img src="imagens/consultoria.png" alt="">
-                </figcaption>
-            
-                <figcaption for="slide5">
-                    <img src="imagens/desenvolvimento.png" alt="">
-                </figcaption>
-            
-                <figcaption for="slide6">
-                    <img src="imagens/limpeza.png" alt="">
-                </figcaption>
-            </figure>
-            
-         </nav>
+         <nav id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+            <nav class="carousel-inner">
+                <figure class="carousel-item active">
+                    <img src="imagens/Instalação.png" class="d-block w-100" alt="Slide 1">
+                    <figcaption class="carousel-caption d-none d-md-block">
+                        <h5>Slide 1</h5>
+                        <p>Description for Slide 1.</p>
+                    </figcaption>
+                </figure>
+                <figure class="carousel-item">
+                    <img src="imagens/Manutenção.png" class="d-block w-100" alt="Slide 2">
+                    <figcaption class="carousel-caption d-none d-md-block">
+                        <h5>Slide 2</h5>
+                        <p>Description for Slide 2.</p>
+                    </figcaption>
+                </figure>
+                <figure class="carousel-item">
+                    <img src="imagens/Vistoria.png" class="d-block w-100" alt="Slide 3">
+                    <figcaption class="carousel-caption d-none d-md-block">
+                        <h5>Slide 3</h5>
+                        <p>Description for Slide 3.</p>
+                    </figcaption>
+                </figure>
+                <figure class="carousel-item">
+                    <img src="imagens/consultoria.png" class="d-block w-100" alt="Slide 4">
+                    <figcaption class="carousel-caption d-none d-md-block">
+                        <h5>Slide 4</h5>
+                        <p>Description for Slide 4.</p>
+                    </figcaption>
+                </figure>
+                <figure class="carousel-item">
+                    <img src="imagens/desenvolvimento.png" class="d-block w-100" alt="Slide 5">
+                    <figcaption class="carousel-caption d-none d-md-block">
+                        <h5>Slide 5</h5>
+                        <p>Description for Slide 5.</p>
+                    </figcaption>
+                </figure>
+                <figure class="carousel-item">
+                    <img src="imagens/limpeza.png" class="d-block w-100" alt="Slide 6">
+                    <figcaption class="carousel-caption d-none d-md-block">
+                        <h5>Slide 6</h5>
+                        <p>Description for Slide 6.</p>
+                    </figcaption>
+                </figure>
+            </nav>
+            <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </nav>
+
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        
          <img src="imagens/solar_ (1).png" alt="">
         <img src="imagens/painelsolar_.png" alt="">
          <img src="imagens/a melhor opção.png" alt="">
@@ -93,41 +116,62 @@
         </header>
         <main>
           <img src="/app/public/imagens/_mobile_7 (2).png" alt="">
-          <nav>
-            <figure class="carousel">
-                <input type="radio" name="carousel" id="slide1" checked>
-                <input type="radio" name="carousel" id="slide2">
-                <input type="radio" name="carousel" id="slide3">
-                <input type="radio" name="carousel" id="slide4">
-                <input type="radio" name="carousel" id="slide5">
-                <input type="radio" name="carousel" id="slide6">
+          <nav id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+            <nav class="carousel-inner">
+                <figure class="carousel-item active">
+                    <img src="imagens/Instalação.png" class="d-block w-100" alt="Slide 1">
+                    <figcaption class="carousel-caption d-none d-md-block">
+                        <h5>Slide 1</h5>
+                        <p>Description for Slide 1.</p>
+                    </figcaption>
+                </figure>
+                <figure class="carousel-item">
+                    <img src="imagens/Manutenção.png" class="d-block w-100" alt="Slide 2">
+                    <figcaption class="carousel-caption d-none d-md-block">
+                        <h5>Slide 2</h5>
+                        <p>Description for Slide 2.</p>
+                    </figcaption>
+                </figure>
+                <figure class="carousel-item">
+                    <img src="imagens/Vistoria.png" class="d-block w-100" alt="Slide 3">
+                    <figcaption class="carousel-caption d-none d-md-block">
+                        <h5>Slide 3</h5>
+                        <p>Description for Slide 3.</p>
+                    </figcaption>
+                </figure>
+                <figure class="carousel-item">
+                    <img src="imagens/consultoria.png" class="d-block w-100" alt="Slide 4">
+                    <figcaption class="carousel-caption d-none d-md-block">
+                        <h5>Slide 4</h5>
+                        <p>Description for Slide 4.</p>
+                    </figcaption>
+                </figure>
+                <figure class="carousel-item">
+                    <img src="imagens/desenvolvimento.png" class="d-block w-100" alt="Slide 5">
+                    <figcaption class="carousel-caption d-none d-md-block">
+                        <h5>Slide 5</h5>
+                        <p>Description for Slide 5.</p>
+                    </figcaption>
+                </figure>
+                <figure class="carousel-item">
+                    <img src="imagens/limpeza.png" class="d-block w-100" alt="Slide 6">
+                    <figcaption class="carousel-caption d-none d-md-block">
+                        <h5>Slide 6</h5>
+                        <p>Description for Slide 6.</p>
+                    </figcaption>
+                </figure>
+            </nav>
+            <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </nav>
             
-                <figcaption for="slide1">
-                    <img src="/app/public/imagens/Instalação.png" alt="">
-                </figcaption>
-            
-                <figcaption for="slide2">
-                    <img src="/app/public/imagens/Manutenção.png" alt="">
-                </figcaption>
-            
-                <figcaption for="slide3">
-                    <img src="/app/public/imagens/Vistoria.png" alt="">
-                </figcaption>
-            
-                <figcaption for="slide4">
-                    <img src="/app/public/imagens/consultoria.png" alt="">
-                </figcaption>
-            
-                <figcaption for="slide5">
-                    <img src="/app/public/imagens/desenvolvimento.png" alt="">
-                </figcaption>
-            
-                <figcaption for="slide6">
-                    <img src="/app/public/imagens/limpeza.png" alt="">
-                </figcaption>
-            </figure>
-            
-          </nav>
+          
           <img src="/app/public/imagens/solar_ (1).png" alt="">
          <img src="/app/public/imagens/painelsolar_.png" alt="">
           <img src="/app/public/imagens/a melhor opção.png" alt="">
