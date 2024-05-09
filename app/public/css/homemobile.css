@@ -77,6 +77,13 @@ nav ul li a:hover {
     width: 100%;
 }
 
+img {
+    width: 100vw; 
+    height: auto;
+    display: block;
+}
+
+
 /* Estilos para o rodapé */
 footer {
     text-align: center;
