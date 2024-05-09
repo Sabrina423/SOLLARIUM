@@ -12,30 +12,28 @@ body {
 
 /* Estilos para o cabeçalho */
 header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.5); /* Fundo transparente preto */
+    padding: 10px 20px; /* Adicionei espaçamento interno para os itens do cabeçalho */
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    height: 80px; /* Ajustei a altura do cabeçalho */
-    background-color: rgba(0, 0, 0, 0.5); /* Fundo transparente preto */
-    display: flex;
-    justify-content: space-between; /* Alinha os itens do cabeçalho */
-    align-items: center; /* Centraliza verticalmente os itens do cabeçalho */
-    padding: 0 20px; /* Adicionei espaçamento interno para os itens do cabeçalho */
     z-index: 1000;
 }
 
 /* Estilos para a logo */
 header img {
-    max-width: 200px;
-    height: auto;
+    max-height: 100%;
 }
 
 /* Estilos para o menu */
 nav ul {
     list-style: none;
     display: flex;
-    color: white;
+    align-items: center;
 }
 
 nav ul li {
@@ -48,12 +46,9 @@ nav ul li:last-child {
 
 nav ul li a {
     text-decoration: none;
+    color: white;
 }
 
-/* Estilos para os links do menu */
-nav ul li a:hover {
-    color: orange; /* Cor do texto ao passar o mouse sobre os links */
-}
 
 /* Estilos para o conteúdo principal */
 .main-transition {
