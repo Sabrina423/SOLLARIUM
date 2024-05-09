@@ -17,7 +17,7 @@ header {
     left: 0;
     width: 100%;
     height: 80px; /* Ajustei a altura do cabeçalho */
-    background-color: #333; /* Cor de fundo do cabeçalho */
+    background-color: transparent; /* Removi a cor de fundo do cabeçalho */
     display: flex;
     justify-content: space-between; /* Alinha os itens do cabeçalho */
     align-items: center; /* Centraliza verticalmente os itens do cabeçalho */
@@ -68,7 +68,7 @@ nav ul li a:hover {
 }
 
 .carousel-item {
-    height: 400px;
+    height: 100vh; /* Ajustei a altura das imagens para preencher a altura da tela */
 }
 
 .carousel-item img {
