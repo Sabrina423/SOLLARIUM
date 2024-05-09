@@ -1,4 +1,5 @@
 
+/* Reset de estilos e box-sizing */
 * {
     margin: 0;
     padding: 0;
@@ -7,33 +8,30 @@
 
 body {
     font-family: 'Roboto', sans-serif;
-    margin: 0;
-    padding: 0;
 }
+
 /* Estilos para o cabeçalho */
 header {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    height: 60px; /* Defina a altura desejada para o cabeçalho */
-    background-color: none;
-    transition: height 0.3s ease; /* Adiciona uma transição suave para a altura */
+    height: 80px; /* Ajustei a altura do cabeçalho */
+    background-color: #333; /* Cor de fundo do cabeçalho */
+    display: flex;
+    justify-content: space-between; /* Alinha os itens do cabeçalho */
+    align-items: center; /* Centraliza verticalmente os itens do cabeçalho */
+    padding: 0 20px; /* Adicionei espaçamento interno para os itens do cabeçalho */
     z-index: 1000;
 }
 
 /* Estilos para a logo */
 header img {
-    max-width: 200px; 
+    max-width: 200px;
     height: auto;
 }
-/* Estilos para a transição do conteúdo principal */
-.main-transition {
-    transition: margin-top 0.3s ease; /* Adiciona uma transição suave para o conteúdo principal */
-}
 
-
-
+/* Estilos para o menu */
 nav ul {
     list-style: none;
     display: flex;
@@ -52,13 +50,16 @@ nav ul li a {
     color: white;
 }
 
-
-img {
-    width: 100vw; 
-    height: auto;
-    display: block;
+/* Estilos para os links do menu */
+nav ul li a:hover {
+    color: #ffcc00; /* Cor do texto ao passar o mouse sobre os links */
 }
 
+/* Estilos para o conteúdo principal */
+.main-transition {
+    margin-top: 80px; /* Ajustei a margem para deixar espaço para o cabeçalho */
+    transition: margin-top 0.3s ease;
+}
 
 .carousel-container {
     width: 100%;
@@ -69,6 +70,7 @@ img {
 .carousel-item {
     height: 400px;
 }
+
 .carousel-item img {
     object-fit: cover;
     height: 100%;
@@ -82,17 +84,15 @@ footer {
 }
 
 @media screen and (max-width: 768px) {
-    .container {
-        padding: 10px;
-    }
     header {
-        flex-direction: column;
-        align-items: center;
+        height: 60px; /* Ajustei a altura do cabeçalho para telas menores */
     }
-    header nav {
-        margin-top: 10px;
+
+    header img {
+        max-width: 150px; /* Ajustei o tamanho da logo para telas menores */
     }
-    .carousel-container {
-        max-width: 90%;
+
+    nav ul {
+        display: none; /* Escondo o menu em telas menores */
     }
 }
