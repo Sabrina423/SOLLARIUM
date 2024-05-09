@@ -35,6 +35,7 @@ header img {
 nav ul {
     list-style: none;
     display: flex;
+    color: white;
 }
 
 nav ul li {
@@ -47,7 +48,6 @@ nav ul li:last-child {
 
 nav ul li a {
     text-decoration: none;
-    color: white;
 }
 
 /* Estilos para os links do menu */
