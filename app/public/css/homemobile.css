@@ -17,7 +17,7 @@ header {
     left: 0;
     width: 100%;
     height: 80px; /* Ajustei a altura do cabeçalho */
-    background-color: transparent; /* Removi a cor de fundo do cabeçalho */
+    background-color: rgba(0, 0, 0, 0.5); /* Fundo transparente preto */
     display: flex;
     justify-content: space-between; /* Alinha os itens do cabeçalho */
     align-items: center; /* Centraliza verticalmente os itens do cabeçalho */
@@ -52,7 +52,7 @@ nav ul li a {
 
 /* Estilos para os links do menu */
 nav ul li a:hover {
-    color: #ffcc00; /* Cor do texto ao passar o mouse sobre os links */
+    color: orange; /* Cor do texto ao passar o mouse sobre os links */
 }
 
 /* Estilos para o conteúdo principal */
@@ -60,6 +60,7 @@ nav ul li a:hover {
     margin-top: 80px; /* Ajustei a margem para deixar espaço para o cabeçalho */
     transition: margin-top 0.3s ease;
 }
+
 
 .carousel-container {
     width: 100%;
