@@ -29,13 +29,15 @@ header {
 header img {
     max-width: 200px;
     height: auto;
+    display: inline-block;
 }
 
 /* Estilos para o menu */
 nav ul {
     list-style: none;
-    display: flex;
+   
     color: white;
+    display: inline-block;
 }
 
 nav ul li {
