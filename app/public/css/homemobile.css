@@ -29,19 +29,20 @@ header {
 header img {
     max-width: 200px;
     height: auto;
-    display: inline-block;
+    display: flex;
 }
 
 /* Estilos para o menu */
 nav ul {
     list-style: none;
-   
-    color: white;
-    display: inline-block;
+    color: black;
+    display: flex;
+    margin-top: auto;
 }
 
 nav ul li {
     margin-right: 20px;
+
 }
 
 nav ul li:last-child {
