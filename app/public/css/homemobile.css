@@ -16,22 +16,24 @@ header {
     top: 0;
     left: 0;
     width: 100%;
-    height: 80px; /* Ajustei a altura do cabeçalho */
+    height: 120px;
     background-color: rgba(0, 0, 0, 0.5); /* Fundo transparente preto */
-    display: flex;
+    border-radius: 0cap;
     justify-content: space-between; /* Alinha os itens do cabeçalho */
     align-items: center; /* Centraliza verticalmente os itens do cabeçalho */
     padding: 0 20px; /* Adicionei espaçamento interno para os itens do cabeçalho */
     z-index: 1000;
+    display: grid;
 }
 
 /* Estilos para a logo */
 header img {
-    max-width: 200px;
+    max-width: 270px;
     height: auto;
     display: flex;
-}
 
+
+}
 /* Estilos para o menu */
 nav ul {
     list-style: none;
@@ -39,6 +41,8 @@ nav ul {
     display: flex;
     position: fixed;
     align-items: center;
+    grid-template-columns: 1fr, 3fr;
+    
 }
 
 nav ul li {
@@ -93,11 +97,11 @@ footer {
 
 @media screen and (max-width: 768px) {
     header {
-        height: 60px; /* Ajustei a altura do cabeçalho para telas menores */
+        height: 70px; /* Ajustei a altura do cabeçalho para telas menores */
     }
 
     header img {
-        max-width: 150px; /* Ajustei o tamanho da logo para telas menores */
+        max-width: 150px; 
     }
 
     nav ul {
