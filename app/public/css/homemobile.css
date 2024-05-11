@@ -138,7 +138,6 @@ footer {
     header img {
         max-width: 150px; 
     }
-
     nav ul {
         display: none; /* Escondo o menu em telas menores */
     }
