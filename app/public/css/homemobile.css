@@ -11,38 +11,53 @@ body {
 }
 
 /* Estilos para o cabeçalho */
+/* Styles for the header */
 header {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 120px;
-    background-color: rgba(0, 0, 0, 0.5); /* Fundo transparente preto */
-    border-radius: 0cap;
-    justify-content: space-between; /* Alinha os itens do cabeçalho */
-    align-items: center; /* Centraliza verticalmente os itens do cabeçalho */
-    padding: 0 20px; /* Adicionei espaçamento interno para os itens do cabeçalho */
+    background-color: rgba(0, 0, 0, 0.5); /* Transparent black background */
+    border-radius: 0;
+    padding: 0 20px; /* Add internal spacing for header items */
+    display: grid; /* Use CSS Grid for layout */
+    grid-template-columns: auto 1fr; /* Define two columns, one for logo and one for menu */
+    align-items: center; /* Center items vertically */
     z-index: 1000;
-    display: grid;
 }
 
-/* Estilos para a logo */
+/* Styles for the logo */
 header img {
     max-width: 270px;
     height: auto;
-    display: flex;
-
-
+    margin-top: auto;
 }
-/* Estilos para o menu */
+
+/* Styles for the menu */
 nav ul {
     list-style: none;
     color: white;
     display: flex;
-    position: fixed;
-    align-items: center;
-    grid-template-columns: 1fr, 3fr;
-    
+    justify-content: center; /* Align menu items to the right */
+}
+
+nav ul li {
+    margin-right: 10px;
+}
+
+nav ul li:last-child {
+    margin-right: 0;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: white;
+}
+
+/* Styles for menu links */
+nav ul li a:hover {
+    color: #ffcc00; /* Change text color on hover */
 }
 
 nav ul li {
@@ -63,6 +78,26 @@ nav ul li a {
 .main-transition {
     margin-top: 80px; /* Ajustei a margem para deixar espaço para o cabeçalho */
     transition: margin-top 0.3s ease;
+}
+
+.btn-wrap{
+    position:relative;
+    text-align:unset;
+    }
+.btn-wrap button{
+   position: absolute;
+    z-index:1;
+    top:50%;
+    left:50%;
+    width:160px;               /* largura para o botão */
+    height:30px;              /* altura para o botão */
+    padding:0;
+    margin:-15px 0 0 -30px;   /* margem à esquerda e ao topo metade da medida do botão */
+    border-radius: 20px;
+    border: none;
+    background-color: rgba(140, 0, 255, 0.247);
+    color: white;
+    font-size: small;
 }
 
 
