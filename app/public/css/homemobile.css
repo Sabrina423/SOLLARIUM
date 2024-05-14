@@ -32,15 +32,23 @@ header img {
     max-width: 270px;
     height: auto;
     margin-top: auto;
+    top: 0px;
 }
 
 /* Styles for the menu */
 nav ul {
-    list-style: none;
-    color: white;
+    font-family:  sans-serif;
     display: flex;
-    justify-content: center; /* Align menu items to the right */
+    padding: 5px;
+    height: 70px;
+    width: 100%;
+    position: fixed;
+    left: 600px;
+    top: 0px;
+    color: white;
+    grid-template-columns: max-content;
 }
+
 
 nav ul li {
     margin-right: 10px;
