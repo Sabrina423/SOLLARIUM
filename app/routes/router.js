@@ -10,6 +10,9 @@ router.get("html", function (req,res){
 router.get("/jquery", function (req,res){
     res.render("pages/souprofissional");
 });
+router.get("/jquery", function (req,res){
+    res.render("pages/perfilprof");
+});
 router.post("html", function (req, res){
     res.json(req.body);
 });
