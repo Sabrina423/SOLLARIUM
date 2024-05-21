@@ -31,8 +31,8 @@ header {
 header img {
     max-width: 270px;
     height: auto;
-    margin-top: auto;
-    top: 0px;
+    position: relative;
+    top: -70px;
 }
 
 /* Styles for the menu */
