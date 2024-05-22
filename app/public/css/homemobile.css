@@ -42,16 +42,16 @@ nav ul {
     padding: 5px;
     height: 70px;
     width: 100%;
-    position: fixed;
+    position: relative;
     left: 600px;
-    top: 0px;
+    top: -250px;
     color: white;
-    grid-template-columns: max-content;
+    align-items: center;
 }
 
 
 nav ul li {
-    margin-right: 10px;
+    margin-right: 30px;
 }
 
 nav ul li:last-child {
@@ -64,12 +64,9 @@ nav ul li a {
 }
 
 /* Styles for menu links */
-nav ul li a:hover {
-    color: #ffcc00; /* Change text color on hover */
-}
 
 nav ul li {
-    margin-right: 20px;
+    margin-right: 60px;
 
 }
 
