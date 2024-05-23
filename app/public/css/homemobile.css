@@ -49,15 +49,6 @@ nav ul {
     align-items: center;
 }
 
-
-nav ul li {
-    margin-right: 30px;
-}
-
-nav ul li:last-child {
-    margin-right: 0;
-}
-
 nav ul li a {
     text-decoration: none;
     color: white;
@@ -67,17 +58,10 @@ nav ul li a {
 
 nav ul li {
     margin-right: 60px;
+    list-style: none;
 
 }
 
-nav ul li:last-child {
-    margin-right: 0;
-}
-
-nav ul li a {
-    text-decoration: none;
-    color: white;
-}
 
 /* Estilos para o conteúdo principal */
 .main-transition {
@@ -128,8 +112,29 @@ img {
     display: block;
 }
 
+.move-up {
+    position: relative;
+    top: -1cm;
+}
 
-/* Estilos para o rodapé */
+.move-up{
+    position: relative;
+    top: -3;
+}
+.move-up{
+    position: relative;
+    top: -5;
+}
+.move-up{
+    position: relative;
+    top: -3;
+}
+.horizontal-rectangle{
+    width: 300px; 
+    height: 100px;
+    background-color: black;
+}
+
 footer {
     text-align: center;
     padding: 20px 0;
