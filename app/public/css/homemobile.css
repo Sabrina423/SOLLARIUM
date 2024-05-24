@@ -111,29 +111,14 @@ img {
     height: auto;
     display: block;
 }
+.image-container{
+    display: block;
+}
+.move-up{
+    margin-top: -2cm;
+}
 
-.move-up {
-    position: relative;
-    top: -1cm;
-}
 
-.move-up{
-    position: relative;
-    top: -3;
-}
-.move-up{
-    position: relative;
-    top: -5;
-}
-.move-up{
-    position: relative;
-    top: -3;
-}
-.horizontal-rectangle{
-    width: 300px; 
-    height: 100px;
-    background-color: black;
-}
 
 footer {
     text-align: center;
@@ -142,13 +127,30 @@ footer {
 
 @media screen and (max-width: 768px) {
     header {
-        height: 70px; /* Ajustei a altura do cabeçalho para telas menores */
+        height: 70px; /* Adjust header height for smaller screens */
     }
 
     header img {
         max-width: 150px; 
     }
+
     nav ul {
-        display: none; /* Escondo o menu em telas menores */
+        display: none; /* Hide the menu on smaller screens */
+    }
+
+    /* Make images longer and more prominent on mobile */
+    img {
+        width: 100%;
+        height: auto;
+        display: block;
+        max-height: none; /* Ensure there's no max-height restriction */
+    }
+
+    /* Additional styles for images you want to be larger */
+    .elongated-image{
+        width: 100%;
+        height: 100vh; /* Full viewport height */
+        object-fit: cover; /* Ensure the image covers the container without stretching */
+        display: block;
     }
 }
