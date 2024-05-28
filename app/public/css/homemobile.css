@@ -82,11 +82,13 @@ nav ul li {
     height:30px;              /* altura para o botão */
     padding:0;
     margin:-15px 0 0 -30px;   /* margem à esquerda e ao topo metade da medida do botão */
-    border-radius: 20px;
+    border-radius: 2px;
     border: none;
-    background-color: rgba(140, 0, 255, 0.247);
-    color: white;
-    font-size: small;
+    background-color: white;
+    color: black;
+    font-size: 10px;
+    font-family: sans-serif;
+    font-weight: 550;
 }
 
 
