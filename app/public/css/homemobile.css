@@ -32,7 +32,7 @@ header img {
     max-width: 270px;
     height: auto;
     position: relative;
-    top: -70px;
+    top: -50%;
 }
 
 /* Styles for the menu */
@@ -76,10 +76,10 @@ nav ul li {
 .btn-wrap button{
    position: absolute;
     z-index:1;
-    top:50%;
-    left:50%;
-    width:160px;               /* largura para o botão */
-    height:30px;              /* altura para o botão */
+    top:67%;
+    left:40%;
+    width:clamp(100px,36%,340px);             /* largura para o botão */
+    height:clamp(10px,10%,60px);            /* altura para o botão */
     padding:0;
     margin:-15px 0 0 -30px;   /* margem à esquerda e ao topo metade da medida do botão */
     border-radius: 2px;
