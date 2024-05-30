@@ -5,13 +5,16 @@ router.get("/", function (req,res){
     res.render ("pages/home");
 });
 router.get("html", function (req,res){
-    res.render("pages/soucliente");
+    res.render ("pages/cadastrocliente");
+});
+router.get("html", function (req,res){
+    res.render("/");
 });
 router.get("/jquery", function (req,res){
-    res.render("pages/souprofissional");
+    res.render("/");
 });
 router.get("/jquery", function (req,res){
-    res.render("pages/perfilprof");
+    res.render("/");
 });
 router.post("html", function (req, res){
     res.json(req.body);
