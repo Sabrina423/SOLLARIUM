@@ -4,11 +4,14 @@ var router = express.Router();
 router.get("/", function (req,res){
     res.render ("pages/home");
 });
-router.get("html", function (req,res){
-    res.render ("pages/cadastrocliente");
+router.get("ejs", function (req,res){
+    res.render ("pages/soucliente");
 });
 router.get("html", function (req,res){
-    res.render("/");
+    res.render ("pages/souprofissional");
+});
+router.get("html", function (req,res){
+    res.render("pages/cadastroprof");
 });
 router.get("/jquery", function (req,res){
     res.render("/");
