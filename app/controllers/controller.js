@@ -1,12 +1,12 @@
-const tarefasModel = require("");
+const tarefasModel = require("../models/tarefas");
 const moment = require("moment");
 const { body, validationResult } = require("express-validator");
 const tarefasController = {
 
     regrasValidacao:[
-        body("").isLength({ min: 5, max: 45 }).withMessage(""),
-        body("").isISO8601(),
-        body("").isNumeric()
+        body("tarefa").isLength({ min: 5, max: 45 }).withMessage("Nome da Tarefa deve conter de 5 a 45 letras!"),
+        body("prazo").isISO8601(),
+        body("situacao").isNumeric()
     ],
 
     listarTarefasPaginadas: async (req, res) => {
@@ -63,57 +63,57 @@ const tarefasController = {
     excluirTarefa: async (req, res) => {
         let { id } = req.query;
         try {
-            results = await tarefasModel.delete(id);
-            totReg = await tarefasModel.totalReg();
-            paginaAtual = Math.ceil(totReg[0].total/5)
-            res.redirect("/?pagina="+paginaAtual);
-    
+          results = await tarefasModel.delete(id);
+          res.redirect("/");
         } catch (e) {
-            console.log(e);
-            res.json({ erro: "Falha ao acessar dados" });
+          console.log(e);
+          res.json({ erro: "Falha ao acessar dados" });
         }
-    },
-
-    finalizarTarefa: async (req, res) => {
+      },
+    
+      finalizarTarefa: async (req, res) => {
         let { id } = req.query;
         try {
-            results = await tarefasModel.sistuacaoTarefa(2, id);
+          results = await tarefasModel.sistuacaoTarefa(2, id);
+          res.redirect("/");
         } catch (e) {
-            console.log(e);
-            res.json({ erro: "Falha ao acessar dados" });
+          console.log(e);
+          res.json({ erro: "Falha ao acessar dados" });
         }
-        let url = req.rawHeaders[25];
-        let urlChamadora = url.replace("http://localhost:3000", "");
-        res.redirect(urlChamadora);
-    },
-
-    exibirTarefaId: async(req,res) => {
+      },
+    
+      exibirTarefaId: async (req, res) => {
         res.locals.moment = moment;
         let { id } = req.query;
         console.log(id);
-        try{
-            let tarefa = await tarefasModel.findId(id)
-            res.render("pages/adicionar", { dados:{
-                 id_tarefa:id, tarefa:tarefa[0].nome_tarefa, 
-                 prazo:tarefa[0].prazo_tarefa, situacao:tarefa[0].situacao_tarefa},  listaErros: null });
-        }catch(e) {
-            console.log(e);
-            res.json({ erro: "Falha ao acessar dados" });
-        }
-    },
-
-    iniciarTarefa: async (req, res) => {
-        let { id } = req.query;
         try {
-            results = await tarefasModel.sistuacaoTarefa(1, id);
-        } catch (e) {
-            console.log(e);
-            res.json({ erro: "Falha ao acessar dados" });
-        }
-        let url = req.rawHeaders[25];
-        let urlChamadora = url.replace("http://localhost:3000", "");
-        res.redirect(urlChamadora);
-    }
-}
-
-module.exports = tarefasController
+          let tarefa = await tarefasModel.findId(id);
+          res.render("pages/adicionar", {
+            dados: {
+              id_tarefa: id,
+              tarefa: tarefa[0].nome_tarefa,
+              prazo: tarefa[0].prazo_tarefa,
+              situacao: tarefa[0].situacao_tarefa,
+            },
+            listaErros: null,
+        });
+      } catch (e) {
+        console.log(e);
+        res.json({ erro: "Falha ao acessar dados" });
+      }
+    },
+  
+    iniciarTarefa: async (req, res) => {
+      let { id } = req.query;
+      try {
+        results = await tarefasModel.sistuacaoTarefa(1, id);
+        res.redirect("/");
+      } catch (e) {
+        console.log(e);
+        res.json({ erro: "Falha ao acessar dados" });
+      }
+    },
+  };
+  
+  module.exports = tarefasController;
+  

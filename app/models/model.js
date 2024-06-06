@@ -21,7 +21,7 @@ const tarefasModel = {
 
     findPage: async (pagina, total) => {
         try {
-            const [linhas] = await pool.query('', [pagina,total])
+            const [linhas] = await pool.query('SELECT * FROM tarefas  WHERE status_tarefa = 1 limit ?, ?', [pagina,total])
             return linhas;
         } catch (error) {
             return error;
@@ -30,7 +30,7 @@ const tarefasModel = {
 
     create: async (dadosForm) => {
         try {
-            const [linhas, campos] = await pool.query('', [dadosForm])
+            const [linhas, campos] = await pool.query('INSERT INTO tarefas SET ?', [dadosForm])
             console.log(linhas);
             console.log(campos);
             return linhas;
@@ -42,7 +42,7 @@ const tarefasModel = {
 
     update: async (dadosForm, id) => {
         try {
-            const [linhas] = await pool.query('', [dadosForm, id])
+            const [linhas] = await pool.query('UPDATE tarefas SET ? WHERE id_tarefa = ?', [dadosForm, id])
             return linhas;
         } catch (error) {
             return error;
