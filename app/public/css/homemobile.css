@@ -77,7 +77,7 @@ nav ul li {
    position: absolute;
     z-index:1;
     top:67%;
-    left:40%;
+    left:42%;
     width:clamp(100px,36%,340px);             /* largura para o botão */
     height:clamp(10px,10%,60px);            /* altura para o botão */
     padding:0;
