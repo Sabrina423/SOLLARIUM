@@ -7,12 +7,16 @@ router.get("/", function (req,res){
 router.get("/soucliente", function (req,res){
     res.render ("pages/soucliente");
 });
-router.get("souprofissional", function (req,res){
+router.get("/souprofissional", function (req,res){
     res.render ("pages/souprofissional");
 });
 router.get("html", function (req,res){
     res.render("pages/cadastroprof");
 });
+router.get("/cadastrocliente", function (req,res){
+    res.render ("pages/cadastrocliente");
+});
+
 router.get("/jquery", function (req,res){
     res.render("/");
 });
