@@ -8,9 +8,9 @@ router.get("/soucliente", function (req,res){
     res.render ("pages/soucliente");
 });
 router.get("/souprofissional", function (req,res){
-    res.render ("pages/souprofissional",{nome:valor});
+    res.render ("pages/souprofissional");
 });
-router.get("/html", function (req,res){
+router.get("/cadastroptof", function (req,res){
     res.render("pages/cadastroprof");
 });
 router.get("/cadastrocliente", function (req,res){

@@ -91,10 +91,8 @@ nav ul li {
     font-weight: 550;
 }
 
-
 .carousel-container {
     width: 100%;
-    overflow: hidden;
     position: relative;
 }
 
@@ -127,7 +125,7 @@ footer {
     padding: 20px 0;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 850px) {
     header {
         height: 70px; /* Adjust header height for smaller screens */
     }
