@@ -26,7 +26,7 @@ body {
     background: rgb(233, 229, 229); /* semi-transparent black background */
     padding: 2rem;
     border-radius: 12px;
-    box-shadow: 0 0 30px rgba(0, 0, 0, 0.8);
+    box-shadow: 0 0 10px rgba(182, 180, 180, 0.8);
     max-width: 500px;
     width: 100%;
     transition: transform 0.3s ease;

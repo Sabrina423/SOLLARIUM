@@ -43,8 +43,8 @@ nav ul {
     height: 70px;
     width: 100%;
     position: relative;
-    left: 600px;
-    top: -250px;
+    left: 30%;
+    top: -240px;
     color: white;
     align-items: center;
 }
@@ -136,6 +136,7 @@ footer {
 
     nav ul {
         display: none; /* Hide the menu on smaller screens */
+        max-width: 150px;
     }
 
     /* Make images longer and more prominent on mobile */
