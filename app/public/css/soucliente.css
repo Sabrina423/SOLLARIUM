@@ -23,10 +23,10 @@ body {
 }
  
 .login-container {
-    background: rgb(233, 229, 229); /* semi-transparent black background */
+    background: rgba(233, 229, 229, 0.199);
     padding: 2rem;
     border-radius: 12px;
-    box-shadow: 0 0 10px rgba(182, 180, 180, 0.8);
+    box-shadow: 0 0 20px rgba(90, 89, 89, 0.411);
     max-width: 500px;
     width: 100%;
     transition: transform 0.3s ease;
