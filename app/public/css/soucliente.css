@@ -10,7 +10,7 @@
  
 body {
     font-family: 'Roboto', sans-serif;
-    background: linear-gradient(-45deg, rgb(255, 136, 0) 0%, rgb(255, 239, 98) 25%, rgb(167, 185, 245) 51%, #524cb1 80%);
+    background: linear-gradient(-);
     -webkit-animation: AnimateBG 20s ease infinite;
     animation: AnimateBG 20s ease infinite;
     height: 100vh;
