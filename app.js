@@ -28,5 +28,5 @@ var rotas = require("./app/routes/router");
 app.use("/", rotas);
 
 app.listen(port, () => {
-  console.log(`Servidor online: http://localhost:3000` );
+  console.log(`Servidor online: http://localhost:3001` );
 });
