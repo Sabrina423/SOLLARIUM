@@ -140,7 +140,7 @@ footer {
 
     /* Make images longer and more prominent on mobile */
     img {
-        width: 100%;
+        width: 190%;
         height: auto;
         display: block;
         max-height: none; /* Ensure there's no max-height restriction */
