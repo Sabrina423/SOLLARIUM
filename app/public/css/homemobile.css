@@ -82,7 +82,7 @@ nav ul li {
     height:clamp(10px,10%,60px);            /* altura para o botão */
     padding:0;
     margin:-15px 0 0 -30px;   /* margem à esquerda e ao topo metade da medida do botão */
-    border-radius: 2px;
+    border-radius: 15px;
     border: none;
     background-color: white;
     color: black;
@@ -113,6 +113,7 @@ img {
 }
 .image-container{
     display: block;
+    height: 300px;
 }
 .move-up{
     margin-top: -2cm;

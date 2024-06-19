@@ -1,0 +1,141 @@
+/* Importing Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+ 
+/* Basic reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+ 
+body {
+    font-family: 'Roboto', sans-serif;
+    background: rgb(0, 0, 0);
+    -webkit-animation: AnimateBG 20s ease infinite;
+    animation: AnimateBG 20s ease infinite;
+    height: 100vh;
+    width: 100%;
+    background-size: 300%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #ffffff;
+}
+
+h3{
+  position: relative;  
+  top: -60px;
+}
+ 
+.login-container {
+    background: rgba(255, 255, 255, 0.075);
+    backdrop-filter: blur(10px);
+    padding: 2rem;
+    border-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.411);
+    max-width: 500px;
+    width: 100%;
+    height: 560px;
+    max-height: 600px;
+    transition: transform 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+ 
+.login-container:hover {
+    transform: scale(1.02);
+}
+ 
+.logo {
+    margin-bottom: 1.5rem;
+}
+ 
+.logo img {
+    max-width: 150px;
+    transition: transform 0.3s ease;
+}
+ 
+.logo img:hover {
+    transform: scale(1.1);
+}
+ 
+form {
+    position: relative;
+    top: -50px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+ 
+form input {
+    background: rgba(151, 151, 151, 0.2);
+    border: none;
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+    border-radius: 4px;
+    color: #ffffff;
+    font-size: 0.875rem;
+    transition: background 0.3s ease;
+}
+ 
+form input:focus {
+    background: rgba(0, 0, 0, 0.3);
+    outline: none;
+}
+ 
+form button {
+    background: #000000;
+    border: none;
+    padding: 0.75rem;
+    border-radius: 4px;
+    color: #fff;
+    cursor: pointer;
+    font-size: 0.875rem;
+    transition: background 0.3s ease;
+}
+ 
+form button:hover {
+    background: black;
+}
+ 
+h1 {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+    text-align: center;
+}
+ 
+label {
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.8);
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+}
+ 
+@media (max-width: 480px) {
+  .login-container {
+      max-width: 310px;
+      max-height: 410px;
+      padding: 1rem;
+  }
+ 
+  .logo img {
+      max-width: 100px;
+  }
+ 
+  form input, form button {
+      padding: 0.5rem;
+      font-size: 0.7rem;
+  }
+ 
+  h1 {
+      font-size: 1rem;
+  }
+ 
+  label {
+      font-size: 0.6rem;
+  }
+}
+ 

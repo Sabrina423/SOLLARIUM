@@ -10,7 +10,7 @@
  
 body {
     font-family: 'Roboto', sans-serif;
-    background: linear-gradient(-);
+    background-color: #000000;
     -webkit-animation: AnimateBG 20s ease infinite;
     animation: AnimateBG 20s ease infinite;
     height: 100vh;
@@ -19,14 +19,16 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    color: #000000;
+    color: #ffffff;
 }
  
 .login-container {
-    background: rgba(233, 229, 229, 0.199);
+    background: rgba(255, 255, 255, 0.075);
+    backdrop-filter: blur(10px);
     padding: 2rem;
+    border-color: #fff;
     border-radius: 12px;
-    box-shadow: 0 0 20px rgba(90, 89, 89, 0.411);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.411);
     max-width: 500px;
     width: 100%;
     transition: transform 0.3s ease;
@@ -64,7 +66,7 @@ form input {
     padding: 0.75rem;
     margin-bottom: 1rem;
     border-radius: 4px;
-    color: #000000;
+    color: #ffffff;
     font-size: 0.875rem;
     transition: background 0.3s ease;
 }
@@ -98,7 +100,7 @@ h1 {
  
 label {
     font-size: 0.75rem;
-    color: rgba(0, 0, 0, 0.8);
+    color: rgba(255, 255, 255, 0.8);
     text-transform: uppercase;
     margin-bottom: 0.5rem;
 }
@@ -106,6 +108,7 @@ label {
 @media (max-width: 480px) {
   .login-container {
       max-width: 310px;
+      max-height: 540px;
       padding: 1rem;
   }
  
