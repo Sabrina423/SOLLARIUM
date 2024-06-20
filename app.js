@@ -1,29 +1,22 @@
-const express = require("express");
-const session = require("express-session");
+const express = require('express');
+const session = require('express-session');
+const router = require('routes/router.js');
+const db = require('pool_conexoes.js'); 
 const app = express();
-const port = 3001;
+const port = 3000;
 
-const env = require("dotenv").config();
 
-app.use(express.static("./app/public"));
+app.set('view engine', 'ejs');
+app.set('views', __dirname + '/views');
 
-app.set("view engine", "ejs");
-app.set("views", "./app/views");
 
-app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(session({ secret: 'your-secret-key', resave: false, saveUninitialized: true }));
 
 
-app.use(session({
-  secret: process.env.SESSION_SECRET || 'secretkey',
-  resave: false,
-  saveUninitialized: true,
-  cookie: { secure: false } 
-}));
-
-var rotas = require("./app/routes/router");
-app.use("/", rotas);
+app.use('/', router);
 
 app.listen(port, () => {
-  console.log(`Servidor online http://localhost:` + port);
+    console.log(`Servidor rodando na porta ${port}`);
 });
