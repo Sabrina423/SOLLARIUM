@@ -44,7 +44,7 @@ router.get('/orcamento', (req, res) => {
 });
 
 // Registro
-router.post('/register', [
+router.post('/cadastrocliente', [
     body('username').isString().withMessage('Username deve ser uma string'),
     body('password').isLength({ min: 6 }).withMessage('Password deve ter no mínimo 6 caracteres')
 ], (req, res) => {
@@ -97,8 +97,8 @@ router.get('/perfilcliente', authenticateToken, (req, res) => {
     res.render('pages/perfilcliente');
 });
 
-router.get('/register', (req, res) => {
-  res.render('pages/register');
+router.get('/soucliente', (req, res) => {
+  res.render('pages/soucliente');
 });
 
 
