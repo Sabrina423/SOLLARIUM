@@ -1,6 +1,6 @@
 const express = require('express');
 const session = require('express-session');
-const router = require('routes/router.js');
+const router = require('router.js');
 const db = require('pool_conexoes.js'); 
 const app = express();
 const port = 3000;
