@@ -25,10 +25,10 @@ body {
 .login-container {
     background: rgba(255, 255, 255, 0.075);
     backdrop-filter: blur(10px);
+    border: 20px;
     padding: 2rem;
     border-color: #fff;
     border-radius: 12px;
-    box-shadow: 0 0 20px rgba(255, 255, 255, 0.411);
     max-width: 500px;
     width: 100%;
     transition: transform 0.3s ease;
