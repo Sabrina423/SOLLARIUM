@@ -72,7 +72,6 @@ nav ul li {
 
 h3{
     position: absolute;
-    z-index:1;
     top: 120px;
     left:40%;
     color: white;
@@ -194,7 +193,6 @@ footer img{
     img {
         width: 100%;
         height: 600px;
-        display: block;
         max-height: none; /* Ensure there's no max-height restriction */
     }
 
@@ -203,11 +201,12 @@ footer img{
         width: 100%;
         height: 700px; /* Full viewport height */
         object-fit: cover; /* Ensure the image covers the container without stretching */
-        display: block;
     }
     .footer{
         width: 100%;
-        height: 50px;
-        display: block;
+        height: 100px;
+    }
+    footer img {
+        max-width: 150px; 
     }
 }
