@@ -24,7 +24,7 @@ body {
  
 .login-container {
     background: rgba(255, 255, 255, 0.075);
-    backdrop-filter: blur(10px);
+    border: 20px;
     padding: 2rem;
     border-color: #fff;
     border-radius: 12px;

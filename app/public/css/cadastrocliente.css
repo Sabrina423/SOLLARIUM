@@ -10,16 +10,33 @@
  
 body {
     font-family: 'Roboto', sans-serif;
-    background-image: url(/app/public/imagens/imagemsolar_22.png);
+    background: rgb(0, 0, 0);
+    -webkit-animation: AnimateBG 20s ease infinite;
+    animation: AnimateBG 20s ease infinite;
+    height: 100vh;
+    width: 100%;
+    background-size: 300%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #ffffff;
+}
+
+h3{
+  position: relative;  
+  top: -60px;
 }
  
 .login-container {
-    background: rgb(233, 229, 229); /* semi-transparent black background */
+    background: rgba(255, 255, 255, 0.075);
+    backdrop-filter: blur(10px);
     padding: 2rem;
+    border-color: #fff;
     border-radius: 12px;
-    box-shadow: 0 0 30px rgba(0, 0, 0, 0.8);
     max-width: 500px;
     width: 100%;
+    height: 560px;
+    max-height: 600px;
     transition: transform 0.3s ease;
     display: flex;
     flex-direction: column;
@@ -44,6 +61,8 @@ body {
 }
  
 form {
+    position: relative;
+    top: -50px;
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -55,7 +74,7 @@ form input {
     padding: 0.75rem;
     margin-bottom: 1rem;
     border-radius: 4px;
-    color: #000000;
+    color: #ffffff;
     font-size: 0.875rem;
     transition: background 0.3s ease;
 }
@@ -89,7 +108,7 @@ h1 {
  
 label {
     font-size: 0.75rem;
-    color: rgba(0, 0, 0, 0.8);
+    color: rgba(255, 255, 255, 0.8);
     text-transform: uppercase;
     margin-bottom: 0.5rem;
 }
@@ -97,7 +116,7 @@ label {
 @media (max-width: 480px) {
   .login-container {
       max-width: 310px;
-      max-height: 600px;
+      max-height: 410px;
       padding: 1rem;
   }
  

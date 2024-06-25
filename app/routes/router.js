@@ -58,10 +58,11 @@ router.post('/cadastrocliente', [
     db.query('INSERT INTO users (username, password) VALUES (?, ?)', [username, hashedPassword], (err) => {
         if (err) {
             return res.status(400).send('Erro ao registrar usuário. Usuário já existe.');
-        }
+        }   
         res.send('Usuário registrado com sucesso.');
     });
 });
+
 
 // Login
 router.post('/login', [
