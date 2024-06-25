@@ -3,14 +3,16 @@ const session = require('express-session');
 const app = express();
 const port = 3000;
 
-app.use(express.static("app/public"))
+app.use(express.static("app/public/"));
+
 app.set('view engine', 'ejs');
-app.set('views',"/app/views/home");
+app.set('views',"./app/views");
 
 
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
 app.use(session({ secret: 'your-secret-key', resave: false, saveUninitialized: true }));
 
 let rotas = require('./app/routes/router')
