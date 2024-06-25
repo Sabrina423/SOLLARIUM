@@ -10,7 +10,10 @@ router.get("/soucliente", function (req,res){
 router.get("/souprofissional", function (req,res){
     res.render ("pages/souprofissional");
 });
-router.get("/cadastroptof", function (req,res){
+router.get("/orcamento", function (req,res){
+    res.render("pages/orcamento");
+});
+router.get("/cadastroprof", function (req,res){
     res.render("pages/cadastroprof");
 });
 router.get("/cadastrocliente", function (req,res){
