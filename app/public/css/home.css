@@ -230,8 +230,9 @@ footer img {
     background-color: #6a0dad; /* Cor roxa */
     color: #fff; /* Cor branca */
     border: none;
-    padding: 15px 30px;
+    padding: 15px 10px;
     font-size: 1em;
+    font-weight: 800;
     cursor: pointer;
 }
 
