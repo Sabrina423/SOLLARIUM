@@ -25,9 +25,17 @@
 
         <label for="password">Senha</label>
         <input type="password" placeholder="Senha" id="password">
-        <button>Cadastre-se</button>
+        <a href="/perfilcliente" target="_blank"><button type="submit">Cadastre-se</button></a>
            
         </form>
     </nav>
+
+    <% if (typeof errors !== 'undefined') { %>
+      <ul>
+        <% errors.forEach(function(error) { %>
+          <li class="error"><%= error.msg %></li>
+        <% }) %>
+      </ul>
+    <% } %>
 </body>
 </html>

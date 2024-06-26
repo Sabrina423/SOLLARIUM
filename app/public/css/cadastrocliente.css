@@ -22,6 +22,10 @@ body {
     color: #ffffff;
 }
 
+.error{
+    color: red;
+}
+
 h3{
   position: relative;  
   top: -60px;

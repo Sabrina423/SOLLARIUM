@@ -1,6 +1,5 @@
 const express = require('express');
 const { body, validationResult } = require('express-validator');
-const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const router = express.Router();
 
@@ -42,6 +41,10 @@ router.get('/orcamento', (req, res) => {
     res.render('pages/orcamento');
 });
 
+router.get('/perfilcliente', (req, res) => {
+    req.render('/pages/perfilcliente')
+})
+
 // Registro
 router.post('/cadastrocliente', [
     body('username').isString().withMessage('Username deve ser uma string'),
@@ -53,7 +56,7 @@ router.post('/cadastrocliente', [
     }
 
     const { username, password } = req.body;
-    const hashedPassword = bcrypt.hashSync(password, 10);
+    const hashedPassword = bcryptjs.hashSync(password, 10);
 
     db.query('INSERT INTO users (username, password) VALUES (?, ?)', [username, hashedPassword], (err) => {
         if (err) {
