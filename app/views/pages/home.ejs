@@ -19,15 +19,28 @@
     <section class="">
        <header>
         <img src="imagens/LOGO_SOLLARIUM (8).png">
-        <nav>
-           <ul>
-               <li><a href="/souprofissional" target="_blank" >Sou Profissional</a></li>
-               <li><a href="/soucliente" target="_blank">Sou Cliente</a></li>
+        <nav class="navbar">
+            </nav>
+            <ul class="menu" id="menu">
+                <li><a href="/souprofissional" target="_blank">Sou Profissional</a></li>
+                <li><a href="/soucliente" target="_blank">Sou Cliente</a></li>
                 <li><a href="/orcamento" target="_blank">Orçamento</a></li>
-                <li><a href="/cadastrocliente"arget="_blank">Quero ser cliente</a></li>
-                <li><a href="/cadastroprof"target="_blank">Quero ser profissional</a></li>
+                <li><a href="/cadastrocliente" target="_blank">Quero ser cliente</a></li>
+                <li><a href="/cadastroprof" target="_blank">Quero ser profissional</a></li>
             </ul>
+            <nav class="hamburger-menu" onclick="toggleMenu()">
+                <nav class="bar"></nav>
+                <nav class="bar"></nav>
+                <nav class="bar"></nav>
+            </nav>
         </nav>
+    
+    <script>
+    function toggleMenu() {
+        var menu = document.getElementById('menu');
+        menu.classList.toggle('active');
+    }
+    </script>
        </header>
        <main>
         <nav class="btn-wrap">
@@ -99,7 +112,8 @@
 
 
         <nav class="image-container">
-        <img src="imagens/painelsolar_.png" alt="imagem painel solar" class="move-up" class="horizontal-rectangle" class="elongated-image">
+            <img src="imagens/painelsolar_.png" alt="imagem painel solar" class="move-up" class="horizontal-rectangle" class="elongated-image">
+        <h6> Energia solar crescendo em todo o páis </h6>
         </nav>
        </main>
        <footer>
