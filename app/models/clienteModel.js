@@ -49,7 +49,7 @@ const ClienteModel = {
 };
 
 module.exports = ClienteModel;
-const ClienteModel = require('"../models/ClienteModel');
+const ClienteModel = require('"../models/clienteModel');
 const { body, validationResult } = require("express-validator");
 
 const ClienteController = {
@@ -63,7 +63,7 @@ const ClienteController = {
     listarClientes: async (req, res) => {
         try {
             const results = await ClienteModel.findAll();
-            res.render("pages/clientes", { clientes: results });
+            res.render("pages/adm_clientes", { clientes: results });
         } catch (e) {
             console.log(e);
             res.json({ erro: "Falha ao acessar dados" });
@@ -85,7 +85,7 @@ const ClienteController = {
         };
         try {
             await ClienteModel.create(dadosForm);
-            res.redirect("/clientes");
+            res.redirect("/adm_cliente");
         } catch (e) {
             console.log(e);
             res.json({ erro: "Falha ao acessar dados" });
