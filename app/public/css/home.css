@@ -9,22 +9,51 @@ body {
     font-family: 'Roboto', sans-serif;
 }
  
-/* Estilos para o cabeçalho */
-/* Styles for the header */
+
 header {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 120px;
-    background-color: rgba(0, 0, 0, 0.712); /* Transparent black background */
+    background-color: rgba(0, 0, 0, 0.712); 
     border-radius: 0;
-    padding: 0 20px; /* Add internal spacing for header items */
-    display: grid; /* Use CSS Grid for layout */
-    grid-template-columns: auto 1fr; /* Define two columns, one for logo and one for menu */
-    align-items: center; /* Center items vertically */
+    padding: 0 20px;
+    display: grid; 
+    grid-template-columns: auto 1fr; 
+    align-items: center; 
     z-index: 1000;
 }
+
+.navbar {
+    width: 100%;
+    height: 60px;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+   
+  .navbar img {
+    width: 61px;
+    height: 61px;
+    box-sizing: border-box;
+    cursor: pointer;
+  }
+   
+  .navbar .links {
+    display: flex;
+    gap: 2.2rem;
+  }
+   
+  .navbar .toggle_btn {
+    color: #090a16;
+    font-size: 1.5rem;
+    cursor: pointer;
+    display: none;
+    font-family: "Lato", sans-serif;
+  }
  
 /* Styles for the logo */
 header img {
@@ -213,6 +242,21 @@ footer img{
         width: 100%;
         height: 600px;
         max-height: none; 
+    }
+
+    .navbar .links,
+    .navbar .action_btn {
+      display: none;
+    }
+   
+    .navbar .toggle_btn {
+      display: block;
+    }
+   
+    .dropdown_menu {
+      display: block;
+      position: absolute;
+      z-index: 2;
     }
  
    
