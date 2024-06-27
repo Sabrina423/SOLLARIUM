@@ -5,7 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sou Cliente</title>
     <link rel="stylesheet" href="css/soucliente.css">
-    <script src="/soucliente.js"></script>
+    <style>
+        .error {
+            color: red;
+        }
+        .error-border {
+            border-color: red;
+        }
+    </style>
 </head>
 <body>
     <nav class="login-container">
@@ -13,15 +20,68 @@
             <img src="imagens/LOGO_SOLLARIUM (8).png" alt="Logo">
         </nav>
         <h1>Login</h1>
-        <form action="/perfilcliente" method="post">
-            <label for="e-meil">E-mail</label>
-            <input type="text" id="e-mail" placeholder="e-mail" required>
+        <form id="loginForm" action="/perfilcliente" method="post">
+            <label for="email">E-mail</label>
+            <input type="text" id="email" name="email" placeholder="e-mail" required>
+            <span class="error" id="emailError"></span>
+
             <label for="senha">Senha</label>
-            <input type="password" id="senha" placeholder="senha" required>
-            <a href="/perfilcliente.ejs"><button type="submit">Sou Cliente</button></a>
+            <input type="password" id="senha" name="password" placeholder="senha" required>
+            <span class="error" id="passwordError"></span>
+
+            <button type="submit">Sou Cliente</button>
         </form>
     </nav>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            let errors = false;
+            const email = document.getElementById('email');
+            const password = document.getElementById('senha');
+
+            // Reset error states
+            document.getElementById('emailError').textContent = '';
+            document.getElementById('passwordError').textContent = '';
+
+            email.classList.remove('error-border');
+            password.classList.remove('error-border');
+
+            // Validate fields
+            if (email.value === '') {
+                document.getElementById('emailError').textContent = 'E-mail é obrigatório';
+                email.classList.add('error-border');
+                errors = true;
+            }
+            if (password.value === '') {
+                document.getElementById('passwordError').textContent = 'Senha é obrigatória';
+                password.classList.add('error-border');
+                errors = true;
+            } else if (password.value.length < 6) {
+                document.getElementById('passwordError').textContent = 'Senha deve ter no mínimo 6 caracteres';
+                password.classList.add('error-border');
+                errors = true;
+            }
+
+            if (errors) {
+                event.preventDefault();
+            }
+        });
+    </script>
+
+<% if (typeof errors !== 'undefined') { %>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            <% if (errors.email) { %>
+                document.getElementById('email').classList.add('error-border');
+                document.getElementById('emailError').textContent = '<%= errors.email %>';
+            <% } %>
+            <% if (errors.password) { %>
+                document.getElementById('senha').classList.add('error-border');
+                document.getElementById('passwordError').textContent = '<%= errors.password %>';
+            <% } %>
+        });
+    </script>
+<% } %>
+
 </body>
 </html>
-
- 

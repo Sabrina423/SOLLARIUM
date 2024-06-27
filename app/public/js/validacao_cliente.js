@@ -1,33 +1,27 @@
-const express = require("express");
+const express = require('express');
+const { body, validationResult } = require('express-validator');
 const app = express();
-const { body, validationResult } = require("express-validator");
 
-// Express.js middleware to use JSON objects
-app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 
-app.post(
-  "/signup",
-  // using validation to verify valid inputs (MIDDLEWARE)
-  [
-    [
-      body("name").notEmpty(),
-      body("email").isEmail(),
-      body("password").notEmpty(),
-    ],
-  ],
-  async (req, res) => {
+app.post('/perfilcliente', [
+    body('username').notEmpty().withMessage('Nome é obrigatório'),
+    body('email').isEmail().withMessage('E-mail inválido'),
+    body('telefone').notEmpty().withMessage('Telefone é obrigatório'),
+    body('password').isLength({ min: 6 }).withMessage('Senha deve ter no mínimo 6 caracteres')
+], (req, res) => {
     const errors = validationResult(req);
-
     if (!errors.isEmpty()) {
-        return res.status(400).json({ errors: errors.array() });
-      }
+        const errorObj = errors.array().reduce((acc, error) => {
+            acc[error.param] = error.msg;
+            return acc;
+        }, {});
+        return res.render('cadastrocliente', { errors: errorObj });
+    }
+   
+    res.send('Cadastro realizado com sucesso');
+});
 
-    res.status(200).json({success:'Successful Sign Up!'})
-  }
-);
-
-// Server Listening at port 3000
-const port = 3000;
-app.listen(port, () => {
-  console.log(`Listening at http://localhost:${port}`);
+app.listen(3000, () => {
+    console.log('Servidor rodando na porta 3000');
 });

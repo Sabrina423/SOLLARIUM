@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -6,36 +5,114 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sou Cliente</title>
     <link rel="stylesheet" href="/css/cadastrocliente.css">
-  </head>
+    <style>
+        .error {
+            color: red;
+        }
+        .error-border {
+            border-color: red;
+        }
+    </style>
+</head>
 <body>
     <nav class="login-container">
         <nav class="logo">
             <img src="imagens/LOGO_SOLLARIUM (8).png" alt="Logo">
         </nav>
         <h3>Sou cliente</h3>
-          <form>  
-        <label for="username">Nome</label>
-        <input type="text" placeholder="Nome" id="username">
+        <form id="registerForm">  
+            <label for="username">Nome</label>
+            <input type="text" placeholder="Nome" id="username" name="username">
+            <span class="error" id="usernameError"></span>
        
-        <label for="email">E-mail</label>
-        <input type="email" placeholder="Meuemail@gmail.com" id="email">
+            <label for="email">E-mail</label>
+            <input type="email" placeholder="Meuemail@gmail.com" id="email" name="email">
+            <span class="error" id="emailError"></span>
 
-        <label for="telefone">Telefone</label>
-        <input type="tel" placeholder="(00)00000-0000" id="telefone">
+            <label for="telefone">Telefone</label>
+            <input type="tel" placeholder="(00)00000-0000" id="telefone" name="telefone">
+            <span class="error" id="telefoneError"></span>
 
-        <label for="password">Senha</label>
-        <input type="password" placeholder="Senha" id="password">
-        <a href="/perfilcliente" target="_blank"><button type="submit">Cadastre-se</button></a>
-           
+            <label for="password">Senha</label>
+            <input type="password" placeholder="Senha" id="password" name="password">
+            <span class="error" id="passwordError"></span>
+
+            <button type="submit">Cadastre-se</button>
         </form>
     </nav>
 
-    <% if (typeof errors !== 'undefined') { %>
-      <ul>
-        <% errors.forEach(function(error) { %>
-          <li class="error"><%= error.msg %></li>
-        <% }) %>
-      </ul>
-    <% } %>
+    <script>
+        document.getElementById('registerForm').addEventListener('submit', function(event) {
+            let errors = false;
+            const username = document.getElementById('username');
+            const email = document.getElementById('email');
+            const telefone = document.getElementById('telefone');
+            const password = document.getElementById('password');
+
+          
+            document.getElementById('usernameError').textContent = '';
+            document.getElementById('emailError').textContent = '';
+            document.getElementById('telefoneError').textContent = '';
+            document.getElementById('passwordError').textContent = '';
+
+            username.classList.remove('error-border');
+            email.classList.remove('error-border');
+            telefone.classList.remove('error-border');
+            password.classList.remove('error-border');
+
+            if (username.value === '') {
+                document.getElementById('usernameError').textContent = 'Nome é obrigatório';
+                username.classList.add('error-border');
+                errors = true;
+            }
+            if (email.value === '') {
+                document.getElementById('emailError').textContent = 'E-mail é obrigatório';
+                email.classList.add('error-border');
+                errors = true;
+            }
+            if (telefone.value === '') {
+                document.getElementById('telefoneError').textContent = 'Telefone é obrigatório';
+                telefone.classList.add('error-border');
+                errors = true;
+            }
+            if (password.value === '') {
+                document.getElementById('passwordError').textContent = 'Senha é obrigatória';
+                password.classList.add('error-border');
+                errors = true;
+            } else if (password.value.length < 6) {
+                document.getElementById('passwordError').textContent = 'Senha deve ter no mínimo 6 caracteres';
+                password.classList.add('error-border');
+                errors = true;
+            }
+
+            if (errors) {
+                event.preventDefault();
+            }
+        });
+    </script>
+
+<% if (typeof errors !== 'undefined') { %>
+  <script>
+      document.addEventListener('DOMContentLoaded', function() {
+          <% if (errors.username) { %>
+              document.getElementById('username').classList.add('error-border');
+              document.getElementById('usernameError').textContent = '<%= errors.username %>';
+          <% } %>
+          <% if (errors.email) { %>
+              document.getElementById('email').classList.add('error-border');
+              document.getElementById('emailError').textContent = '<%= errors.email %>';
+          <% } %>
+          <% if (errors.telefone) { %>
+              document.getElementById('telefone').classList.add('error-border');
+              document.getElementById('telefoneError').textContent = '<%= errors.telefone %>';
+          <% } %>
+          <% if (errors.password) { %>
+              document.getElementById('password').classList.add('error-border');
+              document.getElementById('passwordError').textContent = '<%= errors.password %>';
+          <% } %>
+      });
+  </script>
+<% } %>
+
 </body>
 </html>
