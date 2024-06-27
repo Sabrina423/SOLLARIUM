@@ -84,6 +84,7 @@ form button {
     cursor: pointer;
     font-size: 0.875rem;
     transition: background 0.3s ease;
+    width: 100%;
 }
  
 form button:hover {

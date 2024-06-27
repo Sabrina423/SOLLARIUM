@@ -1,121 +1,100 @@
-const tarefasModel = require("../models/cadastrocliente");
-const moment = require("moment");
+const usuario = require("../models/clienteModel.ejs");
 const { body, validationResult } = require("express-validator");
+const bcrypt = require("bcryptjs");
+var salt = bcrypt.genSaltSync(12);
+const fetch = (...args) => import('node-fetch').then(({ default: fetch }) => fetch(...args));
+const https = require('https');
 
-const tarefasController = {
+const usuarioController = {
 
-    regrasValidacao: [
-        body("tarefa").isLength({ min: 5, max: 45 }).withMessage(""),
-        body("prazo").isISO8601().withMessage("Prazo deve ser uma data válida"),
-        body("situacao").isNumeric().withMessage("Situação deve ser um número")
+    regrasValidacaoFormLogin: [
+        body("nome_usu")
+            .isLength({ min: 8, max: 45 })
+            .withMessage("O nome de usuário/e-mail deve ter de 8 a 45 caracteres"),
+        body("senha_usu")
+            .isStrongPassword()
+            .withMessage("A senha deve ter no mínimo 8 caracteres (mínimo 1 letra maiúscula, 1 caractere especial e 1 número)")
     ],
 
-    listarTarefasPaginadas: async (req, res) => {
-        res.locals.moment = moment;
-        try {
-            const pagina = req.query.pagina ? parseInt(req.query.pagina) : 1;
-            const regPagina = 5;
-            const inicio = (pagina - 1) * regPagina;
-            const totReg = await tarefasModel.totalReg();
-            const totPaginas = Math.ceil(totReg[0].total / regPagina);
-            const results = await tarefasModel.findPage(inicio, regPagina);
-            const paginador = totReg[0].total <= regPagina ? null : {
-                "pagina_atual": pagina,
-                "total_reg": totReg[0].total,
-                "total_paginas": totPaginas
-            };
-            res.render("pages/index", { tarefas: results, paginador });
-        } catch (e) {
-            console.error(e);
-            res.json({ erro: "Falha ao acessar dados" });
+    regrasValidacaoFormCad: [
+        body("nome_usu")
+            .isLength({ min: 3, max: 45 }).withMessage("Nome deve ter de 3 a 45 caracteres!"),
+        body("nomeusu_usu")
+            .isLength({ min: 8, max: 45 }).withMessage("Nome de usuário deve ter de 8 a 45 caracteres!")
+            .custom(async value => {
+                const nomeUsu = await usuario.findCampoCustom({'user_usuario':value});
+                if (nomeUsu > 0) {
+                  throw new Error('Nome de usuário em uso!');
+                }
+              }),  
+        body("email_usu")
+            .isEmail().withMessage("Digite um e-mail válido!")
+            .custom(async value => {
+                const nomeUsu = await usuario.findCampoCustom({'email_usuario':value});
+                if (nomeUsu > 0) {
+                  throw new Error('E-mail em uso!');
+                }
+              }), 
+        body("senha_usu")
+            .isStrongPassword()
+            .withMessage("A senha deve ter no mínimo 8 caracteres (mínimo 1 letra maiúscula, 1 caractere especial e 1 número)")
+    ],
+
+
+    regrasValidacaoPerfil: [
+        body("nome_usu")
+            .isLength({ min: 3, max: 45 }).withMessage("Mínimo de 3 letras e máximo de 45!"),
+        body("nomeusu_usu")
+            .isLength({ min: 8, max: 45 }).withMessage("Nome de usuário deve ter de 8 a 45 caracteres!"),
+        body("email_usu")
+            .isEmail().withMessage("Digite um e-mail válido!"),
+        body("fone_usu")
+            .isLength({ min: 12, max: 13 }).withMessage("Digite um telefone válido!"),
+        verificarUsuAutorizado([1, 2, 3], "pages/restrito"),
+    ],
+
+    logar: (req, res) => {
+        const erros = validationResult(req);
+        if (!erros.isEmpty()) {
+            return res.render("pages/login", { listaErros: erros, dadosNotificacao: null  })
+        }
+        if (req.session.autenticado.autenticado != null) {
+            res.redirect("/");
+        } else {
+            res.render("pages/login", { listaErros: null,
+                 dadosNotificacao: { titulo: "Falha ao logar!", mensagem: "Usuário e/ou senha inválidos!", tipo: "error" } })
         }
     },
 
-    adicionarTarefa: async (req, res) => {
-        res.locals.moment = moment;
-        const errors = validationResult(req);
-        if (!errors.isEmpty()) {
-            console.log(errors);
-            return res.render("pages/adicionar", { dados: req.body, listaErros: errors });
-        }
 
-        const dadosForm = {
-            nome_tarefa: req.body.tarefa,
-            prazo_tarefa: req.body.prazo,
-            situacao_tarefa: req.body.situacao,
+    cadastrar: (req, res) => {
+        const erros = validationResult(req);
+        var dadosForm = {
+            user_usuario: req.body.nomeusu_usu, 
+            senha_usuario: bcrypt.hashSync(req.body.senha_usu, salt),
+            nome_usuario: req.body.nome_usu,
+            email_usuario: req.body.email_usu,
         };
-
-        const id_tarefa = req.body.id_tarefa;
-        try {
-            if (!id_tarefa) {
-                await tarefasModel.create(dadosForm);
-                const totReg = await tarefasModel.totalReg();
-                const paginaAtual = Math.ceil(totReg[0].total / 5);
-                res.redirect("/?pagina=" + paginaAtual);
-            } else {
-                await tarefasModel.update(dadosForm, id_tarefa);
-                const posicao = await tarefasModel.posicaoReg(id_tarefa);
-                const url = "/?pagina=" + Math.ceil(posicao[0].numero_ordem / 5);
-                res.redirect(url);
-            }
-        } catch (e) {
-            console.error(e);
-            res.json({ erro: "Falha ao acessar dados" });
+        if (!erros.isEmpty()) {
+            return res.render("pages/cadastro", { listaErros: erros, dadosNotificacao: null, valores: req.body })
         }
-    },
-
-    excluirTarefa: async (req, res) => {
-        const { id } = req.query;
         try {
-            await tarefasModel.delete(id);
-            res.redirect("/");
+            let create = usuario.create(dadosForm);
+            res.render("pages/cadastro", {
+                listaErros: null, dadosNotificacao: {
+                  titulo: "Cadastro realizado!", mensagem: "Novo usuário criado com sucesso!", tipo: "success"
+                }, valores: req.body
+              })
         } catch (e) {
-            console.error(e);
-            res.json({ erro: "Falha ao acessar dados" });
+            console.log(e);
+            res.render("pages/cadastro", {
+                listaErros: erros, dadosNotificacao: {
+                    titulo: "Erro ao cadastrar!", mensagem: "Verifique os valores digitados!", tipo: "error"
+                }, valores: req.body
+            })
         }
-    },
+    }
 
-    finalizarTarefa: async (req, res) => {
-        const { id } = req.query;
-        try {
-            await tarefasModel.situacaoTarefa(2, id);
-            res.redirect("/");
-        } catch (e) {
-            console.error(e);
-            res.json({ erro: "Falha ao acessar dados" });
-        }
-    },
+}
 
-    exibirTarefaId: async (req, res) => {
-        res.locals.moment = moment;
-        const { id } = req.query;
-        try {
-            const tarefa = await tarefasModel.findId(id);
-            res.render("pages/adicionar", {
-                dados: {
-                    id_tarefa: id,
-                    tarefa: tarefa[0].nome_tarefa,
-                    prazo: tarefa[0].prazo_tarefa,
-                    situacao: tarefa[0].situacao_tarefa,
-                },
-                listaErros: null,
-            });
-        } catch (e) {
-            console.error(e);
-            res.json({ erro: "Falha ao acessar dados" });
-        }
-    },
-
-    iniciarTarefa: async (req, res) => {
-        const { id } = req.query;
-        try {
-            await tarefasModel.situacaoTarefa(1, id);
-            res.redirect("/");
-        } catch (e) {
-            console.error(e);
-            res.json({ erro: "Falha ao acessar dados" });
-        }
-    },
-};
-
-module.exports = tarefasController;
+module.exports = usuarioController
