@@ -6,33 +6,87 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sollarium orçamento</title>
     <link rel="stylesheet" href="/css/orcamento.css">
+    <style>
+        /* Estilos para as mensagens de erro */
+        .error-message {
+            color: red;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <!-- Se precisar de um cabeçalho -->
-    </header>
-    <nav>
-        <!-- Se precisar de uma navegação -->
-    </nav>
     <section class="inteiro">
-        <!-- Metade da tela para telas grandes -->
         <section class="metade1">
             <img src="/imagens/normal_u0.png" alt="Imagem de exemplo">
         </section>
-        <!-- Metade da tela para telas grandes -->
         <section class="metade2">
             <section class="Forms">
                 <h1>Orçamento</h1>
-                <form action="">
-                    <input type="text" placeholder="Estado:" required><br>
-                    <input type="text" placeholder="Cidade/CEP" required><br>
-                    <input type="text" placeholder="Serviço:" required><br>
-                    <textarea placeholder="Detalhe o serviço desejado:" required class="detalhe"></textarea><br>
-                    <input type="text" placeholder="Valor esperado:" required><br>
+                <form id="formOrcamento" action="" onsubmit="return validarFormulario()">
+                    <input type="text" id="estado" name="estado" placeholder="Estado:" required><br>
+                    <div id="estadoError" class="error-message"></div>
+                    <input type="text" id="cidade" name="cidade" placeholder="Cidade/CEP" required><br>
+                    <div id="cidadeError" class="error-message"></div>
+                    <input type="text" id="servico" name="servico" placeholder="Serviço:" required><br>
+                    <div id="servicoError" class="error-message"></div>
+                    <textarea id="detalhe" name="detalhe" placeholder="Detalhe o serviço desejado:" required class="detalhe"></textarea><br>
+                    <div id="detalheError" class="error-message"></div>
+                    <input type="text" id="valor" name="valor" placeholder="Valor esperado:" required><br>
+                    <div id="valorError" class="error-message"></div>
                     <input type="submit" value="FINALIZAR ORÇAMENTO">
                 </form>
             </section>
         </section>
     </section>
+
+    <script>
+        function validarFormulario() {
+            // Resetar mensagens de erro
+            document.getElementById('estadoError').textContent = '';
+            document.getElementById('cidadeError').textContent = '';
+            document.getElementById('servicoError').textContent = '';
+            document.getElementById('detalheError').textContent = '';
+            document.getElementById('valorError').textContent = '';
+
+            let form = document.getElementById('formOrcamento');
+            let estado = form.elements['estado'].value.trim();
+            let cidade = form.elements['cidade'].value.trim();
+            let servico = form.elements['servico'].value.trim();
+            let detalhe = form.elements['detalhe'].value.trim();
+            let valor = form.elements['valor'].value.trim();
+
+            let isValid = true;
+
+            // Validar cada campo
+            if (estado === '') {
+                document.getElementById('estadoError').textContent = 'Por favor, preencha o Estado.';
+                isValid = false;
+            }
+
+            if (cidade === '') {
+                document.getElementById('cidadeError').textContent = 'Por favor, preencha a Cidade/CEP.';
+                isValid = false;
+            }
+
+            if (servico === '') {
+                document.getElementById('servicoError').textContent = 'Por favor, preencha o Serviço.';
+                isValid = false;
+            }
+
+            if (detalhe === '') {
+                document.getElementById('detalheError').textContent = 'Por favor, detalhe o serviço desejado.';
+                isValid = false;
+            }
+
+            if (valor === '') {
+                document.getElementById('valorError').textContent = 'Por favor, preencha o Valor esperado.';
+                isValid = false;
+            }
+
+            // Retornar true ou false para permitir ou não o envio do formulário
+            return isValid;
+        }
+    </script>
 </body>
 </html>
