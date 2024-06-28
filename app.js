@@ -18,7 +18,10 @@ app.use(session({ secret: 'your-secret-key', resave: false, saveUninitialized: t
 let rotas = require('./app/routes/router')
 app.use('/', rotas);
 
+
+
 app.listen(port, () => {
     console.log(`Servidor rodando na porta ${port}\nhttp://localhost:${port}`);
 });
 
+console.log("Iniciando o servidor")
