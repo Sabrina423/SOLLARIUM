@@ -37,8 +37,13 @@ nav ul {
 }
  
 nav ul li a {
-    text-decoration: none;
+  
     color: white;
+    text-transform: uppercase;
+    text-decoration-color:none;
+    text-decoration-thickness: unset;
+   
+   
 }
  
 nav ul li {
@@ -55,19 +60,19 @@ nav ul li {
 .btn-wrap button{
    position: absolute;
     z-index:1;
-    top:60%;
-    left:45%;
+    top:70%;
+    left:46%;
     width:clamp(100px,96%,200px);             /* largura para o botão */
     height:clamp(10px,10%,60px);            /* altura para o botão */
     padding:0;
-    margin:-15px 0 0 -30px;   /* margem à esquerda e ao topo metade da medida do botão */
+    margin:-9px 0 0 -30px;   /* margem à esquerda e ao topo metade da medida do botão */
     background-color:transparent;
-    border-color: white;
-    color: rgb(255, 255, 255);
+    border-color:white;
+    color: white;
     font-size: auto;
     font-family: sans-serif;
     font-weight: 550;
-    border-radius: 3px;
+    border-radius: 5px;
 }
  
 .carousel-container {
