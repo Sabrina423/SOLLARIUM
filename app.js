@@ -1,27 +1,27 @@
+require('dotenv').config(); // Load environment variables
 const express = require('express');
 const session = require('express-session');
+const pool = require('./config/pool_conexoes'); // Ensure this path is correct
+const rotas = require('./app/routes/router'); // Ensure this path is correct
+
 const app = express();
-const port = 3000;
+const port = process.env.APP_PORT || 3000;
 
 app.use(express.static("app/public/"));
-
 app.set('view engine', 'ejs');
-app.set('views',"./app/views");
-
-
+app.set('views', "./app/views");
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-app.use(session({ secret: 'your-secret-key', resave: false, saveUninitialized: true }));
+app.use(session({ 
+  secret: process.env.SESSION_SECRET, 
+  resave: false, 
+  saveUninitialized: true 
+}));
 
-let rotas = require('./app/routes/router')
 app.use('/', rotas);
 
-
-
 app.listen(port, () => {
-    console.log(`Servidor rodando na porta ${port}\nhttp://localhost:${port}`);
+  console.log(`Servidor rodando na porta ${port}\nhttp://localhost:${port}`);
 });
-
-console.log("Iniciando o servidor")
