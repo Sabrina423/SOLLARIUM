@@ -3,7 +3,6 @@ const { body, validationResult } = require('express-validator');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');  // Make sure to include this if it's used
 const router = express.Router();
-const db = require('../config/db');  // Ensure correct path to your db configuration file
 
 const secretKey = 'your-secret-key';
 
