@@ -1,11 +1,13 @@
 const express = require('express');
 const { body, validationResult } = require('express-validator');
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');  // Make sure to include this if it's used
 const router = express.Router();
+const db = require('../config/db');  // Ensure correct path to your db configuration file
 
 const secretKey = 'your-secret-key';
 
-// autenticação
+// Authentication Middleware
 const authenticateToken = (req, res, next) => {
     const token = req.session.token;
     if (!token) return res.redirect('/');
@@ -17,6 +19,7 @@ const authenticateToken = (req, res, next) => {
     });
 };
 
+// Routes
 router.get('/', (req, res) => {
     res.render('pages/home');
 });
@@ -25,16 +28,8 @@ router.get('/soucliente', (req, res) => {
     res.render('pages/soucliente');
 });
 
-router.get('/souprofissional', (req, res) => {
-    res.render('pages/souprofissional');
-});
-
-router.get('/cadastroprof', (req, res) => {
-    res.render('pages/cadastroprof');
-});
-
-router.get('/cadastrocliente', (req, res) => {
-    res.render('pages/cadastrocliente');
+router.get('/cadastro', (req, res) => {
+    res.render('pages/cadastro');
 });
 
 router.get('/orcamento', (req, res) => {
@@ -42,13 +37,13 @@ router.get('/orcamento', (req, res) => {
 });
 
 router.get('/perfilcliente', (req, res) => {
-    req.render('/pages/perfilcliente')
-})
+    res.render('pages/perfilcliente');
+});
 
-// Registro
+// Registration Route
 router.post('/cadastrocliente', [
-    body('username').isString().withMessage('Username deve ser uma string'),
-    body('password').isLength({ min: 6 }).withMessage('Password deve ter no mínimo 6 caracteres')
+    body('username').isString().withMessage('Username must be a string'),
+    body('password').isLength({ min: 6 }).withMessage('Password must be at least 6 characters long')
 ], (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -56,21 +51,21 @@ router.post('/cadastrocliente', [
     }
 
     const { username, password } = req.body;
-    const hashedPassword = bcryptjs.hashSync(password, 10);
+    const hashedPassword = bcrypt.hashSync(password, 10);
 
     db.query('INSERT INTO users (username, password) VALUES (?, ?)', [username, hashedPassword], (err) => {
         if (err) {
-            return res.status(400).send('Erro ao registrar usuário. Usuário já existe.');
-        }   
-        res.send('Usuário registrado com sucesso.');
+            console.log(err);
+            return res.status(400).send('Error registering user. User might already exist.');
+        }
+        res.send('User registered successfully.');
     });
 });
 
-
-// Login
+// Login Route
 router.post('/login', [
-    body('username').isString().withMessage('Username deve ser uma string'),
-    body('password').isLength({ min: 6 }).withMessage('Password deve ter no mínimo 6 caracteres')
+    body('username').isString().withMessage('Username must be a string'),
+    body('password').isLength({ min: 6 }).withMessage('Password must be at least 6 characters long')
 ], (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -81,7 +76,8 @@ router.post('/login', [
 
     db.query('SELECT * FROM users WHERE username = ?', [username], (err, results) => {
         if (err || results.length === 0) {
-            return res.status(400).send('Usuário não encontrado');
+            console.log(err);
+            return res.status(400).send('User not found');
         }
 
         const user = results[0];
@@ -91,18 +87,14 @@ router.post('/login', [
             req.session.token = token;
             res.redirect('/perfilcliente');
         } else {
-            res.status(400).send('Senha incorreta');
+            res.status(400).send('Incorrect password');
         }
     });
 });
 
+// Protected Profile Route
 router.get('/perfilcliente', authenticateToken, (req, res) => {
     res.render('pages/perfilcliente');
 });
-
-router.get('/soucliente', (req, res) => {
-  res.render('pages/soucliente');
-});
-
 
 module.exports = router;

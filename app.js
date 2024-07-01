@@ -1,8 +1,8 @@
-require('dotenv').config(); // Load environment variables
+require('dotenv').config(); // Carregar variáveis de ambiente
 const express = require('express');
 const session = require('express-session');
-const pool = require('./config/pool_conexoes'); // Ensure this path is correct
-const rotas = require('./app/routes/router'); // Ensure this path is correct
+const pool = require('./config/pool_conexoes'); // Certifique-se de que este caminho está correto
+const rotas = require('./app/routes/router'); // Certifique-se de que este caminho está correto
 
 const app = express();
 const port = process.env.APP_PORT || 3000;
