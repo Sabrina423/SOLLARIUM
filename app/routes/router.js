@@ -27,8 +27,8 @@ router.get('/soucliente', (req, res) => {
     res.render('pages/soucliente');
 });
 
-router.get('/cadastro', (req, res) => {
-    res.render('pages/cadastro');
+router.get('/cadastro_cliente', (req, res) => {
+    res.render('pages/cadastro_cliente');
 });
 
 router.get('/orcamento', (req, res) => {
