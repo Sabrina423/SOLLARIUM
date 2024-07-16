@@ -7,22 +7,15 @@
 
 /* Estilos gerais da página */
 body {
-    background-color: #1a1a1a; /* Fundo preto escuro */
+    background-image: url('/imagens/normal_u0.png');
+    background-repeat: no-repeat;
+    background-size: cover;
     color: #ffffff; /* Texto branco */
     font-family: Arial, sans-serif; /* Fonte padrão */
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-}
-
-.inteiro {
-    display: flex;
-    justify-content: space-around;
-    align-items: stretch; /* Estica para ocupar a altura total */
-    max-width: 1200px;
-    width: 100%;
-    padding: 20px;
 }
 
 .metade1,
@@ -34,18 +27,40 @@ body {
     align-items: center;
 }
 
-.metade1 img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 10px; /* Borda arredondada */
+.container {
+    border-radius: 30px;
+    padding: 30px;
+    width: 450px;
+    max-width: 500px; 
+    flex: 1;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 650px;
 }
 
-.metade2 .Forms {
-    background-color: rgba(0, 0, 0, 0.7); /* Fundo semi-transparente preto */
+.Forms {
+    background: rgba(0, 0, 0, 0.568);
+    box-shadow: 0 8px 32px 0 rgba(255, 255, 255, 0.37);
+    backdrop-filter: blur(13.5px);
+    -webkit-backdrop-filter: blur(13.5px);
     padding: 30px;
-    border-radius: 10px;
-    width: 100%;
-    max-width: 600px; /* Tamanho máximo do formulário */
+    width: 450px;
+    max-width: 500px; 
+    text-align: center;
+    position: relative;
+    top: 15px;
+    font-size: 18px;
+}
+
+.logo {
+    margin-bottom: 20px; /* Espaço entre a logo e os campos do formulário */
+}
+
+.logo img {
+    max-width: 100px; /* Tamanho da logo */
+    height: auto;
 }
 
 input[type="text"],
@@ -54,16 +69,17 @@ textarea {
     padding: 10px;
     margin: 10px 0;
     border: none;
-    background-color: rgba(255, 255, 255, 0.1); /* Fundo branco semi-transparente */
-    color: #ffffff; /* Texto branco */
+    background-color: rgba(255, 255, 255, 0.219); /* Fundo branco semi-transparente */ 
     border-radius: 5px;
     font-size: 16px; /* Tamanho da fonte */
+    font-family: sans-serif;
+    color: #000000;
 }
 
 input[type="text"]:focus,
 textarea:focus {
     outline: none;
-    background-color: rgba(255, 255, 255, 0.2); /* Fundo branco mais escuro ao focar */
+    background-color: rgba(0, 0, 0, 0.2); /* Fundo branco mais escuro ao focar */
 }
 
 textarea.detalhe {
@@ -102,6 +118,13 @@ input[type="submit"]:hover {
     }
 
     .Forms {
-        max-width: 100%;
+        max-width: 320px;
     }
+}
+
+/* Estilos para as mensagens de erro */
+.error-message {
+    color: red;
+    font-size: 14px;
+    margin-top: 5px;
 }

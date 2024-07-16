@@ -4,38 +4,35 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sollarium orçamento</title>
+    <title>Sollarium Orçamento</title>
     <link rel="stylesheet" href="/css/orcamento.css">
-    <style>
-        /* Estilos para as mensagens de erro */
-        .error-message {
-            color: red;
-            font-size: 14px;
-            margin-top: 5px;
-        }
-    </style>
 </head>
 <body>
     <section class="inteiro">
         <section class="metade1">
-            <img src="/imagens/normal_u0.png" alt="Imagem de exemplo">
+            <!-- Adicione a imagem aqui se necessário -->
         </section>
         <section class="metade2">
-            <section class="Forms">
-                <h1>Orçamento</h1>
-                <form id="formOrcamento" action="" onsubmit="return validarFormulario()">
-                    <input type="text" id="estado" name="estado" placeholder="Estado:" required><br>
-                    <div id="estadoError" class="error-message"></div>
-                    <input type="text" id="cidade" name="cidade" placeholder="Cidade/CEP" required><br>
-                    <div id="cidadeError" class="error-message"></div>
-                    <input type="text" id="servico" name="servico" placeholder="Serviço:" required><br>
-                    <div id="servicoError" class="error-message"></div>
-                    <textarea id="detalhe" name="detalhe" placeholder="Detalhe o serviço desejado:" required class="detalhe"></textarea><br>
-                    <div id="detalheError" class="error-message"></div>
-                    <input type="text" id="valor" name="valor" placeholder="Valor esperado:" required><br>
-                    <div id="valorError" class="error-message"></div>
-                    <input type="submit" value="FINALIZAR ORÇAMENTO">
-                </form>
+            <section class="container">
+                <section class="Forms">
+                    <div class="logo">
+                        <img src="/imagens/LOGO_SOLLARIUM(8).png" alt="Logo"> <!-- Adicione o caminho correto da sua logo -->
+                    </div>
+                    <h2>Orçamento</h2>
+                    <form id="formOrcamento" action="" onsubmit="return validarFormulario()">
+                        <input type="text" id="estado" name="estado" placeholder="Estado:" required><br>
+                        <div id="estadoError" class="error-message"></div>
+                        <input type="text" id="cidade" name="cidade" placeholder="Cidade/CEP" required><br>
+                        <div id="cidadeError" class="error-message"></div>
+                        <input type="text" id="servico" name="servico" placeholder="Serviço:" required><br>
+                        <div id="servicoError" class="error-message"></div>
+                        <textarea id="detalhe" name="detalhe" placeholder="Detalhe o serviço desejado:" required class="detalhe"></textarea><br>
+                        <div id="detalheError" class="error-message"></div>
+                        <input type="text" id="valor" name="valor" placeholder="Valor esperado:" required><br>
+                        <div id="valorError" class="error-message"></div>
+                        <input type="submit" value="FINALIZAR ORÇAMENTO">
+                    </form>
+                </section>
             </section>
         </section>
     </section>
