@@ -57,7 +57,7 @@ const ClienteController = {
     regrasValidacao: [
         body("cpf_cliente").isLength({ min: 11, max: 11 }).withMessage("CPF deve conter 11 dígitos!"),
         body("nome_cliente").isLength({ min: 5, max: 45 }).withMessage("Nome deve conter de 5 a 45 letras!"),
-        body("contato_cliente").isLength({ min: 14, max: 14 }).withMessage("Contato deve conter 14 dígitos!")
+        body("contato_cliente").isLength({ min: 12, max: 12 }).withMessage("Contato deve conter 12 dígitos!")
     ],
 
     listarClientes: async (req, res) => {

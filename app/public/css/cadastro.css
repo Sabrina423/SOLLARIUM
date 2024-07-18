@@ -127,7 +127,7 @@ table {
 /*site*/
 
 body {
-  background-image: url(../IMG/img_fundo.jpg);
+  background-color: black;
   background-size: cover;
 }
 

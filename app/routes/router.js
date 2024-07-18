@@ -1,12 +1,16 @@
 const express = require('express');
 const { body, validationResult } = require('express-validator');
 const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');  // Make sure to include this if it's used
+const jwt = require('jsonwebtoken');  // Certifique-se de incluir isso se for usado
 const router = express.Router();
+
+const controllerCliente = require('../controllers/controllerCliente');
+
+router.use(controllerCliente);
 
 const secretKey = 'your-secret-key';
 
-// Authentication Middleware
+// Middleware de Autenticação
 const authenticateToken = (req, res, next) => {
     const token = req.session.token;
     if (!token) return res.redirect('/');
@@ -18,7 +22,7 @@ const authenticateToken = (req, res, next) => {
     });
 };
 
-// Routes
+// Rotas
 router.get('/', (req, res) => {
     res.render('pages/home');
 });
@@ -27,22 +31,30 @@ router.get('/soucliente', (req, res) => {
     res.render('pages/soucliente');
 });
 
-router.get('/cadastro_cliente', (req, res) => {
-    res.render('pages/cadastro_cliente');
+router.get('/cadastrocliente', (req, res) => {
+    res.render('pages/cadastrocliente');
 });
 
 router.get('/orcamento', (req, res) => {
     res.render('pages/orcamento');
 });
 
-router.get('/perfilcliente', (req, res) => {
+router.get('/perfilcliente', authenticateToken, (req, res) => {
     res.render('pages/perfilcliente');
 });
 
-// Registration Route
+router.get('/relatorio', authenticateToken, (req, res) => {
+    res.render('pages/relatorio');
+});
+
+router.get('/feedback', authenticateToken, (req, res) => {
+    res.render('pages/feedback');
+});
+
+// Rota de Registro
 router.post('/cadastrocliente', [
-    body('username').isString().withMessage('Username must be a string'),
-    body('password').isLength({ min: 6 }).withMessage('Password must be at least 6 characters long')
+    body('username').isString().withMessage('O nome de usuário deve ser uma string'),
+    body('password').isLength({ min: 6 }).withMessage('A senha deve ter pelo menos 6 caracteres')
 ], (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -55,16 +67,16 @@ router.post('/cadastrocliente', [
     db.query('INSERT INTO users (username, password) VALUES (?, ?)', [username, hashedPassword], (err) => {
         if (err) {
             console.log(err);
-            return res.status(400).send('Error registering user. User might already exist.');
+            return res.status(400).send('Erro ao registrar o usuário. O usuário já pode existir.');
         }
-        res.send('User registered successfully.');
+        res.send('Usuário registrado com sucesso.');
     });
 });
 
-// Login Route
+// Rota de Login
 router.post('/login', [
-    body('username').isString().withMessage('Username must be a string'),
-    body('password').isLength({ min: 6 }).withMessage('Password must be at least 6 characters long')
+    body('username').isString().withMessage('O nome de usuário deve ser uma string'),
+    body('password').isLength({ min: 6 }).withMessage('A senha deve ter pelo menos 6 caracteres')
 ], (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -76,7 +88,7 @@ router.post('/login', [
     db.query('SELECT * FROM users WHERE username = ?', [username], (err, results) => {
         if (err || results.length === 0) {
             console.log(err);
-            return res.status(400).send('User not found');
+            return res.status(400).send('Usuário não encontrado');
         }
 
         const user = results[0];
@@ -86,14 +98,16 @@ router.post('/login', [
             req.session.token = token;
             res.redirect('/perfilcliente');
         } else {
-            res.status(400).send('Incorrect password');
+            res.status(400).send('Senha incorreta');
         }
     });
 });
 
-// Protected Profile Route
+// Rota Protegida do Perfil
 router.get('/perfilcliente', authenticateToken, (req, res) => {
     res.render('pages/perfilcliente');
 });
+
+
 
 module.exports = router;
