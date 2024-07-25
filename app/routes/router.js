@@ -4,9 +4,9 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');  // Certifique-se de incluir isso se for usado
 const router = express.Router();
 
-const controllerCliente = require('../controllers/controllerCliente');
 
-router.use(controllerCliente);
+
+
 
 const secretKey = 'your-secret-key';
 
