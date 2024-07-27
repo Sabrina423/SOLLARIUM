@@ -1,4 +1,4 @@
-const pool = require("../config/pool_conexoes");
+const pool = require('../config/pool_conexoes');
 
 const ClienteModel = {
     findAll: async () => {
@@ -6,125 +6,58 @@ const ClienteModel = {
             const [linhas] = await pool.query('SELECT * FROM CLIENTE');
             return linhas;
         } catch (error) {
-            return error;
+            console.error('Erro ao buscar clientes:', error);
+            throw error;
         }
     },
 
-    findId: async (id) => {
+    findById: async (id) => {
         try {
             const [linhas] = await pool.query('SELECT * FROM CLIENTE WHERE ID_CLIENTE = ?', [id]);
-            return linhas;
+            return linhas[0];
         } catch (error) {
-            return error;
+            console.error('Erro ao buscar cliente por ID:', error);
+            throw error;
         }
     },
 
-    create: async (dadosForm) => {
+    create: async (cliente) => {
         try {
-            const [linhas] = await pool.query('INSERT INTO CLIENTE SET ?', [dadosForm]);
-            return linhas;
+            const { cpf_cliente, endereco_cliente, nome_cliente, contato_cliente, email_cliente } = cliente;
+            const result = await pool.query(
+                'INSERT INTO CLIENTE (CPF_CLIENTE, ENDERECO_CLIENTE, NOME_CLIENTE, CONTATO_CLIENTE, EMAIL_CLIENTE) VALUES (?, ?, ?, ?, ?)',
+                [cpf_cliente, endereco_cliente, nome_cliente, contato_cliente, email_cliente]
+            );
+            return result;
         } catch (error) {
-            console.log(error);
-            return null;
+            console.error('Erro ao criar cliente:', error);
+            throw error;
         }
     },
 
-    update: async (dadosForm, id) => {
+    update: async (id, cliente) => {
         try {
-            const [linhas] = await pool.query('UPDATE CLIENTE SET ? WHERE ID_CLIENTE = ?', [dadosForm, id]);
-            return linhas;
+            const { cpf_cliente, endereco_cliente, nome_cliente, contato_cliente, email_cliente } = cliente;
+            const result = await pool.query(
+                'UPDATE CLIENTE SET CPF_CLIENTE = ?, ENDERECO_CLIENTE = ?, NOME_CLIENTE = ?, CONTATO_CLIENTE = ?, EMAIL_CLIENTE = ? WHERE ID_CLIENTE = ?',
+                [cpf_cliente, endereco_cliente, nome_cliente, contato_cliente, email_cliente, id]
+            );
+            return result;
         } catch (error) {
-            return error;
+            console.error('Erro ao atualizar cliente:', error);
+            throw error;
         }
     },
 
     delete: async (id) => {
         try {
-            const [linhas] = await pool.query('DELETE FROM CLIENTE WHERE ID_CLIENTE = ?', [id]);
-            return linhas;
+            const result = await pool.query('DELETE FROM CLIENTE WHERE ID_CLIENTE = ?', [id]);
+            return result;
         } catch (error) {
-            return error;
+            console.error('Erro ao deletar cliente:', error);
+            throw error;
         }
     }
 };
 
 module.exports = ClienteModel;
-const ClienteModel = require('"../models/clienteModel');
-const { body, validationResult } = require("express-validator");
-
-const ClienteController = {
-
-    regrasValidacao: [
-        body("cpf_cliente").isLength({ min: 11, max: 11 }).withMessage("CPF deve conter 11 dígitos!"),
-        body("nome_cliente").isLength({ min: 5, max: 45 }).withMessage("Nome deve conter de 5 a 45 letras!"),
-       
-    ],
-
-    listarClientes: async (req, res) => {
-        try {
-            const results = await ClienteModel.findAll();
-            res.render("pages/adm_clientes", { clientes: results });
-        } catch (e) {
-            console.log(e);
-            res.json({ erro: "Falha ao acessar dados" });
-        }
-    },
-
-    adicionarCliente: async (req, res) => {
-        const errors = validationResult(req);
-        if (!errors.isEmpty()) {
-            console.log(errors);
-            return res.render("pages/adicionarCliente", { dados: req.body, listaErros: errors });
-        }
-        const dadosForm = {
-            cpf_cliente: req.body.cpf_cliente,
-            nome_cliente: req.body.nome_cliente,
-            contato_cliente: req.body.contato_cliente,
-            endereco_cliente: req.body.endereco_cliente,
-            email_cliente: req.body.email_cliente,
-        };
-        try {
-            await ClienteModel.create(dadosForm);
-            res.redirect("/adm_cliente");
-        } catch (e) {
-            console.log(e);
-            res.json({ erro: "Falha ao acessar dados" });
-        }
-    },
-
-    editarCliente: async (req, res) => {
-        const { id } = req.query;
-        const errors = validationResult(req);
-        if (!errors.isEmpty()) {
-            console.log(errors);
-            return res.render("pages/editarCliente", { dados: req.body, listaErros: errors });
-        }
-        const dadosForm = {
-            cpf_cliente: req.body.cpf_cliente,
-            nome_cliente: req.body.nome_cliente,
-            contato_cliente: req.body.contato_cliente,
-            endereco_cliente: req.body.endereco_cliente,
-            email_cliente: req.body.email_cliente,
-        };
-        try {
-            await ClienteModel.update(dadosForm, id);
-            res.redirect("/clientes");
-        } catch (e) {
-            console.log(e);
-            res.json({ erro: "Falha ao acessar dados" });
-        }
-    },
-
-    excluirCliente: async (req, res) => {
-        const { id } = req.query;
-        try {
-            await ClienteModel.delete(id);
-            res.redirect("/clientes");
-        } catch (e) {
-            console.log(e);
-            res.json({ erro: "Falha ao acessar dados" });
-        }
-    }
-};
-
-module.exports = ClienteController;
