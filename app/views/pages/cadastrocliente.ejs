@@ -29,8 +29,12 @@
                     <input type="text" name="contato_cliente" placeholder="Contato" required>
                 </div>
                 <div class="input-group">
-                    <input type="password" name="senha_cliente" placeholder="Senha" required>
-                    <input type="password" name="confirmar_senha_cliente" placeholder="Confirmar Senha" required>
+                    <div class="password-conteiner">
+                    <input type="password" id="senha_cliente" name="senha_cliente" placeholder="Senha" required>
+                    <span class="toggle-password" onclick="togglePassword('senha_cliente')">&#128065;</span>
+                    <input type="password" id="confirmar_senha_cliente" name="confirmar_senha_cliente" placeholder="Confirmar Senha" required>
+                    <span class="toggle-password" onclick="togglePassword('confirmar_senha_cliente')">&#128065;</span>
+                    ></div>
                 </div>
                 <button type="submit">Criar Conta</button>
             </form>
@@ -38,7 +42,7 @@
     </div>
 
     <script>
-        document.querySelector('form').addEventListener('submit', async function (event) {
+      document.querySelector('form').addEventListener('submit', async function (event) {
             event.preventDefault();
             const formData = new FormData(this);
             const formObject = Object.fromEntries(formData);
@@ -60,6 +64,15 @@
                 alert('Erro ao enviar dados: ' + error.message);
             }
         });
+
+        function togglePassword(fieldId) {
+            const field = document.getElementById(fieldId);
+            if (field.type === 'password') {
+                field.type = 'text';
+            } else {
+                field.type = 'password';
+            }
+        }
     </script>
 </body>
 

@@ -59,6 +59,26 @@ form {
     align-items: center;
 }
 
+.password-container {
+    position: relative;
+    flex: 1;
+}
+
+.password-container input {
+    width: calc(100% - 30px);
+    margin-right: 0;
+}
+
+.toggle-password {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #ecf0f1;
+    font-size: 1.2em;
+}
+
 .input-group {
     display: flex;
     width: 100%;
