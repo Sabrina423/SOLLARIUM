@@ -45,13 +45,10 @@ main {
     max-width: 90%;
     text-align: center;
     z-index: 2;
+    transition: background 0.3s ease, transform 0.2s ease;
 }
 
-main h2 {
-    font-size: 1.4em;
-    margin: 20px 0;
-    color: #ecf0f1;
-}
+
 
 form {
     display: flex;
@@ -62,18 +59,19 @@ form {
 .password-container {
     position: relative;
     flex: 1;
+    display: flex;
+    align-items: center;
+    margin: 5px;
 }
 
 .password-container input {
-    width: calc(100% - 30px);
-    margin-right: 0;
+    width: 100%;
+    padding-right: 30px; /* Espaço para o ícone */
 }
 
 .toggle-password {
     position: absolute;
     right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
     cursor: pointer;
     color: #ecf0f1;
     font-size: 1.2em;
@@ -91,7 +89,7 @@ form {
     margin: 5px;
     background: rgba(255, 255, 255, 0.1);
     border: none;
-    border-radius: 5px;
+    border-radius: 20px;
     padding: 12px;
     color: #ecf0f1;
     font-size: 0.9em;
@@ -102,22 +100,30 @@ input::placeholder {
     color: #bdc3c7;
 }
 
+input:hover{
+    background-color: #837d9c0c;
+}
+
 input:focus {
-    outline: none;
+    outline: #837d9c;
     background: rgba(255, 255, 255, 0.2);
 }
+
+
 
 button {
     background: rgb(110, 52, 219);
     border: none;
     border-radius: 5px;
     padding: 12px;
-    margin: 20px 0 0;
+    margin-top: 20px; /* Espaçamento superior */
     color: #ecf0f1;
     font-size: 1em;
     cursor: pointer;
     transition: background 0.3s ease, transform 0.2s ease;
+    width: 10%; /* Garantir que o botão ocupe 100% da largura do formulário */
 }
+
 
 button:hover {
     background: #837d9c;

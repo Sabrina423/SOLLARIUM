@@ -17,8 +17,7 @@
            
             <form action="/cadastrocliente" method="POST">
                 <div class="input-group">
-                    <input type="text" name="nome_cliente" placeholder="Nome" required>
-                    <input type="text" name="sobrenome_cliente" placeholder="Sobrenome" required>
+                    <input type="text" name="nome_cliente" placeholder="Nome Completo" required>
                 </div>
                 <div class="input-group">
                     <input type="text" name="cpf_cliente" placeholder="CPF" required>
@@ -29,14 +28,17 @@
                     <input type="text" name="contato_cliente" placeholder="Contato" required>
                 </div>
                 <div class="input-group">
-                    <div class="password-conteiner">
-                    <input type="password" id="senha_cliente" name="senha_cliente" placeholder="Senha" required>
-                    <span class="toggle-password" onclick="togglePassword('senha_cliente')">&#128065;</span>
-                    <input type="password" id="confirmar_senha_cliente" name="confirmar_senha_cliente" placeholder="Confirmar Senha" required>
-                    <span class="toggle-password" onclick="togglePassword('confirmar_senha_cliente')">&#128065;</span>
-                    ></div>
+                    <div class="password-container">
+                        <input type="password" id="senha_cliente" name="senha_cliente" placeholder="Senha" required>
+                        <span class="toggle-password" onclick="togglePassword('senha_cliente')">&#128065;</span>
+                    </div>
+                    <div class="password-container">
+                        <input type="password" id="confirmar_senha_cliente" name="confirmar_senha_cliente" placeholder="Confirmar Senha" required>
+                        <span class="toggle-password" onclick="togglePassword('confirmar_senha_cliente')">&#128065;</span>
+                    </div>
+                    </div>
                 </div>
-                <button type="submit">Criar Conta</button>
+                <button type="submit"><a href="/perfilcliente"></a>Criar Conta</button>
             </form>
         </main>
     </div>
