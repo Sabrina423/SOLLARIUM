@@ -67,6 +67,23 @@ form {
     align-items: center;
 }
 
+.input-group select{
+    flex: 1;
+    margin: 5px;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    border-radius: 20px;
+    padding: 12px; 
+    color: #ecf0f1d2;
+    transition: background 0.3s ease;
+    font-family: 'Arial', sans-serif;
+    font-size: smaller;
+}
+.input-group option{
+    border: none;
+    color: black;
+    background-color: rgba(255, 255, 255, 0.1);
+}
 .password-container {
     position: relative;
     flex: 1;
@@ -117,6 +134,11 @@ input:hover{
 }
 
 input:focus {
+    outline: #837d9c;
+    background: rgba(255, 255, 255, 0.2);
+}
+
+input-group select:focus {
     outline: #837d9c;
     background: rgba(255, 255, 255, 0.2);
 }
