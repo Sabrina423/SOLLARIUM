@@ -108,6 +108,12 @@ router.get('/perfilcliente', authenticateToken, (req, res) => {
     res.render('pages/perfilcliente');
 });
 
+router.get('/cadastrocliente', (req, res) => {
+    res.render('cadastrocliente');
+});
+
+
+
 
 
 module.exports = router;

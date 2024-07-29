@@ -48,7 +48,18 @@ main {
     transition: background 0.3s ease, transform 0.2s ease;
 }
 
-
+.logo {
+    margin-bottom: 1.5rem;
+}
+ 
+.logo img {
+    max-width: 150px;
+    transition: transform 0.3s ease;
+}
+ 
+.logo img:hover {
+    transform: scale(1.1);
+}
 
 form {
     display: flex;
@@ -98,6 +109,7 @@ form {
 
 input::placeholder {
     color: #bdc3c7;
+    font-size: smaller;
 }
 
 input:hover{
@@ -109,19 +121,17 @@ input:focus {
     background: rgba(255, 255, 255, 0.2);
 }
 
-
-
 button {
     background: rgb(110, 52, 219);
     border: none;
-    border-radius: 5px;
+    border-radius: 15px;
     padding: 12px;
     margin-top: 20px; /* Espaçamento superior */
     color: #ecf0f1;
     font-size: 1em;
     cursor: pointer;
     transition: background 0.3s ease, transform 0.2s ease;
-    width: 10%; /* Garantir que o botão ocupe 100% da largura do formulário */
+    width: 50%; /* Garantir que o botão ocupe 100% da largura do formulário */
 }
 
 
@@ -129,6 +139,22 @@ button:hover {
     background: #837d9c;
     transform: translateY(-2px);
 }
+
+.input-error {
+    border: 1px solid red;
+}
+
+.error-message {
+    color: red;
+    font-size: 0.8em;
+}
+
+.success-message {
+    color: green;
+    font-size: 1em;
+    margin-bottom: 20px;
+}
+
 
 @media (max-width: 768px) {
     main {

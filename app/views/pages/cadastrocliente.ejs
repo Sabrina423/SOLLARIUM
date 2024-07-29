@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/cadastrocliente.css">
     <title>Cadastro</title>
+    <script src="/js/cadastrocliente.js"></script>
 </head>
 
 <body>
@@ -16,16 +17,36 @@
         <main>
            
             <form action="/cadastrocliente" method="POST">
+                <div class="logo">
+                    <img src="/imagens/LOGO_SOLLARIUM (8).png" alt="logo">
+                </div>
                 <div class="input-group">
                     <input type="text" name="nome_cliente" placeholder="Nome Completo" required>
-                </div>
-                <div class="input-group">
                     <input type="text" name="cpf_cliente" placeholder="CPF" required>
-                    <input type="text" name="endereco_cliente" placeholder="Endereço" required>
                 </div>
                 <div class="input-group">
-                    <input type="email" name="email_cliente" placeholder="Email" required>
-                    <input type="text" name="contato_cliente" placeholder="Contato" required>
+                    <input type="text" name="cidade_cliente" placeholder="Cidade" required>
+                    <div class="radio-group">
+                        <label>
+                            <input type="radio" name="estado_cliente" value="SP" required>
+                            SP
+                        </label>
+                        <label>
+                            <input type="radio" name="estado_cliente" value="RJ" required>
+                            RJ
+                        </label>
+                        <label>
+                            <input type="radio" name="estado_cliente" value="MG" required>
+                            MG
+                        </label>
+                        <input type="radio" name="estado_cliente" value="ES" required>
+                            ES
+                        </label>
+                </div>
+                </div>
+                <div class="input-group">
+                    <input type="email" name="email_cliente" placeholder="E-mail" required>
+                    <input type="tel" name="contato_cliente" placeholder="Contato" required>
                 </div>
                 <div class="input-group">
                     <div class="password-container">
@@ -35,47 +56,15 @@
                     <div class="password-container">
                         <input type="password" id="confirmar_senha_cliente" name="confirmar_senha_cliente" placeholder="Confirmar Senha" required>
                         <span class="toggle-password" onclick="togglePassword('confirmar_senha_cliente')">&#128065;</span>
+                        
                     </div>
                     </div>
+                    <button type="submit"><a href="/perfilcliente"></a>Criar Conta</button>
                 </div>
-                <button type="submit"><a href="/perfilcliente"></a>Criar Conta</button>
             </form>
         </main>
     </div>
 
-    <script>
-      document.querySelector('form').addEventListener('submit', async function (event) {
-            event.preventDefault();
-            const formData = new FormData(this);
-            const formObject = Object.fromEntries(formData);
-            try {
-                const response = await fetch('/cadastrocliente', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(formObject)
-                });
-                const result = await response.json();
-                if (response.ok) {
-                    alert(result.mensagem);
-                } else {
-                    alert('Erro: ' + result.error);
-                }
-            } catch (error) {
-                alert('Erro ao enviar dados: ' + error.message);
-            }
-        });
-
-        function togglePassword(fieldId) {
-            const field = document.getElementById(fieldId);
-            if (field.type === 'password') {
-                field.type = 'text';
-            } else {
-                field.type = 'password';
-            }
-        }
-    </script>
 </body>
 
 </html>
