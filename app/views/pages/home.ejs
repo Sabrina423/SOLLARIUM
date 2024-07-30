@@ -2,106 +2,176 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width", initial-scale="100%">
-   
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="icon" type="imagens/LOGO_SOLLARIUM (8).png" href="/images/favicon.ico">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+    <title>Sollarium</title>
     <link rel="stylesheet" href="/css/home.css">
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <script src="js/animacao.js"></script>
-    <script src="js/menumobile.js"></script>
+    <script src="/js/home.js"></script>
 </head>
 <body>
- 
-    <section class="header">
-       <header>
-        <img src="imagens/LOGO_SOLLARIUM (8).png">
-            <nav class="dropdown_menu">
-                <ul>
-                    <li><a href="/souprofissional" target="_blank" >Sou Profissional</a></li>
-                    <li><a href="/soucliente" target="_blank">Sou Cliente</a></li>
-                     <li><a href="/orcamento" target="_blank">Orçamento</a></li>
-                     <li><a href="/cadastrocliente"target="_blank">Quero ser cliente</a></li>
-                    
-                 </ul>
-       </header>
-       <main>
-        <nav class="btn-wrap">
-            <img src="imagens/sollarium_homepage178.png">
-            <a href="/cadastrocliente"><button>Quero um serviço</button></a>
-        </nav>
-        <section class="text">
+    <header>
+        <div class="logo">Sollarium</div>
+        <ul class="menu">
+            <li>Início</li>
+            <li>Orçamento</li>
+            <li>Quero ser Cliente</li>
+            <li>Sou Profissional</li>
+
+            
+        </ul>
+        <div class="search">Entrar
+        </div>
+    </header>
+    <main>
+    <div class="slider">
+        <div class="list">
+            <div class="item active">
+                <img src="benefits-of-solar-panles.jpg">
+                <div class="content">
+                    <p>design</p>
+                    <h2>Instalação</h2>
+                    <p class="pp">
+                        Oferecemos instalação completa de sistemas de energia solar, 
+                        desde o planejamento até a ativação, garantindo eficiência e segurança em cada etapa.
+                    </p>
+                </div>
+            </div>
+            <div class="item">
+                <img src="/imagens/normal_u0.png">
+                <div class="content">
+                    <p>design</p>
+                    <h2>Vistoria</h2>
+                    <p class="pp">
+                        Realizamos vistorias detalhadas para avaliar a viabilidade e o estado dos sistemas solares,
+                        identificando possíveis melhorias e garantindo seu funcionamento ideal.
+                    </p>
+                </div>
+            </div>
+            <div class="item">
+                <img src="image/img3.jpg">
+                <div class="content">
+                    <p>design</p>
+                    <h2>Manutenção</h2>
+                    <p class="pp">
+                        Nosso serviço de manutenção preventiva e corretiva assegura que seu sistema solar opere
+                        com máxima eficiência e longevidade, minimizando interrupções.
+                    </p>
+                </div>
+            </div>
+            <div class="item">
+                <img src="image/benefits-of-solar-panles.jpg">
+                <div class="content">
+                    <p>design</p>
+                    <h2>Consultoria</h2>
+                    <p class="pp">
+                        Fornecemos consultoria especializada para ajudá-lo a escolher e implementar a melhor
+                        solução de energia solar, adaptada às suas necessidades específicas e orçamento.
+                    </p>
+                </div>
+            </div>
+            <div class="item">
+                <img src="image/img5.jpg">
+                <div class="content">
+                    <p>design</p>
+                    <h2>Limpeza</h2>
+                    <p class="pp">
+                        Oferecemos serviços de limpeza profissional para painéis solares, removendo sujeira e
+                        detritos que podem reduzir a eficiência do sistema, garantindo desempenho ótimo.
+                    </p>
+                </div>
+            </div>
+        </div>
         
-         </section>
-         <nav id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-            <nav class="carousel-inner">
-                <figure class="carousel-item active">
-                    <img src="imagens/Instalação.png" class="d-block w-100" alt="Slide 1">
-                    <figcaption class="carousel-caption d-none d-md-block">
-                        <h5>INSTALAÇÃO</h5>
-                        <p></p>
-                    </figcaption>
-                </figure>
-                <figure class="carousel-item">
-                    <img src="imagens/Manutenção.png" class="d-block w-100" alt="Slide 2">
-                    <figcaption class="carousel-caption d-none d-md-block">
-                        <h5>MANUTENÇÃO</h5>
-                        <p></p>
-                    </figcaption>
-                </figure>
-                <figure class="carousel-item">
-                    <img src="imagens/Vistoria.png" class="d-block w-100" alt="Slide 3">
-                    <figcaption class="carousel-caption d-none d-md-block">
-                        <h5>VISTORIA</h5>
-                        <p></p>
-                    </figcaption>
-                </figure>
-                <figure class="carousel-item">
-                    <img src="imagens/consultoria.png" class="d-block w-100" alt="Slide 4">
-                    <figcaption class="carousel-caption d-none d-md-block">
-                        <h5>CONSULTORIA</h5>
-                        <p></p>
-                    </figcaption>
-                </figure>
-                <figure class="carousel-item">
-                    <img src="imagens/desenvolvimento.png" class="d-block w-100" alt="Slide 5">
-                    <figcaption class="carousel-caption d-none d-md-block">
-                        <h5>DESENVOLVIMENTO</h5>
-                        <p></p>
-                    </figcaption>
-                </figure>
-                <figure class="carousel-item">
-                    <img src="imagens/limpeza.png" class="d-block w-100" alt="Slide 6">
-                    <figcaption class="carousel-caption d-none d-md-block">
-                        <h5>LIMPEZA</h5>
-                        <p></p>
-                    </figcaption>
-                </figure>
-            </nav>
-            <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="sr-only">Previous</span>
-            </a>
-            <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="sr-only">Next</span>
-            </a>
-        </nav>
- 
-        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-       
-        <nav class="image-container">
-            <img src="imagens/painelsolar_.png" alt="imagem painel solar" class="move-up" class="horizontal-rectangle" class="elongated-image">
-            <img src="/imagens/a melhor opção.png" alt="" class="move-up" class="horizontal-rectangle" class = "elongated-image" >
-            <img src="/imagens/solar_ (1).png" alt="">
-        </nav>
-       </main>
-       
-   
+        <div class="arrows">
+            <button id="prev"><</button>
+            <button id="next">></button>
+        </div>
+        
+        <div class="thumbnail">
+            <div class="item active">
+                <img src="image/GettyImages-1384831593.webp">
+                <div class="content">
+                    Instalação
+                </div>
+            </div>
+            <div class="item">
+                <img src="image/img2.jpg">
+                <div class="content">
+                    Vistoria
+                </div>
+            </div>
+            <div class="item">
+                <img src="image/img3.jpg">
+                <div class="content">
+                    Manutenção
+                </div>
+            </div>
+            <div class="item">
+                <img src="image/benefits-of-solar-panles.jpg">
+                <div class="content">
+                    Consultoria
+                </div>
+            </div>
+            <div class="item">
+                <img src="image/img5.jpg">
+                <div class="content">
+                    Limpeza
+                </div>
+            </div>
+        </div>
+    </div>
+    </main>
+
+    <footer>
+        <section class="footer">
+            <div class="footer-content">
+                <h2>Sollarium</h2>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident dolorum 
+                   accusantium nihil laudantium non.</p>
+
+                <div class="icons">
+                    <a href=""><i class='bx bxl-facebook-circle'></i></a>
+                    <a href=""><i class='bx bxl-twitter'></i></a>
+                    <a href=""><i class='bx bxl-instagram-alt' ></i></a>
+                    <a href=""><i class='bx bxl-youtube' ></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-content">
+                <h4>Projetos</h4>
+                <li><a href=""></a>Instalação</li>
+                <li><a href=""></a>Vistoria</li>
+                <li><a href=""></a>Manutenção</li>
+                <li><a href=""></a>Consultoria</li>
+                <li><a href=""></a>Limpeza</li>
+            </div>
+
+            <div class="footer-content">
+                <h4>Company</h4>
+                <li><a href=""></a>Instalação</li>
+                <li><a href=""></a>Vistoria</li>
+                <li><a href=""></a>Manutenção</li>
+                <li><a href=""></a>Consultoria</li>
+            </div>
+
+            <div class="footer-content">
+                <h4>Movement</h4>
+                <li><a href=""></a>Instalação</li>
+                <li><a href=""></a>Vistoria</li>
+                <li><a href=""></a>Manutenção</li>
+                <li><a href=""></a>Consultoria</li>
+            </div>
+
+            <div class="footer-content">
+                <h4>Help</h4>
+                <li><a href=""></a>Instalação</li>
+                <li><a href=""></a>Vistoria</li>
+                <li><a href=""></a>Manutenção</li>
+                <li><a href=""></a>Consultoria</li>
+            </div>
+        </section>
+    </footer>
+
+    <script src="app.js"></script>
 </body>
 </html>
