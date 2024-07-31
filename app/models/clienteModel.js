@@ -1,4 +1,4 @@
-const pool = require('/config/pool_conexoes');
+const pool = require('../../config/pool_conexoes'); // Caminho relativo correto
 
 const ClienteModel = {
     findAll: async () => {

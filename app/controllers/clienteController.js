@@ -1,62 +1,59 @@
 const ClienteModel = require('../models/clienteModel');
-const { body, validationResult } = require('express-validator');
 
 const ClienteController = {
-    listarClientes: async (req, res) => {
+    getAllClients: async (req, res) => {
         try {
             const clientes = await ClienteModel.findAll();
-            res.json(clientes);
+            res.status(200).json(clientes);
         } catch (error) {
-            res.status(500).json({ error: 'Erro ao listar clientes' });
+            res.status(500).json({ error: 'Erro ao buscar clientes' });
         }
     },
 
-    adicionarCliente: async (req, res) => {
-        const errors = validationResult(req);
-        if (!errors.isEmpty()) {
-            return res.status(400).json({ errors: errors.array() });
-        }
-
+    getClientById: async (req, res) => {
         try {
-            const novoCliente = req.body;
-            await ClienteModel.create(novoCliente);
-            res.status(201).json({ mensagem: 'Cliente criado com sucesso' });
+            const id = req.params.id;
+            const cliente = await ClienteModel.findById(id);
+            if (cliente) {
+                res.status(200).json(cliente);
+            } else {
+                res.status(404).json({ error: 'Cliente não encontrado' });
+            }
+        } catch (error) {
+            res.status(500).json({ error: 'Erro ao buscar cliente' });
+        }
+    },
+
+    createClient: async (req, res) => {
+        try {
+            const cliente = req.body;
+            const result = await ClienteModel.create(cliente);
+            res.status(201).json(result);
         } catch (error) {
             res.status(500).json({ error: 'Erro ao criar cliente' });
         }
     },
 
-    editarCliente: async (req, res) => {
-        const errors = validationResult(req);
-        if (!errors.isEmpty()) {
-            return res.status(400).json({ errors: errors.array() });
-        }
-
+    updateClient: async (req, res) => {
         try {
-            const clienteId = req.body.id_cliente;
-            const clienteAtualizado = req.body;
-            await ClienteModel.update(clienteId, clienteAtualizado);
-            res.status(200).json({ mensagem: 'Cliente atualizado com sucesso' });
+            const id = req.params.id;
+            const cliente = req.body;
+            const result = await ClienteModel.update(id, cliente);
+            res.status(200).json(result);
         } catch (error) {
             res.status(500).json({ error: 'Erro ao atualizar cliente' });
         }
     },
 
-    excluirCliente: async (req, res) => {
+    deleteClient: async (req, res) => {
         try {
-            const clienteId = req.query.id;
-            await ClienteModel.delete(clienteId);
-            res.status(200).json({ mensagem: 'Cliente excluído com sucesso' });
+            const id = req.params.id;
+            const result = await ClienteModel.delete(id);
+            res.status(200).json(result);
         } catch (error) {
-            res.status(500).json({ error: 'Erro ao excluir cliente' });
+            res.status(500).json({ error: 'Erro ao deletar cliente' });
         }
-    },
-
-    regrasValidacao: [
-        body('cpf_cliente').isLength({ min: 11, max: 11 }).withMessage('CPF deve ter 11 dígitos'),
-        body('email_cliente').isEmail().withMessage('Email inválido'),
-        body('nome_cliente').notEmpty().withMessage('Nome não pode ser vazio')
-    ]
+    }
 };
 
 module.exports = ClienteController;

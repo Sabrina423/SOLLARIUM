@@ -67,5 +67,6 @@ app.post('/cadastrocliente', (req, res) => {
 });
 
 app.listen(port, () => {
-    console.log(`Servidor rodando na porta ${port}\nhttp://localhost:${port}`);
+    console.log('Servidor rodando na porta ${port}\nhttp://localhost:${port}');
 });
+

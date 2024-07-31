@@ -1,12 +1,9 @@
 const express = require('express');
 const { body, validationResult } = require('express-validator');
 const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');  // Certifique-se de incluir isso se for usado
+const jwt = require('jsonwebtoken');
+const ClienteController = require('../controllers/clienteController');
 const router = express.Router();
-
-
-
-
 
 const secretKey = 'your-secret-key';
 
@@ -111,9 +108,5 @@ router.get('/perfilcliente', authenticateToken, (req, res) => {
 router.get('/cadastrocliente', (req, res) => {
     res.render('cadastrocliente');
 });
-
-
-
-
 
 module.exports = router;
