@@ -7,23 +7,33 @@
     <link rel="stylesheet" href="css/soucliente.css">
 </head>
 <body>
+    <nav class="container">
+        <nav class="hero">
+    
+        </nav>
+<main>
     <nav class="login-container">
         <nav class="logo">
             <img src="imagens/LOGO_SOLLARIUM (8).png" alt="Logo">
         </nav>
+
         <h1>Login</h1>
         <form id="loginForm" action="/perfilcliente" method="post">
+            <nav class="input-group">
             <label for="email">E-mail</label>
-            <input type="text" id="email" name="email" placeholder="e-mail" required>
+            <input type="email" id="email" name="email" placeholder="e-mail" required>
             <span class="error" id="emailError"></span>
 
             <label for="senha">Senha</label>
             <input type="password" id="senha" name="password" placeholder="senha" required>
             <span class="error" id="passwordError"></span>
+        </nav>
 
             <button type="submit">Sou Cliente</button>
         </form>
     </nav>
+
+</main>
 
     <script>
         document.getElementById('loginForm').addEventListener('submit', function(event) {
