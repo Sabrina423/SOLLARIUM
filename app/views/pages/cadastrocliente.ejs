@@ -10,24 +10,24 @@
 </head>
 
 <body>
-    <div class="container">
-        <div class="hero">
+    <nav class="container">
+        <nav class="hero">
             <img src="/imgens/a mlehor opção.png" alt="">
-        </div>
+        </nav>
         <main>
            
             <form action="/cadastrocliente" method="POST">
-                <div class="logo">
+                <nav class="logo">
                     <img src="/imagens/LOGO_SOLLARIUM (8).png" alt="logo">
-                </div>
-                <div class="input-group">
+                </nav>
+                <nav class="input-group">
                     <input type="text" name="nome_cliente" placeholder="Nome Completo" required>
                     <span class="span-required">Nome deve ser completo</span>
                     <input type="text" name="cpf_cliente" placeholder="CPF" required>
                     <span class="span-required">CPF é obrigatório</span>
                     onblur=pesquisacpf_cliente
-                </div>
-                <div class="input-group">
+                </nav>
+                <nav class="input-group">
                     <input type="text" name="cidade_cliente" placeholder="Cidade" required>
                     <select id="estados" name="estados">
                         <label for="estado">Selecione o seu Estado:</label>
@@ -36,29 +36,29 @@
                         <option value="Minas Gerais">MG</option>
                         <option value="Espirito Santo">ES</option>
                     </select>
-                    <div class="radio-group">
-                </div>
-                </div>
-                <div class="input-group">
+                    <nav class="radio-group">
+                    </nav>
+            </nav>
+                <nav class="input-group">
                     <input type="email" name="email_cliente" placeholder="E-mail" required>
                     <input type="tel" name="contato_cliente" placeholder="Contato" required>
-                </div>
-                <div class="input-group">
-                    <div class="password-container">
+                </nav>
+                <nav class="input-group">
+                    <nav class="password-container">
                         <input type="password" id="senha_cliente" name="senha_cliente" placeholder="Senha" required>
                         <span class="toggle-password" onclick="togglePassword('senha_cliente')">&#128065;</span>
-                    </div>
-                    <div class="password-container">
+                    </nav>
+                    <nav class="password-container">
                         <input type="password" id="confirmar_senha_cliente" name="confirmar_senha_cliente" placeholder="Confirmar Senha" required>
                         <span class="toggle-password" onclick="togglePassword('confirmar_senha_cliente')">&#128065;</span>
                         
-                    </div>
-                    </div>
+                    </nav>
+                    </nav>
                     <button type="submit"><a href="/perfilcliente"></a>Criar Conta</button>
-                </div>
+                </nav>
             </form>
         </main>
-    </div>
+    </nav>
 
     <script>
         const form = document.getElementByID('form');
