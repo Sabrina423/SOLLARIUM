@@ -1,63 +1,42 @@
-document.querySelector('form').addEventListener('submit', async function (event) {
-    event.preventDefault();
-    const formData = new FormData(this);
-    const formObject = Object.fromEntries(formData);
+document.addEventListener('DOMContentLoaded', function () {
+    const form = document.getElementById('cadastroForm');
 
-    try {
+    form.addEventListener('submit', async function (event) {
+        event.preventDefault();
+
+        const formData = new FormData(form);
+        const data = Object.fromEntries(formData.entries());
+
         const response = await fetch('/cadastrocliente', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(formObject)
+            body: JSON.stringify(data)
         });
 
         const result = await response.json();
 
-        if (response.ok) {
-            showSuccessMessage(result.mensagem);
+        // Limpa mensagens de erro anteriores
+        document.querySelectorAll('.error-message').forEach(el => el.textContent = '');
+        document.querySelectorAll('.input-group input, .input-group select').forEach(el => el.classList.remove('input-error'));
+
+        if (response.status !== 200) {
+            result.errors.forEach(error => {
+                const field = document.querySelector(`[name=${error.field}]`);
+                const errorMessage = field.parentElement.querySelector('.error-message');
+                errorMessage.textContent = error.message;
+                field.classList.add('input-error');
+            });
         } else {
-            showErrors(result.errors);
+            alert(result.mensagem);
+            form.reset();
         }
-    } catch (error) {
-        alert('Erro ao enviar dados: ' + error.message);
-    }
+    });
 });
 
-function showErrors(errors) {
-    const errorFields = document.querySelectorAll('.error-message');
-    errorFields.forEach(field => field.remove());
-
-    errors.forEach(error => {
-        const inputField = document.querySelector(`[name="${error.field}"]`);
-        inputField.classList.add('input-error');
-
-        const errorMessage = document.createElement('small');
-        errorMessage.classList.add('error-message');
-        errorMessage.style.color = 'red';
-        errorMessage.style.fontSize = '0.8em';
-        errorMessage.textContent = error.message;
-
-        inputField.parentNode.appendChild(errorMessage);
-    });
-}
-
-function showSuccessMessage(message) {
-    const successMessage = document.createElement('div');
-    successMessage.classList.add('success-message');
-    successMessage.style.color = 'green';
-    successMessage.style.fontSize = '1em';
-    successMessage.style.marginBottom = '20px';
-    successMessage.textContent = message;
-
-    document.querySelector('main').prepend(successMessage);
-}
-
-function togglePassword(fieldId) {
-    const field = document.getElementById(fieldId);
-    if (field.type === 'password') {
-        field.type = 'text';
-    } else {
-        field.type = 'password';
-    }
+function togglePassword(id) {
+    const field = document.getElementById(id);
+    const type = field.getAttribute('type') === 'password' ? 'text' : 'password';
+    field.setAttribute('type', type);
 }

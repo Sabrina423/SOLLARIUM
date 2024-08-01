@@ -23,8 +23,8 @@ app.use(session({
 app.use('/', rotas);
 
 // Rota de cadastro de cliente com validação
-app.post('/cadastrocliente', (req, res) => {
-    const { nome_cliente, cpf_cliente, endereco_cliente, email_cliente, contato_cliente, senha_cliente, confirmar_senha_cliente } = req.body;
+app.post('/cadastrocliente', async (req, res) => {
+    const { nome_cliente, cpf_cliente, cidade_cliente, estados, email_cliente, contato_cliente, senha_cliente, confirmar_senha_cliente } = req.body;
     
     // Validações
     let errors = [];
@@ -37,8 +37,12 @@ app.post('/cadastrocliente', (req, res) => {
         errors.push({ field: 'cpf_cliente', message: 'CPF é obrigatório.' });
     }
 
-    if (!endereco_cliente) {
-        errors.push({ field: 'endereco_cliente', message: 'Endereço é obrigatório.' });
+    if (!cidade_cliente) {
+        errors.push({ field: 'cidade_cliente', message: 'Cidade é obrigatória.' });
+    }
+
+    if (!estados) {
+        errors.push({ field: 'estados', message: 'Estado é obrigatório.' });
     }
 
     if (!email_cliente) {
@@ -61,12 +65,18 @@ app.post('/cadastrocliente', (req, res) => {
         return res.status(400).json({ errors });
     }
 
-    // Aqui você pode adicionar o código para salvar os dados no banco de dados
-
-    res.status(200).json({ mensagem: 'Cadastro realizado com sucesso!' });
+    try {
+        const [rows] = await pool.query(
+            'INSERT INTO clientes (nome, cpf, cidade, estado, email, contato, senha) VALUES (?, ?, ?, ?, ?, ?, ?)',
+            [nome_cliente, cpf_cliente, cidade_cliente, estados, email_cliente, contato_cliente, senha_cliente]
+        );
+        res.status(200).json({ mensagem: 'Cadastro realizado com sucesso!' });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ errors: [{ field: 'general', message: 'Erro ao salvar os dados no banco de dados.' }] });
+    }
 });
 
 app.listen(port, () => {
-    console.log('Servidor rodando na porta ${port}\nhttp://localhost:${port}');
+    console.log(`Servidor rodando na porta ${port}\nhttp://localhost:${port}`);
 });
-
