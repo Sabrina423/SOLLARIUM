@@ -28,7 +28,9 @@ const ClienteController = {
         try {
             const cliente = req.body;
             const result = await ClienteModel.create(cliente);
-            res.status(201).json(result);
+            console.log(result)
+    
+           // res.status(201).json(result);
         } catch (error) {
             res.status(500).json({ error: 'Erro ao criar cliente' });
         }
