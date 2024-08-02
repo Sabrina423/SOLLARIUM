@@ -13,7 +13,7 @@ const ClienteModel = {
 
     findById: async (id) => {
         try {
-            const [linhas] = await pool.query('SELECT * FROM CLIENTE WHERE ID_CLIENTE = ?', [id]);
+            const [linhas] = await pool.query('SELECT * FROM CLIENTE WHERE ID_CLIENTE = ?', [id_cliente]);
             return linhas[0];
         } catch (error) {
             console.error('Erro ao buscar cliente por ID:', error);
