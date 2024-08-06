@@ -1,0 +1,98 @@
+/* Adicione os estilos necessários para ajustar o layout e as cores */
+body {
+    background-color: rgb(0, 0, 0);
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.rectangle {
+    width: 100%;
+    height: 100px;
+    background-image: linear-gradient(-245.61068148134132deg, #fdd44d 0.5149934303997685%, rgba(159, 53, 242, 0.76) 98.65211335101907%);
+    position: absolute;
+    top: 0;
+}
+
+.ellipse {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    background-image: linear-gradient(-245.61068148134132deg, #fdd44d 0.5149934303997685%, rgb(160, 53, 242) 98.65211335101907%);
+    position: relative;
+    cursor: pointer;
+    margin-top: 20px; /* Ajuste conforme necessário */
+}
+
+.ellipse img {
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    object-fit: cover;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: rgba(255, 255, 255, 0.308);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.747);
+    backdrop-filter: blur(15.5px);
+    -webkit-backdrop-filter: blur(13.5px);
+}
+
+.options-menu {
+    position: absolute;
+    top: 100px; /* Ajuste conforme necessário */
+    left: 10px; /* Ajuste conforme necessário */
+    width: 150px;
+    background: rgb(255, 255, 255);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.747);
+    backdrop-filter: blur(15.5px);
+    -webkit-backdrop-filter: blur(13.5px);
+    border-radius: 10px;
+    border: 1px solid rgb(255, 255, 255);
+    padding: 10px;
+    display: none;
+    z-index: 100;
+}
+
+.options-menu a {
+    display: block;
+    padding: 5px 10px;
+    color: #000000;
+    font-family: sans-serif;
+    text-decoration: none;
+    transition: background-color 0.3s;
+    text-align: center;
+}
+
+.options-menu a:hover {
+    background-color: #ffffffcc;
+    color: rgb(0, 0, 0);
+}
+
+.informacoes {
+    font-family: sans-serif;
+    font-size: 15px;
+    position: absolute;
+    top: 230px; /* Ajuste conforme necessário */
+    left: 80px; /* Ajuste conforme necessário */
+    color: white;
+}
+
+.button1, .button2 {
+    position: absolute;
+    top: 330px; /* Ajuste conforme necessário */
+    left: -105px; /* Ajuste conforme necessário */
+}
+
+.dados {
+    position: absolute;
+    top: 300px; /* Ajuste conforme necessário */
+    background-color: #000000;
+    padding: 20px;
+    color: white;
+    width: 300px; /* Ajuste conforme necessário */
+}

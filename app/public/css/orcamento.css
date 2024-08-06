@@ -1,0 +1,125 @@
+/* Reset básico para garantir consistência */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Estilos gerais da página */
+body {
+    background-image: url('/imagens/image.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: #ffffff; /* Texto branco */
+    font-family: Arial, sans-serif; /* Fonte padrão */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+
+.metade1,
+.metade2 {
+    flex: 1;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.metade1 img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px; /* Borda arredondada */
+}
+
+.container{
+    border-radius: 30px;
+    padding: 30px;
+    width: 450px;
+    max-width: 500px; 
+    flex: 1;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 650px;
+}
+.metade2 .Forms {
+    background: rgba(0, 0, 0, 0.568);
+    box-shadow: 0 8px 32px 0 rgba(255, 255, 255, 0.37);
+    backdrop-filter: blur( 13.5px );
+    -webkit-backdrop-filter: blur( 13.5px );
+    padding: 30px;
+    width: 450px;
+    max-width: 500px; 
+    text-align: center;
+    position: absolute;
+    top: 15px;
+    font-size: 18px;
+
+    input[type="text"]{
+        color: rgb(0, 0, 0);
+      }
+
+}
+input[type="text"],
+textarea {
+    width: calc(100% - 20px); /* Ajuste para o padding */
+    padding: 10px;
+    margin: 10px 0;
+    border: none;
+    background-color: rgba(255, 255, 255, 0.219); /* Fundo branco semi-transparente */ 
+    border-radius: 5px;
+    font-size: 16px; /* Tamanho da fonte */
+    font-family: sans-serif;
+    color: #000000;
+}
+
+input[type="text"]:focus,
+textarea:focus {
+    outline: none;
+    background-color: rgba(0, 0, 0, 0.2); /* Fundo branco mais escuro ao focar */
+}
+
+textarea.detalhe {
+    height: 150px; /* Ajustei a altura do textarea */
+}
+
+input[type="submit"] {
+    padding: 15px 30px; /* Aumentei o padding do botão */
+    background-color: #000000; /* Cor do botão preto */
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 18px; /* Tamanho da fonte do botão */
+    transition: background-color 0.3s ease;
+}
+
+input[type="submit"]:hover {
+    background-color: #333333; /* Cor do botão mais escura ao passar o mouse */
+}
+
+@media screen and (max-width: 768px) {
+    .inteiro {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .metade1,
+    .metade2 {
+        width: 100%;
+        padding: 20px 0;
+    }
+
+    .metade1 img {
+        border-radius: 0; /* Remova a borda arredondada em telas menores */
+    }
+
+    .metade2 .Forms {
+        max-width: 320px;
+    }
+}

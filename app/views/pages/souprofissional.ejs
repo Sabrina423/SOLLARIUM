@@ -1,26 +1,35 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sou profissional</title>
+    <title>Sou Cliente</title>
     <link rel="stylesheet" href="css/souprofmobile.css">
-    <script src="/souprof.js"></script>
 </head>
 <body>
-    <nav class="login-container">
-        <nav class="logo">
-            <img src="imagens/LOGO_SOLLARIUM (8).png" alt="Logo">
+    <nav class="container">
+        <nav class="hero">
+            <h2>Bem-Vindo de volta!</h2>
         </nav>
+<main>
+    <nav class="login-container">
+
         <h1>Login</h1>
-        <form>
-            <label for="e-meil">E-mail</label>
-            <input type="text" id="e-mail" placeholder="e-mail" required>
+        <form id="loginForm" action="/perfilcliente" method="post">
+            <nav class="input-group">
+            <label for="email">E-mail</label>
+            <input type="email" id="email" name="email" placeholder="e-mail" required>
+            <span class="error" id="emailError"></span>
+
             <label for="senha">Senha</label>
-            <input type="senha" id="senha" placeholder="senha" required>
-            <button type="sou cliente">Sou Profissional</button>
+            <input type="password" id="senha" name="password" placeholder="senha" required>
+            <span class="error" id="passwordError"></span>
+        </nav>
+            <button type="submit">Sou Cliente</button>
+            <a href="/app/views/pages/cadastro.ejs">Quero me cadastrar!</a>
         </form>
     </nav>
-</body>
+
+</main>
+    </body>
 </html>
- 

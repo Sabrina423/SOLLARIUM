@@ -1,0 +1,89 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #1b1b2f;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.container {
+    background-color: #162447;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    width: 400px;
+}
+
+.header {
+    text-align: center;
+}
+
+.header h1 {
+    margin-bottom: 10px;
+}
+
+.header p {
+    margin-bottom: 20px;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #e43f5a;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    color: white;
+    font-weight: bold;
+}
+
+button:hover {
+    background-color: #e84a5f;
+}
+
+.form {
+    display: none;
+    flex-direction: column;
+}
+
+.form.hidden {
+    display: none;
+}
+
+input, select {
+    padding: 10px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 5px;
+    width: 100%;
+}
+
+input[type="file"] {
+    background-color: #fff;
+    color: #000;
+}
+
+input:invalid {
+    border: 2px solid red;
+}
+
+input:required::placeholder {
+    color: red;
+}
+
+button[type="submit"] {
+    background-color: #1fab89;
+}
+
+button[type="submit"]:hover {
+    background-color: #62d2a2;
+}

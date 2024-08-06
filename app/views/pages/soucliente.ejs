@@ -3,25 +3,125 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sou Cliente</title>
-    <link rel="stylesheet" href="css/soucliente.css">
-    <script src="/soucliente.js"></script>
+    <link rel="icon" href="/images/favicon.ico">
+    <link rel="stylesheet" href="/css/perfilclientemobile.css">
 </head>
 <body>
-    <nav class="login-container">
-        <nav class="logo">
-            <img src="imagens/LOGO_SOLLARIUM (8).png" alt="Logo">
-        </nav>
-        <h1>Login</h1>
-        <form>
-            <label for="e-meil">E-mail</label>
-            <input type="text" id="e-mail" placeholder="e-mail" required>
-            <label for="senha">Senha</label>
-            <input type="password" id="senha" placeholder="senha" required>
-            <button type="sou cliente">Sou Cliente</button>
-        </form>
-    </nav>
+    <header>
+        <nav class="rectangle"></nav>
+    </header>
+    <div class="profile-container">
+        <div class="profile-details">
+            <div class="ellipse" id="profileEllipse">
+                <img src="/imagens/icon1.webp" alt="Profile Picture">
+                <div class="options-menu" id="optionsMenu">
+                    <a href="#" id="changePhoto">Mudar foto</a>
+                    <a href="#" id="removePhoto">Remover foto</a>
+                </div>
+            </div>            
+            <nav class="informacoes">
+                <h1>Fulano de tal</h1>
+                <h2>Espirito Santo</h2>
+            </nav>
+            <div id="imageContainer" style="display: none;">
+                <img id="uploadedImage" src="#" alt="Imagem carregada">
+            </div>
+            <div class="button-container">
+                <section class="button1">
+                    <button type="button" class="btn btn-primary">Editar Perfil</button>
+                </section>
+                <section class="button2">
+                    <button type="button" class="btn btn-light">Orçamento</button>
+                </section>
+            </div>
+        </div>
+        <section class="dados">
+            <form>
+                <h3>Informações da conta</h3>
+                <div class="form-group">
+                    <label for="nome">Nome completo</label>
+                    <input type="text" id="nome" name="nome" class="form-control" value="">
+                </div>
+                <div class="form-group">
+                    <label for="email">E-mail</label>
+                    <input type="email" id="email" name="email" class="form-control" value="">
+                    <div class="alert alert-warning mt-3">
+                        Seu e-mail não está confirmado. Por favor, verifique sua caixa de entrada.
+                        <br><a href="javascript:void(0)">Reenviar confirmação</a>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="tel">Telefone</label>
+                    <input type="tel" id="tel" name="tel" class="form-control" value="+55 (01) 23456 7890">
+                </div>
+                <div class="form-group">
+                    <label for="cidade">Cidade</label>
+                    <input type="text" id="cidade" name="cidade" class="form-control" value="">
+                </div>
+                <div class="form-group">
+                    <label for="data">Data de nascimento</label>
+                    <input type="date" id="data" name="data" class="form-control" value="">
+                </div>
+                <div class="form-group">
+                    <label for="conta">Data e hora da criação da conta</label>
+                    <input type="datetime-local" id="conta" name="conta" class="form-control" value="">
+                </div>
+            </form>
+        </section>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const ellipse = document.getElementById('profileEllipse');
+            const optionsMenu = document.getElementById('optionsMenu');
+            const uploadInput = document.getElementById('uploadInput');
+            const uploadedImage = document.getElementById('uploadedImage');
+            const imageContainer = document.getElementById('imageContainer');
+            const changePhotoLink = document.getElementById('changePhoto');
+            const removePhotoLink = document.getElementById('removePhoto');
+
+            ellipse.addEventListener('click', function(e) {
+                e.stopPropagation(); // Evita que o evento de clique na elipse se propague para o body
+                optionsMenu.style.display = 'block';
+            });
+
+            changePhotoLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                uploadInput.click();
+                optionsMenu.style.display = 'none';
+            });
+
+            uploadInput.addEventListener('change', function() {
+                const file = uploadInput.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        uploadedImage.src = e.target.result;
+                        imageContainer.style.display = 'block';
+                        ellipse.style.backgroundImage = `url(${e.target.result})`; // Coloca a imagem de fundo da elipse
+                        ellipse.style.backgroundSize = 'cover'; // Preenche a elipse com a imagem
+                        optionsMenu.style.display = 'none';
+                    };
+                    reader.readAsDataURL(file);
+                } else {
+                    optionsMenu.style.display = 'none';
+                }
+            });
+
+            removePhotoLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                uploadedImage.src = '#';
+                imageContainer.style.display = 'none';
+                uploadInput.value = '';
+                ellipse.style.backgroundImage = 'none'; // Remove a imagem de fundo da elipse
+            });
+
+            // Fecha o menu de opções ao clicar fora dele
+            document.addEventListener('click', function(e) {
+                if (!ellipse.contains(e.target) && !optionsMenu.contains(e.target)) {
+                    optionsMenu.style.display = 'none';
+                }
+            });
+        });
+    </script>
 </body>
 </html>
-
- 

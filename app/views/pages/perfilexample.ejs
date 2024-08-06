@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/images/favicon.ico">
+    <link rel="stylesheet" href="/css/perfilclientemobile.css">
+</head>
+<header>
+    <nav class="rectangle">
+
+    </nav>
+</header>
+<body>
+    <div class="ellipse" id="profileEllipse">
+        <img src="/imagens/icon1.webp">
+        <div class="options-menu" id="optionsMenu">
+            <a href="#" id="changePhoto">Mudar foto</a>
+            <input type="file" id="uploadInput" style="display: none;">
+            <a href="#" id="removePhoto">Remover foto</a>
+        </div>
+        </div>
+        <nav class="informacoes"> 
+         <h1>Fulano de tal</h1>
+         <h2>Espirito Santo</h2>
+        </nav>
+        <div id="imageContainer" style="display: none;">
+            <img id="uploadedImage" src="#" alt="Imagem carregada" style="width: 100%; height: 100%; object-fit: cover;">
+        </div>
+<section class="button1">
+    <button type="button">Editar Perfil</button>
+</section>
+<section class="button2">
+    <button type="button">Orçamento</button>
+</section>
+
+<section class="dados">
+    <form>
+        <h3>informações da conta</h3>
+        <label for="nome">Nome completo</label><br>
+        <input type="text" id="nome" name="nome"><br>
+        <label for="email">E-mail</label><br>
+        <input type="email" id="email" name="email"><br>
+        <label for="tel">Telefone</label><br>
+        <input type="tel" id="tel" name="tel"><br>
+        <label for="cidade">Cidade</label><br>
+        <input type="text" id="cidade" name="cidade"><br>
+        <label for="email">E-mail</label><br>
+        <input type="email" id="email" name="email"><br>
+        <label for="data">Data de nascimento :</label><br>
+  <input type="date" id="data" name="data"><br>
+        <label for="conta">Data e hora da criação da conta</label><br>
+        <input type="datetime-local" id="conta" name="conta"><br>
+    </form>
+</section>
+    <script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const ellipse = document.getElementById('profileEllipse');
+    const optionsMenu = document.getElementById('optionsMenu');
+    const uploadInput = document.getElementById('uploadInput');
+    const uploadedImage = document.getElementById('uploadedImage');
+    const imageContainer = document.getElementById('imageContainer');
+    const changePhotoLink = document.getElementById('changePhoto');
+    const removePhotoLink = document.getElementById('removePhoto');
+
+    ellipse.addEventListener('click', function(e) {
+        e.stopPropagation(); // Evita que o evento de clique na elipse se propague para o body
+        optionsMenu.style.display = 'block';
+    });
+
+    changePhotoLink.addEventListener('click', function(e) {
+        e.preventDefault();
+        uploadInput.click();
+        optionsMenu.style.display = 'none';
+    });
+
+    uploadInput.addEventListener('change', function() {
+        const file = uploadInput.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                uploadedImage.src = e.target.result;
+                imageContainer.style.display = 'block';
+                ellipse.style.backgroundImage = `url(${e.target.result})`; // Coloca a imagem de fundo da elipse
+                ellipse.style.backgroundSize = 'cover'; // Preenche a elipse com a imagem
+                optionsMenu.style.display = 'none';
+            };
+            reader.readAsDataURL(file);
+        } else {
+            optionsMenu.style.display = 'none';
+        }
+    });
+
+    removePhotoLink.addEventListener('click', function(e) {
+        e.preventDefault();
+        uploadedImage.src = '#';
+        imageContainer.style.display = 'none';
+        uploadInput.value = '';
+        ellipse.style.backgroundImage = 'none'; // Remove a imagem de fundo da elipse
+    });
+
+    // Fecha o menu de opções ao clicar fora dele
+    document.addEventListener('click', function(e) {
+        if (!ellipse.contains(e.target) && !optionsMenu.contains(e.target)) {
+            optionsMenu.style.display = 'none';
+        }
+    });
+});
+        </script>
+</body>
+</html>

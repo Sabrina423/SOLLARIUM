@@ -1,131 +1,137 @@
-/* Importing Google Font */
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
- 
-/* Basic reset */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: Arial, sans-serif;
 }
  
 body {
-    font-family: 'Roboto', sans-serif;
-    background-color: #000000;
-    -webkit-animation: AnimateBG 20s ease infinite;
-    animation: AnimateBG 20s ease infinite;
-    height: 100vh;
-    width: 100%;
-    background-size: 300%;
     display: flex;
     justify-content: center;
     align-items: center;
-    color: #ffffff;
+    height: 100vh;
+    background-color: #000000;
 }
  
-.login-container {
-    background: rgba(255, 255, 255, 0.075);
-    border: 20px;
-    padding: 2rem;
-    border-color: #fff;
-    border-radius: 12px;
-    max-width: 500px;
-    width: 100%;
-    transition: transform 0.3s ease;
+.container {
     display: flex;
-    flex-direction: column;
+    width: 800px;
+    height: 500px;
+    background-color: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.473);
+    
+}
+ 
+.hero {
+    width: 50%;
+    background-image: url(/imagens/1.png);
+    display: flex;
     align-items: center;
+    justify-content: center;
+    color: white;
+    padding: 40px;
 }
  
-.login-container:hover {
-    transform: scale(1.02);
+.hero img {
+    display: none; /* Esconda a imagem se não for necessária */
 }
  
-.logo {
-    margin-bottom: 1.5rem;
+main {
+    width: 50%;
+    padding: 40px;
 }
  
-.logo img {
-    max-width: 150px;
-    transition: transform 0.3s ease;
+.input-group {
+    margin-bottom: 15px;
+    padding-top: 30px;
+}
+
+.input-group label{
+ font-family: sans-serif;
+ font-size: 18px;
+ margin-bottom: 30px;
 }
  
-.logo img:hover {
-    transform: scale(1.1);
-}
- 
-form {
-    display: flex;
-    flex-direction: column;
+.input-group input,
+.input-group select {
     width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+    margin-top: 25px;
 }
- 
-form input {
-    background: rgba(151, 151, 151, 0.2);
-    border: none;
-    padding: 0.75rem;
-    margin-bottom: 1rem;
-    border-radius: 4px;
-    color: #ffffff;
-    font-size: 0.875rem;
-    transition: background 0.3s ease;
-}
- 
-form input:focus {
-    background: rgba(0, 0, 0, 0.3);
-    outline: none;
-}
- 
-form button {
-    background: #000000;
-    border: none;
-    padding: 0.75rem;
-    border-radius: 4px;
-    color: #fff;
-    cursor: pointer;
-    font-size: 0.875rem;
-    transition: background 0.3s ease;
-}
- 
-form button:hover {
-    background: black;
-}
- 
-h1 {
-    font-size: 1.5rem;
-    margin-bottom: 1.5rem;
-    font-weight: 700;
+
+h1{
+    font-size: 30px;
     text-align: center;
+    padding-bottom: 30px;
+}
+
+h2{
+    font-family: sans-serif;
+    font-size: 40px;
+    width: 250px;
+    position: relative;
+    top: -70px;
+    left: -30px;
 }
  
-label {
-    font-size: 0.75rem;
-    color: rgba(255, 255, 255, 0.8);
-    text-transform: uppercase;
-    margin-bottom: 0.5rem;
+.radio-group {
+    margin-bottom: 15px;
 }
  
-@media (max-width: 480px) {
-  .login-container {
-      max-width: 310px;
-      max-height: 540px;
-      padding: 1rem;
-  }
- 
-  .logo img {
-      max-width: 100px;
-  }
- 
-  form input, form button {
-      padding: 0.5rem;
-      font-size: 0.7rem;
-  }
- 
-  h1 {
-      font-size: 1rem;
-  }
- 
-  label {
-      font-size: 0.6rem;
-  }
+.password-container {
+    position: relative;
 }
+ 
+.password-container input {
+    width: calc(100% - 30px);
+    padding-right: 30px;
+}
+ 
+.toggle-password {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+ 
+button[type="submit"] {
+    width: 100%;
+    padding: 12px;
+    background-image: url(/imagens/1.png);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 20px;
+}
+ 
+button[type="submit"]:hover {
+    background-color: #5a7ddb;
+}
+ 
+button[type="submit"] a {
+    color: white;
+    text-decoration: none;
+}
+ 
+a{
+    text-decoration: none;
+    color: #000000;
+    position: relative;
+    top: 25px;
+    left: 78px;
+    font-size: 17px;
+    font-family: sans-serif;
+}
+
+
  
