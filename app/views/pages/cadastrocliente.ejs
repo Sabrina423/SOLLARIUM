@@ -1,74 +1,159 @@
 <!DOCTYPE html>
-<html lang="pt-br">
-
+<html lang="pt">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Cliente</title>
     <link rel="stylesheet" href="/css/cadastrocliente.css">
-    <title>Cadastro</title>
-    <script src="/js/cadastrocliente.js"></script>
 </head>
-
 <body>
-    <nav class="container">
-        <nav class="hero">
-            <img src="/imgens/a mlehor opção.png" alt="">
-        </nav>
-        <main>
-           
-            <form action="/cadastrocliente" method="POST">
-                <nav class="logo">
-                    <img src="/imagens/LOGO_SOLLARIUM (8).png" alt="logo">
-                </nav>
-                <nav class="input-group">
-                    <input type="text" name="nome_cliente" placeholder="Nome Completo" required>
-                    <input type="text" name="cpf_cliente" placeholder="CPF" required>
-            </nav>
-                <nav class="input-group">
-                    <input type="text" name="cidade_cliente" placeholder="Cidade" required>
-                    <select id="estados" name="estados">
-                        <label for="estado">Selecione o seu Estado:</label>
-                        <option value="São paulo">SP</option>
-                        <option value="Rio de Janeiro">RJ</option>
-                        <option value="Minas Gerais">MG</option>
-                        <option value="Espirito Santo">ES</option>
-                    </select>
-                    <nav class="radio-group">
-                    </nav>
-            </nav>
-                <nav class="input-group">
-                    <input type="email" name="email_cliente" placeholder="E-mail" required>
-                    <input type="tel" name="contato_cliente" placeholder="Contato" required>
-                </nav>
-                <nav class="input-group">
-                    <nav class="password-container">
-                        <input type="password" id="senha_cliente" name="senha_cliente" placeholder="Senha" required>
-                        <span class="toggle-password" onclick="togglePassword('senha_cliente')">&#128065;</span>
-                    </nav>
-                    <nav class="password-container">
-                        <input type="password" id="confirmar_senha_cliente" name="confirmar_senha_cliente" placeholder="Confirmar Senha" required>
-                        <span class="toggle-password" onclick="togglePassword('confirmar_senha_cliente')">&#128065;</span>
-                        
-                    </nav>
-                    </nav>
-                    <button type="submit"><a href="/perfilcliente"></a>Criar Conta</button>
-                </nav>
-            </form>
-        </main>
-    </nav>
+    <div class="container">
+        <h1>Cadastro de Cliente</h1>
+        <form id="cadastroForm">
+            <div class="form-group">
+                <label for="nome_cliente">Nome Completo</label>
+                <input type="text" id="nome_cliente" name="nome_cliente">
+                <small class="error-message"></small>
+            </div>
+            <div class="form-group">
+                <label for="cpf_cliente">CPF</label>
+                <input type="text" id="cpf_cliente" name="cpf_cliente">
+                <small class="error-message"></small>
+            </div>
+            <div class="form-group">
+                <label for="cidade_cliente">Cidade</label>
+                <input type="text" id="cidade_cliente" name="cidade_cliente">
+                <small class="error-message"></small>
+            </div>
+            <div class="form-group">
+                <label for="estados">Estado</label>
+                <select id="estados" name="estados">
+                    <option value="">Selecione o estado</option>
+                    <option value="SP">São Paulo</option>
+                    <option value="RJ">Rio de Janeiro</option>
+                    <option value="MG">Minas Gerais</option>
+                    <!-- Adicione outros estados conforme necessário -->
+                </select>
+                <small class="error-message"></small>
+            </div>
+            <div class="form-group">
+                <label for="email_cliente">Email</label>
+                <input type="email" id="email_cliente" name="email_cliente">
+                <small class="error-message"></small>
+            </div>
+            <div class="form-group">
+                <label for="contato_cliente">Contato</label>
+                <input type="text" id="contato_cliente" name="contato_cliente">
+                <small class="error-message"></small>
+            </div>
+            <div class="form-group">
+                <label for="senha_cliente">Senha</label>
+                <input type="password" id="senha_cliente" name="senha_cliente">
+                <small class="error-message"></small>
+            </div>
+            <div class="form-group">
+                <label for="confirmar_senha_cliente">Confirmar Senha</label>
+                <input type="password" id="confirmar_senha_cliente" name="confirmar_senha_cliente">
+                <small class="error-message"></small>
+            </div>
+            <button type="submit">Cadastrar</button>
+        </form>
+        <div id="success-message"></div>
+    </div>
+     <script>
+        document.getElementById('cadastroForm').addEventListener('submit', async function(event) {
+    event.preventDefault();
 
-    <script>
-        const form = document.getElementByID('form');
-        const campos = document.querySelectorall('required');
-        const spans = document.querySelectorall('span-required');
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    // Limpa mensagens de erro
+    const errorMessages = document.querySelectorAll('.error-message');
+    errorMessages.forEach(error => error.style.display = 'none');
 
-       function nameValidate(){
-        if(campos[0].value.lenght < 3)
-        console.log
-       }
+    const formData = {
+        nome_cliente: document.getElementById('nome_cliente').value,
+        cpf_cliente: document.getElementById('cpf_cliente').value,
+        cidade_cliente: document.getElementById('cidade_cliente').value,
+        estados: document.getElementById('estados').value,
+        email_cliente: document.getElementById('email_cliente').value,
+        contato_cliente: document.getElementById('contato_cliente').value,
+        senha_cliente: document.getElementById('senha_cliente').value,
+        confirmar_senha_cliente: document.getElementById('confirmar_senha_cliente').value
+    };
 
-    </script>
+    // Validações
+    let isValid = true;
+
+    if (!formData.nome_cliente) {
+        showError('nome_cliente', 'Nome Completo é obrigatório.');
+        isValid = false;
+    }
+
+    if (!formData.cpf_cliente) {
+        showError('cpf_cliente', 'CPF é obrigatório.');
+        isValid = false;
+    }
+
+    if (!formData.cidade_cliente) {
+        showError('cidade_cliente', 'Cidade é obrigatória.');
+        isValid = false;
+    }
+
+    if (!formData.estados) {
+        showError('estados', 'Estado é obrigatório.');
+        isValid = false;
+    }
+
+    if (!formData.email_cliente) {
+        showError('email_cliente', 'Email é obrigatório.');
+        isValid = false;
+    }
+
+    if (!formData.contato_cliente) {
+        showError('contato_cliente', 'Contato é obrigatório.');
+        isValid = false;
+    }
+
+    if (!formData.senha_cliente || formData.senha_cliente.length < 8) {
+        showError('senha_cliente', 'A senha deve ter no mínimo 8 caracteres.');
+        isValid = false;
+    }
+
+    if (formData.senha_cliente !== formData.confirmar_senha_cliente) {
+        showError('confirmar_senha_cliente', 'As senhas não coincidem.');
+        isValid = false;
+    }
+
+    if (!isValid) return;
+
+    try {
+        const response = await fetch('/cadastrocliente', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(formData)
+        });
+
+        const result = await response.json();
+
+        if (response.status === 200) {
+            document.getElementById('success-message').innerText = result.mensagem;
+            document.getElementById('cadastroForm').reset();
+        } else {
+            result.errors.forEach(error => {
+                showError(error.field, error.message);
+            });
+        }
+    } catch (error) {
+        console.error('Erro ao enviar os dados:', error);
+    }
+});
+
+function showError(field, message) {
+    const errorElement = document.querySelector(`#${field} ~ .error-message`);
+    errorElement.innerText = message;
+    errorElement.style.display = 'block';
+}
+
+     </script>
 </body>
-
 </html>

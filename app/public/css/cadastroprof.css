@@ -2,13 +2,36 @@ body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
-    height: 100vh;
     margin: 0;
 }
 
-.container {
+header {
+    text-align: center;
+    margin: 20px 0;
+}
+
+header h2 {
+    margin: 0 0 20px 0;
+}
+
+header .prof, .cliente {
+    margin: 5px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+header .prof:hover, .cliente:hover {
+    background-color: #0056b3;
+}
+
+main {
     background-color: #fff;
     padding: 20px;
     border-radius: 5px;
@@ -16,9 +39,8 @@ body {
     width: 300px;
 }
 
-h1 {
+main h1 {
     text-align: center;
-    margin-bottom: 20px;
 }
 
 .form-group {
@@ -36,7 +58,7 @@ input, select {
     box-sizing: border-box;
 }
 
-button {
+input[type="submit"] {
     width: 100%;
     padding: 10px;
     background-color: #007bff;
@@ -46,7 +68,7 @@ button {
     cursor: pointer;
 }
 
-button:hover {
+input[type="submit"]:hover {
     background-color: #0056b3;
 }
 
@@ -61,3 +83,5 @@ button:hover {
     text-align: center;
     color: green;
 }
+
+

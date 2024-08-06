@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -19,71 +19,110 @@
                         <img src="/imagens/LOGO_SOLLARIUM(8).png" alt="Logo"> <!-- Adicione o caminho correto da sua logo -->
                     </div>
                     <h2>Orçamento</h2>
-                    <form id="formOrcamento" action="" onsubmit="return validarFormulario()">
-                        <input type="text" id="estado" name="estado" placeholder="Estado:" required><br>
-                        <div id="estadoError" class="error-message"></div>
-                        <input type="text" id="cidade" name="cidade" placeholder="Cidade/CEP" required><br>
-                        <div id="cidadeError" class="error-message"></div>
-                        <input type="text" id="servico" name="servico" placeholder="Serviço:" required><br>
-                        <div id="servicoError" class="error-message"></div>
-                        <textarea id="detalhe" name="detalhe" placeholder="Detalhe o serviço desejado:" required class="detalhe"></textarea><br>
-                        <div id="detalheError" class="error-message"></div>
-                        <input type="text" id="valor" name="valor" placeholder="Valor esperado:" required><br>
-                        <div id="valorError" class="error-message"></div>
+                    <form id="formOrcamento">
+                        <div class="form-group">
+                            <input type="text" id="estado" name="estado" placeholder="Estado:" required>
+                            <small id="estadoError" class="error-message"></small>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="cidade" name="cidade" placeholder="Cidade/CEP" required>
+                            <small id="cidadeError" class="error-message"></small>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="servico" name="servico" placeholder="Serviço:" required>
+                            <small id="servicoError" class="error-message"></small>
+                        </div>
+                        <div class="form-group">
+                            <textarea id="detalhe" name="detalhe" placeholder="Detalhe o serviço desejado:" required class="detalhe"></textarea>
+                            <small id="detalheError" class="error-message"></small>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="valor" name="valor" placeholder="Valor esperado:" required>
+                            <small id="valorError" class="error-message"></small>
+                        </div>
                         <input type="submit" value="FINALIZAR ORÇAMENTO">
+                        <div id="success-message"></div>
                     </form>
                 </section>
             </section>
         </section>
     </section>
 
-    <script>
-        function validarFormulario() {
-            // Resetar mensagens de erro
-            document.getElementById('estadoError').textContent = '';
-            document.getElementById('cidadeError').textContent = '';
-            document.getElementById('servicoError').textContent = '';
-            document.getElementById('detalheError').textContent = '';
-            document.getElementById('valorError').textContent = '';
+   <script>
+      document.getElementById('formOrcamento').addEventListener('submit', async function(event) {
+    event.preventDefault();
 
-            let form = document.getElementById('formOrcamento');
-            let estado = form.elements['estado'].value.trim();
-            let cidade = form.elements['cidade'].value.trim();
-            let servico = form.elements['servico'].value.trim();
-            let detalhe = form.elements['detalhe'].value.trim();
-            let valor = form.elements['valor'].value.trim();
+    // Resetar mensagens de erro
+    const errorMessages = document.querySelectorAll('.error-message');
+    errorMessages.forEach(error => error.style.display = 'none');
 
-            let isValid = true;
+    const formData = {
+        estado: document.getElementById('estado').value.trim(),
+        cidade: document.getElementById('cidade').value.trim(),
+        servico: document.getElementById('servico').value.trim(),
+        detalhe: document.getElementById('detalhe').value.trim(),
+        valor: document.getElementById('valor').value.trim()
+    };
 
-            // Validar cada campo
-            if (estado === '') {
-                document.getElementById('estadoError').textContent = 'Por favor, preencha o Estado.';
-                isValid = false;
-            }
+    let isValid = true;
 
-            if (cidade === '') {
-                document.getElementById('cidadeError').textContent = 'Por favor, preencha a Cidade/CEP.';
-                isValid = false;
-            }
+    if (formData.estado === '') {
+        showError('estadoError', 'Por favor, preencha o Estado.');
+        isValid = false;
+    }
 
-            if (servico === '') {
-                document.getElementById('servicoError').textContent = 'Por favor, preencha o Serviço.';
-                isValid = false;
-            }
+    if (formData.cidade === '') {
+        showError('cidadeError', 'Por favor, preencha a Cidade/CEP.');
+        isValid = false;
+    }
 
-            if (detalhe === '') {
-                document.getElementById('detalheError').textContent = 'Por favor, detalhe o serviço desejado.';
-                isValid = false;
-            }
+    if (formData.servico === '') {
+        showError('servicoError', 'Por favor, preencha o Serviço.');
+        isValid = false;
+    }
 
-            if (valor === '') {
-                document.getElementById('valorError').textContent = 'Por favor, preencha o Valor esperado.';
-                isValid = false;
-            }
+    if (formData.detalhe === '') {
+        showError('detalheError', 'Por favor, detalhe o serviço desejado.');
+        isValid = false;
+    }
 
-            // Retornar true ou false para permitir ou não o envio do formulário
-            return isValid;
+    if (formData.valor === '') {
+        showError('valorError', 'Por favor, preencha o Valor esperado.');
+        isValid = false;
+    }
+
+    if (!isValid) return;
+
+    try {
+        const response = await fetch('/orcamento', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(formData)
+        });
+
+        const result = await response.json();
+
+        if (response.status === 200) {
+            document.getElementById('success-message').innerText = result.mensagem;
+            document.getElementById('formOrcamento').reset();
+        } else {
+            result.errors.forEach(error => {
+                showError(error.field + 'Error', error.message);
+            });
         }
-    </script>
+    } catch (error) {
+        console.error('Erro ao enviar os dados:', error);
+    }
+});
+
+function showError(fieldId, message) {
+    const errorElement = document.getElementById(fieldId);
+    errorElement.innerText = message;
+    errorElement.style.display = 'block';
+}
+
+   </script>
 </body>
 </html>

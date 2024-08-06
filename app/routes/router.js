@@ -24,12 +24,16 @@ router.get('/', (req, res) => {
     res.render('pages/home');
 });
 
-router.get('/soucliente', (req, res) => {
-    res.render('pages/soucliente');
+router.get('/entrar', (req, res) => {
+    res.render('pages/entrar');
 });
 
 router.get('/cadastrocliente', (req, res) => {
     res.render('pages/cadastrocliente');
+});
+
+router.get('/cadastroprof', (req, res) => {
+    res.render('pages/cadastroprof');
 });
 
 router.get('/orcamento', (req, res) => {
@@ -38,6 +42,10 @@ router.get('/orcamento', (req, res) => {
 
 router.get('/perfilcliente', authenticateToken, (req, res) => {
     res.render('pages/perfilcliente');
+});
+
+router.get('/perfilprof', authenticateToken, (req, res) => {
+    res.render('pages/perfilprof');
 });
 
 router.get('/relatorio', authenticateToken, (req, res) => {
@@ -58,6 +66,15 @@ router.post('/cadastrocliente', [
        // return res.status(400).json({ errors: errors.array() });
     }
 
+    router.post('/cadastroprof', [
+        body('username').isString().withMessage('O nome de usuário deve ser uma string'),
+        body('password').isLength({ min: 6 }).withMessage('A senha deve ter pelo menos 6 caracteres')
+    ], (req, res) => {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+           // return res.status(400).json({ errors: errors.array() });
+        }
+
     const { username, password } = req.body;
     const hashedPassword = bcrypt.hashSync(password, 10);
 
@@ -71,7 +88,7 @@ router.post('/cadastrocliente', [
 });
 
 // Rota de Login
-router.post('/login', [
+router.post('/entrar', [
     body('username').isString().withMessage('O nome de usuário deve ser uma string'),
     body('password').isLength({ min: 6 }).withMessage('A senha deve ter pelo menos 6 caracteres')
 ], (req, res) => {

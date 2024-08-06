@@ -1,130 +1,70 @@
-/* Reset básico para garantir consistência */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-/* Estilos gerais da página */
 body {
-    background-image: url('/imagens/normal_u0.png');
-    background-repeat: no-repeat;
-    background-size: cover;
-    color: #ffffff; /* Texto branco */
-    font-family: Arial, sans-serif; /* Fonte padrão */
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
+    margin: 0;
 }
 
-.metade1,
-.metade2 {
-    flex: 1;
-    text-align: center;
+section.inteiro {
     display: flex;
-    justify-content: center;
-    align-items: center;
+    width: 80%;
+}
+
+section.metade1, section.metade2 {
+    flex: 1;
 }
 
 .container {
-    border-radius: 30px;
-    padding: 30px;
-    width: 450px;
-    max-width: 500px; 
-    flex: 1;
-    text-align: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 650px;
-}
-
-.Forms {
-    background: rgba(0, 0, 0, 0.568);
-    box-shadow: 0 8px 32px 0 rgba(255, 255, 255, 0.37);
-    backdrop-filter: blur(13.5px);
-    -webkit-backdrop-filter: blur(13.5px);
-    padding: 30px;
-    width: 450px;
-    max-width: 500px; 
-    text-align: center;
-    position: relative;
-    top: 15px;
-    font-size: 18px;
-}
-
-.logo {
-    margin-bottom: 20px; /* Espaço entre a logo e os campos do formulário */
-}
-
-.logo img {
-    max-width: 100px; /* Tamanho da logo */
-    height: auto;
-}
-
-input[type="text"],
-textarea {
-    width: calc(100% - 20px); /* Ajuste para o padding */
-    padding: 10px;
-    margin: 10px 0;
-    border: none;
-    background-color: rgba(255, 255, 255, 0.219); /* Fundo branco semi-transparente */ 
+    background-color: #fff;
+    padding: 20px;
     border-radius: 5px;
-    font-size: 16px; /* Tamanho da fonte */
-    font-family: sans-serif;
-    color: #000000;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-input[type="text"]:focus,
-textarea:focus {
-    outline: none;
-    background-color: rgba(0, 0, 0, 0.2); /* Fundo branco mais escuro ao focar */
+h2 {
+    text-align: center;
 }
 
-textarea.detalhe {
-    height: 150px; /* Ajustei a altura do textarea */
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+input, textarea {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
 }
 
 input[type="submit"] {
-    padding: 15px 30px; /* Aumentei o padding do botão */
-    background-color: #000000; /* Cor do botão preto */
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
     color: white;
     border: none;
-    cursor: pointer;
     border-radius: 5px;
-    font-size: 18px; /* Tamanho da fonte do botão */
-    transition: background-color 0.3s ease;
+    cursor: pointer;
 }
 
 input[type="submit"]:hover {
-    background-color: #333333; /* Cor do botão mais escura ao passar o mouse */
+    background-color: #0056b3;
 }
 
-@media screen and (max-width: 768px) {
-    .inteiro {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .metade1,
-    .metade2 {
-        width: 100%;
-        padding: 20px 0;
-    }
-
-    .metade1 img {
-        border-radius: 0; /* Remova a borda arredondada em telas menores */
-    }
-
-    .Forms {
-        max-width: 320px;
-    }
-}
-
-/* Estilos para as mensagens de erro */
 .error-message {
     color: red;
-    font-size: 14px;
-    margin-top: 5px;
+    font-size: 12px;
+    display: none;
+}
+
+#success-message {
+    margin-top: 20px;
+    text-align: center;
+    color: green;
 }
