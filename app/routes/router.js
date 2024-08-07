@@ -61,10 +61,11 @@ router.post('/cadastrocliente', [
     body('username').isString().withMessage('O nome de usuário deve ser uma string'),
     body('password').isLength({ min: 6 }).withMessage('A senha deve ter pelo menos 6 caracteres')
 ], (req, res) => {
-    const errors = validationResult(req);
+   const errors = validationResult(req);
     if (!errors.isEmpty()) {
        // return res.status(400).json({ errors: errors.array() });
     }
+});
 
     router.post('/cadastroprof', [
         body('username').isString().withMessage('O nome de usuário deve ser uma string'),
@@ -125,6 +126,14 @@ router.get('/perfilcliente', authenticateToken, (req, res) => {
 router.get('/cadastrocliente', (req, res) => {
     res.render('cadastrocliente');
 });
+
+router.post(
+    "/cadastrocliente",
+    usuarioController.regrasValidacaoFormCad,
+    async function (req, res) {
+      clienteController.cadastrar(req, res);
+    }
+  );
 
 module.exports = router;
 

@@ -9,7 +9,7 @@
 <body>
     <div class="container">
         <h1>Cadastro de Cliente</h1>
-        <form id="cadastroForm">
+        <form id="cadastroForm" method="post" action="/perfilcliente"> 
             <div class="form-group">
                 <label for="nome_cliente">Nome Completo</label>
                 <input type="text" id="nome_cliente" name="nome_cliente">
@@ -125,15 +125,15 @@
     if (!isValid) return;
 
     try {
-        const response = await fetch('/cadastrocliente', {
+        const response = await fetch('/perfilcliente', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(formData)
+            body: FormData
         });
 
-        const result = await response.json();
+       /* const result = await response.json();
 
         if (response.status === 200) {
             document.getElementById('success-message').innerText = result.mensagem;
@@ -142,7 +142,7 @@
             result.errors.forEach(error => {
                 showError(error.field, error.message);
             });
-        }
+        }*/
     } catch (error) {
         console.error('Erro ao enviar os dados:', error);
     }
