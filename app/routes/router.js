@@ -2,7 +2,7 @@ const express = require('express');
 const { body, validationResult } = require('express-validator');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const cliententeController = require('../controllers/clienteController');
+const clienteController = require('../controllers/clienteController');
 
 const {
     verificarUsuAutenticado,
@@ -137,7 +137,7 @@ router.get('/cadastrocliente', (req, res) => {
 
 router.post(
     "/cadastrocliente",
-    clienteController.regrasValidacaoFormCad,
+    clienteController.regrasValidacaoFormCad, 
     async function (req, res) {
       clienteController.cadastrar(req, res);
     }
