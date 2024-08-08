@@ -3,6 +3,14 @@ const { body, validationResult } = require('express-validator');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const ClienteController = require('../controllers/clienteController');
+
+const {
+    verificarUsuAutenticado,
+    limparSessao,
+    gravarUsuAutenticado,
+    verificarUsuAutorizado,
+  } = require("../models/autenticador_middleware");
+
 const router = express.Router();
 
 const secretKey = 'your-secret-key';

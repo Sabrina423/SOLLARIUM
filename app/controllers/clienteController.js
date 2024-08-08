@@ -1,10 +1,10 @@
-const cliente = require("../models/clienteModel");
+const cliente = require("../models/tipoClienteModel");
 const { body, validationResult } = require("express-validator");
 const bcrypt = require("bcryptjs");
 var salt = bcrypt.genSaltSync(12);
 const fetch = (...args) => import('node-fetch').then(({ default: fetch }) => fetch(...args));
 const https = require('https');
-const verificarClienteAutorizado = require('../middleware/verificarClienteAutorizado'); // Importar o middleware
+const verificarClienteAutorizado = require('../models/verificarClienteAutorizado'); // Importar o middleware
 
 
 const clienteController = {
@@ -15,7 +15,7 @@ const clienteController = {
             .withMessage("O nome de usuário/e-mail deve ter de 8 a 45 caracteres"),
         body("senha_usu")
             .isStrongPassword()
-            .withMessage("A senha deve ter no mínimo 8 caracteres (mínimo 1 letra maiúscula, 1 caractere especial e 1 número)")
+            .withMessage("A senha deve ter no mínimo 8 caracteres")
     ],
 
     regrasValidacaoFormCad: [
@@ -39,7 +39,7 @@ const clienteController = {
               }), 
         body("senha_Cliente")
             .isStrongPassword()
-            .withMessage("A senha deve ter no mínimo 8 caracteres (mínimo 1 letra maiúscula, 1 caractere especial e 1 número)")
+            .withMessage("A senha deve ter no mínimo 8 caracteres")
     ],
 
     regrasValidacaoPerfil: [
