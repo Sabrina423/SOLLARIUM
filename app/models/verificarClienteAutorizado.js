@@ -8,4 +8,4 @@ const verificarClienteAutorizado = (permissoes, redirecionarPara) => {
   };
 };
 
-module.exports = verificarUsuAutorizado;
+module.exports = verificarClienteAutorizado;

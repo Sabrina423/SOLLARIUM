@@ -2,7 +2,7 @@ const express = require('express');
 const { body, validationResult } = require('express-validator');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const ClienteController = require('../controllers/clienteController');
+const cliententeController = require('../controllers/clienteController');
 
 const {
     verificarUsuAutenticado,
@@ -141,7 +141,7 @@ router.post(
     async function (req, res) {
       clienteController.cadastrar(req, res);
     }
-  );
+);
 
 module.exports = router;
 
