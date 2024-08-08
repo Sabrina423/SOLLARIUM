@@ -1,11 +1,13 @@
-const usuario = require("../models/clienteModel");
+const cliente = require("../models/clienteModel");
 const { body, validationResult } = require("express-validator");
 const bcrypt = require("bcryptjs");
 var salt = bcrypt.genSaltSync(12);
 const fetch = (...args) => import('node-fetch').then(({ default: fetch }) => fetch(...args));
 const https = require('https');
+const verificarClienteAutorizado = require('../middleware/verificarClienteAutorizado'); // Importar o middleware
 
-const usuarioController = {
+
+const clienteController = {
 
     regrasValidacaoFormLogin: [
         body("nome_usu")
@@ -22,7 +24,7 @@ const usuarioController = {
         body("nomeusu_usu")
             .isLength({ min: 8, max: 45 }).withMessage("Nome de usuário deve ter de 8 a 45 caracteres!")
             .custom(async value => {
-                const nomeUsu = await usuario.findCampoCustom({'user_usuario':value});
+                const nomeUsu = await usuario.findCampoCustom({'user_cliente':value});
                 if (nomeUsu > 0) {
                   throw new Error('Nome de usuário em uso!');
                 }
@@ -30,50 +32,48 @@ const usuarioController = {
         body("email_usu")
             .isEmail().withMessage("Digite um e-mail válido!")
             .custom(async value => {
-                const nomeUsu = await usuario.findCampoCustom({'email_usuario':value});
-                if (nomeUsu > 0) {
+                const nomeCliente = await cliente.findCampoCustom({'email_cliente':value});
+                if (nomeCliente > 0) {
                   throw new Error('E-mail em uso!');
                 }
               }), 
-        body("senha_usu")
+        body("senha_Cliente")
             .isStrongPassword()
             .withMessage("A senha deve ter no mínimo 8 caracteres (mínimo 1 letra maiúscula, 1 caractere especial e 1 número)")
     ],
 
-
     regrasValidacaoPerfil: [
-        body("nome_usu")
+        body("nome_cliente")
             .isLength({ min: 3, max: 45 }).withMessage("Mínimo de 3 letras e máximo de 45!"),
-        body("nomeusu_usu")
+        body("nomeusu_cliente")
             .isLength({ min: 8, max: 45 }).withMessage("Nome de usuário deve ter de 8 a 45 caracteres!"),
-        body("email_usu")
+        body("email_cliente")
             .isEmail().withMessage("Digite um e-mail válido!"),
-        body("fone_usu")
+        body("fone_cliente")
             .isLength({ min: 12, max: 13 }).withMessage("Digite um telefone válido!"),
-        verificarUsuAutorizado([1, 2, 3], "pages/restrito"),
+        verificarClienteAutorizado([1, 2, 3], "pages/cadastrocliente"),
     ],
 
     logar: (req, res) => {
         const erros = validationResult(req);
         if (!erros.isEmpty()) {
-            return res.render("pages/login", { listaErros: erros, dadosNotificacao: null  })
+            return res.render("pages/entrar", { listaErros: erros, dadosNotificacao: null  })
         }
         if (req.session.autenticado.autenticado != null) {
             res.redirect("/");
         } else {
-            res.render("pages/login", { listaErros: null,
+            res.render("pages/entrar", { listaErros: null,
                  dadosNotificacao: { titulo: "Falha ao logar!", mensagem: "Usuário e/ou senha inválidos!", tipo: "error" } })
         }
     },
 
-
     cadastrar: (req, res) => {
         const erros = validationResult(req);
         var dadosForm = {
-            user_usuario: req.body.nomeusu_usu, 
-            senha_usuario: bcrypt.hashSync(req.body.senha_usu, salt),
-            nome_usuario: req.body.nome_usu,
-            email_usuario: req.body.email_usu,
+            user_cliente: req.body.nomeusu_cliente, 
+            senha_cliente: bcrypt.hashSync(req.body.senha_usu, salt),
+            nome_cliente: req.body.nome_cliente,
+            email_cliente: req.body.email_cliente,
         };
         if (!erros.isEmpty()) {
             return res.render("pages/cadastrocliente", { listaErros: erros, dadosNotificacao: null, valores: req.body })
@@ -94,7 +94,6 @@ const usuarioController = {
             })
         }
     }
-
 }
 
-module.exports = clienteController
+module.exports = clienteController;

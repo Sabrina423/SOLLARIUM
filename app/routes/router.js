@@ -129,7 +129,7 @@ router.get('/cadastrocliente', (req, res) => {
 
 router.post(
     "/cadastrocliente",
-    usuarioController.regrasValidacaoFormCad,
+    clienteController.regrasValidacaoFormCad,
     async function (req, res) {
       clienteController.cadastrar(req, res);
     }
