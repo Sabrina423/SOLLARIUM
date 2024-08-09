@@ -2,7 +2,7 @@ const { validationResult } = require("express-validator");
 const cliente = require("../models/clienteModel");
 const bcrypt = require("bcryptjs");
 
-verificarClienteAutenticado = (req, res, next) => {
+const verificarClienteAutenticado = (req, res, next) => {
   if (req.session.autenticado) {
     var autenticado = req.session.autenticado;
     req.session.logado = req.session.logado + 1;
@@ -14,29 +14,30 @@ verificarClienteAutenticado = (req, res, next) => {
   next();
 };
 
-limparSessao = (req, res, next) => {
+const limparSessao = (req, res, next) => {
   req.session.destroy();
   next();
 };
 
-gravarClienteAutenticado = async (req, res, next) => {
-  erros = validationResult(req);
+const gravarClienteAutenticado = async (req, res, next) => {
+  const erros = validationResult(req);
   var autenticado = { autenticado: null, id: null, tipo: null };
   if (erros.isEmpty()) {
-    var dadosForm = {
-      user_usuario: req.body.nome_usu,
-      senha_usuario: req.body.senha_usu,
+    const dadosForm = {
+      user_cliente: req.body.nome_usu,
+      senha_cliente: req.body.senha_usu,
     };
-    var results = await usuario.findClienteEmail(dadosForm);
-    var total = Object.keys(results).length;
-    if (total == 1) {
-      if (bcrypt.compareSync(dadosForm.senha_usuario, results[0].senha_cliente)) {
-        var autenticado = {
-          autenticado: results[0].nome_cliente,
-          id: results[0].id_cliente,
-          tipo: results[0].tipo_cliente
+    try {
+      const clienteExistente = await cliente.findById(dadosForm.user_cliente);
+      if (clienteExistente && bcrypt.compareSync(dadosForm.senha_cliente, clienteExistente.senha_cliente)) {
+        autenticado = {
+          autenticado: clienteExistente.nome_cliente,
+          id: clienteExistente.id_cliente,
+          tipo: clienteExistente.tipo_cliente
         };
       }
+    } catch (e) {
+      console.error(e);
     }
   }
   req.session.autenticado = autenticado;
@@ -44,13 +45,11 @@ gravarClienteAutenticado = async (req, res, next) => {
   next();
 };
 
-verificarClienteAutorizado = (tipoPermitido, destinoFalha) => {
+const verificarClienteAutorizado = (tipoPermitido, destinoFalha) => {
   return (req, res, next) => {
     if (
       req.session.autenticado.autenticado != null &&
-      tipoPermitido.find(function (element) {
-        return element == req.session.autenticado.tipo;
-      }) != undefined
+      tipoPermitido.includes(req.session.autenticado.tipo)
     ) {
       next();
     } else {

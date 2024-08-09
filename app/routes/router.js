@@ -64,17 +64,57 @@ router.get('/feedback', authenticateToken, (req, res) => {
     res.render('pages/feedback');
 });
 
-// Rota de Registro
+//Rota de registro cliente
 router.post('/cadastrocliente', [
-    body('username').isString().withMessage('O nome de usuário deve ser uma string'),
-    body('password').isLength({ min: 6 }).withMessage('A senha deve ter pelo menos 6 caracteres')
-], (req, res) => {
-   const errors = validationResult(req);
+    body('username')
+        .isString().withMessage('O nome de usuário deve ser uma string')
+        .isLength({ min: 3, max: 45 }).withMessage('O nome de usuário deve ter entre 3 e 45 caracteres'),
+    body('password')
+        .isLength({ min: 8 }).withMessage('A senha deve ter pelo menos 8 caracteres')
+        .matches(/[A-Z]/).withMessage('A senha deve conter pelo menos uma letra maiúscula')
+        .matches(/[a-z]/).withMessage('A senha deve conter pelo menos uma letra minúscula')
+        .matches(/\d/).withMessage('A senha deve conter pelo menos um número')
+        .matches(/[@$!%*?&]/).withMessage('A senha deve conter pelo menos um caractere especial'),
+    body('cpf')
+        .isLength({ min: 11, max: 11 }).withMessage('O CPF deve ter 11 dígitos')
+        .isNumeric().withMessage('O CPF deve conter apenas números'),
+    body('endereco')
+        .isString().withMessage('O endereço deve ser uma string')
+        .isLength({ min: 10, max: 100 }).withMessage('O endereço deve ter entre 10 e 100 caracteres'),
+    body('contato')
+        .isLength({ min: 10, max: 15 }).withMessage('O contato deve ter entre 10 e 15 dígitos')
+        .isNumeric().withMessage('O contato deve conter apenas números'),
+    body('email')
+        .isEmail().withMessage('O e-mail deve ser válido')
+        .normalizeEmail()
+], async (req, res) => {
+    const errors = validationResult(req);
     if (!errors.isEmpty()) {
-       // return res.status(400).json({ errors: errors.array() });
+        return res.status(400).json({ errors: errors.array() });
+    }
+
+    const { username, password, cpf, endereco, contato, email } = req.body;
+    const hashedPassword = bcrypt.hashSync(password, salt);
+
+    const dadosForm = {
+        cpf_cliente: cpf,
+        endereco_cliente: endereco,
+        nome_cliente: username,
+        contato_cliente: contato,
+        email_cliente: email
+    };
+
+    try {
+        await cliente.create(dadosForm);
+        res.status(200).json({ message: 'Cadastro realizado com sucesso!' });
+    } catch (e) {
+        console.error(e);
+        res.status(500).json({ error: 'Erro ao registrar o cliente.' });
     }
 });
 
+
+//Rota de registro profissional
     router.post('/cadastroprof', [
         body('username').isString().withMessage('O nome de usuário deve ser uma string'),
         body('password').isLength({ min: 6 }).withMessage('A senha deve ter pelo menos 6 caracteres')
@@ -135,13 +175,6 @@ router.get('/cadastrocliente', (req, res) => {
     res.render('cadastrocliente');
 });
 
-router.post(
-    "/cadastrocliente",
-    clienteController.regrasValidacaoFormCad, 
-    async function (req, res) {
-      clienteController.cadastrar(req, res);
-    }
-);
 
 module.exports = router;
 
