@@ -21,7 +21,7 @@ const clienteController = {
         body("nome_usu")
             .isLength({ min: 3, max: 45 }).withMessage("Nome deve ter de 3 a 45 caracteres!"),
         body("nomeusu_usu")
-            .isLength({ min: 8, max: 45 }).withMessage("Nome de usuário deve ter de 8 a 45 caracteres!")
+            .isLength({ min: 8, max: 45 }).withMessage("Nome de usuário deve ter de 8 a 45 caracteres!Incluindo uma letra maiúscula, um caractere especial e um número ")
             .custom(async value => {
                 const nomeUsu = await usuario.findCampoCustom({'user_cliente':value});
                 if (nomeUsu > 0) {

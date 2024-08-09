@@ -132,6 +132,15 @@ a{
     font-size: 17px;
     font-family: sans-serif;
 }
+input.error {
+    border-color: red;
+}
+
+.error-message {
+    color: red;
+    font-size: 12px;
+    display: none;
+}
 
 
  

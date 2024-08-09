@@ -11,25 +11,64 @@
         <nav class="hero">
             <h2>Bem-Vindo de volta!</h2>
         </nav>
-<main>
-    <nav class="login-container">
+        <main>
+            <nav class="login-container">
+                <h1>Login</h1>
+                <form id="loginForm" action="/perfilcliente" method="post">
+                    <nav class="input-group">
+                        <label for="email">E-mail</label>
+                        <input type="email" id="email" name="email" placeholder="e-mail" required>
+                        <small class="error-message"></small>
 
-        <h1>Login</h1>
-        <form id="loginForm" action="/perfilcliente" method="post">
-            <nav class="input-group">
-            <label for="email">E-mail</label>
-            <input type="email" id="email" name="email" placeholder="e-mail" required>
-            <span class="error" id="emailError"></span>
+                        <label for="senha">Senha</label>
+                        <input type="password" id="senha" name="password" placeholder="senha" required>
+                        <small class="error-message"></small>
+                    </nav>
+                    <button type="submit">Sou Cliente</button>
+                    <a href="/cadastro.ejs">Quero me cadastrar!</a>
+                </form>
+            </nav>
+        </main>
 
-            <label for="senha">Senha</label>
-            <input type="password" id="senha" name="password" placeholder="senha" required>
-            <span class="error" id="passwordError"></span>
-        </nav>
-            <button type="submit">Sou Cliente</button>
-            <a href="/cadastro.ejs">Quero me cadastrar!</a>
-        </form>
-    </nav>
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault();
 
-</main>
-    </body>
+            // Limpar mensagens de erro e estilos
+            const inputs = document.querySelectorAll('input');
+            inputs.forEach(input => {
+                input.classList.remove('error');
+                input.nextElementSibling.style.display = 'none';
+            });
+
+            let isValid = true;
+
+            const emailInput = document.getElementById('email');
+            const senhaInput = document.getElementById('senha');
+
+            // Validação do e-mail (mínimo de 8 caracteres)
+            if (emailInput.value.length < 8 || emailInput.value.length > 45) {
+                isValid = false;
+                emailInput.classList.add('error');
+                emailInput.nextElementSibling.textContent = "O e-mail deve ter de 8 a 45 caracteres";
+                emailInput.nextElementSibling.style.display = 'block';
+            }
+
+            // Validação da senha
+            const senhaPattern = /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+            if (!senhaPattern.test(senhaInput.value)) {
+                isValid = false;
+                senhaInput.classList.add('error');
+                senhaInput.nextElementSibling.textContent = "A senha deve ter no mínimo 8 caracteres, incluindo uma letra maiúscula, um número e um caractere especial";
+                senhaInput.nextElementSibling.style.display = 'block';
+            }
+
+            if (isValid) {
+                // Se tudo estiver válido, envie o formulário
+                alert('Formulário válido! Enviando...');
+                // document.getElementById('loginForm').submit(); // Descomente para enviar o formulário
+            }
+        });
+    </script>
+</body>
 </html>
