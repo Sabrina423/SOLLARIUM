@@ -21,8 +21,8 @@
                 <small class="error-message"></small>
             </div>
             <div class="form-group">
-                <label for="endereco_cliente">Endereço</label>
-                <input type="text" id="endereco_cliente" name="endereco_cliente">
+                <label for="cep_cliente">Endereço</label>
+                <input type="text" id="endereco_cliente" name="cep_cliente">
                 <small class="error-message"></small>
             </div>
             <div class="form-group">
@@ -77,8 +77,8 @@
                 isValid = false;
             }
 
-            if (!formData.endereco_cliente) {
-                showError('endereco_cliente', 'Endereço é obrigatório.');
+            if (!formData.cep_cliente) {
+                showError('cep_cliente', 'Cep é obrigatório.');
                 isValid = false;
             }
 
@@ -128,8 +128,9 @@
 
         function showError(field, message) {
             const errorElement = document.querySelector(`#${field} ~ .error-message`);
-            errorElement.innerText = message;
-            errorElement.style.display = 'block';
+            // console.log(message);
+            //errorElement.innerText = message;
+            //errorElement.style.display = 'block';
         }
     </script>
 </body>
