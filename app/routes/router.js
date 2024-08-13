@@ -78,7 +78,7 @@ router.post('/cadastrocliente',
     body('cpf_cliente')
         .isLength({ min: 11, max: 11 }).withMessage('O CPF deve ter 11 dígitos')
         .isNumeric().withMessage('O CPF deve conter apenas números'),
-    body('cep_cliente')
+    body('endereco_cliente')
         .isString().withMessage('O cep deve ser uma string')
         .isLength({ min: 8, max: 8 }).withMessage('O cep deve ter entre 10 e 100 caracteres'),
     body('contato_cliente')
@@ -94,7 +94,7 @@ router.post('/cadastrocliente',
         return res.status(400).json({ errors: errors.array() });
     }
 
-    const { username, password, cpf, endereco, contato, email } = req.body;
+    const { nome_cliente, senha_cliente, cpf_cliente, endereco_cliente, contato_cliente, email_cliente } = req.body;
     const hashedPassword = bcrypt.hashSync(password, salt);
 
     const dadosForm = {

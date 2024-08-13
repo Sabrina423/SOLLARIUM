@@ -1,42 +1,82 @@
-document.addEventListener('DOMContentLoaded', function () {
-    const form = document.getElementById('cadastroForm');
+document.getElementById('cadastroForm').addEventListener('submit', async function(event) {
+    event.preventDefault();
 
-    form.addEventListener('submit', async function (event) {
-        event.preventDefault();
+    const formData = {
+        nome_cliente: document.getElementById('nome_cliente').value,
+        cpf_cliente: document.getElementById('cpf_cliente').value,
+        endereco_cliente: document.getElementById('endereco_cliente').value,
+        contato_cliente: document.getElementById('contato_cliente').value,
+        email_cliente: document.getElementById('email_cliente').value,
+        senha_cliente: document.getElementById('senha_cliente').value,
+        confirmar_senha_cliente: document.getElementById('confirmar_senha_cliente').value
+    };
 
-        const formData = new FormData(form);
-        const data = Object.fromEntries(formData.entries());
+    document.querySelectorAll('.error-message').forEach(el => el.style.display = 'none');
 
+    let isValid = true;
+
+    if (!formData.nome_cliente) {
+        showError('nome_cliente', 'Nome Completo é obrigatório.');
+        isValid = false;
+    }
+
+    if (!formData.cpf_cliente || !/^\d{11}$/.test(formData.cpf_cliente)) {
+        showError('cpf_cliente', 'O CPF deve ter 11 dígitos e conter apenas números.');
+        isValid = false;
+    }
+
+    if (!formData.cep_cliente) {
+        showError('endereco_cliente', 'Cep é obrigatório.');
+        isValid = false;
+    }
+
+    if (!formData.email_cliente || !/\S+@\S+\.\S+/.test(formData.email_cliente)) {
+        showError('email_cliente', 'Email é obrigatório e deve ser válido.');
+        isValid = false;
+    }
+
+    if (!formData.contato_cliente || !/^\d{10,15}$/.test(formData.contato_cliente)) {
+        showError('contato_cliente', 'O contato deve ter entre 10 e 15 dígitos e conter apenas números.');
+        isValid = false;
+    }
+
+    if (!formData.senha_cliente || formData.senha_cliente.length < 8) {
+        showError('senha_cliente', 'A senha deve ter no mínimo 8 caracteres.');
+        isValid = false;
+    }
+
+    if (formData.senha_cliente !== formData.confirmar_senha_cliente) {
+        showError('confirmar_senha_cliente', 'As senhas não coincidem.');
+        isValid = false;
+    }
+
+    if (!isValid) return;
+
+    try {
         const response = await fetch('/cadastrocliente', {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(formData)
         });
 
         const result = await response.json();
 
-        // Limpa mensagens de erro anteriores
-        document.querySelectorAll('.error-message').forEach(el => el.textContent = '');
-        document.querySelectorAll('.input-group input, .input-group select').forEach(el => el.classList.remove('input-error'));
-
-        if (response.status !== 200) {
-            result.errors.forEach(error => {
-                const field = document.querySelector(`[name=${error.field}]`);
-                const errorMessage = field.parentElement.querySelector('.error-message');
-                errorMessage.textContent = error.message;
-                field.classList.add('input-error');
-            });
+        if (response.status === 200) {
+            document.getElementById('success-message').innerText = result.message;
+            document.getElementById('cadastroForm').reset();
         } else {
-            alert(result.mensagem);
-            form.reset();
+            result.errors.forEach(error => {
+                showError(error.field, error.message);
+            });
         }
-    });
+    } catch (error) {
+        console.error('Erro ao enviar os dados:', error);
+    }
 });
 
-function togglePassword(id) {
-    const field = document.getElementById(id);
-    const type = field.getAttribute('type') === 'password' ? 'text' : 'password';
-    field.setAttribute('type', type);
+function showError(field, message) {
+    const errorElement = document.querySelector(`#${field} ~ .error-message`);
+    // console.log(message);
+    //errorElement.innerText = message;
+    //errorElement.style.display = 'block';
 }
