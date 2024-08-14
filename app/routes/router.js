@@ -2,7 +2,9 @@ const express = require('express');
 const { body, validationResult } = require('express-validator');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+var salt = bcrypt.genSaltSync(12);
 const clienteController = require('../controllers/clienteController');
+const cliente = require("../models/clienteModel");
 
 const {
     verificarUsuAutenticado,
@@ -95,14 +97,15 @@ router.post('/cadastrocliente',
     }
 
     const { nome_cliente, senha_cliente, cpf_cliente, endereco_cliente, contato_cliente, email_cliente } = req.body;
-    const hashedPassword = bcrypt.hashSync(password, salt);
+    const hashedPassword = bcrypt.hashSync(senha_cliente, salt);
 
     const dadosForm = {
-        cpf_cliente: cpf,
-        endereco_cliente: endereco,
-        nome_cliente: username,
-        contato_cliente: contato,
-        email_cliente: email
+        cpf_cliente: cpf_cliente,
+        endereco_cliente: endereco_cliente,
+        nome_cliente: nome_cliente,
+        contato_cliente: contato_cliente,
+        email_cliente: email_cliente,
+        senha_cliente:senha_cliente
     };
 
     try {
