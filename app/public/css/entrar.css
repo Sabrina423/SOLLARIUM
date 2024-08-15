@@ -10,17 +10,18 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: #000000;
+    background-color:white;
 }
  
 .container {
     display: flex;
     width: 800px;
     height: 500px;
-    background-color: white;
+    background-color: rgb(255, 255, 255);
     border-radius: 10px;
+    border: #000000;
     overflow: hidden;
-    box-shadow: 0 0 20px rgba(255, 255, 255, 0.473);
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.473);
     
 }
  

@@ -1,47 +1,155 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Perfil do Profissional</title>
+    <link rel="icon" href="/images/favicon.ico">
     <link rel="stylesheet" href="/css/perfilcliente.css">
+    <title>Perfil do Usuário</title>
 </head>
 <body>
-    <header>
-        <nav class="header-container">
-            <nav class="menu-icon" id="menuBtn">&#9776;</div>
-            <nav class="profile-summary">
-                <img src="profile.jpg" alt="Perfil" class="profile-img">
-                <h1></h1>
-                <p></p>
-            </nav>
+
+<header class="site-header">
+    <div class="header-container">
+        <div class="logo">Logo</div>
+        <nav class="main-nav">
+            <a href="#home">Home</a>
+            <a href="#orcamento">Orçamento</a>
+            <a href="#configuracoes">
+                <img src="/images/settings-icon.png" alt="Configurações">
+            </a>
         </nav>
-    </header>
-    <main>
-        <section class="stats">
-            <nav class="stat">
-                <p>Pedir um serviço</p>
-            </nav>
-            <nav class="stat">
-                <p>Quantidade de serviços</p>
-                <span>120</span>
-            </nav>
-        </section>
-    </main>
-    <footer>
-        <p>&copy; 2024 Perfil do Profissional</p>
-    </footer>
+        <button class="menu-toggle" aria-label="Toggle menu">&#9776;</button>
+    </div>
+</header>
 
-    <nav id="sidebar" class="sidebar">
-        <ul>
-            <li><a href="#">Alterar Perfil</a></li>
-            <li><a href="#">Ir ao Site</a></li>
-            <li><a href="#">Sair</a></li>
-        </ul>
-    </nav>
+<div class="profile-container">
+    <div class="profile-left">
+        <div class="profile-header">
+            <img id="profile-pic" src="default-profile.jpg" >
+            <div>
+                <h1 id="user-name">Nome do Usuário</h1>
+                <p id="user-state">Estado</p>
+                <div class="photo-actions">
+                    <button onclick="togglePhotoMenu()">Alterar Foto</button>
+                    <div id="photo-menu" class="photo-menu">
+                        <input type="file" id="file-input" accept="image/*" style="display: none;">
+                        <button onclick="document.getElementById('file-input').click()">Selecionar Foto</button>
+                        <button onclick="removePhoto()">Remover Foto</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="profile-right">
+        <div class="profile-details">
+            <h2>Informações do Perfil</h2>
+            <input type="text" id="full-name" placeholder="Nome Completo">
+            <input type="text" id="email" placeholder="Email">
+            <input type="text" id="phone" placeholder="Telefone">
+            <button onclick="saveProfile()">Salvar</button>
+        </div>
 
-    <nav id="overlay" class="overlay"></nav>
+        <div class="professionals-carousel">
+            <h2>Profissionais contratados</h2>
+            <div class="carousel-wrapper">
+                <div class="carousel-container">
+                    <div class="professional-card">
+                        <img src="/imagens/icon1.webp" alt="Profissional 1">
+                        <h3>João Silva</h3>
+                        <p>Especialização: Instalador de Painéis Solares</p>
+                    </div>
+                    <div class="professional-card">
+                        <img src="/imagens/icon1.webp" alt="Profissional 2">
+                        <h3>Maria Oliveira</h3>
+                        <p>Especialização: Consultora de Energia Solar</p>
+                    </div>
+                    <div class="professional-card">
+                        <img src="/imagens/icon1.webp" alt="Profissional 3">
+                        <h3>Pedro Santos</h3>
+                        <p>Especialização: Projetista de Sistemas Solares</p>
+                    </div>
+                    <!-- Adicione mais cartões conforme necessário -->
+                </div>
+                <button class="carousel-button carousel-prev" onclick="prevSlide()">&#10094;</button>
+                <button class="carousel-button carousel-next" onclick="nextSlide()">&#10095;</button>
+            </div>
+        </div>
+    </div>
+</div>
 
-    <script src="scripts.js"></script>
+<script>
+    let photoMenuVisible = false;
+    let currentIndex = 0;
+
+    function togglePhotoMenu() {
+        const menu = document.getElementById('photo-menu');
+        photoMenuVisible = !photoMenuVisible;
+        menu.style.display = photoMenuVisible ? 'block' : 'none';
+    }
+
+    function removePhoto() {
+        document.getElementById('profile-pic').src = 'default-profile.jpg';
+        document.getElementById('file-input').value = '';
+        togglePhotoMenu(); // Hide the menu after removing photo
+    }
+
+    document.getElementById('file-input').addEventListener('change', function(event) {
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById('profile-pic').src = e.target.result;
+                togglePhotoMenu(); // Hide the menu after selecting photo
+            }
+            reader.readAsDataURL(file);
+        }
+    });
+
+    document.addEventListener('click', function(event) {
+        const menu = document.getElementById('photo-menu');
+        const photoButton = document.querySelector('.photo-actions button');
+        if (photoMenuVisible && !menu.contains(event.target) && event.target !== photoButton) {
+            togglePhotoMenu();
+        }
+    });
+
+    function saveProfile() {
+        const fullName = document.getElementById('full-name').value;
+        const email = document.getElementById('email').value;
+        const phone = document.getElementById('phone').value;
+
+        // Aqui você pode adicionar a lógica para salvar as informações do perfil, 
+        // como fazer uma requisição para um servidor.
+
+        alert('Perfil salvo com sucesso!');
+    }
+
+    function showSlide(index) {
+        const container = document.querySelector('.carousel-container');
+        const totalSlides = container.children.length;
+        if (index >= totalSlides) {
+            currentIndex = 0;
+        } else if (index < 0) {
+            currentIndex = totalSlides - 1;
+        } else {
+            currentIndex = index;
+        }
+        container.style.transform = `translateX(-${currentIndex * 100}%)`;
+    }
+
+    function nextSlide() {
+        showSlide(currentIndex + 1);
+    }
+
+    function prevSlide() {
+        showSlide(currentIndex - 1);
+    }
+
+    // Inicializar o carrossel
+    showSlide(currentIndex);
+</script>
+
 </body>
 </html>

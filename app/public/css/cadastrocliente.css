@@ -1,63 +1,94 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    margin: 0;
+    background-color:white;
 }
 
 .container {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 300px;
+    display: flex;
+    width: 900px;
+    max-width: 100%;
+    background-color: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
 }
 
-h1 {
-    text-align: center;
-    margin-bottom: 20px;
+.hero {
+    width: 40%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    background-color: #f0f0f0;
 }
 
-.form-group {
+.hero img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+main {
+    width: 60%;
+    padding: 40px;
+}
+
+.logo {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 17px;
+}
+
+.logo img {
+    width: 115px;
+}
+
+.input-group {
     margin-bottom: 15px;
 }
 
-label {
-    display: block;
-    margin-bottom: 5px;
-}
-
-input, select {
-    width: 100%;
-    padding: 8px;
-    box-sizing: border-box;
-}
-
-button {
+.input-group input,
+.input-group select {
     width: 100%;
     padding: 10px;
-    background-color: #007bff;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.password-container {
+    position: relative;
+}
+
+.password-container input {
+    width: 100%;
+    padding-right: 30px;
+}
+
+button[type="submit"] {
+    width: 100%;
+    padding: 12px;
+    background-color: #ff9407;
     color: white;
     border: none;
     border-radius: 5px;
+    font-size: 16px;
     cursor: pointer;
+    transition: background-color 0.3s;
 }
 
-button:hover {
-    background-color: #0056b3;
-}
-
-.error-message {
-    color: red;
-    font-size: 12px;
-    display: none;
-}
-
-#success-message {
-    margin-top: 20px;
-    text-align: center;
-    color: green;
+button[type="submit"]:hover {
+    background-color: #e48311;
+    ;
 }

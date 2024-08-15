@@ -1,158 +1,320 @@
-/* Reset básico */
-* {
+/* CSS para o corpo e fontes */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #000000;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
-    font-family: 'Arial', sans-serif;
+    height: 700px;
 }
 
-/* Estilo da página */
-body {
-    background: linear-gradient(to bottom, #333, #666);
+/* CSS para o cabeçalho e menu */
+.site-header {
+    background-color: #000;
     color: #fff;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    padding: 20px;
-}
-
-/* Cabeçalho */
-header {
+    padding: 10px 20px;
+    position: fixed;
     width: 100%;
-    background: linear-gradient(to right, #000, #444);
-    padding: 20px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    height: 50px;
+    top: 0;
+    left: 0;
+    z-index: 1000;
 }
 
 .header-container {
     display: flex;
-    align-items: center;
     justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
-.menu-icon {
-    font-size: 1.5rem;
-    cursor: pointer;
-    color: #ff6600;
-}
-
-.profile-summary {
-    text-align: center;
-}
-
-.profile-img {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    margin-bottom: 10px;
-}
-
-.profile-summary h1 {
-    color: #ff6600;
-    font-size: 1.8rem;
-    margin-bottom: 5px;
-}
-
-.profile-summary p {
-    color: #ccc;
-}
-
-/* Estatísticas */
-.stats {
-    width: 100%;
-    max-width: 600px;
-    display: flex;
-    justify-content: space-around;
-    margin: 20px 0;
-}
-
-.stat {
-    background: linear-gradient(to bottom, #ff6600, #333);
-    padding: 20px;
-    border-radius: 8px;
-    text-align: center;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    transition: transform 0.2s;
-}
-
-.stat:hover {
-    transform: scale(1.05);
-}
-
-.stat p {
-    font-size: 1rem;
-    margin-bottom: 5px;
-}
-
-.stat span {
-    font-size: 1.5rem;
+.logo {
+    font-size: 24px;
     font-weight: bold;
 }
 
-/* Rodapé */
-footer {
-    margin-top: 20px;
-    text-align: center;
-    width: 100%;
-    background: #000;
-    padding: 10px;
-    box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
+.main-nav {
+    display: flex;
+    gap: 20px;
 }
 
-footer p {
-    color: #ff6600;
-    font-size: 1rem;
-}
-
-/* Sidebar */
-.sidebar {
-    height: 100%;
-    width: 250px;
-    position: fixed;
-    top: 0;
-    left: -250px;
-    background-color: #333;
-    padding-top: 60px;
-    transition: 0.5s;
-    box-shadow: 2px 0 5px rgba(0,0,0,0.5);
-    z-index: 2;
-}
-
-.sidebar ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-.sidebar ul li {
-    padding: 8px 16px;
-    text-align: center;
-}
-
-.sidebar ul li a {
-    color: #ff6600;
-    text-decoration: none;
-    font-size: 1.2rem;
-    display: block;
-    transition: 0.3s;
-}
-
-.sidebar ul li a:hover {
-    background-color: #555;
+.main-nav a {
     color: #fff;
+    text-decoration: none;
+    font-size: 16px;
+    padding: 5px 10px;
 }
 
-/* Overlay */
-.overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0,0,0,0.7);
-    opacity: 0;
-    transition: opacity 0.5s;
-    z-index: 1;
+.main-nav a:hover {
+    background-color: #333;
+    border-radius: 4px;
+}
+
+.main-nav img {
+    width: 24px;
+    height: 24px;
+}
+
+.menu-toggle {
     display: none;
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    .main-nav {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 50px;
+        right: 0;
+        background-color: #000;
+        width: 100%;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    
+    .main-nav.active {
+        display: flex;
+    }
+    
+    .main-nav a {
+        padding: 15px;
+        font-size: 18px;
+        text-align: center;
+        border-bottom: 1px solid #333;
+    }
+    
+    .main-nav a:last-child {
+        border-bottom: none;
+    }
+    
+    .menu-toggle {
+        display: block;
+    }
+}
+
+/* CSS para o perfil */
+.profile-container {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    padding-top: 50px;
+    margin: 20px auto;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.profile-left, .profile-right {
+    flex: 1;
+    padding: 20px;
+}
+
+.profile-left {
+    border-right: 1px solid #ddd;
+}
+
+.profile-right {
+    padding-left: 20px;
+}
+
+.profile-header {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+}
+
+.profile-header img {
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    margin-right: 20px;
+    background-image: url('/imagens/1.png');
+}
+
+.profile-header h1 {
+    margin: 0;
+    font-size: 24px;
+}
+
+.profile-header p {
+    margin: 5px 0;
+    color: #666;
+}
+
+.profile-header .photo-actions {
+    margin-top: 10px;
+}
+
+.profile-header .photo-actions button {
+    background-image: url('/imagens/1.png');
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.profile-header .photo-actions button:hover {
+    background: #000000;
+}
+
+.photo-menu {
+    display: none;
+    position: absolute;
+    top: 130px;
+    left: 20px;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    padding: 10px;
+    z-index: 10;
+}
+
+.photo-menu button {
+    display: block;
+    background: transparent;
+    border: none;
+    padding: 10px;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+    color: #000000;
+}
+
+.photo-menu button:hover {
+    background: #f0f0f0;
+}
+
+.profile-details {
+    margin-top: 20px;
+}
+
+.profile-details h2 {
+    margin-top: 0;
+    font-family: sans-serif;
+}
+
+.profile-details input[type="text"] {
+    width: calc(100% - 22px);
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.profile-details button {
+    padding: 10px 20px;
+    background-image: url('/imagens/1.png');
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.profile-details button:hover {
+    background-color: #000;
+}
+
+/* CSS para o carrossel */
+.professionals-carousel {
+    margin-top: 40px;
+    position: relative;
+}
+
+.carousel-wrapper {
+    overflow: hidden;
+    position: relative;
+}
+
+.carousel-container {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+    width: 100%;
+}
+
+.professional-card {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    margin: 10px;
+    padding: 10px;
+    flex: 0 0 300px; /* Largura padrão do cartão */
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.professional-card img {
+    border-radius: 8px;
+    width: 100px;
+    height: 150px;
+    object-fit: cover;
+}
+
+.professional-card h3 {
+    margin: 10px 0 5px;
+    font-size: 18px;
+}
+
+.professional-card p {
+    margin: 0;
+    color: #666;
+}
+
+.carousel-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+}
+
+.carousel-button:hover {
+    background: rgba(0, 0, 0, 0.7);
+}
+
+.carousel-prev {
+    left: 10px;
+}
+
+.carousel-next {
+    right: 10px;
+}
+
+/* Ajustes para tamanhos menores */
+@media (max-width: 768px) {
+    .profile-container {
+        flex-direction: column;
+    }
+    
+    .profile-left, .profile-right {
+        border-right: none;
+        border-bottom: 1px solid #ddd;
+    }
+    
+    .profile-right {
+        padding-left: 0;
+    }
+    
+    .professional-card {
+        flex: 0 0 100%; /* Largura total do cartão em telas pequenas */
+    }
 }
