@@ -8,7 +8,8 @@ document.getElementById('cadastroForm').addEventListener('submit', async functio
         contato_cliente: document.getElementById('contato_cliente').value,
         email_cliente: document.getElementById('email_cliente').value,
         senha_cliente: document.getElementById('senha_cliente').value,
-        confirmar_senha_cliente: document.getElementById('confirmar_senha_cliente').value
+        confirmar_senha_cliente: document.getElementById('confirmar_senha_cliente').value,
+        estado_cliente:document.getElementById('O campo é obrogatório').value,
     };
 
     document.querySelectorAll('.error-message').forEach(el => el.style.display = 'none');
@@ -26,7 +27,7 @@ document.getElementById('cadastroForm').addEventListener('submit', async functio
     }
 
     if (!formData.cep_cliente) {
-        showError('endereco_cliente', 'Cep é obrigatório.');
+        showError('endereco_cliente', 'Endereço é obrigatório.');
         isValid = false;
     }
 

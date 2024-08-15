@@ -24,7 +24,7 @@
                         <input type="password" id="senha" name="password" placeholder="senha" required>
                         <small class="error-message"></small>
                     </nav>
-                    <button type="submit">Sou Cliente</button>
+                    <button type="submit"><a href="/home"></a>Sou Cliente</button>
                     <a href="/cadastro.ejs">Quero me cadastrar!</a>
                 </form>
             </nav>
@@ -55,11 +55,11 @@
             }
 
             // Validação da senha
-            const senhaPattern = /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+            const senhaPattern = /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
             if (!senhaPattern.test(senhaInput.value)) {
                 isValid = false;
                 senhaInput.classList.add('error');
-                senhaInput.nextElementSibling.textContent = "A senha deve ter no mínimo 8 caracteres, incluindo uma letra maiúscula, um número e um caractere especial";
+                senhaInput.nextElementSibling.textContent = "senha incorreta";
                 senhaInput.nextElementSibling.style.display = 'block';
             }
 

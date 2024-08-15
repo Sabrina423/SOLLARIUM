@@ -74,6 +74,7 @@ const clienteController = {
             senha_cliente: bcrypt.hashSync(req.body.senha_cliente, salt),
             nome_cliente: req.body.nome_cliente,
             email_cliente: req.body.email_cliente,
+            estado_cliente : req.body.estado_cliente
         };
 
         try {

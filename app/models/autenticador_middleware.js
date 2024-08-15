@@ -24,12 +24,12 @@ const gravarClienteAutenticado = async (req, res, next) => {
   var autenticado = { autenticado: null, id: null, tipo: null };
   if (erros.isEmpty()) {
     const dadosForm = {
-      user_cliente: req.body.nome_usu,
-      senha_cliente: req.body.senha_usu,
+      nome_cliente: req.body.nome_cliente,
+      senha_cliente: req.body.senha_cliente,
     };
     try {
-      const clienteExistente = await cliente.findById(dadosForm.user_cliente);
-      if (clienteExistente && bcrypt.compareSync(dadosForm.senha_cliente, clienteExistente.senha_cliente)) {
+      const clienteExistente = await cliente.findById(dadosForm.nome_cliente);
+      if (clienteExistente && bcrypt.compareSync(dadosForm.user_cliente, clienteExistente.senha_cliente)) {
         autenticado = {
           autenticado: clienteExistente.nome_cliente,
           id: clienteExistente.id_cliente,

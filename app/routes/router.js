@@ -88,7 +88,8 @@ router.post('/cadastrocliente',
         .isNumeric().withMessage('O contato deve conter apenas números'),
     body('email_cliente')
         .isEmail().withMessage('O e-mail deve ser válido')
-        .normalizeEmail()
+        .normalizeEmail(),
+    body('estado_cliente')
 , async (req, res) => {
     const errors = validationResult(req);
     console.log(errors)
@@ -105,7 +106,8 @@ router.post('/cadastrocliente',
         nome_cliente: nome_cliente,
         contato_cliente: contato_cliente,
         email_cliente: email_cliente,
-        senha_cliente:senha_cliente
+        senha_cliente: senha_cliente,
+        endereco_cliente: endereco_cliente,
     };
 
     try {
@@ -132,7 +134,7 @@ router.post('/cadastrocliente',
     const { username, password } = req.body;
     const hashedPassword = bcrypt.hashSync(password, 10);
 
-    db.query('INSERT INTO users (username, password) VALUES (?, ?)', [username, hashedPassword], (err) => {
+    db.query('INSERT INTO users (email_cliente, senha_cliente) VALUES (?, ?)', [username, hashedPassword], (err) => {
         if (err) {
             console.log(err);
             return res.status(400).send('Erro ao registrar o usuário. O usuário já pode existir.');
@@ -151,18 +153,18 @@ router.post('/entrar', [
         return res.status(400).json({ errors: errors.array() });
     }
 
-    const { username, password } = req.body;
+    const { email_cliente, senha_cliente } = req.body;
 
-    db.query('SELECT * FROM users WHERE username = ?', [username], (err, results) => {
+    db.query('SELECT * FROM cliente WHERE nome_cliente = ?', [email_cliente], (err, results) => {
         if (err || results.length === 0) {
             console.log(err);
             return res.status(400).send('Usuário não encontrado');
         }
-
+        
         const user = results[0];
-        const isMatch = bcrypt.compareSync(password, user.password);
+        const isMatch = bcrypt.compareSync(senha, senha_cliente);
         if (isMatch) {
-            const token = jwt.sign({ username: user.username, id: user.id }, secretKey);
+            const token = jwt.sign({ email_cliente: email_cliente, id: cliente.id }, secretKey);
             req.session.token = token;
             res.redirect('/perfilcliente');
         } else {
@@ -172,13 +174,9 @@ router.post('/entrar', [
 });
 
 // Rota Protegida do Perfil
-router.get('/perfilcliente', authenticateToken, (req, res) => {
-    res.render('pages/perfilcliente');
-});
 
-router.get('/cadastrocliente', (req, res) => {
-    res.render('cadastrocliente');
-});
+
+
 
 
 module.exports = router;
