@@ -141,11 +141,22 @@ router.post('/cadastrocliente',
         }
         res.send('Usuário registrado com sucesso.');
     });
+
+    const dadosForm = {
+        cpf_cliente: cpf_cliente,
+        endereco_cliente: endereco_cliente,
+        nome_cliente: nome_cliente,
+        contato_cliente: contato_cliente,
+        email_cliente: email_cliente,
+        senha_cliente: senha_cliente,
+        endereco_cliente: endereco_cliente,
+    };
+
 });
 
 // Rota de Login
 router.post('/entrar', [
-    body('username').isString().withMessage('O nome de usuário deve ser uma string'),
+    body('user').isString().withMessage('O nome de usuário deve ser uma string'),
     body('password').isLength({ min: 6 }).withMessage('A senha deve ter pelo menos 6 caracteres')
 ], (req, res) => {
     const errors = validationResult(req);
@@ -166,14 +177,14 @@ router.post('/entrar', [
         if (isMatch) {
             const token = jwt.sign({ email_cliente: email_cliente, id: cliente.id }, secretKey);
             req.session.token = token;
-            res.redirect('/perfilcliente');
+            res.redirect('/entrar');
         } else {
             res.status(400).send('Senha incorreta');
         }
     });
 });
 
-// Rota Protegida do Perfil
+
 
 
 
