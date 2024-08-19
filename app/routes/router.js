@@ -134,7 +134,7 @@ router.post('/cadastrocliente',
     const { username, password } = req.body;
     const hashedPassword = bcrypt.hashSync(password, 10);
 
-    db.query('INSERT INTO users (email_cliente, senha_cliente) VALUES (?, ?)', [username, hashedPassword], (err) => {
+    db.query('INSERT INTO users (email_prof, senha_prof) VALUES (?, ?)', [username, hashedPassword], (err) => {
         if (err) {
             console.log(err);
             return res.status(400).send('Erro ao registrar o usuário. O usuário já pode existir.');
