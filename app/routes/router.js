@@ -81,8 +81,7 @@ router.post('/cadastrocliente',
         .isLength({ min: 11, max: 11 }).withMessage('O CPF deve ter 11 dígitos')
         .isNumeric().withMessage('O CPF deve conter apenas números'),
     body('endereco_cliente')
-        .isString().withMessage('O cep deve ser uma string')
-        .isLength({ min: 8, max: 8 }).withMessage('O cep deve ter entre 10 e 100 caracteres'),
+        .isLength({ min: 8, max: 8 }).withMessage('O endereço deve ter entre 10 e 100 caracteres'),
     body('contato_cliente')
         .isLength({ min: 10, max: 15 }).withMessage('O contato deve ter entre 10 e 15 dígitos')
         .isNumeric().withMessage('O contato deve conter apenas números'),
@@ -107,7 +106,6 @@ router.post('/cadastrocliente',
         contato_cliente: contato_cliente,
         email_cliente: email_cliente,
         senha_cliente: senha_cliente,
-        endereco_cliente: endereco_cliente,
     };
 
     try {
