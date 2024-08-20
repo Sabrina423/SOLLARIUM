@@ -4,9 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Entrar</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-notify@0.5.5/dist/simple-notify.min.css" >
+    <script src="https://cdn.jsdelivr.net/npm/simple-notify@0.5.5/dist/simple-notify.min.js"></script>
     <link rel="stylesheet" href="/css/entrar.css">
+    <script src="js/script.js"></script>
 </head>
 <body>
+   <% if (dadosNotificacao) { %>
+        <script>
+                notify("<%= dadosNotificacao.titulo%>","<%= dadosNotificacao.mensagem%>", "<%= dadosNotificacao.tipo%>", "center")
+                if("<%= dadosNotificacao.tipo %>" == "success"){
+                    setTimeout(function(){window.location="/"}, 3000)
+                }                        
+        </script>
+    <% } %>  
+
     <nav class="container">
         <nav class="hero">
             <h2>Bem-Vindo de volta!</h2>
@@ -65,8 +77,8 @@
 
             if (isValid) {
                 // Se tudo estiver válido, envie o formulário
-                alert('Formulário válido! Enviando...');
-                // document.getElementById('loginForm').submit(); // Descomente para enviar o formulário
+                //alert('Formulário válido! Enviando...');
+                document.getElementById('loginForm').submit(); // Descomente para enviar o formulário
             }
         });
     </script>

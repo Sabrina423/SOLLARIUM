@@ -11,6 +11,16 @@ const ClienteModel = {
         }
     },
 
+    findByEmail: async (id) => {
+        try {
+            const [linhas] = await pool.query('SELECT * FROM CLIENTE WHERE EMAIL_CLIENTE = ?', [id]);
+            return linhas;
+        } catch (error) {
+            console.error('Erro ao buscar cliente por ID:', error);
+            throw error;
+        }
+    },
+
     create: async (cliente) => {
         try {
             const { cpf_cliente, endereco_cliente, nome_cliente, contato_cliente, email_cliente, senha_cliente, estado_cliente } = cliente;

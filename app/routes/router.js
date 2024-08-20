@@ -6,11 +6,11 @@ var salt = bcrypt.genSaltSync(12);
 const clienteController = require('../controllers/clienteController');
 const cliente = require("../models/clienteModel");
 
-const {
-    verificarUsuAutenticado,
+const  {
+    verificarClienteAutenticado,
     limparSessao,
-    gravarUsuAutenticado,
-    verificarUsuAutorizado,
+    gravarClienteAutenticado,
+    verificarClienteAutorizado,
   } = require("../models/autenticador_middleware");
 
 const router = express.Router();
@@ -35,7 +35,7 @@ router.get('/', (req, res) => {
 });
 
 router.get('/entrar', (req, res) => {
-    res.render('pages/entrar');
+    res.render('pages/entrar',{dadosNotificacao:null});
 });
 
 router.get('/cadastrocliente', (req, res) => {
@@ -153,34 +153,15 @@ router.post('/cadastrocliente',
 });
 
 // Rota de Login
-router.post('/entrar', [
-    body('user').isString().withMessage('O nome de usuário deve ser uma string'),
-    body('password').isLength({ min: 6 }).withMessage('A senha deve ter pelo menos 6 caracteres')
-], (req, res) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-        return res.status(400).json({ errors: errors.array() });
-    }
 
-    const { email_cliente, senha_cliente } = req.body;
-
-    db.query('SELECT * FROM cliente WHERE nome_cliente = ?', [email_cliente], (err, results) => {
-        if (err || results.length === 0) {
-            console.log(err);
-            return res.status(400).send('Usuário não encontrado');
+    router.post(
+        "/entrar",
+        clienteController.regrasValidacaoFormLogin,
+        gravarClienteAutenticado,
+        function (req, res) {
+          clienteController.logar(req, res);
         }
-        
-        const user = results[0];
-        const isMatch = bcrypt.compareSync(senha, senha_cliente);
-        if (isMatch) {
-            const token = jwt.sign({ email_cliente: email_cliente, id: cliente.id }, secretKey);
-            req.session.token = token;
-            res.redirect('/entrar');
-        } else {
-            res.status(400).send('Senha incorreta');
-        }
-    });
-});
+      );
 
 
 

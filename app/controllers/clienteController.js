@@ -7,10 +7,10 @@ const verificarClienteAutorizado = require('../models/verificarClienteAutorizado
 
 const clienteController = {
     regrasValidacaoFormLogin: [
-        body("nome_usu")
+        body("email")
             .isLength({ min: 8, max: 45 })
             .withMessage("O nome de usuário/e-mail deve ter de 8 a 45 caracteres"),
-        body("senha_usu")
+        body("password")
             .isStrongPassword()
             .withMessage("A senha deve ter no mínimo 8 caracteres")
     ],
@@ -50,6 +50,7 @@ const clienteController = {
             .isLength({ min: 12, max: 13 }).withMessage("Digite um telefone válido!"),
         verificarClienteAutorizado([1, 2, 3], "pages/cadastrocliente"),
     ],
+    
 
     logar: (req, res) => {
         const erros = validationResult(req);

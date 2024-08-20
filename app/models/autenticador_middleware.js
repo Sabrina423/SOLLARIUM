@@ -24,24 +24,33 @@ const gravarClienteAutenticado = async (req, res, next) => {
   var autenticado = { autenticado: null, id: null, tipo: null };
   if (erros.isEmpty()) {
     const dadosForm = {
-      nome_cliente: req.body.nome_cliente,
-      senha_cliente: req.body.senha_cliente,
+      nome_cliente: req.body.email,
+      senha_cliente: req.body.password,
     };
+    console.log(dadosForm)
     try {
-      const clienteExistente = await cliente.findById(dadosForm.nome_cliente);
-      if (clienteExistente && bcrypt.compareSync(dadosForm.user_cliente, clienteExistente.senha_cliente)) {
+      const clienteExistente = await cliente.findByEmail(dadosForm.nome_cliente);
+      const profExistente = await clienprofissional.findByEmail(dadosForm.nome_cliente);
+     
+      if (clienteExistente && bcrypt.compareSync( dadosForm.senha_cliente, clienteExistente[0].SENHA_CLIENTE)) {
+            console.log("validou a senha")
+
         autenticado = {
-          autenticado: clienteExistente.nome_cliente,
-          id: clienteExistente.id_cliente,
-          tipo: clienteExistente.tipo_cliente
+          autenticado: clienteExistente[0].NOME_CLIENTE,
+          id: clienteExistente[0].ID_CLIENTE,
+          tipo: 1
         };
       }
     } catch (e) {
-      console.error(e);
+      console.log(e);
     }
+  }else{
+    console.log(erros);
+    
   }
   req.session.autenticado = autenticado;
   req.session.logado = 0;
+  console.log(req.session.autenticado)
   next();
 };
 
