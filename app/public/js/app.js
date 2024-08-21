@@ -1,20 +1,26 @@
-const menuToggle = document.querySelector('.menu-toggle');
-const menu = document.querySelector('.menu');
+document.addEventListener('DOMContentLoaded', () => {
+    const images = document.querySelectorAll('#carousel img');
+    let currentIndex = 0;
 
-menuToggle.addEventListener('click', () => {
-    menu.classList.toggle('active');
+    function showImage(index) {
+        images.forEach((img, i) => {
+            img.style.display = i === index ? 'block' : 'none';
+        });
+    }
+
+    function nextImage() {
+        currentIndex = (currentIndex + 1) % images.length;
+        showImage(currentIndex);
+    }
+
+    function prevImage() {
+        currentIndex = (currentIndex - 1 + images.length) % images.length;
+        showImage(currentIndex);
+    }
+
+    document.getElementById('next').addEventListener('click', nextImage);
+    document.getElementById('prev').addEventListener('click', prevImage);
+
+    // Carrossel automático
+    setInterval(nextImage, 5000); // Muda a imagem a cada 5 segundos
 });
-
-// Carousel Functionality
-const carouselInner = document.querySelector('.carousel-inner');
-const prevBtn = document.querySelector('.prev');
-const nextBtn = document.querySelector('.next');
-let index = 0;
-
-const showItem = (n) => {
-    index = (n + carouselInner.children.length) % carouselInner.children.length;
-    carouselInner.style.transform = `translateX(-${index * 100}%)`;
-};
-
-prevBtn.addEventListener('click', () => showItem(index - 1));
-nextBtn.addEventListener('click', () => showItem(index + 1));

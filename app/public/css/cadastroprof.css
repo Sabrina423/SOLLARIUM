@@ -1,87 +1,137 @@
+/* Arquivo: cadastroprof.css */
+
 body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    color: #333;
     margin: 0;
+    padding: 0;
 }
 
 header {
     text-align: center;
-    margin: 20px 0;
+    padding: 20px;
+    background-color: #fff;
+    border-bottom: 1px solid #ddd;
 }
 
 header h2 {
-    margin: 0 0 20px 0;
+    margin: 0;
+    font-size: 24px;
 }
 
-header .prof, .cliente {
-    margin: 5px;
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: white;
+header button {
+    background-color: black;
+    color: #fff;
     border: none;
-    border-radius: 5px;
+    padding: 10px 20px;
+    margin: 10px;
+    font-size: 16px;
     cursor: pointer;
-    text-decoration: none;
+    border-radius: 4px;
 }
 
-header .prof:hover, .cliente:hover {
-    background-color: #0056b3;
+header button.cliente {
+    background-color: #F59A23;
+}
+
+header button:hover {
+    opacity: 0.8;
 }
 
 main {
-    background-color: #fff;
+    max-width: 800px;
+    margin: 20px auto;
     padding: 20px;
-    border-radius: 5px;
+    background-color: #fff;
+    border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 300px;
 }
 
-main h1 {
-    text-align: center;
+h1 {
+    font-size: 28px;
+    margin-bottom: 20px;
+    color: black;
+}
+
+hr {
+    border: none;
+    border-top: 1px solid #ddd;
+    margin: 20px 0;
+}
+
+.form-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
 }
 
 .form-group {
-    margin-bottom: 15px;
+    flex: 1;
+    min-width: 220px;
+    margin-bottom: 20px;
 }
 
-label {
+.form-group label {
     display: block;
-    margin-bottom: 5px;
+    font-weight: bold;
+    margin-bottom: 8px;
 }
 
-input, select {
+.form-group input,
+.form-group select {
     width: 100%;
-    padding: 8px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
     box-sizing: border-box;
 }
 
-input[type="submit"] {
-    width: 100%;
-    padding: 10px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+.form-group input[type="file"] {
+    padding: 3px;
 }
 
-input[type="submit"]:hover {
-    background-color: #0056b3;
-}
-
-.error-message {
+.form-group .error-message {
     color: red;
     font-size: 12px;
     display: none;
 }
 
-#success-message {
-    margin-top: 20px;
-    text-align: center;
-    color: green;
+.toggle-password {
+    background: none;
+    border: none;
+    color: orange;
+    font-size: 14px;
+    cursor: pointer;
+    margin-top: 5px;
 }
 
+input[type="submit"] {
+    background-color: black;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 4px;
+    width: 100%;
+    margin-top: 20px;
+}
 
+input[type="submit"]:hover {
+    background-color: rgb(59, 58, 58);
+}
+
+p {
+    font-size: 14px;
+    margin: 20px 0;
+}
+
+.link {
+    color: orange;
+    text-decoration: none;
+}
+
+.link:hover {
+    text-decoration: underline;
+}
