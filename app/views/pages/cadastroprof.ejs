@@ -21,7 +21,7 @@
         <form id="cadastroForm">
             <h1>Crie uma nova conta<b>.</b></h1>
             <hr>
-            <div class="form-row">
+            <nav class="form-row">
                 <section class="form-group">
                     <label for="nome">Nome:</label>
                     <input type="text" id="nome" name="nome" required>
@@ -32,8 +32,8 @@
                     <input type="text" id="sobrenome" name="sobrenome" required>
                     <small class="error-message"></small>
                 </section>
-            </div>
-            <div class="form-row">
+            </nav>
+            <nav class="form-row">
                 <section class="form-group">
                     <label for="phone">Telefone:</label>
                     <input type="tel" id="phone" name="phone" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" required>
@@ -44,8 +44,8 @@
                     <input type="text" id="cpf" name="cpf" required>
                     <small class="error-message"></small>
                 </section>
-            </div>
-            <div class="form-row">
+            </nav>
+            <nav class="form-row">
                 <section class="form-group">
                     <label for="estado">Estado:</label>
                     <input type="text" id="estado" name="estado" required>
@@ -56,8 +56,8 @@
                     <input type="text" id="cidade" name="cidade" required>
                     <small class="error-message"></small>
                 </section>
-            </div>
-            <div class="form-row">
+            </nav>
+            <nav class="form-row">
                 <section class="form-group">
                     <label for="cep">CEP:</label>
                     <input type="text" id="cep" name="cep" required>
@@ -68,8 +68,8 @@
                     <input type="email" id="email" name="email" required>
                     <small class="error-message"></small>
                 </section>
-            </div>
-            <div class="form-row">
+            </nav>
+            <nav class="form-row">
                 <section class="form-group">
                     <label for="profissao">Área em que deseja atuar:</label>
                     <select id="profissao" name="profissao" required>
@@ -87,8 +87,8 @@
                     <input type="file" id="curriculo" name="curriculo">
                     <small class="error-message"></small>
                 </section>
-            </div>
-            <div class="form-row">
+            </nav>
+            <nav class="form-row">
                 <section class="form-group">
                     <label for="senha">Senha:</label>
                     <input type="password" id="senha" name="senha" required>
@@ -101,7 +101,7 @@
                     <small class="error-message"></small>
                     <button type="button" class="toggle-password" onclick="togglePasswordVisibility('confirmar-senha')"></button>
                 </section>
-            </div>
+            </nav>
             <hr>
             <p>Já possui uma conta? <a href="/entrar" class="link">Conecte-se</a></p>
             <input type="submit" value="Criar Conta">

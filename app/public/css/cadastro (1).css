@@ -14,7 +14,7 @@ body {
 }
 
 .container {
-    height: 700px;
+    height: 600px;
     display: flex;
     width: 900px;
     max-width: 1200px;
@@ -30,7 +30,7 @@ body {
     align-items: center;
     justify-content: center;
     padding: 10px;
-    background-color: black;
+    background-image: url(/imagens/1.png);
 }
 
 .hero img {
@@ -84,7 +84,7 @@ button[type="submit"] {
     width: 100%;
     height: 50px;
     padding: 12px;
-    background-color:black;
+    background-image: url(/imagens/1.png);
     color: white;
     border: none;
     border-radius: 5px;

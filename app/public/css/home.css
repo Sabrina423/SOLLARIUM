@@ -20,7 +20,7 @@ svg{
 a{
     text-decoration: none;
     font-size: 1rem;
-    color: #eee;
+    color: white;
 }
 
 
@@ -58,17 +58,17 @@ header{
 
 
 .navbar .toggle_btn{
-    color: #fff;
+    color:white;
     font-size: 1.5rem;
     cursor: pointer;
     display: none;
 }
 
 .action_btn{
-    color: #fff;
+    color: white;
     padding: 0.3rem 2rem;
     border: solid;
-    border-color: #eee;
+    border-color: white;
     border-width: 2.5px;
     outline: none;
     border-radius: 15px;
@@ -79,7 +79,7 @@ header{
 
 .action_btn:hover{
     scale: 1.05;
-    color: #fff;
+    color: white;
 }
 
 .action_btn:active{

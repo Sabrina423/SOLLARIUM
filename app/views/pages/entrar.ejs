@@ -7,15 +7,15 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-notify@0.5.5/dist/simple-notify.min.css" >
     <script src="https://cdn.jsdelivr.net/npm/simple-notify@0.5.5/dist/simple-notify.min.js"></script>
     <link rel="stylesheet" href="/css/entrar.css">
-    <script src="js/script.js" defer></script>
+    <script src="js/script.js"></script>
 </head>
 <body>
    <% if (dadosNotificacao) { %>
         <script>
-            notify("<%= dadosNotificacao.titulo%>","<%= dadosNotificacao.mensagem%>", "<%= dadosNotificacao.tipo%>", "center");
-            if("<%= dadosNotificacao.tipo %>" == "success"){
-                setTimeout(function(){window.location="/"}, 3000);
-            }                        
+                notify("<%= dadosNotificacao.titulo%>","<%= dadosNotificacao.mensagem%>", "<%= dadosNotificacao.tipo%>", "center")
+                if("<%= dadosNotificacao.tipo %>" == "success"){
+                    setTimeout(function(){window.location="/"}, 3000)
+                }                        
         </script>
     <% } %>  
 
@@ -36,12 +36,11 @@
                         <input type="password" id="senha" name="password" placeholder="senha" required>
                         <small class="error-message"></small>
                     </nav>
-                    <button type="submit">Entrar</button>
+                    <button type="submit">Sou Cliente</button>
                     <a href="/cadastroprof">Quero me cadastrar!</a>
                 </form>
             </nav>
         </main>
-    </nav>
 
     <script>
         document.getElementById('loginForm').addEventListener('submit', function(event) {
@@ -72,12 +71,14 @@
             if (!senhaPattern.test(senhaInput.value)) {
                 isValid = false;
                 senhaInput.classList.add('error');
-                senhaInput.nextElementSibling.textContent = "Senha incorreta";
+                senhaInput.nextElementSibling.textContent = "senha incorreta";
                 senhaInput.nextElementSibling.style.display = 'block';
             }
 
             if (isValid) {
-                document.getElementById('loginForm').submit();
+                // Se tudo estiver válido, envie o formulário
+                //alert('Formulário válido! Enviando...');
+                document.getElementById('loginForm').submit(); // Descomente para enviar o formulário
             }
         });
     </script>
