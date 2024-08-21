@@ -8,8 +8,8 @@ document.getElementById('cadastroForm').addEventListener('submit', async functio
         contato_cliente: document.getElementById('contato_cliente').value,
         email_cliente: document.getElementById('email_cliente').value,
         senha_cliente: document.getElementById('senha_cliente').value,
-        confirmar_senha_cliente: document.getElementById('confirmar_senha_cliente').value,
-        estado_cliente:document.getElementById('O campo é obrogatório').value,
+        confirmar_senha_cliente: document.getElementById('senha_cliente').value,
+        estado_cliente: document.getElementById('estado_cliente').value,
     };
 
     document.querySelectorAll('.error-message').forEach(el => el.style.display = 'none');
@@ -26,7 +26,7 @@ document.getElementById('cadastroForm').addEventListener('submit', async functio
         isValid = false;
     }
 
-    if (!formData.cep_cliente) {
+    if (!formData.endereco_cliente) {
         showError('endereco_cliente', 'Endereço é obrigatório.');
         isValid = false;
     }
@@ -47,7 +47,7 @@ document.getElementById('cadastroForm').addEventListener('submit', async functio
     }
 
     if (formData.senha_cliente !== formData.confirmar_senha_cliente) {
-        showError('confirmar_senha_cliente', 'As senhas não coincidem.');
+        showError('senha_cliente', 'As senhas não coincidem.');
         isValid = false;
     }
 
@@ -71,31 +71,32 @@ document.getElementById('cadastroForm').addEventListener('submit', async functio
             });
         }
     } catch (error) {
-        console.error('Erro ao enviar os dados:', error);
+        console.error('Erro ao enviar o formulário:', error);
     }
 });
+
+function showError(field, message) {
+    const input = document.getElementById(field);
+    const errorElement = document.createElement('div');
+    errorElement.classList.add('error-message');
+    errorElement.innerText = message;
+    input.insertAdjacentElement('afterend', errorElement);
+}
+
+function validatePassword() {
+    const password = document.getElementById('password');
+    const message = document.getElementById('message');
+    if (password.value.length < 8) {
+        message.style.display = 'block';
+    } else {
+        message.style.display = 'none';
+    }
+}
+
 function showMessage() {
     document.getElementById('message').style.display = 'block';
 }
 
 function hideMessage() {
     document.getElementById('message').style.display = 'none';
-}
-
-function validatePassword() {
-    const password = document.getElementById('password').value;
-    const message = document.getElementById('message');
-    if (password.length >= 8) {
-        message.textContent = 'A senha deve ter no mínimo 8 caracteres.';
-        message.className = 'valid';
-    } else {
-        message.textContent = 'A senha deve ter no mínimo 8 caracteres.';
-        message.className = 'invalid';
-    }
-}
-function showError(field, message) {
-    const errorElement = document.querySelector(`#${field} ~ .error-message`);
-    // console.log(message);
-    //errorElement.innerText = message;
-    //errorElement.style.display = 'block';
 }
