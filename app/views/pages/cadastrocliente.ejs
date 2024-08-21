@@ -8,16 +8,17 @@
 </head>
 <body>
     <main>
-        <div class="form-container">
+        <nav class="form-container">
             <h1>Cadastre-se na Sollarium</h1>
             <p>Faça parte do nosso time de clientes e aproveite as melhores soluções em energia solar.</p>
             
             <form action="/cadastrocliente" method="POST">
-                <div class="input-group">
+                <nav class="input-group">
                     <input type="text" name="nome_cliente" placeholder="Nome Completo" required>
                     <input type="text" name="cpf_cliente" placeholder="CPF" required>
-                </div>
-                <div class="input-group">
+                    
+                </nav>
+                <nav class="input-group">
                     <input type="number" name="endereco_cliente" placeholder="CEP" required>
                     <select id="estados" name="estados" required>
                         <option value="">Selecione seu Estado</option>
@@ -26,45 +27,45 @@
                         <option value="MG">Minas Gerais</option>
                         <option value="ES">Espírito Santo</option>
                     </select>
-                </div>
-                <div class="input-group">
+                </nav>
+                <nav class="input-group">
                     <input type="email" name="email_cliente" placeholder="E-mail" required>
                     <input type="tel" name="contato_cliente" placeholder="Contato" required>
-                </div>
-                <div class="input-group">
-                    <div class="password-container">
+                </nav>
+                <nav class="input-group">
+                    <nav class="password-container">
                         <input type="password" id="senha_cliente" name="senha_cliente" placeholder="Senha" required>
-                    </div>
-                    <div class="password-container">
+                    </nav>
+                    <nav class="password-container">
                         <input type="password" id="confirmar_senha_cliente" name="confirmar_senha_cliente" placeholder="Confirmar Senha" required>
-                    </div>
-                </div>
-                <button type="submit">Criar Conta</button>
+                    </nav>
+                </nav>
+                <button type="submit"><a href="/perfilcliente"></a>Criar Conta</button>
             </form>
-        </div>
+        </nav>
     </main>
 
     <footer>
-        <div class="footer-content">
-            <div>
+        <nav class="footer-content">
+            <nav>
                 <h4>Sobre Nós</h4>
                 <p>Sollarium é líder no fornecimento de soluções em energia solar. Oferecemos serviços de instalação,<br> manutenção e consultoria para um futuro mais sustentável.</p>
-            </div>
-            <div>
+            </nav>
+            <nav>
                 <h4>Contato</h4>
                 <p>Endereço: Rua Exemplo, 123, São Paulo, SP</p>
                 <p>Telefone: (11) 1234-5678</p>
                 <p>Email: contato@sollarium.com.br</p>
-            </div>
-            <div>
+            </nav>
+            <nav>
                 <h4>Siga-nos</h4>
-                <div class="icons">
+                <nav class="icons">
                     <a href="#"><i class="fab fa-facebook-f"></i></a>
                     <a href="#"><i class="fab fa-instagram"></i></a>
                     <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                </div>
-            </div>
-        </div>
+                </nav>
+            </nav>
+        </nav>
     </footer>
 </body>
 </html>

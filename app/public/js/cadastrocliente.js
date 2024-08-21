@@ -8,7 +8,7 @@ document.getElementById('cadastroForm').addEventListener('submit', async functio
         contato_cliente: document.getElementById('contato_cliente').value,
         email_cliente: document.getElementById('email_cliente').value,
         senha_cliente: document.getElementById('senha_cliente').value,
-        confirmar_senha_cliente: document.getElementById('senha_cliente').value,
+        confirmar_senha_cliente: document.getElementById('confirmar_senha_cliente').value,
         estado_cliente: document.getElementById('estado_cliente').value,
     };
 
@@ -47,7 +47,7 @@ document.getElementById('cadastroForm').addEventListener('submit', async functio
     }
 
     if (formData.senha_cliente !== formData.confirmar_senha_cliente) {
-        showError('senha_cliente', 'As senhas não coincidem.');
+        showError('confirmar_senha_cliente', 'As senhas não coincidem.');
         isValid = false;
     }
 
@@ -77,26 +77,7 @@ document.getElementById('cadastroForm').addEventListener('submit', async functio
 
 function showError(field, message) {
     const input = document.getElementById(field);
-    const errorElement = document.createElement('div');
-    errorElement.classList.add('error-message');
+    const errorElement = document.getElementById(`${field}_error`);
     errorElement.innerText = message;
-    input.insertAdjacentElement('afterend', errorElement);
-}
-
-function validatePassword() {
-    const password = document.getElementById('password');
-    const message = document.getElementById('message');
-    if (password.value.length < 8) {
-        message.style.display = 'block';
-    } else {
-        message.style.display = 'none';
-    }
-}
-
-function showMessage() {
-    document.getElementById('message').style.display = 'block';
-}
-
-function hideMessage() {
-    document.getElementById('message').style.display = 'none';
+    errorElement.style.display = 'block';
 }

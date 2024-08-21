@@ -30,8 +30,7 @@ const gravarClienteAutenticado = async (req, res, next) => {
     console.log(dadosForm)
     try {
       const clienteExistente = await cliente.findByEmail(dadosForm.nome_cliente);
-      const profExistente = await clienprofissional.findByEmail(dadosForm.nome_cliente);
-     
+     console.log(clienteExistente)
       if (clienteExistente && bcrypt.compareSync( dadosForm.senha_cliente, clienteExistente[0].SENHA_CLIENTE)) {
             console.log("validou a senha")
 

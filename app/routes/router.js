@@ -119,6 +119,8 @@ router.post('/cadastrocliente',
 });
 
 
+
+
 //Rota de registro profissional
     router.post('/cadastroprof', [
         body('username').isString().withMessage('O nome de usuário deve ser uma string'),
