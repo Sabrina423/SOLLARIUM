@@ -50,6 +50,10 @@ router.get('/orcamento', (req, res) => {
     res.render('pages/orcamento');
 });
 
+router.get('/sobre', (req, res) => {
+    res.render('pages/sobre');
+});
+
 router.get('/perfilcliente', authenticateToken, (req, res) => {
     res.render('pages/perfilcliente');
 });
