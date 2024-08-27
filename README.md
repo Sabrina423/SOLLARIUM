@@ -5,3 +5,4 @@ e digite:
 *para liberar o proxy(se necessário)
 
 **** npm install
+*** teste
