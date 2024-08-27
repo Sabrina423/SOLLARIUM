@@ -1,128 +1,81 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sollarium Orçamento</title>
-    <link rel="stylesheet" href="/css/orcamento.css">
+    <title>Solicitação de Orçamento</title>
+    <link rel="stylesheet" href="css/orcamento.css">
 </head>
 <body>
-    <section class="inteiro">
-        <section class="metade1">
-            <!-- Adicione a imagem aqui se necessário -->
+    <header>
+        <div class="logo">
+            <img src="imagens/LOGO_SOLLARIUM (8).png" alt="Logo">
+        </div>
+        <nav class="navbar">
+            <ul class="nav-links">
+                <li><a href="#home">Início</a></li>
+                <li><a href="#about">Sobre</a></li>
+                <li><a href="#contact">Contato</a></li>
+            </ul>
+            <div class="menu-toggle" id="menu-toggle">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="contact">
+            <form id="orcamento-form">
+                <h1>Solicitação de Orçamento</h1>
+                <label for="name">Nome:</label>
+                <input type="text" id="name" name="name" required>
+                
+                <label for="cep">CEP:</label>
+                <input type="text" id="cep" name="cep" required>
+                
+                <label for="text">Serviço:</label>
+                <textarea id="text" name="serviço" rows="4" required></textarea>
+
+                <label for="valor">Valor esperado:</label>
+                <input type="text" id="valor" name="valor" required>
+                
+                <button type="submit">Enviar Solicitação</button>
+                <div id="success-message" style="display: none; color: green; margin-top: 1rem;">
+                    Sua solicitação foi enviada com sucesso! Logo um profissional será encontrado para te atender.
+                </div>
+            </form>
         </section>
-        <section class="metade2">
-            <section class="container">
-                <section class="Forms">
-                    <section class="logo">
-                        <img src="/imagens/LOGO_SOLLARIUM(8).png" alt="Logo"> <!-- Adicione o caminho correto da sua logo -->
-                    </section>
-                    <h2>Orçamento</h2>
-                    <form id="formOrcamento">
-                        <section class="form-group">
-                            <input type="text" id="estado" name="estado" placeholder="Estado:" required>
-                            <small id="estadoError" class="error-message"></small>
-                        </section>
-                        <section class="form-group">
-                            <input type="text" id="cidade" name="cidade" placeholder="Cidade/CEP" required>
-                            <small id="cidadeError" class="error-message"></small>
-                        </section>
-                        <section class="form-group">
-                            <input type="text" id="servico" name="servico" placeholder="Serviço:" required>
-                            <small id="servicoError" class="error-message"></small>
-                        </section>
-                        <section class="form-group">
-                            <textarea id="detalhe" name="detalhe" placeholder="Detalhe o serviço desejado:" required class="detalhe"></textarea>
-                            <small id="detalheError" class="error-message"></small>
-                        </section>
-                        <section class="form-group">
-                            <input type="text" id="valor" name="valor" placeholder="Valor esperado:" required>
-                            <small id="valorError" class="error-message"></small>
-                        </section>
-                        <input type="submit" value="FINALIZAR ORÇAMENTO">
-                        <section id="success-message"></section>
-                    </form>
-                </section>
-            </section>
-        </section>
-    </section>
+    </main>
 
-   <script>
-      document.getElementById('formOrcamento').addEventListener('submit', async function(event) {
-    event.preventDefault();
+    <footer>
+        <p>&copy; 2024 Sollarium. Todos os direitos reservados.</p>
+    </footer>
 
-    // Resetar mensagens de erro
-    const errorMessages = document.querySelectorAll('.error-message');
-    errorMessages.forEach(error => error.style.display = 'none');
-
-    const formData = {
-        estado: document.getElementById('estado').value.trim(),
-        cidade: document.getElementById('cidade').value.trim(),
-        servico: document.getElementById('servico').value.trim(),
-        detalhe: document.getElementById('detalhe').value.trim(),
-        valor: document.getElementById('valor').value.trim()
-    };
-
-    let isValid = true;
-
-    if (formData.estado === '') {
-        showError('estadoError', 'Por favor, preencha o Estado.');
-        isValid = false;
-    }
-
-    if (formData.cidade === '') {
-        showError('cidadeError', 'Por favor, preencha a Cidade/CEP.');
-        isValid = false;
-    }
-
-    if (formData.servico === '') {
-        showError('servicoError', 'Por favor, preencha o Serviço.');
-        isValid = false;
-    }
-
-    if (formData.detalhe === '') {
-        showError('detalheError', 'Por favor, detalhe o serviço desejado.');
-        isValid = false;
-    }
-
-    if (formData.valor === '') {
-        showError('valorError', 'Por favor, preencha o Valor esperado.');
-        isValid = false;
-    }
-
-    if (!isValid) return;
-
-    try {
-        const response = await fetch('/orcamento', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(formData)
+    <script>
+        document.getElementById('menu-toggle').addEventListener('click', function() {
+            const navLinks = document.querySelector('.nav-links');
+            navLinks.classList.toggle('active');
         });
 
-        const result = await response.json();
+        document.getElementById('orcamento-form').addEventListener('submit', function(event) {
+            event.preventDefault(); // Previne o envio do formulário para a ação padrão
 
-        if (response.status === 200) {
-            document.getElementById('success-message').innerText = result.mensagem;
-            document.getElementById('formOrcamento').reset();
-        } else {
-            result.errors.forEach(error => {
-                showError(error.field + 'Error', error.message);
-            });
-        }
-    } catch (error) {
-        console.error('Erro ao enviar os dados:', error);
-    }
-});
+            // Valida se todos os campos são preenchidos
+            const name = document.getElementById('name').value;
+            const cep = document.getElementById('cep').value;
+            const text = document.getElementById('text').value;
+            const valor = document.getElementById('valor').value;
 
-function showError(fieldId, message) {
-    const errorElement = document.getElementById(fieldId);
-    errorElement.innerText = message;
-    errorElement.style.display = 'block';
-}
-
-   </script>
+            if (name && cep && text && valor) {
+                // Mostra a mensagem de sucesso
+                document.getElementById('success-message').style.display = 'block';
+            } else {
+                // Opcional: Mostrar uma mensagem de erro se não todos os campos estiverem preenchidos
+                alert('Por favor, preencha todos os campos.');
+            }
+        });
+    </script>
 </body>
 </html>

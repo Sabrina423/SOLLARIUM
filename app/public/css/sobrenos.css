@@ -1,0 +1,112 @@
+/* Estilo geral */
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f7f7f7;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Cabeçalho */
+header {
+    background-color: #ff6600;
+    color: #fff;
+    text-align: center;
+    padding: 50px 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+header p {
+    font-size: 1.2rem;
+}
+
+/* Seções */
+section {
+    padding: 40px 20px;
+    max-width: 1000px;
+    margin: 0 auto;
+    background-color: #fff;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+section h2 {
+    font-size: 2rem;
+    color: #ff6600;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 10px;
+}
+
+section p {
+    font-size: 1.1rem;
+    color: #555;
+}
+
+/* Lista de valores */
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+ul li {
+    background-color: #ff6600;
+    color: #fff;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    font-size: 1.1rem;
+    transition: transform 0.3s ease;
+}
+
+ul li:hover {
+    transform: translateX(10px);
+}
+
+/* Rodapé */
+footer {
+    text-align: center;
+    background-color: #333;
+    color: #fff;
+    padding: 20px 10px;
+    font-size: 0.9rem;
+}
+
+footer address a {
+    color: #ff6600;
+    text-decoration: none;
+}
+
+footer address a:hover {
+    text-decoration: underline;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    header {
+        padding: 30px 10px;
+    }
+
+    header h1 {
+        font-size: 2rem;
+    }
+
+    section {
+        padding: 30px 15px;
+    }
+
+    section h2 {
+        font-size: 1.8rem;
+    }
+
+    ul li {
+        font-size: 1rem;
+    }
+}
