@@ -1,7 +1,7 @@
-/* Arquivo: cadastroprof.css */
+
 
 body {
-    font-family: Arial, sans-serif;
+    font-family: sans-serif;
     background-color: #f4f4f4;
     color: #333;
     margin: 0;
@@ -28,11 +28,12 @@ header button {
     margin: 10px;
     font-size: 16px;
     cursor: pointer;
-    border-radius: 4px;
+    border-radius: 30px;
 }
 
 header button.cliente {
-    background-color: #F59A23;
+    background-color:none;
+    
 }
 
 header button:hover {
