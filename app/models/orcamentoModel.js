@@ -6,17 +6,17 @@ const orcamentoModel = {
             const [linhas] = await pool.query('SELECT * FROM ORCAMENTO WHERE ID_ORCAMENTO = ?', [id]);
             return linhas[0];
         } catch (error) {
-            console.error('Erro ao buscar cliente por ID:', error);
+            console.error('Erro ao buscar orçamento por ID:', error);
             throw error;
         }
     },
 
     findByEmail: async (id) => {
         try {
-            const [linhas] = await pool.query('SELECT * FROM CLIENTE WHERE EMAIL_CLIENTE = ?', [id]);
+            const [linhas] = await pool.query('SELECT * FROM ORCAMENTO WHERE ID_ORCAMENTO = ?', [id]);
             return linhas;
         } catch (error) {
-            console.error('Erro ao buscar cliente por ID:', error);
+            console.error('Erro ao buscar orçamento por ID:', error);
             throw error;
         }
     },
@@ -25,7 +25,7 @@ const orcamentoModel = {
         try {
             const { cpf_cliente, endereco_cliente, nome_cliente, contato_cliente, email_cliente, senha_cliente, estado_cliente } = cliente;
             const result = await pool.query(
-                'INSERT INTO CLIENTE (CPF_CLIENTE, ENDERECO_CLIENTE, NOME_CLIENTE, CONTATO_CLIENTE, EMAIL_CLIENTE, SENHA_CLIENTE, ESTADO_CLIENTE) VALUES (?, ?, ?, ?, ?,?, ?)',
+                'INSERT INTO CLIENTE ( NOME_CLIENTE, CONTATO_CLIENTE, EMAIL_CLIENTE, SENHA_CLIENTE, ESTADO_CLIENTE) VALUES (?, ?, ?, ?, ?,?, ?)',
                 [cpf_cliente, endereco_cliente, nome_cliente, contato_cliente, email_cliente, senha_cliente, estado_cliente]
             );
             return result; // Retorna o resultado da inserção
