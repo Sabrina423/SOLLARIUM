@@ -13,10 +13,10 @@ const profissionaisModel = {
 
     create: async (profissional) => {
         try {
-            const { cpf_prof, endereco_prof, nome_prof, contato_prof, email_prof, senha_prof, estado_prof,cep_prof, documento_prof, data_nasc} = profissional;
+            
             const result = await pool.query(
-                'INSERT INTO CLIENTE (CPF_PROF, ENDERECO_PROF, NOME_PROF, CONTATO_PROF, EMAIL_PROF, SENHA_PROF, ESTADO_PROF, DOCUMENTO_PROF, DATA_NASC) VALUES (?, ?, ?, ?, ?,?, ?, ?, ?)',
-                [cpf_prof, endereco_prof, nome_prof, contato_prof, email_prof, senha_prof, estado_prof, cep_prof, documento_prof, data_nasc]
+                'INSERT INTO PROFISSIONAL (NOME_PROF,CONTATO_PROF,EMAIL_PROF,CPF_PROF,CEP_PROF,SENHA_PROF) VALUES (?,?,?,?,?,?)',
+                [profissional.nome+ " "+ profissional.sobrenome,profissional.phone, profissional.email,profissional.cpf,profissional.cep,profissional.hashedsenha]
             );
             return result; // Retorna o resultado da inserção
         } catch (error) {

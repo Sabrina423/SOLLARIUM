@@ -4,6 +4,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 var salt = bcrypt.genSaltSync(12);
 const clienteController = require('../controllers/clienteController');
+const profissionalController = require('../controllers/profissionaisController.js');
 const cliente = require("../models/clienteModel");
 
 const  {
@@ -11,7 +12,7 @@ const  {
     limparSessao,
     gravarClienteAutenticado,
     verificarClienteAutorizado,
-  } = require("../models/autenticador_middleware");
+  } = require("../models/autenticador_middleware.js");
 
 const router = express.Router();
 
@@ -126,35 +127,39 @@ router.post('/cadastrocliente',
 
 
 //Rota de registro profissional
-    router.post('/cadastroprof', [
-        body('username').isString().withMessage('O nome de usuário deve ser uma string'),
-        body('password').isLength({ min: 6 }).withMessage('A senha deve ter pelo menos 6 caracteres')
-    ], (req, res) => {
-        const errors = validationResult(req);
-        if (!errors.isEmpty()) {
-           // return res.status(400).json({ errors: errors.array() });
-        }
+    router.post(
+        '/cadastroprof', 
+        body("nome")
+            .isLength({ min: 3, max: 45 }).withMessage("Mínimo de 3 letras e máximo de 45!"),
+        body("sobrenome")
+            .isLength({ min: 8, max: 45 }).withMessage("Nome de usuário deve ter de 8 a 45 caracteres!"),
+        body("email")
+            .isEmail().withMessage("Digite um e-mail válido!"),
+        body("phone")
+            .isLength({ min: 12, max: 13 }).withMessage("Digite um telefone válido!"), 
+    (req, res) => {
+    
 
-    const { username, password } = req.body;
-    const hashedPassword = bcrypt.hashSync(password, 10);
+        profissionalController.cadastrar(req, res);
+    
 
-    db.query('INSERT INTO users (email_prof, senha_prof) VALUES (?, ?)', [username, hashedPassword], (err) => {
-        if (err) {
-            console.log(err);
-            return res.status(400).send('Erro ao registrar o usuário. O usuário já pode existir.');
-        }
-        res.send('Usuário registrado com sucesso.');
-    });
+    // db.query('INSERT INTO PROFISSIONAL (NOME_PROF,CONTATO_PROF,EMAIL_PROF,CPF_PROF,CEP_PROF,SENHA_PROF) VALUES (?,?,?,?,?,?)', [ nome+ " "+ sobrenome,phone, email,cpf,cep,hashedsenha], (err) => {
+    //     if (err) {
+    //         console.log(err);
+    //         return res.status(400).send('Erro ao registrar o usuário. O usuário já pode existir.');
+    //     }
+    //     res.send('Usuário registrado com sucesso.');
+    // });
 
-    const dadosForm = {
-        cpf_cliente: cpf_cliente,
-        endereco_cliente: endereco_cliente,
-        nome_cliente: nome_cliente,
-        contato_cliente: contato_cliente,
-        email_cliente: email_cliente,
-        senha_cliente: senha_cliente,
-        endereco_cliente: endereco_cliente,
-    };
+    // const dadosForm = {
+    //     cpf_cliente: cpf_cliente,
+    //     endereco_cliente: endereco_cliente,
+    //     nome_cliente: nome_cliente,
+    //     contato_cliente: contato_cliente,
+    //     email_cliente: email_cliente,
+    //     senha_cliente: senha_cliente,
+    //     endereco_cliente: endereco_cliente,
+    // };
 
 });
 

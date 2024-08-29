@@ -17,7 +17,7 @@
     </header>
 
     <main>
-        <form id="cadastroForm">
+        <form id="cadastroForm" method="POST" action="/cadastroprof">
             <h1>Crie uma nova conta</h1>
             <hr>
             <nav class="form-row">
@@ -35,7 +35,7 @@
             <nav class="form-row">
                 <section class="form-group">
                     <label for="phone">Telefone:</label>
-                    <input type="tel" id="phone" name="phone" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" required>
+                    <input type="tel" id="phone" name="phone" pattern="([0-9]{2})[0-9]{5}-[0-9]{4}" required>
                     <small class="error-message"></small>
                 </section>
                 <section class="form-group">
@@ -96,7 +96,7 @@
                 </section>
                 <section class="form-group">
                     <label for="confirmar-senha">Confirmar Senha:</label>
-                    <input type="password" id="confirmar-senha" name="confirmar-senha" required>
+                    <input type="password" id="confirmar_senha" name="confirmar_senha" required>
                     <small class="error-message"></small>
                     <button type="button" class="toggle-password" onclick="togglePasswordVisibility('confirmar-senha')"></button>
                 </section>
