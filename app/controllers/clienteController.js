@@ -9,7 +9,7 @@ const clienteController = {
     regrasValidacaoFormLogin: [
         body("email")
             .isLength({ min: 8, max: 45 })
-            .withMessage("O nome de usuário/e-mail deve ter de 8 a 45 caracteres"),
+            .withMessage("O nome de usuário/e-mail deve ter de a 45 caracteres"),
         body("password")
             .isStrongPassword()
             .withMessage("A senha deve ter no mínimo 8 caracteres")
