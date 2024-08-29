@@ -4,14 +4,6 @@ const validarOrcamento = (dados) => {
     const { estado, cidade, servico, detalhe, valor } = dados;
     let errors = [];
 
-    if (!estado) {
-        errors.push({ field: 'estado', message: 'Estado é obrigatório.' });
-    }
-
-    if (!cidade) {
-        errors.push({ field: 'cidade', message: 'Cidade/CEP é obrigatório.' });
-    }
-
     if (!servico) {
         errors.push({ field: 'servico', message: 'Serviço é obrigatório.' });
     }
@@ -28,7 +20,7 @@ const validarOrcamento = (dados) => {
 }
 
 const criarOrcamento = async (req, res) => {
-    const { estado, cidade, servico, detalhe, valor } = req.body;
+    const { servico, detalhe, valor } = req.body;
 
     const errors = validarOrcamento(req.body);
 
@@ -38,7 +30,7 @@ const criarOrcamento = async (req, res) => {
 
     try {
         const [rows] = await pool.query(
-            'INSERT INTO orcamentos (estado, cidade, servico, detalhe, valor) VALUES (?, ?, ?, ?, ?)',
+            'INSERT INTO orcamentos (servico, detalhe, valor) VALUES (?, ?, ?, ?, ?)',
             [estado, cidade, servico, detalhe, valor]
         );
         res.status(200).json({ mensagem: 'Orçamento enviado com sucesso!' });
