@@ -1,11 +1,9 @@
-const cliente = require("../models/clienteModel");
+const profissional = require("../models/profissionaisModel");
 const { body, validationResult } = require("express-validator");
 const bcrypt = require("bcryptjs");
 var salt = bcrypt.genSaltSync(12);
 const fetch = (...args) => import('node-fetch').then(({ default: fetch }) => fetch(...args));
-const verificarClienteAutorizado = require('../models/verificarClienteAutorizado'); // Corrigido o caminho para o middleware
-
-const clienteController = {
+const profissionaisController = {
     regrasValidacaoFormLogin: [
         body("nome_usu")
             .isLength({ min: 8, max: 45 })
@@ -16,7 +14,7 @@ const clienteController = {
     ],
 
     regrasValidacaoFormCad: [
-        body("nome_usu")
+        body("nome_Prof")
             .isLength({ min: 3, max: 45 }).withMessage("Nome deve ter de 3 a 45 caracteres!"),
         body("nomeusu_usu")
             .isLength({ min: 8, max: 45 }).withMessage("Nome de usuário deve ter de 8 a 45 caracteres! Incluindo uma letra maiúscula, um caractere especial e um número ")
@@ -47,8 +45,7 @@ const clienteController = {
         body("email_profissional")
             .isEmail().withMessage("Digite um e-mail válido!"),
         body("fone_profissional")
-            .isLength({ min: 12, max: 13 }).withMessage("Digite um telefone válido!"),
-        verificarClienteAutorizado([1, 2, 3], "pages/cadastroprof"),
+            .isLength({ min: 12, max: 13 }).withMessage("Digite um telefone válido!")
     ],
 
     logar: (req, res) => {
@@ -64,19 +61,35 @@ const clienteController = {
     },
 
     cadastrar: async (req, res) => {
+        console.log("prof_controller")
         const erros = validationResult(req);
         if (!erros.isEmpty()) {
+            console.log(erros);
             return res.render("pages/cadastroprof", { listaErros: erros, dadosNotificacao: null, valores: req.body });
         }
 
-        const dadosForm = {
-            user_cliente: req.body.nomeusu_cliente, 
-            senha_cliente: bcrypt.hashSync(req.body.senha_cliente, salt),
-            nome_cliente: req.body.nome_cliente,
-            email_cliente: req.body.email_cliente,
-            estado_cliente : req.body.estado_cliente
-        };
+        // const dadosForm = {
+        //     NOME_PROF: req.body.nome + " " +req.body.sobrenome, 
+        //     CONTATO_PROF: bcrypt.hashSync(req.body.phone, salt),
+        //     EMAIL_PROF: req.body.email,
+        //     ENDERECO_PROF: req.body.estado,
+        //     CPF_PROF: req.body.cpf,
+        //     DATA_PROF: req.body.estado_cliente,
+        //     DOCUMENTO_PROF: req.body.curriculo,
+        //     CEP_PROF: req.body.cep,
+        //     SENHA_PROF: req.body.estado_cliente
+        // };
 
+        const dadosForm = { 
+            nome: req.body.nome, 
+            sobrenome: req.body.sobrenome,
+            phone: req.body.phone,
+            cpf: req.body.cpf,
+            cep: req.body.cep,
+            email: req.body.email,
+            hashedsenha: bcrypt.hashSync(req.body.senha, salt)
+        } ;
+        console.log(dadosForm);
         try {
             await profissional.create(dadosForm); // Correto método de criação
             res.render("pages/cadastroprof", {
@@ -95,4 +108,4 @@ const clienteController = {
     }
 };
 
-module.exports = clienteController;
+module.exports = profissionaisController;
