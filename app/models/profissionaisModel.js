@@ -20,7 +20,7 @@ const profissionaisModel = {
             );
             return result; // Retorna o resultado da inserção
         } catch (error) {
-            console.error('Erro ao criar cliente:', error);
+            console.error('Erro ao criar usuário:', error);
             throw error;
         }
     },
