@@ -43,8 +43,8 @@ router.get('/cadastrocliente', (req, res) => {
     res.render('pages/cadastrocliente');
 });
 
-router.get('/cadastroprof', (req, res) => {
-    res.render('pages/cadastroprof');
+router.get('/cadastroinicial', (req, res) => {
+    res.render('pages/cadastroinicial');
 });
 
 router.get('/orcamento', (req, res) => {
@@ -57,6 +57,10 @@ router.get('/sobre', (req, res) => {
 
 router.get('/perfilcliente', authenticateToken, (req, res) => {
     res.render('pages/perfilcliente');
+});
+
+router.get('/cadastroprof', (req, res) => {
+    res.render('pages/cadastroprof');
 });
 
 router.get('/perfilprof', authenticateToken, (req, res) => {
