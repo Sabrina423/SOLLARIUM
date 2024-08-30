@@ -16,7 +16,7 @@ const ClienteModel = {
             const [linhas] = await pool.query('SELECT * FROM CLIENTE WHERE EMAIL_CLIENTE = ?', [id]);
             return linhas;
         } catch (error) {
-            console.error('Erro ao  cliente por ID:', error);
+            console.error('Erro ao buscar cliente por ID:', error);
             throw error;
         }
     },
