@@ -16,7 +16,7 @@ body {
 .container {
     display: flex;
     width: 800px;
-    height:68%;
+    height:78%;
     background-color: white;
     border-radius: 10px;
     overflow: hidden;
@@ -115,46 +115,46 @@ button[type="submit"] a {
     color: white;
     text-decoration: none;
 }
- 
-a{
+.link-container {
+    text-align: center; /* Centraliza o conteúdo do contêiner */
+    margin-top: 20px; /* Espaçamento acima do contêiner */
+}
+.link-container a{
     text-decoration: none;
     color: #000000;
-    position: relative;
-    top: 25px;
-    left: 78px;
     font-size: 17px;
     font-family: sans-serif;
+    display: inline-block; /* Permite aplicar padding e margin */
+    margin: 0; /* Remove margem padrão */
+    padding: 10px; /* Espaçamento interno do link */
 }
 /* Media Queries para Layout Responsivo */
 @media (max-width: 768px) {
     .container {
+      height: 600px;
         flex-direction: column; /* Layout vertical: hero em cima e formulário embaixo */
-        height:73% ;
     }
 
     .hero {
         width: 100%;
-        height: 300px; /* Ajusta a altura da imagem */
+        height: 150px; /* Ajusta a altura da imagem */
     }
 
     main {
         width: 100%;
+        padding: 10px;
     }
 
-    h2 {
-        font-size: 2em;
-        margin: 10px 0;
-    }
-
-    a{
-        margin-left: 20px;
-    }
-
-@media (max-width: 480px) {
-    h2 {
-        font-size: 1.5em;
+    .hero h2 {
+        font-size: 1.8em;
+        margin: 10px;
     }
 }
+
+@media (max-width: 480px) {
+    .hero h2 {
+        font-size: 1.5em;
+    }
 }
 
  

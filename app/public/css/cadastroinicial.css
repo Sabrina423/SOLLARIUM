@@ -11,15 +11,16 @@ body {
     justify-content: center;
     align-items: center;
     background-color: white;
+    min-height: 100vh;
 }
 
 .container {
     position: relative;
-    top: 80px;
-    height: 450px;
+    top: 0px;
     display: flex;
     flex-direction: row; /* Layout padrão: lado a lado */
-    width: 50%;
+    width: 90%;
+    height: 450px;
     max-width: 900px;
     background-color: white;
     border-radius: 10px;
@@ -40,97 +41,100 @@ body {
     background-position: center; /* Centraliza a imagem */
 }
 
-.hero img {
-    width: 100%;
-    height: auto;
-    border-radius: 10px;
-}
-
-h2 {
+.hero h2 {
     font-family: sans-serif;
     font-size: 2.0em;
     color: white;
     text-align: left;
-    margin-bottom: 130px;
     margin-left: 20px;
-
 }
 
 main {
     width: 60%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     padding: 20px;
 }
 
-.profissional{
-    width: 300px;
+.profissional {
+    padding: 1rem;
+    width: 100%;
+    max-width: 300px;
     height: 50px;
     border-radius: 5px;
     background-color: black;
     text-align: center;
-    padding: 1rem;
-    position: relative;
-    left: 20%;
-}
-
-.cliente{
-    width: 300px;
-    height: 50px;
-    border-radius: 5px;
-    background-color: black;
-    text-align: center;
-    padding: 1rem;
     margin-top: 40px;
-    margin-left: 30px;
 }
 
+.cliente {
+    padding: 1rem;
+    width: 100%;
+    max-width: 300px;
+    height: 50px;
+    border-radius: 5px;
+    background-color: black;
+    text-align: center;
+    margin-top: 50px;
+    margin-bottom: 20px;
+}
 
-.action_btn{
-    color: rgb(255, 255, 255);
-    padding: 0.3rem 2rem;
+.profissional:hover, .cliente:hover {
+    background-color: white;
+    border: 2px solid black;
+}
+
+.profissional a, .cliente a {
+    color: white;
+    padding: 1rem;
     text-decoration: none;
     border-radius: 15px;
     font-size: 0.9rem;
     cursor: pointer;
-    transition: scale 0.2 ease;
+    transition: 0.2s ease;
 }
 
-.action_btn:hover{
-    scale: 1.05;
-    color: white;
+.profissional:hover a, .cliente:hover a {
+    color: black;
 }
 
-.action_btn:active{
-    scale: 0.95;
-}
-
-h3{
+h3 {
     font-family: sans-serif;
     text-align: center;
-    margin-top: 50px;
+    margin-top: 40px;
 }
 
-.login{
-    text-align: center;
+.login {
     padding: 1rem;
-    width: 300px;
+    width: 100%;
+    max-width: 300px;
     height: 50px;
-    border: solid;
-    border-color: rgb(0, 0, 0);
-    border-width: 1.5px;
-    outline: none;
-    border-radius: 15px;
-    margin-top: 50px;
-    margin-left: 30px;
+    border-radius: 5px;
+    background-color: rgb(255, 255, 255);
+    text-align: center;
+    margin-top: 40px;
+    border: 1px solid rgb(0, 0, 0);
+    transition: 0.2s ease;
 }
 
-.login a{
+.login a {
     color: rgb(0, 0, 0);
+    padding: 1rem;
     text-decoration: none;
+    border-radius: 15px;
     font-size: 0.9rem;
     cursor: pointer;
-    transition: scale 0.2 ease;
-    text-align: center;
+}
 
+.login:hover {
+    background-color: black;
+    color: rgb(255, 255, 255);
+    border-color: rgb(0, 0, 0);
+}
+
+.login:hover a {
+    color: rgb(255, 255, 255);
 }
 
 /* Media Queries para Layout Responsivo */
@@ -141,21 +145,30 @@ h3{
 
     .hero {
         width: 100%;
-        height: 300px; /* Ajusta a altura da imagem */
+        height: 250px; /* Ajusta a altura da imagem */
     }
 
     main {
         width: 100%;
+        padding: 10px;
     }
 
-    h2 {
-        font-size: 2em;
-        margin: 10px 0;
-    }
-
-@media (max-width: 480px) {
-    h2 {
-        font-size: 1.5em;
+    .hero h2 {
+        font-size: 1.8em;
+        margin: 10px;
     }
 }
+
+@media (max-width: 480px) {
+    .hero h2 {
+        font-size: 1.5em;
+    }
+
+    .profissional, .cliente, .login {
+        width: 90%;
+    }
+
+    .profissional, .cliente {
+        margin-top: 10px;
+    }
 }
