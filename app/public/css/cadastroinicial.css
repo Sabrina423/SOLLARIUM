@@ -141,11 +141,12 @@ h3 {
 @media (max-width: 768px) {
     .container {
         flex-direction: column; /* Layout vertical: hero em cima e formulário embaixo */
+        height: 70%;
     }
 
     .hero {
         width: 100%;
-        height: 250px; /* Ajusta a altura da imagem */
+        height: 40%; /* Ajusta a altura da imagem */
     }
 
     main {
