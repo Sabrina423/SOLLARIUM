@@ -10,7 +10,7 @@ body {
 
 /* Cabeçalho */
 header {
-    background-color: #ff6600;
+    background-color: #000000;
     color: #fff;
     text-align: center;
     padding: 50px 20px;
@@ -25,6 +25,23 @@ header h1 {
 header p {
     font-size: 1.2rem;
 }
+.btn-home {
+    display: flex;
+    align-items: center;
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: bold;
+    font-family: sans-serif;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    margin-right: auto; /* Isso empurra o botão para a esquerda */
+}
+
+.btn-home i {
+    margin-right: 8px; /* Espaçamento entre a seta e o texto */
+}
+
 
 /* Seções */
 section {
@@ -39,7 +56,7 @@ section {
 
 section h2 {
     font-size: 2rem;
-    color: #ff6600;
+    color: #000000;
     margin-bottom: 20px;
     border-bottom: 2px solid #eee;
     padding-bottom: 10px;
@@ -57,7 +74,7 @@ ul {
 }
 
 ul li {
-    background-color: #ff6600;
+    background-color: #000000;
     color: #fff;
     padding: 10px;
     margin: 10px 0;
@@ -73,7 +90,7 @@ ul li:hover {
 /* Rodapé */
 footer {
     text-align: center;
-    background-color: #333;
+    background-color: #000000;
     color: #fff;
     padding: 20px 10px;
     font-size: 0.9rem;

@@ -92,16 +92,19 @@ header{
     right: 2rem;
     top: 60px;
     width: 300px;
+    height: 400px;
     height: 0;
-    background: rgb(255, 255, 255, 0.1);
-    backdrop-filter: blur(15px);
+    background: rgb(0, 0, 0);
     border-radius: 10px;
     overflow: hidden;
-    transition: height .2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
  
 .dropdown_menu.open{
+<<<<<<< HEAD
     height: 248px;
+=======
+    height: 240px;
+>>>>>>> fbd4989 (cadastro-front)
 }
  
 .dropdown_menu li{
@@ -301,7 +304,16 @@ footer {
     flex-wrap: wrap;
     gap: 30px;
 }
+<<<<<<< HEAD
  
+=======
+
+.sobre{
+    position: relative;
+    left: 9%;
+}
+
+>>>>>>> fbd4989 (cadastro-front)
 .footer-content h4 {
     font-size: 20px;
     margin-bottom: 20px;

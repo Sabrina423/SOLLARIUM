@@ -1,0 +1,215 @@
+/* Estilos gerais */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    color: #000000;
+    background-color: #ffffff;
+}
+
+header {
+    height: 100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background-color: #000;
+    color: #fff;
+}
+
+.logo img {
+    width: 250px;
+    height: 250px;
+    margin-top:20px;
+}
+
+.navbar {
+    display: flex;
+    align-items: center;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    margin-top: 20px;
+}
+
+.nav-links li {
+    margin: 0 1rem;
+    margin-bottom: 20px;
+}
+
+.nav-links a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.menu-toggle {
+    display: none;
+    cursor: pointer;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #000;
+    padding: 0.5rem;
+}
+
+.menu-toggle .bar {
+    width: 25px;
+    height: 3px;
+    background-color: #fff;
+    margin: 3px 0;
+    transition: transform 0.3s ease;
+}
+
+/* Estilos para o formulário */
+main {
+    padding: 1rem;
+    padding-top: 2rem; /* Ajusta a posição para cima */
+}
+
+h1 {
+    text-align: center;
+    font-size: 20px;
+}
+
+.form-steps {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2rem;
+}
+
+.step {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #ddd;
+    color: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 0.5rem;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    cursor: pointer;
+}
+
+.step.active {
+    background-color: #000;
+    color: #fff;
+}
+
+.step-content {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.step-content.active {
+    opacity: 1;
+}
+
+/* Estilos para o botão */
+button {
+    height: 60px;
+    padding: 0.5rem;
+    border: none;
+    background-color: #000000;
+    color: #ffffff;
+    cursor: pointer;
+    font-family: sans-serif;
+    font-size: 12px;
+    border-radius: 5px;
+    margin: 0.5rem;
+    transition: background-color 0.3s ease;
+}
+
+button.prev-btn {
+    background-color: #555;
+}
+
+/* Estilos para o campo de data e hora */
+input[type="datetime-local"] {
+    height: auto;
+    padding: 0.5rem;
+    margin-bottom: 0.5rem;
+    border: 1px solid #000000;
+    background-color: #ffffff;
+    color: #000000;
+    border-radius: 5px;
+    width: 100%;
+}
+
+/* Estilos para o rodapé */
+footer {
+    background-color: #000;
+    color: #fff;
+    text-align: center;
+    padding: 1rem;
+    position: relative;
+    top: 100px;
+    width: 100%;
+    height: 100px;
+    font-size: 12px;
+}
+
+/* Estilos responsivos */
+@media (max-width: 768px) {
+    .nav-links {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        background-color: rgba(0, 0, 0, 0.8);
+        position: absolute;
+        top: 60px;
+        left: 0;
+        padding: 1rem;
+        transform: translateY(-100%);
+        visibility: hidden;
+        opacity: 0;
+        transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+
+    .nav-links.active {
+        transform: translateY(0);
+        visibility: visible;
+        opacity: 1;
+    }
+
+    .menu-toggle {
+        display: flex;
+    }
+
+    .menu-toggle .bar:nth-child(1) {
+        transform: rotate(0);
+    }
+
+    .menu-toggle .bar:nth-child(2) {
+        opacity: 1;
+    }
+
+    .menu-toggle .bar:nth-child(3) {
+        transform: rotate(0);
+    }
+
+    .nav-links.active ~ .menu-toggle .bar:nth-child(1) {
+        transform: rotate(45deg) translateY(6px);
+    }
+
+    .nav-links.active ~ .menu-toggle .bar:nth-child(2) {
+        opacity: 0;
+    }
+
+    .nav-links.active ~ .menu-toggle .bar:nth-child(3) {
+        transform: rotate(-45deg) translateY(-6px);
+    }
+
+    form {
+        width: 100%;
+    }
+}

@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="css/orcamento.css">
 </head>
 <body>
+
     <header>
         <div class="logo">
             <img src="imagens/LOGO_SOLLARIUM (8).png" alt="Logo">
@@ -29,14 +30,25 @@
         <section id="contact">
             <form id="orcamento-form">
                 <h1>Solicitação de Orçamento</h1>
-                <label for="name">Nome:</label>
-                <input type="text" id="name" name="name" required>
+                <div class="form-group">
+                    <label for="name">Nome:</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
                 
-                <label for="text">Serviço:</label>
-                <textarea id="text" name="serviço" rows="4" required></textarea>
+                <div class="form-group">
+                    <label for="text">Serviço:</label>
+                    <textarea id="text" name="serviço" rows="4" required></textarea>
+                </div>
 
-                <label for="valor">Valor esperado:</label>
-                <input type="text" id="valor" name="valor" required>
+                <div class="form-group">
+                    <label for="valor">Valor esperado:</label>
+                    <input type="text" id="valor" name="valor" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="data">Dia e horário que o serviço deve ser realizado:</label>
+                    <input type="datetime-local" id="data" name="data" required>
+                </div>
                 
                 <button type="submit">Enviar Solicitação</button>
                 <div id="success-message" style="display: none; color: green; margin-top: 1rem;">
@@ -61,17 +73,126 @@
 
             // Valida se todos os campos são preenchidos
             const name = document.getElementById('name').value;
-            const cep = document.getElementById('cep').value;
             const text = document.getElementById('text').value;
             const valor = document.getElementById('valor').value;
+            const data = document.getElementById('data').value;
 
-            if (name && cep && text && valor) {
+            if (name && text && valor && data) {
                 // Mostra a mensagem de sucesso
                 document.getElementById('success-message').style.display = 'block';
             } else {
                 // Opcional: Mostrar uma mensagem de erro se não todos os campos estiverem preenchidos
                 alert('Por favor, preencha todos os campos.');
             }
+        });
+
+        // Tutorial Script
+        document.addEventListener('DOMContentLoaded', function() {
+            const tutorialOverlay = document.getElementById('tutorial-overlay');
+            const steps = document.querySelectorAll('.tutorial-step');
+            let currentStep = 1;
+
+            function showStep(step) {
+                steps.forEach((el, index) => {
+                    el.style.display = index === step - 1 ? 'block' : 'none';
+                });
+                document.querySelectorAll('.tutorial-tip').forEach((tip, index) => {
+                    tip.style.display = index === step - 1 ? 'block' : 'none';
+                });
+            }
+
+            showStep(currentStep);
+
+            document.getElementById('next-step').addEventListener('click', function() {
+                if (currentStep < steps.length) {
+                    currentStep++;
+                    showStep(currentStep);
+                }
+            });
+
+            document.getElementById('next-step-2').addEventListener('click', function() {
+                if (currentStep < steps.length) {
+                    currentStep++;
+                    showStep(currentStep);
+                }
+            });
+
+            document.getElementById('next-step-3').addEventListener('click', function() {
+                if (currentStep < steps.length) {
+                    currentStep++;
+                    showStep(currentStep);
+                }
+            });
+
+            document.getElementById('skip-tutorial').addEventListener('click', function() {
+                tutorialOverlay.style.display = 'none';
+            });
+
+            document.getElementById('skip-tutorial-2').addEventListener('click', function() {
+                tutorialOverlay.style.display = 'none';
+            });
+
+            document.getElementById('skip-tutorial-3').addEventListener('click', function() {
+                tutorialOverlay.style.display = 'none';
+            });
+
+            document.getElementById('skip-tutorial-final').addEventListener('click', function() {
+                tutorialOverlay.style.display = 'none';
+            });
+            document.addEventListener('DOMContentLoaded', function() {
+    const tutorialOverlay = document.getElementById('tutorial-overlay');
+    const steps = document.querySelectorAll('.tutorial-step');
+    let currentStep = 1;
+
+    function showStep(step) {
+        steps.forEach((el, index) => {
+            el.style.display = index === step - 1 ? 'block' : 'none';
+        });
+        document.querySelectorAll('.tutorial-tip').forEach((tip, index) => {
+            tip.style.display = index === step - 1 ? 'block' : 'none';
+        });
+    }
+
+    showStep(currentStep);
+
+    document.getElementById('next-step').addEventListener('click', function() {
+        if (currentStep < steps.length) {
+            currentStep++;
+            showStep(currentStep);
+        }
+    });
+
+    document.getElementById('next-step-2').addEventListener('click', function() {
+        if (currentStep < steps.length) {
+            currentStep++;
+            showStep(currentStep);
+        }
+    });
+
+    document.getElementById('next-step-3').addEventListener('click', function() {
+        if (currentStep < steps.length) {
+            currentStep++;
+            showStep(currentStep);
+        }
+    });
+
+    document.getElementById('skip-tutorial').addEventListener('click', function() {
+        tutorialOverlay.style.display = 'none';
+    });
+
+    document.getElementById('skip-tutorial-2').addEventListener('click', function() {
+        tutorialOverlay.style.display = 'none';
+    });
+
+    document.getElementById('skip-tutorial-3').addEventListener('click', function() {
+        tutorialOverlay.style.display = 'none';
+    });
+
+    document.getElementById('skip-tutorial-final').addEventListener('click', function() {
+        tutorialOverlay.style.display = 'none';
+    });
+});
+
         });
     </script>
 </body>

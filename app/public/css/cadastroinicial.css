@@ -20,7 +20,7 @@ body {
     display: flex;
     flex-direction: row; /* Layout padrão: lado a lado */
     width: 90%;
-    height: 450px;
+    height: 500px;
     max-width: 900px;
     background-color: white;
     border-radius: 10px;
@@ -37,7 +37,7 @@ body {
     align-items: center;
     justify-content: center;
     padding: 10px;
-    background-color: black;
+    background-image: url(/imagens/painelsolar_.png);
     background-size: cover; /* Ajusta a imagem ao tamanho do contêiner */
     background-position: center; /* Centraliza a imagem */
 }

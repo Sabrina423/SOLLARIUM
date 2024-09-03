@@ -10,15 +10,6 @@
     <script src="js/script.js"></script>
 </head>
 <body>
-   <% if (dadosNotificacao) { %>
-        <script>
-                notify("<%= dadosNotificacao.titulo%>","<%= dadosNotificacao.mensagem%>", "<%= dadosNotificacao.tipo%>", "center")
-                if("<%= dadosNotificacao.tipo %>" == "success"){
-                    setTimeout(function(){window.location="/"}, 3000)
-                }                        
-        </script>
-    <% } %>  
-
     <nav class="container">
         <nav class="hero">
             <h2>Bem-Vindo de volta!</h2>
@@ -36,14 +27,17 @@
                         <input type="password" id="senha" name="password" placeholder="senha" required>
                         <small class="error-message"></small>
                     </nav>
+                    <nav class="link-container-senha">
+                        <a href="/recuperar enha">Esqueceu sua senha?</a>
+                    </nav>
+                    </nav>
                     <button type="submit"><a href="/perfilcliente"></a>Sou Cliente</button>
                     <nav class="link-container">
-                    <a href="/cadastroprof">Quero me cadastrar!</a>
-                </nav>
+                    <a href="/cadastroinicial">Quero me cadastrar!</a>
                 </form>
             </nav>
         </main>
-
+    </body>
     <script>
         document.getElementById('loginForm').addEventListener('submit', function(event) {
             event.preventDefault();
@@ -84,5 +78,4 @@
             }
         });
     </script>
-</body>
 </html>

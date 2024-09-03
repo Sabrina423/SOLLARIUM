@@ -15,8 +15,8 @@ body {
 
 .container {
     position: relative;
-    top: 30px;
-    height: 520px;
+    top: 100px;
+    height: 650px;
     display: flex;
     flex-direction: row; /* Layout padrão: lado a lado */
     width: 60%;
@@ -34,7 +34,7 @@ body {
     align-items: center;
     justify-content: center;
     padding: 10px;
-    background-color: black;
+    background-image: url(/imagens/painelsolar_.png);
     background-size: cover; /* Ajusta a imagem ao tamanho do contêiner */
     background-position: center; /* Centraliza a imagem */
 }
@@ -60,6 +60,7 @@ main {
 }
 
 .input-group {
+    margin-top: 20px;
     margin-bottom: 12px;
 }
 
@@ -70,7 +71,7 @@ main {
     border: 1px solid #ddd;
     border-radius: 5px;
     font-size: 14px;
-    height: 30px;
+    height: 40px;
 }
 .input-group select {
     width: 100%;
@@ -126,6 +127,8 @@ button[type="submit"]:hover {
 /* Media Queries para Layout Responsivo */
 @media (max-width: 768px) {
     .container {
+        position: relative;
+        top: 0px;
         flex-direction: column; /* Layout vertical: hero em cima e formulário embaixo */
         height: 70%;
         width: 90%;
