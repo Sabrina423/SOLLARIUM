@@ -20,8 +20,7 @@ body {
 
 .container {
     display: flex;
-    max: 600px;
-    height: 70%;
+    height: 100%;
     max-height: 700px;
     background-color: rgb(255, 255, 255);
     backdrop-filter: blur(2px);
@@ -163,10 +162,75 @@ color: rgb(252, 182, 52);
 hr{
     margin-top: 20px;
 }
+ul.box-redes-sociais {
+  
+    display: flex;
+    background: transparent;
+    width: 305px;
+    float: none;
+    margin: auto;
+  }
+  ul.box-redes-sociais li {
+    list-style: none;
+    margin: auto;
+  }
+  ul.box-redes-sociais li a {
+    
+    width: 50px;
+    height: 50px;
+    background-color: #fff;
+    text-align: center;
+    line-height: 45px;
+    font-size: 22px;
+    display: block;
+    border-radius: 50%;
+    position: relative;
+    overflow: hidden;
+    border: 2px solid #eaeaea;
+    z-index: 1;
+    margin-top: 20px;
+  }
+  ul.box-redes-sociais li a .icon {
+    position: relative;
+    top:-8px;
+    color: #262626;
+    transition: .3s;
+    z-index: 3;
+  }
+  ul.box-redes-sociais li a:hover .icon {
+    color: #fff;
+    scale: 1.2;
+  }
+  ul.box-redes-sociais li a:before {
+    content: "";
+    position: absolute;
+    top: 100%;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background: #f00;
+    transition: .6s;
+    z-index: 2;
+  }
+  ul.box-redes-sociais li a:hover:before {
+    top: 0;
+  }
+  ul.box-redes-sociais li.facebook a:before{
+    background: #3b5999;
+  }
+  ul.box-redes-sociais li.instagram a:before{
+    background:hsl(0 0% 10%);
+    background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%,#d6249f 60%,#285AEB 90%);
+
+  }
 /* Media Queries para Layout Responsivo */
 @media (max-width: 768px) {
+    h1{
+        margin-bottom: -40px;
+    }
+    
     .container {
-        height: 700px;
+        height: 800px;
         flex-direction: column; /* Layout vertical: hero em cima e formulário embaixo */
     }
 
