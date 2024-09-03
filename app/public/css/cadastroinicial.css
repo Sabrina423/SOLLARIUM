@@ -27,6 +27,7 @@ body {
     overflow: hidden;
     box-shadow: 0 0 30px rgba(0, 0, 0, 0.753);
     align-content: center;
+    transition: background-color 5.20s ease, color 30.3s ease;
 }
 
 /* O Hero é a parte esquerda e o formulário é a parte direita */
