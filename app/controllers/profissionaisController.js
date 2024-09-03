@@ -14,38 +14,30 @@ const profissionaisController = {
     ],
 
     regrasValidacaoFormCad: [
-        body("nome_Prof")
+        body("nome_prof")
             .isLength({ min: 3, max: 45 }).withMessage("Nome deve ter de 3 a 45 caracteres!"),
-        body("nomeusu_usu")
-            .isLength({ min: 8, max: 45 }).withMessage("Nome de usuário deve ter de 8 a 45 caracteres! Incluindo uma letra maiúscula, um caractere especial e um número ")
-            .custom(async value => {
-                const profiionalExistente = await cliente.findById(value); // Ajustado para verificar no modelo correto
-                if (profissionalExistente) {
-                    throw new Error('Nome de usuário em uso!');
-                }
-            }),
-        body("email_profissional")
+        body("email_prof")
             .isEmail().withMessage("Digite um e-mail válido!")
             .custom(async value => {
-                const clienteExistente = await cliente.findById(value); // Ajustado para verificar no modelo correto
-                if (clienteExistente) {
+                const profissionalExistente = await cliente.findById(value); // Ajustado para verificar no modelo correto
+                if (profissionalExistente) {
                     throw new Error('E-mail em uso!');
                 }
             }),
-        body("senha_profissional")
+        body("senha_prof")
             .isStrongPassword()
             .withMessage("A senha deve ter no mínimo 8 caracteres")
     ],
 
     regrasValidacaoPerfil: [
-        body("nome_profissional")
+        body("nome_prof")
             .isLength({ min: 3, max: 45 }).withMessage("Mínimo de 3 letras e máximo de 45!"),
-        body("nome_profissional")
-            .isLength({ min: 8, max: 45 }).withMessage("Nome de usuário deve ter de 8 a 45 caracteres!"),
-        body("email_profissional")
+        body("email_prof")
             .isEmail().withMessage("Digite um e-mail válido!"),
-        body("fone_profissional")
-            .isLength({ min: 12, max: 13 }).withMessage("Digite um telefone válido!")
+        body("telefone_prof")
+            .isLength({ min: 12, max: 13 }).withMessage("Digite um telefone válido!"),
+        body("senha_prof")
+            .isLength({ min: 8, max: 45 }).withMessage("Nome de usuário deve ter de 8 a 45 caracteres!"),
     ],
 
     logar: (req, res) => {
@@ -61,7 +53,7 @@ const profissionaisController = {
     },
 
     cadastrar: async (req, res) => {
-        console.log("prof_controller")
+        console.log("profissionaisController")
         const erros = validationResult(req);
         if (!erros.isEmpty()) {
             console.log(erros);
@@ -81,13 +73,11 @@ const profissionaisController = {
         // };
 
         const dadosForm = { 
-            nome: req.body.nome, 
-            sobrenome: req.body.sobrenome,
-            phone: req.body.phone,
-            cpf: req.body.cpf,
-            cep: req.body.cep,
-            email: req.body.email,
-            hashedsenha: bcrypt.hashSync(req.body.senha, salt)
+            nome_prof: req.body.nome_prof, 
+            telefone_prof: req.body.telefone_prof,
+            cpf_prof: req.body.cpf_prof,
+            email_prof: req.body.email_prof,
+            hashedsenha: bcrypt.hashSync(req.body.senha_prof, salt)
         } ;
         console.log(dadosForm);
         try {

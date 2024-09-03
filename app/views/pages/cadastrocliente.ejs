@@ -17,7 +17,7 @@
                 <nav class="logo"></nav>
                 <nav class="input-group">
                     <input type="text" name="nome_cliente" placeholder="Nome Completo" required>
-                    <input type="text" name="cpf_cliente" placeholder="CPF" required>
+                    <input type="text" name="cpf_cliente" id="cpf_cliente" placeholder="CPF" required>
                 </nav>
                 <nav class="input-group">
                     <input type="text" name="endereco_cliente" placeholder="Endereço" required>
@@ -68,6 +68,35 @@
             const specialCharCriteria = /[!@#$%^&*(),.?":{}|<>]/.test(password);
             return lengthCriteria && upperCaseCriteria && specialCharCriteria;
         }
+
+
+
+        document.addEventListener('DOMContentLoaded', function() {
+        function applyCPFMask(value) {
+            return value
+                .replace(/\D/g, '') // Remove tudo que não é dígito
+                .replace(/(\d{3})(\d)/, '$1.$2')
+                .replace(/(\d{3})(\d)/, '$1.$2')
+                .replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+        }
+
+        function applyPhoneMask(value) {
+            return value
+                .replace(/\D/g, '') // Remove tudo que não é dígito
+                .replace(/(\d{2})(\d)/, '($1) $2')
+                .replace(/(\d{5})(\d)/, '$1-$2')
+                .replace(/(\d{5})(\d{1,4})$/, '$1-$2');
+        }
+
+        document.getElementById('cpf_cliente').addEventListener('input', function() {
+            this.value = applyCPFMask(this.value);
+        });
+
+        document.getElementById('telefone_cliente').addEventListener('input', function() {
+            this.value = applyPhoneMask(this.value);
+        });
+    });
+
     </script>
 </body>
 </html>

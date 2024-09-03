@@ -13,14 +13,14 @@
             <img src="/imagens/pexels-tomfisk-9893729.jpg" alt="">
         </nav>
         <main>
-            <form action="/cadastrocliente" method="POST" id="cadastroForm">
+            <form action="/cadastroprofissional" method="POST" id="cadastroFormprof">
                 <nav class="logo"></nav>
                 <nav class="input-group">
-                    <input type="text" name="nome_cliente" placeholder="Nome Completo" required>
-                    <input type="text" name="cpf_cliente" placeholder="CPF" required>
+                    <input type="text" name="nome_prof" id="nome_prof" placeholder="Nome Completo" required>
+                    <input type="text" name="cpf_prof" id="cpf_prof"  placeholder="CPF" required>
                 </nav>
                 <nav class="input-group">
-                    <select id="estado_cliente" name="estado_cliente">
+                    <select id="estado_prof" name="estado_prof">
                         <option value="São paulo">SP</option>
                         <option value="Rio de Janeiro">RJ</option>
                         <option value="Minas Gerais">MG</option>
@@ -28,20 +28,20 @@
                     </select>
                 </nav>
                 <nav class="input-group">
-                    <input type="email" name="email_cliente" placeholder="E-mail" required>
-                    <input type="tel" id="telefone_cliente" name="contato_cliente" placeholder="Contato (00) 00000-0000" required>
+                    <input type="email" name="email_prof" id="email_prof" placeholder="E-mail" required>
+                    <input type="tel" id="telefone_prof" name="contato_prof" placeholder="Contato (00) 00000-0000" required>
                 </nav>
                 <nav class="input-group">
                     <nav class="password-container">
-                        <input type="password" id="password" placeholder="Senha" onfocus="showMessage()" onblur="hideMessage()" oninput="validatePassword()">
+                        <input type="password" id="senha_prof" placeholder="Senha" onfocus="showMessage()" onblur="hideMessage()" oninput="validatePassword()">
                         <nav id="message" class="invalid">A senha deve ter pelo menos 8 caracteres, uma letra maiúscula e um caractere especial.</nav>
                     </nav>
                     <nav class="password-container">
-                        <input type="password" id="senha_cliente" name="senha_cliente" placeholder="Confirme sua senha" required>
+                        <input type="password" id="confimasenha_prof" name="confimasenha_prof" placeholder="Confirme sua senha" required>
                     </nav>
                     <nav class="input-group">
-                        <input type="text" name="area_cliente" placeholder="Área de atuação" required>
-                        <input type="text" id="experiencia_cliente" name="experiencia_cliente" placeholder="Anos de experiência na área" required>
+                        <input type="text" name="area_prof" id="area_prof" placeholder="Área de atuação" required>
+                        <input type="text" id="experiencia_prof" name="experiencia_prof" placeholder="Anos de experiência na área" required>
                     </nav>
                 </nav>
                 <button type="submit">Criar Conta</button>
@@ -58,19 +58,46 @@
         }
 
         function validatePassword() {
-            const password = document.getElementById('password').value;
+            const senha_prof = document.getElementById('senha_prof').value;
             const message = document.getElementById('message');
-            const isValid = validatePasswordCriteria(password);
+            const isValid = validatePasswordCriteria(senha_prof);
             message.className = isValid ? 'valid' : 'invalid';
             message.innerText = isValid ? 'Senha válida' : 'A senha deve ter pelo menos 8 caracteres, uma letra maiúscula e um caractere especial.';
         }
 
-        function validatePasswordCriteria(password) {
-            const lengthCriteria = password.length >= 8;
-            const upperCaseCriteria = /[A-Z]/.test(password);
-            const specialCharCriteria = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+        function validatePasswordCriteria(senha_prof) {
+            const lengthCriteria = senha_prof.length >= 8;
+            const upperCaseCriteria = /[A-Z]/.test(senha_prof);
+            const specialCharCriteria = /[!@#$%^&*(),.?":{}|<>]/.test(senha_prof);
             return lengthCriteria && upperCaseCriteria && specialCharCriteria;
         }
+
+    document.addEventListener('DOMContentLoaded', function() {
+    function applyCPFMask(value) {
+        return value
+            .replace(/\D/g, '') // Remove tudo que não é dígito
+            .replace(/(\d{3})(\d)/, '$1.$2')
+            .replace(/(\d{3})(\d)/, '$1.$2')
+            .replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+    }
+
+    function applyPhoneMask(value) {
+        return value
+            .replace(/\D/g, '') // Remove tudo que não é dígito
+            .replace(/(\d{2})(\d)/, '($1) $2')
+            .replace(/(\d{5})(\d)/, '$1-$2')
+            .replace(/(\d{5})(\d{1,4})$/, '$1-$2');
+    }
+
+    document.getElementById('cpf_prof').addEventListener('input', function() {
+        this.value = applyCPFMask(this.value);
+    });
+
+    document.getElementById('telefone_prof').addEventListener('input', function() {
+        this.value = applyPhoneMask(this.value);
+    });
+});
+
     </script>
 </body>
 </html>
