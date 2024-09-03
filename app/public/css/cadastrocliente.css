@@ -1,13 +1,5 @@
-<<<<<<< HEAD
 /* Estilos gerais */
 * {
-=======
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
-
-body {
-    font-family: 'Poppins', opens-sans;
-    background-color: #f5f5f5;
->>>>>>> bb11587 (css commit)
     margin: 0;
     padding: 0;
     box-sizing: border-box;

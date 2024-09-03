@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,149 +8,151 @@
     <link rel="stylesheet" href="/css/perfilcliente.css">
     <title>Perfil do Usuário</title>
 </head>
+
 <body>
 
-<header class="site-header">
-    <section class="header-container">
-        <section class="logo">Logo</section>
-        <nav class="main-nav">
-            <a href="#home">Home</a>
-            <a href="#orcamento">Orçamento</a>
-            <a href="#configuracoes">
-                <img src="/images/settings-icon.png" alt="Configurações">
-            </a>
-        </nav>
-        <button class="menu-toggle" aria-label="Toggle menu">&#9776;</button>
-    </section>
-</header>
-
-<section class="profile-container">
-    <section class="profile-left">
-        <section class="profile-header">
-            <img id="profile-pic" src="default-profile.jpg" >
-            <section>
-                <h1 id="user-name">Nome do Usuário</h1>
-                <p id="user-state">Estado</p>
-                <nav class="photo-actions">
-                    <button onclick="togglePhotoMenu()">Alterar Foto</button>
-                    <nav id="photo-menu" class="photo-menu">
-                        <input type="file" id="file-input" accept="image/*" style="display: none;">
-                        <button onclick="document.getElementById('file-input').click()">Selecionar Foto</button>
-                        <button onclick="removePhoto()">Remover Foto</button>
-                    </nav>
-                </nav>
-            </section>
+    <header class="site-header">
+        <section class="header-container">
+            <section class="logo">Logo</section>
+            <nav class="main-nav">
+                <a href="#home">Home</a>
+                <a href="#orcamento">Orçamento</a>
+                <a href="#configuracoes">
+                    <img src="/images/settings-icon.png" alt="Configurações">
+                </a>
+            </nav>
+            <button class="menu-toggle" aria-label="Toggle menu">&#9776;</button>
         </section>
-    </section>
-    
-    <nav class="profile-right">
-        <div class="profile-details">
-            <h2>Informações do Perfil</h2>
-            <input type="text" id="full-name" placeholder="Nome Completo">
-            <input type="text" id="email" placeholder="Email">
-            <input type="text" id="phone" placeholder="Telefone">
-            <button onclick="saveProfile()">Salvar</button>
-        </nav>
-
-        <section class="professionals-carousel">
-            <h2>Profissionais contratados</h2>
-            <nav class="carousel-wrapper">
-                <section class="carousel-container">
-                    <nav class="professional-card">
-                        <img src="/imagens/icon1.webp" alt="Profissional 1">
-                        <h3>João Silva</h3>
-                        <p>Especialização: Instalador de Painéis Solares</p>
-                    </nav>
-                    <section class="professional-card">
-                        <img src="/imagens/icon1.webp" alt="Profissional 2">
-                        <h3>Maria Oliveira</h3>
-                        <p>Especialização: Consultora de Energia Solar</p>
+    </header>
+    <form>
+        <section class="profile-container">
+            <section class="profile-left">
+                <section class="profile-header">
+                    <img id="profile-pic" src="default-profile.jpg">
+                    <section>
+                        <h1 id="user-name">Nome do Usuário</h1>
+                        <p id="user-state">Estado</p>
+                        <nav class="photo-actions">
+                            <button onclick="togglePhotoMenu()">Alterar Foto</button>
+                            <nav id="photo-menu" class="photo-menu">
+                                <input type="file" id="file-input" accept="image/*" style="display: none;">
+                                <button onclick="document.getElementById('file-input').click()">Selecionar Foto</button>
+                                <button onclick="removePhoto()">Remover Foto</button>
+                            </nav>
+                        </nav>
                     </section>
-                    <nav class="professional-card">
-                        <img src="/imagens/icon1.webp" alt="Profissional 3">
-                        <h3>Pedro Santos</h3>
-                        <p>Especialização: Projetista de Sistemas Solares</p>
-                    </nav>
-                    <!-- Adicione mais cartões conforme necessário -->
-                </nav>
-                <button class="carousel-button carousel-prev" onclick="prevSlide()">&#10094;</button>
-                <button class="carousel-button carousel-next" onclick="nextSlide()">&#10095;</button>
+                </section>
             </section>
-        </section>
+
+            <nav class="profile-right">
+                <div class="profile-details">
+                    <h2>Informações do Perfil</h2>
+                    <input type="text" id="full-name" placeholder="Nome Completo">
+                    <input type="text" id="email" placeholder="Email">
+                    <input type="text" id="phone" placeholder="Telefone">
+                    <button onclick="saveProfile()">Salvar</button>
+            </nav>
+    </form>
+    <section class="professionals-carousel">
+        <h2>Profissionais contratados</h2>
+        <nav class="carousel-wrapper">
+            <section class="carousel-container">
+                <nav class="professional-card">
+                    <img src="/imagens/icon1.webp" alt="Profissional 1">
+                    <h3>João Silva</h3>
+                    <p>Especialização: Instalador de Painéis Solares</p>
+                </nav>
+                <section class="professional-card">
+                    <img src="/imagens/icon1.webp" alt="Profissional 2">
+                    <h3>Maria Oliveira</h3>
+                    <p>Especialização: Consultora de Energia Solar</p>
+                </section>
+                <nav class="professional-card">
+                    <img src="/imagens/icon1.webp" alt="Profissional 3">
+                    <h3>Pedro Santos</h3>
+                    <p>Especialização: Projetista de Sistemas Solares</p>
+                </nav>
+                <!-- Adicione mais cartões conforme necessário -->
+        </nav>
+        <button class="carousel-button carousel-prev" onclick="prevSlide()">&#10094;</button>
+        <button class="carousel-button carousel-next" onclick="nextSlide()">&#10095;</button>
     </section>
-</section>
+    </section>
+    </section>
+    </section>
 
-<script>
-    let photoMenuVisible = false;
-    let currentIndex = 0;
+    <script>
+        let photoMenuVisible = false;
+        let currentIndex = 0;
 
-    function togglePhotoMenu() {
-        const menu = document.getElementById('photo-menu');
-        photoMenuVisible = !photoMenuVisible;
-        menu.style.display = photoMenuVisible ? 'block' : 'none';
-    }
+        function togglePhotoMenu() {
+            const menu = document.getElementById('photo-menu');
+            photoMenuVisible = !photoMenuVisible;
+            menu.style.display = photoMenuVisible ? 'block' : 'none';
+        }
 
-    function removePhoto() {
-        document.getElementById('profile-pic').src = 'default-profile.jpg';
-        document.getElementById('file-input').value = '';
-        togglePhotoMenu(); // Hide the menu after removing photo
-    }
+        function removePhoto() {
+            document.getElementById('profile-pic').src = 'default-profile.jpg';
+            document.getElementById('file-input').value = '';
+            togglePhotoMenu(); // Hide the menu after removing photo
+        }
 
-    document.getElementById('file-input').addEventListener('change', function(event) {
-        const file = event.target.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                document.getElementById('profile-pic').src = e.target.result;
-                togglePhotoMenu(); // Hide the menu after selecting photo
+        document.getElementById('file-input').addEventListener('change', function (event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    document.getElementById('profile-pic').src = e.target.result;
+                    togglePhotoMenu(); // Hide the menu after selecting photo
+                }
+                reader.readAsDataURL(file);
             }
-            reader.readAsDataURL(file);
+        });
+
+        document.addEventListener('click', function (event) {
+            const menu = document.getElementById('photo-menu');
+            const photoButton = document.querySelector('.photo-actions button');
+            if (photoMenuVisible && !menu.contains(event.target) && event.target !== photoButton) {
+                togglePhotoMenu();
+            }
+        });
+
+        function saveProfile() {
+            const fullName = document.getElementById('full-name').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+
+            // Aqui você pode adicionar a lógica para salvar as informações do perfil, 
+            // como fazer uma requisição para um servidor.
+
+            alert('Perfil salvo com sucesso!');
         }
-    });
 
-    document.addEventListener('click', function(event) {
-        const menu = document.getElementById('photo-menu');
-        const photoButton = document.querySelector('.photo-actions button');
-        if (photoMenuVisible && !menu.contains(event.target) && event.target !== photoButton) {
-            togglePhotoMenu();
+        function showSlide(index) {
+            const container = document.querySelector('.carousel-container');
+            const totalSlides = container.children.length;
+            if (index >= totalSlides) {
+                currentIndex = 0;
+            } else if (index < 0) {
+                currentIndex = totalSlides - 1;
+            } else {
+                currentIndex = index;
+            }
+            container.style.transform = `translateX(-${currentIndex * 100}%)`;
         }
-    });
 
-    function saveProfile() {
-        const fullName = document.getElementById('full-name').value;
-        const email = document.getElementById('email').value;
-        const phone = document.getElementById('phone').value;
-
-        // Aqui você pode adicionar a lógica para salvar as informações do perfil, 
-        // como fazer uma requisição para um servidor.
-
-        alert('Perfil salvo com sucesso!');
-    }
-
-    function showSlide(index) {
-        const container = document.querySelector('.carousel-container');
-        const totalSlides = container.children.length;
-        if (index >= totalSlides) {
-            currentIndex = 0;
-        } else if (index < 0) {
-            currentIndex = totalSlides - 1;
-        } else {
-            currentIndex = index;
+        function nextSlide() {
+            showSlide(currentIndex + 1);
         }
-        container.style.transform = `translateX(-${currentIndex * 100}%)`;
-    }
 
-    function nextSlide() {
-        showSlide(currentIndex + 1);
-    }
+        function prevSlide() {
+            showSlide(currentIndex - 1);
+        }
 
-    function prevSlide() {
-        showSlide(currentIndex - 1);
-    }
-
-    // Inicializar o carrossel
-    showSlide(currentIndex);
-</script>
+        // Inicializar o carrossel
+        showSlide(currentIndex);
+    </script>
 
 </body>
+
 </html>

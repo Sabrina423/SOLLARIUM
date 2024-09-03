@@ -3,45 +3,82 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Sobre a Sollarium, líder em soluções de energia solar no Brasil. Conheça nossa história, missão e valores.">
-    <meta name="keywords" content="Sollarium, energia solar, sobre nós, missão, valores, história">
-    <meta name="author" content="Sollarium">
-    <title>Sobre Nós - Sollarium</title>
-    <link rel="stylesheet" href="/css/sobrenos.css">
+    <link rel="stylesheet" href="/css/cadastroprof.css">
+    <title>Cadastro Profissional</title>
 </head>
 <body>
+<<<<<<< HEAD
     <header>
         <a href="/home" class="btn-home">&#9664; Voltar para a Home</a>
         <h1>Sobre a Sollarium</h1>
         <p>Conheça nossa história, missão e valores</p>
     </header>
+=======
+    <nav class="container">
+        <nav class="hero">
+            <h2>Faça parte da nossa equipe!</h2>
+            <img src="/imagens/pexels-tomfisk-9893729.jpg" alt="">
+        </nav>
+        <main>
+            <form action="/cadastrocliente" method="POST" id="cadastroForm">
+                <nav class="logo"></nav>
+                <nav class="input-group">
+                    <input type="text" name="nome_cliente" placeholder="Nome Completo" required>
+                    <input type="text" name="cpf_cliente" placeholder="CPF" required>
+                </nav>
+                <nav class="input-group">
+                    <select id="estado_cliente" name="estado_cliente">
+                        <option value="São paulo">SP</option>
+                        <option value="Rio de Janeiro">RJ</option>
+                        <option value="Minas Gerais">MG</option>
+                        <option value="Espirito Santo">ES</option>
+                    </select>
+                </nav>
+                <nav class="input-group">
+                    <input type="email" name="email_cliente" placeholder="E-mail" required>
+                    <input type="tel" id="telefone_cliente" name="contato_cliente" placeholder="Contato (00) 00000-0000" required>
+                </nav>
+                <nav class="input-group">
+                    <nav class="password-container">
+                        <input type="password" id="password" placeholder="Senha" onfocus="showMessage()" onblur="hideMessage()" oninput="validatePassword()">
+                        <nav id="message" class="invalid">A senha deve ter pelo menos 8 caracteres, uma letra maiúscula e um caractere especial.</nav>
+                    </nav>
+                    <nav class="password-container">
+                        <input type="password" id="senha_cliente" name="senha_cliente" placeholder="Confirme sua senha" required>
+                    </nav>
+                    <nav class="input-group">
+                        <input type="text" name="area_cliente" placeholder="Área de atuação" required>
+                        <input type="text" id="experiencia_cliente" name="experiencia_cliente" placeholder="Anos de experiência na área" required>
+                    </nav>
+                </nav>
+                <button type="submit">Criar Conta</button>
+            </form>
+        </main>
+    </nav>
+    <script>
+        function showMessage() {
+            document.getElementById('message').style.display = 'block';
+        }
+>>>>>>> fa6c7f7 (atualização)
 
-    <section>
-        <h2>Nossa História</h2>
-        <p>A Sollarium foi fundada com o objetivo de oferecer as melhores soluções em energia solar para clientes em todo o Brasil. Com experiência no mercado, nos tornamos referência em qualidade e inovação.</p>
-    </section>
+        function hideMessage() {
+            document.getElementById('message').style.display = 'none';
+        }
 
-    <section>
-        <h2>Missão</h2>
-        <p>Nossa missão é promover o uso sustentável da energia solar, contribuindo para um futuro mais limpo e seguro.</p>
-    </section>
+        function validatePassword() {
+            const password = document.getElementById('password').value;
+            const message = document.getElementById('message');
+            const isValid = validatePasswordCriteria(password);
+            message.className = isValid ? 'valid' : 'invalid';
+            message.innerText = isValid ? 'Senha válida' : 'A senha deve ter pelo menos 8 caracteres, uma letra maiúscula e um caractere especial.';
+        }
 
-    <section>
-        <h2>Valores</h2>
-        <ul>
-            <li>Inovação</li>
-            <li>Sustentabilidade</li>
-            <li>Transparência</li>
-            <li>Qualidade</li>
-            <li>Compromisso com o cliente</li>
-        </ul>
-    </section>
-
-    <footer>
-        <p>&copy; <%= new Date().getFullYear() %> Sollarium - Todos os direitos reservados.</p>
-        <address>
-            Contato: <a href="mailto:contato@sollarium.com.br">contato@sollarium.com.br</a> | Telefone: (11) 1234-5678
-        </address>
-    </footer>
+        function validatePasswordCriteria(password) {
+            const lengthCriteria = password.length >= 8;
+            const upperCaseCriteria = /[A-Z]/.test(password);
+            const specialCharCriteria = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+            return lengthCriteria && upperCaseCriteria && specialCharCriteria;
+        }
+    </script>
 </body>
 </html>
