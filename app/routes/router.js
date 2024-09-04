@@ -7,7 +7,7 @@ const clienteController = require('../controllers/clienteController');
 const profissionalController = require('../controllers/profissionaisController.js');
 const cliente = require("../models/clienteModel");
 
-const  {
+const  {  
     verificarClienteAutenticado,
     limparSessao,
     gravarClienteAutenticado,
@@ -16,7 +16,7 @@ const  {
 
 const router = express.Router();
 
-const secretKey = 'your-secret-key';
+const secretKey = 'your-secret-key'; 
 
 // Middleware de Autenticação
 const authenticateToken = (req, res, next) => {
@@ -87,7 +87,7 @@ router.post('/cadastrocliente',
         .matches(/\d/).withMessage('A senha deve conter pelo menos um número')
         .matches(/[@$!%*?&]/).withMessage('A senha deve conter pelo menos um caractere especial'),
     body('cpf_cliente')
-        .isLength({ min: 15, max: 15 }).withMessage('O CPF deve ter 11 dígitos'),
+        .isLength({ min: 14, max: 14 }).withMessage('O CPF deve ter 11 dígitos'),
     body('cep_cliente')
         .isLength({ min: 8, max: 8 }).withMessage('O endereço deve ter entre 8 caracteres'),
     body('contato_cliente')
@@ -104,14 +104,14 @@ router.post('/cadastrocliente',
         return res.status(400).json({ errors: errors.array() });
     }
 
-    const { nome_cliente, senha_cliente, cpf_cliente, endereco_cliente, contato_cliente, email_cliente } = req.body;
+    const { nome_cliente, senha_cliente, cpf_cliente, cep_cliente, contato_cliente, email_cliente } = req.body;
     const hashedPassword = bcrypt.hashSync(senha_cliente, salt);
 
     const dadosForm = {
         cpf_cliente: cpf_cliente,
-        endereco_cliente: endereco_cliente,
+        cep_cliente: cep_cliente,
         nome_cliente: nome_cliente,
-        contato_cliente: contato_cliente,
+        contato_cliente: contato_cliente, 
         email_cliente: email_cliente,
         senha_cliente: senha_cliente,
     };
