@@ -1,5 +1,8 @@
 const { validationResult } = require("express-validator");
 const cliente = require("../models/clienteModel");
+const profissional = require("../models/profissionaisModel");
+const adm = require("../models/admModel");
+
 const bcrypt = require("bcryptjs");
 
 const verificarClienteAutenticado = (req, res, next) => {
@@ -44,7 +47,7 @@ const gravarClienteAutenticado = async (req, res, next) => {
             // if  validar profissional        
               const profissionalExistente = await profissional.findByEmail(dadosForm.email_profissional);
               console.log(profissionalExistente)
-              if (profissionalExistente && bcrypt.compareSync( dadosForm.senha_cliente, profissionalExistente[0].SENHA_PROFISSIONAL)) {
+              if (profissionalExistente && bcrypt.compareSync( dadosForm.senha_cliente, profissionalExistente[0].SENHA_PROF)) {
                     console.log("validou a senha")
         
                 autenticado = {

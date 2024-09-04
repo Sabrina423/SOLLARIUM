@@ -23,10 +23,10 @@ const ClienteModel = {
 
     create: async (cliente) => {
         try {
-            const { cpf_cliente, cep_cliente, nome_cliente, contato_cliente, email_cliente, senha_cliente, estado_cliente } = cliente;
+            const { cpf_cliente, cep_cliente, nome_cliente, contato_cliente, email_cliente, senha_cliente } = cliente;
             const result = await pool.query(
-                'INSERT INTO CLIENTE (CPF_CLIENTE, CEP_CLIENTE, NOME_CLIENTE, CONTATO_CLIENTE, EMAIL_CLIENTE, SENHA_CLIENTE, ESTADO_CLIENTE) VALUES (?, ?, ?, ?, ?,?, ?)',
-                [cpf_cliente, cep_cliente, nome_cliente, contato_cliente, email_cliente, senha_cliente, estado_cliente]
+                'INSERT INTO CLIENTE (CPF_CLIENTE, CEP_CLIENTE, NOME_CLIENTE, CONTATO_CLIENTE, EMAIL_CLIENTE, SENHA_CLIENTE) VALUES (?, ?, ?, ?, ?,?)',
+                [cpf_cliente, cep_cliente, nome_cliente, contato_cliente, email_cliente, senha_cliente]
             );
             return result; // Retorna o resultado da inserção
         } catch (error) {
@@ -39,7 +39,7 @@ const ClienteModel = {
         try {
             const { cpf_cliente, cep_cliente, nome_cliente, contato_cliente, email_cliente, senha_cliente } = cliente;
             const result = await pool.query(
-                'UPDATE CLIENTE SET CPF_CLIENTE = ?, CEP_CLIENTE = ?, NOME_CLIENTE = ?, CONTATO_CLIENTE = ?, EMAIL_CLIENTE = ?, SENHA_CLIENTE, ESTADO_CLIENTE = ? WHERE ID_CLIENTE = ?',
+                'UPDATE CLIENTE SET CPF_CLIENTE = ?, CEP_CLIENTE = ?, NOME_CLIENTE = ?, CONTATO_CLIENTE = ?, EMAIL_CLIENTE = ?, SENHA_CLIENTE = ? WHERE ID_CLIENTE = ?',
                 [cpf_cliente, cep_cliente, nome_cliente, contato_cliente, email_cliente,senha_cliente, id]
             );
             return result; // Retorna o resultado da atualização

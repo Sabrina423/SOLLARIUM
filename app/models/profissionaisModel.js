@@ -11,6 +11,16 @@ const profissionaisModel = {
         }
     },
 
+    findByEmail: async (id) => {
+        try {
+            const [linhas] = await pool.query('SELECT * FROM PROFISSIONAIS WHERE EMAIL_PROF = ?', [id]);
+            return linhas;
+        } catch (error) {
+            console.error('Erro ao buscar profissional por ID:', error);
+            throw error;
+        }
+    },
+
     create: async (profissional) => {
         try {
             

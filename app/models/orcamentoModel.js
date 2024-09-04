@@ -26,7 +26,7 @@ const orcamentoModel = {
             const { id_orcamento, valor_orcamento,  descricao_orcamento, data_orcamento} = orcamento;
             const result = await pool.query(
                 'INSERT INTO ORCAME ( ID_ORCAMENO, VALOR_ORCAMENTO, DESCRICAO_ORCAMENTO, DATA_ORCAMENTO) VALUES (?, ?, ?,?)',
-                [id_orcamento, valor_orcamento, descricao_orcamento, data_orcamento, id]
+                [id_orcamento, valor_orcamento, descricao_orcamento, data_orcamento]
             );
             return result; // Retorna o resultado da inserção
         } catch (error) {
