@@ -1,320 +1,205 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<<<<<<< HEAD
     <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
-    integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" 
+    integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" 
     crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <script src="/app/public/js/home.js"></script>
+    <title>Sollarium</title>
+    <script src="/js/home.js"></script>
     <link rel="stylesheet" href="/css/home.css">
-    <title>Sollarium | Energia Solar</title>
-=======
-    <link rel="icon" href="/images/favicon.ico">
-    <link rel="stylesheet" href="/css/perfilcliente.css">
-    <title>Perfil do Usuário</title>
->>>>>>> 153684c (atualização)
 </head>
 <body>
+    <header>
+       <div class="navbar">
+        <div class="logo"><a href="#">Sollarium</a></div>
+        <ul class="links">
+            <li><a href="#">Início</a></li>
+            <li><a href="#">Orçamento</a></li>
+            <li><a href="#">Sou Profissional</a></li>
+            <li><a href="#">Cadastro</a></li>
+        </ul>
+        <a href="#" class="action_btn">Entrar</a>
+        <div class="toggle_btn">
+            <i class="fa-solid fa-bars-staggered"></i>
+        </div>
+       </div>
 
-<header class="site-header">
-    <section class="header-container">
-        <section class="logo">Logo</section>
-        <nav class="main-nav">
-            <a href="#home">Home</a>
-            <a href="#orcamento">Orçamento</a>
-            <a href="#configuracoes">
-                <img src="/images/settings-icon.png" alt="Configurações">
-            </a>
-        </nav>
-<<<<<<< HEAD
-       </nav>
- 
-       <nav class="dropdown_menu">
-            <li><a href="/home">Início</a></li>
-            <li><a href="/orcamento">Orçamento</a></li>
-            <li><a href="/sobre"></a>Sobre Nós</li>
-            <li><a href="/cadastroinicial">Cadastre-se</a></li>
-            <li><a href="/entrar" class="action_btn">Entrar</a></li>
-       </nav>
+       <div class="dropdown_menu">
+            <li><a href="#">Início</a></li>
+            <li><a href="#">Orçamento</a></li>
+            <li><a href="#">Sou Profissional</a></li>
+            <li><a href="#">Cadastro</a></li>
+            <li><a href="#" class="action_btn">Entrar</a></li>
+       </div>
     </header>
- 
+
     <script>
         const toggleBtn = document.querySelector('.toggle_btn')
         const toggleBtnIcon = document.querySelector('.toggle_btn i')
         const dropDownMenu = document.querySelector('.dropdown_menu')
- 
+
         toggleBtn.onclick = function () {
             dropDownMenu.classList.toggle('open')
             const isOpen = dropDownMenu.classList.contains('open')
- 
+
             toggleBtnIcon.classList = isOpen
             ? 'fa-solid fa-xmark'
             : 'fa-solid fa-bars-staggered'
         }
     </script>
- 
+
     <main>
-        <nav class="slider">
-            <nav class="list">
-                <nav class="item active">
-                    <img src="/imagens/benefits-of-solar-panles.jpg">
-                    <nav class="content">
-                        <p>serviço</p>
+        <div class="sliderhome">
+            <div class="listhome">
+                <div class="item active">
+                    <img src="image/img1.webp">
+                    <div class="content">
+                        <p>design</p>
                         <h2>Instalação</h2>
                         <p class="pp">
-                            Oferecemos instalação completa de sistemas de energia solar,
+                            Oferecemos instalação completa de sistemas de energia solar, 
                             desde o planejamento até a ativação, garantindo eficiência e segurança em cada etapa.
                         </p>
-                    </nav>
-                </nav>
-                <nav class="item">
-                    <img src="">
-                    <nav class="content">
-                        <p>serviço</p>
+                    </div>
+                </div>
+                <div class="item">
+                    <img src="image/img2.jpg">
+                    <div class="content">
+                        <p>design</p>
                         <h2>Vistoria</h2>
                         <p class="pp">
                             Realizamos vistorias detalhadas para avaliar a viabilidade e o estado dos sistemas solares,
                             identificando possíveis melhorias e garantindo seu funcionamento ideal.
                         </p>
-                    </nav>
-                </nav>
-                <nav class="item">
-                    <img src="/imagens/Manutenção.png">
-                    <nav class="content">
-                        <p>serviço</p>
+                    </div>
+                </div>
+                <div class="item">
+                    <img src="image/img3.jpg">
+                    <div class="content">
+                        <p>design</p>
                         <h2>Manutenção</h2>
                         <p class="pp">
                             Nosso serviço de manutenção preventiva e corretiva assegura que seu sistema solar opere
                             com máxima eficiência e longevidade, minimizando interrupções.
                         </p>
-                    </nav>
-                </nav>
-                <nav class="item">
+                    </div>
+                </div>
+                <div class="item">
                     <img src="image/img4.jpg">
-                    <nav class="content">
-                        <p>serviço</p>
+                    <div class="content">
+                        <p>design</p>
                         <h2>Consultoria</h2>
                         <p class="pp">
                             Fornecemos consultoria especializada para ajudá-lo a escolher e implementar a melhor
                             solução de energia solar, adaptada às suas necessidades específicas e orçamento.
                         </p>
-                    </nav>
-                </nav>
-                <nav class="item">
+                    </div>
+                </div>
+                <div class="item">
                     <img src="image/img5.jpg">
-                    <nav class="content">
-                        <p>serviço</p>
+                    <div class="content">
+                        <p>design</p>
                         <h2>Limpeza</h2>
                         <p class="pp">
                             Oferecemos serviços de limpeza profissional para painéis solares, removendo sujeira e
                             detritos que podem reduzir a eficiência do sistema, garantindo desempenho ótimo.
                         </p>
-                    </nav>
-                </nav>
-            </nav>
-           
-            <nav class="arrows">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="arrows">
                 <button id="prev"><</button>
                 <button id="next">></button>
-            </nav>
-           
-            <nav class="thumbnail">
-                <nav class="item active">
-                    <img src="/imagens/Instalação.png">
-                    <nav class="content">
+            </div>
+            
+            <div class="thumbnailhome">
+                <div class="item active">
+                    <img src="image/img1.webp">
+                    <div class="content">
                         Instalação
-                    </nav>
-                </nav>
-                <nav class="item">
-                    <img src="/imagens/Vistoria.png">
-                    <nav class="content">
+                    </div>
+                </div>
+                <div class="item">
+                    <img src="image/img2.jpg">
+                    <div class="content">
                         Vistoria
-                    </nav>
-                </nav>
-                <nav class="item">
-                    <img src="/imagens/Manutenção.png">
-                    <nav class="content">
+                    </div>
+                </div>
+                <div class="item">
+                    <img src="image/img3.jpg">
+                    <div class="content">
                         Manutenção
-                    </nav>
-                </nav>
-                <nav class="item">
-                    <img src="/imagens/consultoria.png">
-                    <nav class="content">
+                    </div>
+                </div>
+                <div class="item">
+                    <img src="image/img4.jpg">
+                    <div class="content">
                         Consultoria
-                    </nav>
-                </nav>
-                <nav class="item">
-                    <img src="/imagens/limpeza.png">
-                    <nav class="content">
+                    </div>
+                </div>
+                <div class="item">
+                    <img src="image/img5.jpg">
+                    <div class="content">
                         Limpeza
-                    </nav>
-                </nav>
-            </nav>
-        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
     </main>
     <footer>
-        <nav class="footer-content">
-            <nav class="sobre">
-                <h4>Sobre Nós</h4>
-                <p>Sollarium é líder no fornecimento de soluções em energia solar. Oferecemos serviços de instalação, manutenção, vistoria, limpeza <br>
-                 e consultoria para um futuro mais sustentável.</p>
-            </nav>
-            <nav>
-                <h4>Contato</h4>
-                <p>Endereço: São Paulo, 123, São Paulo, SP</p>
-                <p>Telefone: (11) 1234-5678</p>
-                <p>Email: contato@sollarium.com.br</p>
-            </nav>
-            <nav>
-                <h4>Siga-nos</h4>
-                <nav class="icons">
-                    <a href="#"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                </nav>
-            </nav>
-        </nav>
+        <section class="footer">
+            <div class="footer-content">
+                <h2>Sollarium</h2>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident dolorum 
+                   accusantium nihil laudantium non.</p>
+
+                <div class="icons">
+                    <a href=""><i class='bx bxl-facebook-circle'></i></a>
+                    <a href=""><i class='bx bxl-twitter'></i></a>
+                    <a href=""><i class='bx bxl-instagram-alt' ></i></a>
+                    <a href=""><i class='bx bxl-youtube' ></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-content">
+                <h4>Projetos</h4>
+                <li><a href=""></a>Instalação</li>
+                <li><a href=""></a>Vistoria</li>
+                <li><a href=""></a>Manutenção</li>
+                <li><a href=""></a>Consultoria</li>
+                <li><a href=""></a>Limpeza</li>
+            </div>
+
+            <div class="footer-content">
+                <h4>Company</h4>
+                <li><a href=""></a>Instalação</li>
+                <li><a href=""></a>Vistoria</li>
+                <li><a href=""></a>Manutenção</li>
+                <li><a href=""></a>Consultoria</li>
+            </div>
+
+            <div class="footer-content">
+                <h4>Movement</h4>
+                <li><a href=""></a>Instalação</li>
+                <li><a href=""></a>Vistoria</li>
+                <li><a href=""></a>Manutenção</li>
+                <li><a href=""></a>Consultoria</li>
+            </div>
+
+            <div class="footer-content">
+                <h4>Help</h4>
+                <li><a href=""></a>Instalação</li>
+                <li><a href=""></a>Vistoria</li>
+                <li><a href=""></a>Manutenção</li>
+                <li><a href=""></a>Consultoria</li>
+            </div>
+        </section>
     </footer>
-</body>
-</html>
- 
-   
-=======
-        <button class="menu-toggle" aria-label="Toggle menu">&#9776;</button>
-    </section>
-</header>
 
-<section class="profile-container">
-    <section class="profile-left">
-        <section class="profile-header">
-            <img id="profile-pic" src="default-profile.jpg" >
-            <section>
-                <h1 id="user-name">Nome do Usuário</h1>
-                <p id="user-state">Estado</p>
-                <nav class="photo-actions">
-                    <button onclick="togglePhotoMenu()">Alterar Foto</button>
-                    <nav id="photo-menu" class="photo-menu">
-                        <input type="file" id="file-input" accept="image/*" style="display: none;">
-                        <button onclick="document.getElementById('file-input').click()">Selecionar Foto</button>
-                        <button onclick="removePhoto()">Remover Foto</button>
-                    </nav>
-                </nav>
-            </section>
-        </section>
-    </section>
-    
-    <nav class="profile-right">
-        <div class="profile-details">
-            <h2>Informações do Perfil</h2>
-            <input type="text" id="full-name" placeholder="Nome Completo">
-            <input type="text" id="email" placeholder="Email">
-            <input type="text" id="phone" placeholder="Telefone">
-            <button onclick="saveProfile()">Salvar</button>
-        </nav>
-
-        <section class="professionals-carousel">
-            <h2>Profissionais contratados</h2>
-            <nav class="carousel-wrapper">
-                <section class="carousel-container">
-                    <nav class="professional-card">
-                        <img src="/imagens/icon1.webp" alt="Profissional 1">
-                        <h3>João Silva</h3>
-                        <p>Especialização: Instalador de Painéis Solares</p>
-                    </nav>
-                    <section class="professional-card">
-                        <img src="/imagens/icon1.webp" alt="Profissional 2">
-                        <h3>Maria Oliveira</h3>
-                        <p>Especialização: Consultora de Energia Solar</p>
-                    </section>
-                    <nav class="professional-card">
-                        <img src="/imagens/icon1.webp" alt="Profissional 3">
-                        <h3>Pedro Santos</h3>
-                        <p>Especialização: Projetista de Sistemas Solares</p>
-                    </nav>
-                    <!-- Adicione mais cartões conforme necessário -->
-                </nav>
-                <button class="carousel-button carousel-prev" onclick="prevSlide()">&#10094;</button>
-                <button class="carousel-button carousel-next" onclick="nextSlide()">&#10095;</button>
-            </section>
-        </section>
-    </section>
-</section>
-
-<script>
-    let photoMenuVisible = false;
-    let currentIndex = 0;
-
-    function togglePhotoMenu() {
-        const menu = document.getElementById('photo-menu');
-        photoMenuVisible = !photoMenuVisible;
-        menu.style.display = photoMenuVisible ? 'block' : 'none';
-    }
-
-    function removePhoto() {
-        document.getElementById('profile-pic').src = 'default-profile.jpg';
-        document.getElementById('file-input').value = '';
-        togglePhotoMenu(); // Hide the menu after removing photo
-    }
-
-    document.getElementById('file-input').addEventListener('change', function(event) {
-        const file = event.target.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                document.getElementById('profile-pic').src = e.target.result;
-                togglePhotoMenu(); // Hide the menu after selecting photo
-            }
-            reader.readAsDataURL(file);
-        }
-    });
-
-    document.addEventListener('click', function(event) {
-        const menu = document.getElementById('photo-menu');
-        const photoButton = document.querySelector('.photo-actions button');
-        if (photoMenuVisible && !menu.contains(event.target) && event.target !== photoButton) {
-            togglePhotoMenu();
-        }
-    });
-
-    function saveProfile() {
-        const fullName = document.getElementById('full-name').value;
-        const email = document.getElementById('email').value;
-        const phone = document.getElementById('phone').value;
-
-        // Aqui você pode adicionar a lógica para salvar as informações do perfil, 
-        // como fazer uma requisição para um servidor.
-
-        alert('Perfil salvo com sucesso!');
-    }
-
-    function showSlide(index) {
-        const container = document.querySelector('.carousel-container');
-        const totalSlides = container.children.length;
-        if (index >= totalSlides) {
-            currentIndex = 0;
-        } else if (index < 0) {
-            currentIndex = totalSlides - 1;
-        } else {
-            currentIndex = index;
-        }
-        container.style.transform = `translateX(-${currentIndex * 100}%)`;
-    }
-
-    function nextSlide() {
-        showSlide(currentIndex + 1);
-    }
-
-    function prevSlide() {
-        showSlide(currentIndex - 1);
-    }
-
-    // Inicializar o carrossel
-    showSlide(currentIndex);
-</script>
-
->>>>>>> 153684c (atualização)
+    <script src="app.js"></script>
 </body>
 </html>

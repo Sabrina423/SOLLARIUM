@@ -1,8 +1,8 @@
-let items = document.querySelectorAll('.slider .list .item');
+let items = document.querySelectorAll('.sliderhome .listhome .item');
 let next = document.getElementById('next');
 let prev = document.getElementById('prev');
-let thumbnails = document.querySelectorAll('.thumbnail .item');
- 
+let thumbnails = document.querySelectorAll('.thumbnailhome .item');
+
 // config param
 let countItem = items.length;
 let itemActive = 0;
@@ -28,22 +28,22 @@ let refreshInterval = setInterval(() => {
 }, 5000)
 function showSlider(){
     // remove item active old
-    let itemActiveOld = document.querySelector('.slide .list .item.active');
-    let thumbnailActiveOld = document.querySelector('.thumbnail .item.active');
+    let itemActiveOld = document.querySelector('.sliderhome .listhome .item.active');
+    let thumbnailActiveOld = document.querySelector('.thumbnailhome .item.active');
     itemActiveOld.classList.remove('active');
     thumbnailActiveOld.classList.remove('active');
- 
+
     // active new item
     items[itemActive].classList.add('active');
     thumbnails[itemActive].classList.add('active');
- 
+
     // clear auto time run slider
     clearInterval(refreshInterval);
     refreshInterval = setInterval(() => {
         next.click();
     }, 5000)
 }
- 
+
 // click thumbnail
 thumbnails.forEach((thumbnail, index) => {
     thumbnail.addEventListener('click', () => {
@@ -51,3 +51,4 @@ thumbnails.forEach((thumbnail, index) => {
         showSlider();
     })
 })
+
