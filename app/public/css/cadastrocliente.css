@@ -16,7 +16,7 @@ body {
 .container {
     position: relative;
     top: 100px;
-    height: 600px;
+    height: 650px;
     display: flex;
     flex-direction: row; /* Layout padrão: lado a lado */
     width: 60%;
@@ -127,6 +127,8 @@ button[type="submit"]:hover {
 /* Media Queries para Layout Responsivo */
 @media (max-width: 768px) {
     .container {
+        position: relative;
+        top: 0px;
         flex-direction: column; /* Layout vertical: hero em cima e formulário embaixo */
         height: 70%;
         width: 90%;
@@ -134,7 +136,7 @@ button[type="submit"]:hover {
 
     .hero {
         width: 100%;
-        height: 40%; /* Ajusta a altura da imagem */
+        height: 120px; /* Ajusta a altura da imagem */
     }
 
     main {
