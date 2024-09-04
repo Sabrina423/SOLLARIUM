@@ -1,7 +1,7 @@
 const pool = require('../pool_conexoes');
 
 const validarOrcamento = (dados) => {
-    const { estado, cidade, servico, detalhe, valor } = dados;
+    const {  servico, detalhe, valor, data } = dados;
     let errors = [];
 
     if (!servico) {
@@ -20,7 +20,7 @@ const validarOrcamento = (dados) => {
 }
 
 const criarOrcamento = async (req, res) => {
-    const { servico, detalhe, valor } = req.body;
+    const { servico, detalhe, valor, data } = req.body;
 
     const errors = validarOrcamento(req.body);
 

@@ -88,7 +88,7 @@ router.post('/cadastrocliente',
         .matches(/[@$!%*?&]/).withMessage('A senha deve conter pelo menos um caractere especial'),
     body('cpf_cliente')
         .isLength({ min: 11, max: 11 }).withMessage('O CPF deve ter 11 dígitos')
-        .isNumeric().withMessage('O CPF deve conter apenas números'),
+        .isNumeric().withMessage('O cpf é obrigatório'),
     body('endereco_cliente')
         .isLength({ min: 8, max: 8 }).withMessage('O endereço deve ter entre 10 e 100 caracteres'),
     body('contato_cliente')
