@@ -21,12 +21,12 @@ const orcamentoModel = {
         }
     },
 
-    create: async (cliente) => {
+    create: async (orcamento) => {
         try {
-            const { cpf_cliente, endereco_cliente, nome_cliente, contato_cliente, email_cliente, senha_cliente, estado_cliente } = cliente;
+            const { id_orcamento, valor_orcamento,  descricao_orcamento, data_orcamento} = orcamento;
             const result = await pool.query(
-                'INSERT INTO CLIENTE ( NOME_CLIENTE, CONTATO_CLIENTE, EMAIL_CLIENTE, SENHA_CLIENTE, ESTADO_CLIENTE) VALUES (?, ?, ?, ?, ?,?, ?)',
-                [cpf_cliente, endereco_cliente, nome_cliente, contato_cliente, email_cliente, senha_cliente, estado_cliente]
+                'INSERT INTO ORCAME ( ID_ORCAMENO, VALOR_ORCAMENTO, DESCRICAO_ORCAMENTO, DATA_ORCAMENTO) VALUES (?, ?, ?,?)',
+                [id_orcamento, valor_orcamento, descricao_orcamento, data_orcamento, id]
             );
             return result; // Retorna o resultado da inserção
         } catch (error) {
@@ -35,12 +35,12 @@ const orcamentoModel = {
         }
     },
 
-    update: async (id, cliente) => {
+    update: async (id, orcamento) => {
         try {
-            const { cpf_cliente, endereco_cliente, nome_cliente, contato_cliente, email_cliente, senha_cliente } = cliente;
+            const { id_orcamento, valor_orcamento,  descricao_orcamento, data_orcamento } = orcamento;
             const result = await pool.query(
-                'UPDATE CLIENTE SET CPF_CLIENTE = ?, ENDERECO_CLIENTE = ?, NOME_CLIENTE = ?, CONTATO_CLIENTE = ?, EMAIL_CLIENTE = ?, SENHA_CLIENTE, ESTADO_CLIENTE = ? WHERE ID_CLIENTE = ?',
-                [cpf_cliente, endereco_cliente, nome_cliente, contato_cliente, email_cliente,senha_cliente, id]
+                'UPDATE ORCAMENTO SET ID_ORCAMENTO = ?, VALOR_ORCAMENTO = ?, DESCRICAO_ORCAMENTO = ?, DATA_ORCAMENTO = ? WHERE ID_ORCAMENTO = ?',
+                [id_orcamento, valor_orcamento, descricao_orcamento, data_orcamento, id]
             );
             return result; // Retorna o resultado da atualização
         } catch (error) {
@@ -51,10 +51,10 @@ const orcamentoModel = {
 
     delete: async (id) => {
         try {
-            const result = await pool.query('DELETE FROM CLIENTE WHERE ID_CLIENTE = ?', [id]);
+            const result = await pool.query('DELETE FROM ORCAMENTO WHERE ID_ORCAMENTO = ?', [id]);
             return result; // Retorna o resultado da exclusão
         } catch (error) {
-            console.error('Erro ao deletar cliente:', error);
+            console.error('Erro ao deletar orcamento:', error);
             throw error;
         }
     }
