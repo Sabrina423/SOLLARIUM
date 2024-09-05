@@ -57,7 +57,18 @@ router.get('/sobre', (req, res) => {
 
 router.get('/perfilcliente', authenticateToken, (req, res) => {
     res.render('pages/perfilcliente');
+    clienteController.mostrarPerfil(req, res);
 });
+
+router.post(
+    "/perfilcliente",
+    uploadFile("imagem-perfil_usu"),
+    usuarioController.regrasValidaçãoPerfil,
+    verificarUsuAutorizado([1,2,3], "pages/perfilcliente"),
+    async function (req, res) {
+        usuarioController.gravarperfil(req, res);
+    }
+);
 
 router.get('/cadastroprof', (req, res) => {
     res.render('pages/cadastroprof');
