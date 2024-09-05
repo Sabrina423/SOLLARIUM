@@ -35,7 +35,7 @@ body {
     justify-content: center;
     padding: 10px;
     background-image: url(/imagens/painelsolar_.png);
-    background-size: cover; /* Ajusta a imagem ao tamanho do contêiner */
+    background-size: cover ; /* Ajusta a imagem ao tamanho do contêiner */
     background-position: center; /* Centraliza a imagem */
 }
 
