@@ -1,9 +1,11 @@
 const cliente = require("../models/clienteModel");
-const { body, validationResult } = require("express-validator");
+const { body, validationResult, Result } = require("express-validator");
 const bcrypt = require("bcryptjs");
 var salt = bcrypt.genSaltSync(12);
+const {removeImg} = require("../util/removeImg");
 const fetch = (...args) => import('node-fetch').then(({ default: fetch }) => fetch(...args));
 const verificarClienteAutorizado = require('../models/verificarClienteAutorizado'); // Corrigido o caminho para o middleware
+const https = require('https');
 
 const clienteController = {
     regrasValidacaoFormLogin: [
@@ -98,3 +100,5 @@ const clienteController = {
 };
 
 module.exports = clienteController;
+
+
