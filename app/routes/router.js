@@ -63,10 +63,10 @@ router.get('/perfilcliente', authenticateToken, (req, res) => {
 router.post(
     "/perfilcliente",
     uploadFile("imagem-perfil_usu"),
-    usuarioController.regrasValidaçãoPerfil,
+    clienteController.regrasValidacaoPerfil,
     verificarUsuAutorizado([1,2,3], "pages/perfilcliente"),
     async function (req, res) {
-        usuarioController.gravarperfil(req, res);
+        clienteController.gravarperfil(req, res);
     }
 );
 
