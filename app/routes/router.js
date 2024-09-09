@@ -67,8 +67,7 @@ router.post(
     verificarUsuAutorizado([1,2,3], "pages/perfilcliente"),
     async function (req, res) {
         clienteController.gravarperfil(req, res);
-    }
-);
+    });
 
 router.get('/cadastroprof', (req, res) => {
     res.render('pages/cadastroprof');
