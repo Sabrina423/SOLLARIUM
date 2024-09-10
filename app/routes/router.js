@@ -1,4 +1,4 @@
-const express = require('express');
+const express = require("express");
 const { body, validationResult } = require('express-validator');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
@@ -7,6 +7,8 @@ const clienteController = require('../controllers/clienteController');
 const profissionalController = require('../controllers/profissionaisController.js');
 const cliente = require("../models/clienteModel");
 
+const uploadFile = require("../util/uploader")("./app/public/imagem/perfil");
+//const uploadFile = require("../util/uploader")();
 const  {  
     verificarClienteAutenticado,
     limparSessao,
@@ -60,14 +62,6 @@ router.get('/perfilcliente', authenticateToken, (req, res) => {
     clienteController.mostrarPerfil(req, res);
 });
 
-router.post(
-    "/perfilcliente",
-    uploadFile("imagem-perfil_usu"),
-    clienteController.regrasValidacaoPerfil,
-    verificarUsuAutorizado([1,2,3], "pages/perfilcliente"),
-    async function (req, res) {
-        clienteController.gravarperfil(req, res);
-    });
 
 router.get('/cadastroprof', (req, res) => {
     res.render('pages/cadastroprof');
@@ -86,12 +80,14 @@ router.get('/feedback', authenticateToken, (req, res) => {
 });
 
 //Rota de registro cliente
-router.post('/cadastrocliente', 
-  clienteController.regrasValidacaoFormCad,
- async (req, res) => {
-    
-clienteController.cadastrar(req, res);
-});
+router.post(
+    "/perfilcliente",
+    uploadFile("imagem-perfil_cliente"),
+    clienteController.regrasValidacaoPerfil,
+    verificarUsuAutorizado([1,2,3], "pages/registro"),
+    async function (req, res) {
+        clienteController.gravarperfil(req, res);
+    });
 // //Rota de registro cliente
 // router.post('/cadastrocliente', 
 //     body('nome_cliente')

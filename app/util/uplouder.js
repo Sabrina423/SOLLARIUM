@@ -53,7 +53,7 @@ module.exports = (caminho = null, tamanhoArq = 3) =>{
                 req.session.erroMulter = {
                     value: '',
                     msg: err.message,
-                    path:campoArquivo
+                    path: campoArquivo
                 }
             } else if (err) {
                 req.session.erroMulter = {
