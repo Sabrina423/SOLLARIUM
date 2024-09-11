@@ -7,7 +7,7 @@ const clienteController = require('../controllers/clienteController');
 const profissionalController = require('../controllers/profissionaisController.js');
 const cliente = require("../models/clienteModel");
 
-const uploadFile = require("/util/uploader")("./app/public/imagem/perfil");
+const uploadFile = require("../util/uploader")("./app/public/imagem/perfil");
 //const uploadFile = require("../util/uploader")();
 const  {  
     verificarClienteAutenticado,
@@ -84,7 +84,7 @@ router.post(
     "/perfilcliente",
     uploadFile("imagem-perfil_cliente"),
     clienteController.regrasValidacaoPerfil,
-    verificarUsuAutorizado([1,2,3], "pages/registro"),
+    verificarClienteAutorizado([1,2,3], "pages/registro"),
     async function (req, res) {
         clienteController.gravarperfil(req, res);
     });
