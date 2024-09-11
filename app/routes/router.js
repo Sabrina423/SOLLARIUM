@@ -7,7 +7,7 @@ const clienteController = require('../controllers/clienteController');
 const profissionalController = require('../controllers/profissionaisController.js');
 const cliente = require("../models/clienteModel");
 
-const uploadFile = require("../util/uploader")("./app/public/imagem/perfil");
+const uploadFile = require("/util/uploader")("./app/public/imagem/perfil");
 //const uploadFile = require("../util/uploader")();
 const  {  
     verificarClienteAutenticado,
