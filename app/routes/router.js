@@ -34,7 +34,7 @@ const authenticateToken = (req, res, next) => {
 
 // Rotas
 router.get('/', (req, res) => {
-    res.render('pages/perfilprof');
+    res.render('pages/home');
 });
 
 router.get('/entrar', (req, res) => {
