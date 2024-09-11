@@ -1,0 +1,215 @@
+/* Estilos gerais */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url(/imagens/painelsolar_.png);
+    background-repeat: no-repeat;
+    Background-size: cover;
+
+.container {
+    position: relative;
+    top: 100px;
+    height: 50%;
+    display: flex;
+    flex-direction: row; /* Layout padrão: lado a lado */
+    width: 60%;
+    max-width: 900px;
+    background-color: rgba(255, 255, 255, 0.363);
+    backdrop-filter: blur(5px);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.753);
+}
+
+.container h3{
+    font-family: sans-serif;
+    font-size: 22px;
+    width: 320px;
+    text-align: left;
+    margin-top: 40px;
+    margin-left: 30px;
+    color: rgb(0, 0, 0);
+
+}
+    hr{
+        color: #ffffff;
+    }
+    .termos{
+        height: 720px;
+        background-color: rgba(255, 255, 255, 0);
+    
+    }
+.termos1 button{
+    width: 90%;
+    height: 50px;
+    padding: 12px;
+    background-color: black;
+    color: rgb(255, 255, 255);
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-left: 20px;
+    margin-top: 30px;
+}
+.termos1 :hover{
+    background-color: rgba(255, 255, 255, 0.151);
+    backdrop-filter: blur(5px);
+    border: 1px solid black;
+}
+.termos1 button:hover{
+color: #000000;
+}
+
+.termos1 input{
+  width: 20px;
+  margin-left: 23px;
+  margin-top: 428px;
+}
+.termos1 label{
+    font-family: sans-serif;
+    font-size: 18px;
+    color: rgb(0, 0, 0);
+  }
+h2 {
+    width: 500px;
+    font-family: sans-serif;
+    font-size: 2.0em;
+    color: white;
+    text-align: left;
+    margin-left: 20px;
+}
+
+main {
+    width: 60%;
+    padding: 20px;
+}
+
+.input-group {
+    margin-top: 20px;
+    margin-bottom: 12px;
+}
+
+.input-group input{
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+    height: 40px;
+}
+.input-group select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+    height: 40px;
+}
+
+.password-container {
+    position: relative;
+}
+
+.password-container input {
+    width: 100%;
+    padding-right: 30px;
+}
+
+button[type="submit"] {
+    width: 100%;
+    height: 50px;
+    padding: 12px;
+    background-color: black;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.container [type="submit"]:hover {
+    background-color: darken(#000, 10%);
+}
+
+#message {
+    display: none;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    font-size: 12px;
+}
+
+.valid {
+    color: green;
+}
+
+.invalid {
+    color: red;
+}
+
+/* Media Queries para Layout Responsivo */
+@media (max-width: 768px) {
+    .container {
+        position: relative;
+        top: 0px;
+        flex-direction: column; /* Layout vertical: hero em cima e formulário embaixo */
+        height:100%;
+        width: 90%;
+    }
+
+
+
+    .hero {
+        width: 100%;
+        height: 120px; /* Ajusta a altura da imagem */
+    }
+
+    main {
+        width: 100%;
+    }
+    .hero h2 {
+        font-size: 1.4em;
+        margin: 10px;
+        text-align: left;
+        margin-left: 70px;
+    }
+
+    .input-group input,
+    .input-group select {
+        font-size: 12px;
+        height: 40px;
+    }
+
+    button[type="submit"] {
+        font-size: 14px;
+        }
+}
+
+@media (max-width: 480px) {
+    h2 {
+        font-size: 1.5em;
+    }
+
+    .input-group input,
+    .input-group select {
+        font-size: 10px;
+        height: 35px;
+    }
+
+    button[type="submit"] {
+        font-size: 12px;
+    }
+}
+}

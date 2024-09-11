@@ -1,49 +1,119 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Perfil do Profissional</title>
-    <link rel="stylesheet" href="/css/feedback.css">
+    <title>Feedback do Cliente</title>
+    <link rel="stylesheet" href="css/feedbackmobile.css">
 </head>
 <body>
+    <!-- Header -->
     <header>
-        <h1>Perfil do Profissional</h1>
+        <div class="container">
+            <img src="/imagens/LOGO_SOLLARIUM (8).png" alt="Logo" class="logo">
+            <div class="menu-toggle" id="menu-toggle">☰</div>
+            <nav id="nav-menu">
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Sobre</a></li>
+                    <li><a href="#">Contato</a></li>
+                </ul>
+            </nav>
+        </div>
     </header>
+
+    <!-- Main Content -->
     <main>
-        <section class="profile">
-            <section class="profile-info">
-                <h2>João Silva</h2>
-                <p><strong>Profissão:</strong> Eletricista</p>
-                <p><strong>Experiência:</strong> 10 anos</p>
-                <p><strong>Localização:</strong> São Paulo, SP</p>
-                <button id="feedbackBtn">Ver Feedbacks</button>
-            </section>
-        </section>
-    </main>
-    <footer>
-        <p>&copy; 2024 Perfil do Profissional</p>
-    </footer>
-
-    
-    <nav id="feedbackModal" class="modal">
-        <nav class="modal-content">
-            <span class="close">&times;</span>
+        <div class="container1">
             <h2>Feedbacks</h2>
-            <nav class="feedback">
-                <p><strong>Cliente:</strong> Maria Oliveira</p>
-                <p><strong>Feedback:</strong> Excelente trabalho, muito profissional!</p>
-                <p><strong>Data:</strong> 15/06/2024</p>
-            </nav>
-            <nav class="feedback">
-                <p><strong>Cliente:</strong> Carlos Pereira</p>
-                <p><strong>Feedback:</strong> Trabalho bem feito, recomendo!</p>
-                <p><strong>Data:</strong> 10/06/2024</p>
-            </nav>
+            <div class="filter">
+                <label for="filter">Filtrar por:</label>
+                <div class="custom-select">
+                    <div class="select-selected">Mais recentes</div>
+                    <div class="select-items">
+                        <div>Mais recentes</div>
+                        <div>Mais antigas</div>
+                        <div>Menor avaliação</div>
+                        <div>Maior avaliação</div>
+                    </div>
+                </div>
+                </div>
 
-        </nav>
-    </nav>
+            <div class="feedback">
+                <div class="feedback-item">
+                    <div class="feedback-header">
+                        <span class="client-name">Cliente 1</span>
+                        <span class="feedback-date">2024-09-08</span>
+                    </div>
+                    <div class="feedback-ratings">
+                        <div class="rating">
+                            <span>Qualidade:</span>
+                            <div class="stars">★★★★★</div>
+                        </div>
+                        <div class="rating">
+                            <span>Rapidez:</span>
+                            <div class="stars">★★★★☆</div>
+                        </div>
+                        <div class="rating">
+                            <span>Resultados:</span>
+                            <div class="stars">★★★☆☆</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="feedback-item">
+                    <div class="feedback-header">
+                        <span class="client-name">Cliente 2</span>
+                        <span class="feedback-date">2024-09-07</span>
+                    </div>
+                    <div class="feedback-ratings">
+                        <div class="rating">
+                            <span>Qualidade:</span>
+                            <div class="stars">★★★☆☆</div>
+                        </div>
+                        <div class="rating">
+                            <span>Rapidez:</span>
+                            <div class="stars">★★★★☆</div>
+                        </div>
+                        <div class="rating">
+                            <span>Resultados:</span>
+                            <div class="stars">★★★★☆</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Adicione mais feedbacks aqui -->
+            </div>
+        </div>
+    </main>
 
-    <script src="/feedbackprof.js"></script>
+    <!-- JavaScript -->
+    <script>document.getElementById('menu-toggle').addEventListener('click', function() {
+        var navMenu = document.getElementById('nav-menu');
+        if (navMenu.classList.contains('active')) {
+            navMenu.classList.remove('active');
+        } else {
+            navMenu.classList.add('active');
+        }
+    });
+    document.querySelector('.select-selected').addEventListener('click', function() {
+        this.parentElement.classList.toggle('open');
+    });
+
+    document.querySelectorAll('.select-items div').forEach(item => {
+        item.addEventListener('click', function() {
+            const selectedText = this.textContent;
+            this.parentElement.previousElementSibling.textContent = selectedText;
+            this.parentElement.classList.remove('open');
+        });
+    });
+
+    // Close the dropdown if the user clicks outside of it
+    window.addEventListener('click', function(e) {
+        if (!e.target.matches('.select-selected')) {
+            document.querySelectorAll('.custom-select').forEach(select => {
+                select.classList.remove('open');
+            });
+        }
+    });
+    </script>
 </body>
 </html>

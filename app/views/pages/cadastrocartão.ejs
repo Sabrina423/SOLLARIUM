@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Cartão</title>
+    <link rel="stylesheet" href="/css/cadastrocartão.css">
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <div id="card-number-display" class="card-number">**** **** **** 1234</div>
+            <div class="card-info">
+                <div id="card-holder-display">Nome do Titular</div>
+                <div id="expiry-date-display">MM/AA</div>
+            </div>
+        </div>
+
+        <form id="card-form">
+            <div class="form-group">
+                <label for="card-number">Número do Cartão</label>
+                <input type="text" id="card-number" name="card-number" placeholder="1234 5678 9012 3456" maxlength="19" required>
+            </div>
+            <div class="form-group">
+                <label for="card-holder">Nome do Titular</label>
+                <input type="text" id="card-holder" name="card-holder" placeholder="Nome do Titular" required>
+            </div>
+            <div class="form-group">
+                <label for="expiry-date">Data de Validade</label>
+                <input type="text" id="expiry-date" name="expiry-date" placeholder="MM/AA" maxlength="5" required>
+            </div>
+            <div class="form-group">
+                <label for="cvv">Código de Segurança (CVV)</label>
+                <input type="text" id="cvv" name="cvv" placeholder="123" maxlength="3" required>
+            </div>
+            <button type="submit" class="submit-button">Cadastrar Cartão</button>
+        </form>
+    </div>
+
+    <script>
+        // Função para formatar o número do cartão em blocos de 4 dígitos
+        function formatCardNumber(value) {
+            return value.replace(/\D/g, '').replace(/(.{4})/g, '$1 ').trim();
+        }
+
+        // Função para formatar a data de validade no formato MM/AA
+        function formatExpiryDate(value) {
+            return value.replace(/\D/g, '').replace(/(.{2})/g, '$1/').trim().slice(0, 5);
+        }
+
+        // Função para formatar o código de segurança (CVV) para 3 dígitos
+        function formatCVV(value) {
+            return value.replace(/\D/g, '').slice(0, 3);
+        }
+
+        // Atualizar informações do cartão em tempo real
+        function updateCardDisplay() {
+            const cardNumberInput = document.getElementById('card-number');
+            const cardHolderInput = document.getElementById('card-holder');
+            const expiryDateInput = document.getElementById('expiry-date');
+
+            document.getElementById('card-number-display').textContent = formatCardNumber(cardNumberInput.value) || '**** **** **** 1234';
+            document.getElementById('card-holder-display').textContent = cardHolderInput.value || 'Nome do Titular';
+            document.getElementById('expiry-date-display').textContent = formatExpiryDate(expiryDateInput.value) || 'MM/AA';
+        }
+
+        // Função para lidar com a entrada do número do cartão
+        function handleCardNumberInput(event) {
+            const input = event.target;
+            let value = input.value;
+            value = value.replace(/\D/g, '');
+            input.value = formatCardNumber(value);
+            updateCardDisplay();
+        }
+
+        // Função para lidar com a entrada da data de validade
+        function handleExpiryDateInput(event) {
+            const input = event.target;
+            let value = input.value;
+            input.value = formatExpiryDate(value);
+            updateCardDisplay();
+        }
+
+        // Função para lidar com a entrada do código de segurança (CVV)
+        function handleCVVInput(event) {
+            const input = event.target;
+            let value = input.value;
+            input.value = formatCVV(value);
+        }
+
+        // Adicionar eventos de input para atualizar o display
+        document.getElementById('card-number').addEventListener('input', handleCardNumberInput);
+        document.getElementById('card-holder').addEventListener('input', updateCardDisplay);
+        document.getElementById('expiry-date').addEventListener('input', handleExpiryDateInput);
+        document.getElementById('cvv').addEventListener('input', handleCVVInput);
+    </script>
+</body>
+</html>

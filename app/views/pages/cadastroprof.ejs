@@ -9,15 +9,24 @@
 <body>
     <nav class="container">
         <nav class="hero">
-            <h2>Faça parte da nossa equipe!</h2>
+            <h3>Saiba como nossas taxações e contrato funcionam!</h3>
+            <nav class="termos1">
+                <button type="button" id="openPopup">Quero saber!</button>
+                <div class="checkbox-label">
+                    <input type="checkbox" id="termos" name="termos" required>
+                    <label for="termos">Li e aceito os termos de taxação e assinatura!</label>
+                </div>
+            </nav>
+            
             <img src="/imagens/pexels-tomfisk-9893729.jpg" alt="">
         </nav>
+        <hr>
         <main>
             <form action="/cadastroprofissional" method="POST" id="cadastroFormprof">
                 <nav class="logo"></nav>
                 <nav class="input-group">
                     <input type="text" name="nome_prof" id="nome_prof" placeholder="Nome Completo" required>
-                    <input type="text" name="cpf_prof" id="cpf_prof"  placeholder="CPF" required>
+                    <input type="text" name="cpf_prof" id="cpf_prof" placeholder="CPF" required>
                 </nav>
                 <nav class="input-group">
                     <select id="estado_prof" name="estado_prof">
@@ -48,7 +57,57 @@
             </form>
         </main>
     </nav>
+
+    <!-- Popup Modal -->
+    <div id="popup" class="popup">
+        <div class="popup-content">
+            <span class="popup-close" id="closePopup">&times;</span>
+            <p>
+                <h2>Termos de Taxação e Assinatura</h2>
+            Por favor, leia atentamente os termos e condições antes de aceitar.</p>
+            <p>Procedimento de Cadastro e Política de Comissionamento de Profissionais
+
+1. Introdução
+
+A nossa empresa se dedica a proporcionar um ambiente estruturado e eficiente para a colaboração de profissionais especializados em diversas áreas. Com o objetivo de garantir uma gestão transparente e justa das contribuições e recompensas de nossos parceiros, estabelecemos um processo detalhado para o cadastro de profissionais, bem como uma política de comissionamento baseada na remuneração obtida através de serviços realizados por meio de nossa plataforma.
+
+2. Cadastro de Profissionais
+
+O processo de cadastro de um profissional na nossa empresa é estruturado para assegurar a integridade e a qualidade dos serviços oferecidos. Os principais passos do processo são os seguintes:
+
+Solicitação de Cadastro: O interessado deve preencher um formulário de solicitação de cadastro disponível em nossa plataforma online. Este formulário inclui informações pessoais, detalhes profissionais, qualificações e experiência relevante.
+
+Documentação e Verificação: Após o envio do formulário, o candidato deve fornecer documentos comprobatórios, como certificados de qualificação, registro profissional e identificações pessoais. A equipe responsável realiza uma análise minuciosa da documentação para verificar a conformidade com os requisitos da empresa.
+
+Entrevista e Avaliação: Em alguns casos, poderá ser solicitada uma entrevista ou uma avaliação prática para garantir que o profissional atende aos padrões de qualidade e competência estabelecidos pela empresa.
+
+Aprovação e Contrato: Após a conclusão das etapas anteriores, e uma vez aprovado, o profissional receberá um contrato formalizando sua parceria com a empresa. Este contrato detalha as responsabilidades, direitos e obrigações de ambas as partes.
+
+Integração e Treinamento: O profissional passará por um processo de integração, que pode incluir treinamentos específicos sobre a utilização da plataforma e os procedimentos operacionais da empresa.
+
+3. Política de Comissionamento
+
+A política de comissionamento estabelecida visa alinhar os interesses da empresa e dos profissionais cadastrados, promovendo uma relação de parceria justa e transparente. As diretrizes são as seguintes:
+
+Comissão sobre Lucros: A empresa retém uma comissão equivalente a 15% do lucro líquido obtido pelo profissional em serviços fechados e realizados através da nossa plataforma. O lucro líquido é calculado com base no valor total cobrado ao cliente, descontadas quaisquer despesas ou custos associados ao serviço.
+
+Apuração de Lucros: Mensalmente, a empresa realiza uma apuração detalhada dos serviços prestados e dos valores recebidos por cada profissional. O cálculo da comissão é efetuado sobre o total dos lucros registrados no período, conforme demonstrado nas faturas e relatórios financeiros.
+
+Pagamentos e Relatórios: Os profissionais recebem um relatório detalhado sobre os serviços prestados e a respectiva comissão retida. O pagamento da comissão líquida, ou seja, o valor restante após a dedução da comissão da empresa, é efetuado ao profissional conforme o calendário de pagamentos estabelecido no contrato.
+
+Transparência e Ajustes: A empresa mantém total transparência nos processos de cálculo e apuração dos lucros. Quaisquer discrepâncias ou dúvidas podem ser discutidas diretamente com a equipe financeira, que está disponível para esclarecer e ajustar eventuais erros.
+
+4. Conclusão
+
+O cadastro e a política de comissionamento visam estabelecer um ambiente de trabalho colaborativo e mutuamente benéfico, garantindo que tanto a empresa quanto os profissionais estejam alinhados em seus objetivos e expectativas. Para qualquer dúvida adicional ou necessidade de esclarecimento, os profissionais são encorajados a entrar em contato com o suporte da empresa, que está sempre disponível para fornecer assistência e suporte contínuos.</p>
+
+<p>Sollarium, Departamento de Recursos Humanos / Cadastro de Profissionais.</p>
+            <button id="acceptTerms">Entendi</button>
+        </div>
+    </div>
+
     <script>
+        // Funções para mostrar e esconder a mensagem de senha
         function showMessage() {
             document.getElementById('message').style.display = 'block';
         }
@@ -72,32 +131,44 @@
             return lengthCriteria && upperCaseCriteria && specialCharCriteria;
         }
 
-    document.addEventListener('DOMContentLoaded', function() {
-    function applyCPFMask(value) {
-        return value
-            .replace(/\D/g, '') // Remove tudo que não é dígito
-            .replace(/(\d{3})(\d)/, '$1.$2')
-            .replace(/(\d{3})(\d)/, '$1.$2')
-            .replace(/(\d{3})(\d{1,2})$/, '$1-$2');
-    }
+        // Funções para abrir e fechar o pop-up
+        document.getElementById('openPopup').addEventListener('click', function() {
+            document.getElementById('popup').style.display = 'block';
+        });
 
-    function applyPhoneMask(value) {
-        return value
-            .replace(/\D/g, '') // Remove tudo que não é dígito
-            .replace(/(\d{2})(\d)/, '($1) $2')
-            .replace(/(\d{5})(\d)/, '$1-$2')
-            .replace(/(\d{5})(\d{1,4})$/, '$1-$2');
-    }
+        document.getElementById('closePopup').addEventListener('click', function() {
+            document.getElementById('popup').style.display = 'none';
+        });
 
-    document.getElementById('cpf_prof').addEventListener('input', function() {
-        this.value = applyCPFMask(this.value);
-    });
+        document.getElementById('acceptTerms').addEventListener('click', function() {
+            document.getElementById('popup').style.display = 'none';
+        });
 
-    document.getElementById('telefone_prof').addEventListener('input', function() {
-        this.value = applyPhoneMask(this.value);
-    });
-});
+        document.addEventListener('DOMContentLoaded', function() {
+            function applyCPFMask(value) {
+                return value
+                    .replace(/\D/g, '') // Remove tudo que não é dígito
+                    .replace(/(\d{3})(\d)/, '$1.$2')
+                    .replace(/(\d{3})(\d)/, '$1.$2')
+                    .replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+            }
 
+            function applyPhoneMask(value) {
+                return value
+                    .replace(/\D/g, '') // Remove tudo que não é dígito
+                    .replace(/(\d{2})(\d)/, '($1) $2')
+                    .replace(/(\d{5})(\d)/, '$1-$2')
+                    .replace(/(\d{5})(\d{1,4})$/, '$1-$2');
+            }
+
+            document.getElementById('cpf_prof').addEventListener('input', function() {
+                this.value = applyCPFMask(this.value);
+            });
+
+            document.getElementById('telefone_prof').addEventListener('input', function() {
+                this.value = applyPhoneMask(this.value);
+            });
+        });
     </script>
 </body>
 </html>

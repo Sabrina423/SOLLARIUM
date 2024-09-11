@@ -1,146 +1,154 @@
 <!DOCTYPE html>
-<html lang="pt-br">
-
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/cadastrocliente.css">
-    <title>Cadastro Cliente</title>
+    <title>Relatório de Serviços</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+        }
+        header {
+            background: #333;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+        }
+        table {
+            width: 100%;
+            margin: 20px 0;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        th {
+            background: #333;
+            color: #fff;
+        }
+        tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+        .footer {
+            background: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+        .details {
+            display: none;
+            margin-top: 10px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            background: #fff;
+        }
+        .details input[type="file"] {
+            margin-top: 10px;
+        }
+        .details button {
+            margin-top: 10px;
+            padding: 5px 10px;
+            background: #333;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+        .details button:hover {
+            background: #555;
+        }
+    </style>
 </head>
-
 <body>
-    <nav class="container">
-        <nav class="hero">
-            <h2>Venha fazer negócios conosco!</h2>
-            <img src="/imagens/pexels-tomfisk-9893729.jpg" alt="">
-        </nav>
-        <main>
-           
-            <form action="/cadastrocliente" method="POST">
-                <nav class="logo">
-                
-                      </nav>
-                                    <nav class="input-group">
-                                        <input type="text" name="nome_cliente" placeholder="Nome Completo" required>
-                                        <input type="text" name="cpf_cliente" placeholder="CPF" required>
-                                </nav>
-                                    <nav class="input-group">
-                                        <input type="text" name="endereco_cliente" placeholder="Endereço" required>
-                                        <select id="estado_cliente" name="estado_cliente">
-                                            <label for="estado">Selecione o seu Estado:</label>
-                                            <option value="São paulo">SP</option>
-                                            <option value="Rio de Janeiro">RJ</option>
-                                            <option value="Minas Gerais">MG</option>
-                                            <option value="Espirito Santo">ES</option>
-                                        </select>
-                                        <nav class="radio-group">
-                                        </nav>
-                                </nav>
-                                    <nav class="input-group">
-                                        <input type="email" name="email_cliente" placeholder="E-mail" required>
-                                        <input type="tel" id="telefone_cliente" name="contato_cliente" placeholder="Contato (00) 00000-0000" required>
+    <header>
+        <h1>Relatório de Serviços</h1>
+    </header>
 
-                                    </nav>
-                                    <nav class="input-group">
-                                        <nav class="password-container">
-                        
-                                            <input type="password" id="password" placeholder="Senha" onfocus="showMessage()" onblur="hideMessage()" oninput="validatePassword()">
-                                            <nav id="message" class="invalid">A senha deve ter no mínimo 8 caracteres.</nav>
-                                                                               
-                                           
-                                        </nav>
-                                        <nav class="password-container">
-                                            <input type="password" id="senha_cliente" name="senha_cliente" placeholder="Confirme sua enha" required>
-                               </nav>
-                                        </nav>
-                                        <button type="submit"><a href="/perfilcliente"></a>Criar Conta</button>
-                                    </nav>
-                                </form>
-                            </main>
-                        </nav>
-                
-                    </body>
-                    <script>document.getElementById('cadastroForm').addEventListener('submit', async function(event) {
-                        event.preventDefault();
-                    
-                        const formData = {
-                            nome_cliente: document.getElementById('nome_cliente').value,
-                            cpf_cliente: document.getElementById('cpf_cliente').value,
-                            endereco_cliente: document.getElementById('endereco_cliente').value,
-                            contato_cliente: document.getElementById('contato_cliente').value,
-                            email_cliente: document.getElementById('email_cliente').value,
-                            senha_cliente: document.getElementById('senha_cliente').value,
-                            confirmar_senha_cliente: document.getElementById('confirmar_senha_cliente').value,
-                            estado_cliente: document.getElementById('estado_cliente').value,
-                        };
-                    
-                        document.querySelectorAll('.error-message').forEach(el => el.style.display = 'none');
-                    
-                        let isValid = true;
-                    
-                        if (!formData.nome_cliente) {
-                            showError('nome_cliente', 'Nome Completo é obrigatório.');
-                            isValid = false;
-                        }
-                    
-                        if (!formData.cpf_cliente || !/^\d{11}$/.test(formData.cpf_cliente)) {
-                            showError('cpf_cliente', 'O CPF deve ter 11 dígitos e conter apenas números.');
-                            isValid = false;
-                        }
-                    
-                        if (!formData.endereco_cliente) {
-                            showError('endereco_cliente', 'Endereço é obrigatório.');
-                            isValid = false;
-                        }
-                    
-                        if (!formData.email_cliente || !/\S+@\S+\.\S+/.test(formData.email_cliente)) {
-                            showError('email_cliente', 'Email é obrigatório e deve ser válido.');
-                            isValid = false;
-                        }
-                    
-                        if (!formData.contato_cliente || !/^\d{10,15}$/.test(formData.contato_cliente)) {
-                            showError('contato_cliente', 'O contato deve ter entre 10 e 15 dígitos e conter apenas números.');
-                            isValid = false;
-                        }
-                    
-                        if (!formData.senha_cliente || formData.senha_cliente.length < 8) {
-                            showError('senha_cliente', 'A senha deve ter no mínimo 8 caracteres.');
-                            isValid = false;
-                        }
-                    
-                        if (formData.senha_cliente !== formData.confirmar_senha_cliente) {
-                            showError('confirmar_senha_cliente', 'As senhas não coincidem.');
-                            isValid = false;
-                        }
-                    
-                        if (!isValid) return;
-                    
-                        try {
-                            const response = await fetch('/cadastrocliente', {
-                                method: 'POST',
-                                headers: { 'Content-Type': 'application/json' },
-                                body: JSON.stringify(formData)
-                            });
-                    
-                            const result = await response.json();
-                    
-                            if (response.status === 200) {
-                                document.getElementById('success-message').innerText = result.message;
-                                document.getElementById('cadastroForm').reset();
-                            } else {
-                                result.errors.forEach(error => {
-                                    showError(error.field, error.message);
-                                });
-                            }
-                        } catch (error) {
-                            console.error('Erro ao enviar o formulário:', error);
-                        }
-                    });
-                    
-                    function showError(field, message) {
-                        const input = document.getElementById(field);
-                        const errorElement = document.getElementById(`${field}_error`);
-                        errorElement.innerText = message;
-                        errorElement.style.display = 'block';
-                    }</script>
-                    </html>
+    <div class="container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Dia</th>
+                    <th>Hora</th>
+                    <th>Nome do Cliente</th>
+                    <th>Endereço</th>
+                    <th>Valor</th>
+                    <th>Serviço Realizado</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>01/09/2024</td>
+                    <td>10:00</td>
+                    <td><a href="#" onclick="toggleDetails('details1')">João Silva</a></td>
+                    <td>Rua A, 123, São Paulo</td>
+                    <td>R$ 150,00</td>
+                    <td>Instalação de Ar Condicionado</td>
+                </tr>
+                <tr>
+                    <td>02/09/2024</td>
+                    <td>14:30</td>
+                    <td><a href="#" onclick="toggleDetails('details2')">Maria Oliveira</a></td>
+                    <td>Avenida B, 456, Rio de Janeiro</td>
+                    <td>R$ 200,00</td>
+                    <td>Manutenção de Aquecedor</td>
+                </tr>
+                <tr>
+                    <td>03/09/2024</td>
+                    <td>09:00</td>
+                    <td><a href="#" onclick="toggleDetails('details3')">Carlos Pereira</a></td>
+                    <td>Rua C, 789, Belo Horizonte</td>
+                    <td>R$ 100,00</td>
+                    <td>Reparo em Televisão</td>
+                </tr>
+                <!-- Adicione mais linhas aqui conforme necessário -->
+            </tbody>
+        </table>
+
+        <div id="details1" class="details">
+            <h2>Enviar Foto da Nota Fiscal - João Silva</h2>
+            <input type="file" accept="image/*">
+            <button>Enviar</button>
+        </div>
+
+        <div id="details2" class="details">
+            <h2>Enviar Foto da Nota Fiscal - Maria Oliveira</h2>
+            <input type="file" accept="image/*">
+            <button>Enviar</button>
+        </div>
+
+        <div id="details3" class="details">
+            <h2>Enviar Foto da Nota Fiscal - Carlos Pereira</h2>
+            <input type="file" accept="image/*">
+            <button>Enviar</button>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>&copy; 2024 Seu Nome ou Empresa. Todos os direitos reservados.</p>
+    </div>
+
+    <script>
+        function toggleDetails(id) {
+            const details = document.getElementById(id);
+            if (details.style.display === 'block') {
+                details.style.display = 'none';
+            } else {
+                details.style.display = 'block';
+            }
+        }
+    </script>
+</body>
+</html>

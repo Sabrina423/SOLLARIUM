@@ -1,34 +1,76 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Relatório de Serviços</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Relatório de Serviço</title>
+    <link rel="stylesheet" href="css/relatoriomobile.css">
 </head>
 <body>
     <header>
-        <h1>Relatório de Serviços</h1>
+        <div class="logo">
+            <img src="imagens/LOGO_SOLLARIUM (8).png">
+        </div>
+        <nav class="menu">
+            <ul>
+                <li><a href="#" class="back-profile">Voltar ao Perfil</a></li>
+                <li><a href="#" class="back-profile">Minha área</a></li>
+                <li class="menu-toggle">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </li>
+            </ul>
+        </nav>
     </header>
+    
     <main>
-        <section class="service-report">
-            <nav class="service">
-                <h2>Serviço 1</h2>
-                <p><strong>Cliente:</strong> João Silva</p>
-                <p><strong>Local:</strong> São Paulo, SP</p>
-                <p><strong>Valor Recebido:</strong> R$ 500,00</p>
-            </nav>
-            <nav class="service">
-                <h2>Serviço 2</h2>
-                <p><strong>Cliente:</strong> Maria Oliveira</p>
-                <p><strong>Local:</strong> Rio de Janeiro, RJ</p>
-                <p><strong>Valor Recebido:</strong> R$ 700,00</p>
-            </nav>
-            <!-- Adicione mais serviços conforme necessário -->
+        <section class="service-details">
+            <h1>Detalhes do Serviço</h1>
+            <p><strong>Nome do Cliente:</strong> <span id="client-name">João da Silva</span></p>
+            <p><strong>Valor do Serviço:</strong> R$ 500,00</p>
+            <p><strong>Data e Horário:</strong> 09/09/2024 14:30</p>
+            <p><strong>Endereço do Serviço:</strong> Rua Exemplo, 123, Bairro, Cidade</p>
+            
+            <button id="upload-btn">Enviar Nota Fiscal</button>
+            <div id="upload-section" class="hidden">
+                <label for="invoice-upload">Selecione a foto da nota fiscal:</label>
+                <input type="file" id="invoice-upload" accept="image/*">
+                <div id="preview-container">
+                    <img id="preview" src="" alt="Prévia da Nota Fiscal" class="hidden">
+                </div>
+                <button id="send-btn">Enviar</button>
+            </div>
         </section>
     </main>
-    <footer>
-        <p>&copy; 2024 Relatório de Serviços</p>
-    </footer>
+
+    <script>document.addEventListener('DOMContentLoaded', function () {
+        const uploadBtn = document.getElementById('upload-btn');
+        const uploadSection = document.getElementById('upload-section');
+        const menuToggle = document.querySelector('.menu-toggle');
+        const menu = document.querySelector('nav.menu');
+    
+        uploadBtn.addEventListener('click', function () {
+            uploadSection.classList.toggle('hidden');
+        });
+    
+        document.getElementById('invoice-upload').addEventListener('change', function (e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (event) {
+                    const preview = document.getElementById('preview');
+                    preview.src = event.target.result;
+                    preview.classList.remove('hidden');
+                }
+                reader.readAsDataURL(file);
+            }
+        });
+    
+        menuToggle.addEventListener('click', function () {
+            menu.classList.toggle('active');
+        });
+    });
+    </script>
 </body>
 </html>

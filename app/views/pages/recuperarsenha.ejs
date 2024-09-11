@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recuperação de Senha</title>
+    <link rel="stylesheet" href="/css/recuperarsenha.css">
+
+</head>
+<body>
+    <div class="container">
+        <h2>Recuperar Senha</h2>
+        <form action="/recuperar-senha" method="POST">
+            <label for="email">Digite seu e-mail:</label>
+            <input type="email" id="email" name="email" required>
+            <button type="submit">Enviar link de recuperação</button>
+        </form>
+        <p class="message">Você receberá um e-mail com instruções para redefinir sua senha.</p>
+    </div>
+    <script>const express = require('express');
+        const nodemailer = require('nodemailer');
+        const bodyParser = require('body-parser');
+        require('dotenv').config();
+        
+        const app = express();
+        const port = process.env.PORT || 3000;
+        
+        // Configura o parser para o corpo das requisições
+        app.use(bodyParser.urlencoded({ extended: false }));
+        app.use(bodyParser.json());
+        
+        // Serve arquivos estáticos (CSS, JS, etc.)
+        app.use(express.static('public'));
+        
+        // Serve o arquivo HTML
+        app.get('/', (req, res) => {
+          res.sendFile(__dirname + '/views/index.html');
+        });
+        
+        // Rota para recuperação de senha
+        app.post('/recuperar-senha', (req, res) => {
+          const email = req.body.email;
+        
+          // Configuração do transportador de e-mails
+          const transporter = nodemailer.createTransport({
+            service: 'Gmail',
+            auth: {
+              user: process.env.EMAIL_USER,
+              pass: process.env.EMAIL_PASS
+            }
+          });
+        
+          // Configuração do e-mail
+          const mailOptions = {
+            from: process.env.EMAIL_USER,
+            to: email,
+            subject: 'Recuperação de Senha',
+            text: 'Clique no link abaixo para redefinir sua senha:\n\n' +
+                  'http://example.com/resetar-senha?token=1234567890' // Gere um token real aqui
+          };
+        
+          transporter.sendMail(mailOptions, (error, info) => {
+            if (error) {
+              console.error('Erro ao enviar e-mail:', error);
+              res.status(500).send('Erro ao enviar e-mail. Tente novamente.');
+            } else {
+              console.log('E-mail enviado:', info.response);
+              res.send('E-mail enviado com sucesso. Verifique sua caixa de entrada.');
+            }
+          });
+        });
+        
+        app.listen(port, () => {
+          console.log(`Servidor rodando na porta ${port}`);
+        });
+        </script>
+</body>
+</html>

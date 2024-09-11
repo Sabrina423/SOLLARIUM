@@ -19,8 +19,7 @@ header {
     background-color: #000;
     color: #fff;
 }
-
-.logo img {
+img {
     width: 250px;
     height: 250px;
     margin-top:20px;
