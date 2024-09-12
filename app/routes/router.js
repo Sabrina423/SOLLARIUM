@@ -5,12 +5,15 @@ const jwt = require('jsonwebtoken');
 var salt = bcrypt.genSaltSync(12);
 const clienteController = require('../controllers/clienteController');
 const profissionalController = require('../controllers/profissionaisController.js');
+const admController = require('../controllers/admController.js');
 const cliente = require("../models/clienteModel");
+const profissional = require("../models/profissionaisModel");
+const adm = require("../models/admModel");
 
 const uploadFile = require("../util/uploader")("./app/public/imagem/perfil");
 //const uploadFile = require("../util/uploader")();
 const  {  
-    verificarClienteAutenticado,
+    verificarClienteAutorizado,
     limparSessao,
     gravarClienteAutenticado,
     verificarClienteAutorizado,
@@ -120,12 +123,8 @@ router.post(
             admController.cadastrar(req, res);
             res.render('pages/home')
         });
-    
-    
-    
 
 // Rota de Login
-
     router.post(
         "/entrar",
         clienteController.regrasValidacaoFormLogin,
@@ -134,12 +133,6 @@ router.post(
           clienteController.logar(req, res);
         }
       );
-
-
-
-
-
-
 
 module.exports = router;
 
