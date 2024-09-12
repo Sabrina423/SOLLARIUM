@@ -99,6 +99,21 @@ const clienteController = {
     }
 };
 
+mostrarPerfil: async (req, res) => {
+
+    let campos = {
+        nome_cliente: results[0].nome_cliente,
+        numero: results[0].numero_cliente,
+        complemento: results[0].complemento_cliente, logradouro: viaCep. logradouro,
+        bairro: viaCep.bairro, localidade: viaCep.localidade, uf: viaCep.uf,
+        img_perfil_pasta: results[0].img_perfil_pasta,
+        img_perfil_banco: results[0].img_perfil_banco != null ? 'data: image/jpge;base64,${results[0].img_perfil_banco.toString('base64')}': null,
+    }
+  
+}
+
+gravaPerfil
+
 module.exports = clienteController;
 
 

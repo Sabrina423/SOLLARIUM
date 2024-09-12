@@ -10,7 +10,7 @@ const cliente = require("../models/clienteModel");
 const profissional = require("../models/profissionaisModel");
 const adm = require("../models/admModel");
 
-const uploadFile = require("../util/uploader")("./app/public/imagem/perfil");
+const uploadFile = require("../util/uplouder.js")("./app/public/imagem/perfil");
 //const uploadFile = require("../util/uploader")();
 const  {  
     verificarClienteAutorizado,
