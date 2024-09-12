@@ -34,7 +34,11 @@ const authenticateToken = (req, res, next) => {
 
 // Rotas
 router.get('/', (req, res) => {
+<<<<<<< HEAD
     res.render('pages/home');
+=======
+    res.render('pages/home.ejs');
+>>>>>>> 7a4b715 (atualização :3)
 });
 
 router.get('/entrar', (req, res) => {
@@ -88,63 +92,6 @@ router.post(
     async function (req, res) {
         clienteController.gravarperfil(req, res);
     });
-// //Rota de registro cliente
-// router.post('/cadastrocliente', 
-//     body('nome_cliente')
-//         .isString().withMessage('O nome de usuário deve ser uma string')
-//         .isLength({ min: 3, max: 45 }).withMessage('O nome de usuário deve ter entre 3 e 45 caracteres'),
-//     body('senha_cliente')
-//         .isLength({ min: 8 }).withMessage('A senha deve ter pelo menos 8 caracteres')
-//         .matches(/[A-Z]/).withMessage('A senha deve conter pelo menos uma letra maiúscula')
-//         .matches(/[a-z]/).withMessage('A senha deve conter pelo menos uma letra minúscula')
-//         .matches(/\d/).withMessage('A senha deve conter pelo menos um número')
-//         .matches(/[@$!%*?&]/).withMessage('A senha deve conter pelo menos um caractere especial'),
-//     body('cpf_cliente')
-//         .isLength({ min: 14, max: 14 }).withMessage('O CPF deve ter 11 dígitos'),
-//     body('cep_cliente')
-//         .isLength({ min: 8, max: 8 }).withMessage('O endereço deve ter entre 8 caracteres'),
-//     body('contato_cliente')
-//         .isLength({ min: 10, max: 15 }).withMessage('O contato deve ter entre 10 e 15 dígitos'),
-
-//     body('email_cliente')
-//         .isEmail().withMessage('O e-mail deve ser válido')
-//         .normalizeEmail(),
-//     body('estado_cliente')
-// , async (req, res) => {
-//     const errors = validationResult(req);
-//     console.log(errors)
-//     if (!errors.isEmpty()) {
-//         return res.status(400).json({ errors: errors.array() });
-//     }
-
-//     const { nome_cliente, senha_cliente, cpf_cliente, cep_cliente, contato_cliente, email_cliente } = req.body;
-//     const hashedPassword = bcrypt.hashSync(senha_cliente, salt);
-
-//     const dadosForm = {
-//         cpf_cliente: cpf_cliente,
-//         cep_cliente: cep_cliente,
-//         nome_cliente: nome_cliente,
-//         contato_cliente: contato_cliente, 
-//         email_cliente: email_cliente,
-//         senha_cliente: senha_cliente,
-//     };
-
-//     try {
-//         let result = await cliente.create(dadosForm);
-//         console.log(result);
-//         res.render('pages/home');
-//        // res.status(200).json({ message: 'Cadastro realizado com sucesso!' });
-//     } catch (e) {
-//         console.error(e);
-//         res.render("pages/cadastrocliente", {
-//             listaErros: erros, dadosNotificacao: {
-//                 titulo: "Erro ao cadastrar!", mensagem: "Verifique os valores digitados!", tipo: "error"
-//             }, valores: req.body
-//         });
-//     }
-// });
-
-
 
 
 //Rota de registro profissional
@@ -163,24 +110,6 @@ router.post(
 
         profissionalController.cadastrar(req, res);
     
-
-    // db.query('INSERT INTO PROFISSIONAL (NOME_PROF,CONTATO_PROF,EMAIL_PROF,CPF_PROF,CEP_PROF,SENHA_PROF) VALUES (?,?,?,?,?,?)', [ nome+ " "+ sobrenome,phone, email,cpf,cep,hashedsenha], (err) => {
-    //     if (err) {
-    //         console.log(err);
-    //         return res.status(400).send('Erro ao registrar o usuário. O usuário já pode existir.');
-    //     }
-    //     res.send('Usuário registrado com sucesso.');
-    // });
-
-    // const dadosForm = {
-    //     cpf_cliente: cpf_cliente,
-    //     endereco_cliente: endereco_cliente,
-    //     nome_cliente: nome_cliente,
-    //     contato_cliente: contato_cliente,
-    //     email_cliente: email_cliente,
-    //     senha_cliente: senha_cliente,
-    //     endereco_cliente: endereco_cliente,
-    // };
 
 });
 
