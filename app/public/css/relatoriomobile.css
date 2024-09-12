@@ -84,7 +84,42 @@ button:hover {
     border: 1px solid black;
     color: #000000;
 }
-
+.container {
+    text-align: center;
+    border: 2px dashed #ccc;
+    padding: 20px;
+    border-radius: 10px;
+    width: 300px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    border: none;
+    background-color: #007BFF;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+.hidden {
+    display: none;
+}
+video {
+    max-width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+canvas {
+    display: none;
+}
+img {
+    max-width: 100%;
+    margin-top: 20px;
+}
 #preview-container {
     margin: 10px 0;
 }

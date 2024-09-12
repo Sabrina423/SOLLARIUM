@@ -32,19 +32,89 @@
             <p><strong>Data e Horário:</strong> 09/09/2024 14:30</p>
             <p><strong>Endereço do Serviço:</strong> Rua Exemplo, 123, Bairro, Cidade</p>
             
-            <button id="upload-btn">Enviar Nota Fiscal</button>
-            <div id="upload-section" class="hidden">
-                <label for="invoice-upload">Selecione a foto da nota fiscal:</label>
-                <input type="file" id="invoice-upload" accept="image/*">
-                <div id="preview-container">
-                    <img id="preview" src="" alt="Prévia da Nota Fiscal" class="hidden">
-                </div>
-                <button id="send-btn">Enviar</button>
-            </div>
+            <p><strong>Escolha uma opção:</strong></p>
+            <button onclick="document.getElementById('photoInput').click()">Carregar Foto</button>
+            <br>
+            <button onclick="startCamera()">Tirar Foto</button>
+            <br>
+            <input type="file" id="photoInput" accept="image/*" class="hidden" onchange="previewImage(event)">
+            <video id="video" class="hidden" autoplay></video>
+            <button id="captureButton" class="button hidden" onclick="capturePhoto()">Capturar Foto</button>
+            <canvas id="canvas"></canvas>
+            <img id="photoPreview" class="hidden">
+            <br>
+            <button id="submitButton" class="button" onclick="submitPhoto()">Enviar Foto</button>
+        </div>    
         </section>
     </main>
 
-    <script>document.addEventListener('DOMContentLoaded', function () {
+    <script>
+     let stream = null;
+
+function startCamera() {
+    const video = document.getElementById('video');
+    const captureButton = document.getElementById('captureButton');
+
+    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+        navigator.mediaDevices.getUserMedia({ video: true })
+        .then(function(mediaStream) {
+            stream = mediaStream;
+            video.srcObject = mediaStream;
+            video.classList.remove('hidden');
+            captureButton.classList.remove('hidden');
+        }).catch(function(error) {
+            console.error('Erro ao acessar a câmera:', error);
+        });
+    } else {
+        alert('Acesso à câmera não suportado.');
+    }
+}
+
+function capturePhoto() {
+    const video = document.getElementById('video');
+    const canvas = document.getElementById('canvas');
+    const photoPreview = document.getElementById('photoPreview');
+
+    canvas.width = video.videoWidth;
+    canvas.height = video.videoHeight;
+    const context = canvas.getContext('2d');
+    context.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+    photoPreview.src = canvas.toDataURL('image/png');
+    photoPreview.classList.remove('hidden');
+
+    // Stop the video stream and hide the video element
+    if (stream) {
+        stream.getTracks().forEach(track => track.stop());
+    }
+    video.classList.add('hidden');
+    canvas.classList.add('hidden');
+    document.getElementById('captureButton').classList.add('hidden');
+}
+
+function previewImage(event) {
+    const photoPreview = document.getElementById('photoPreview');
+    const file = event.target.files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            photoPreview.src = e.target.result;
+            photoPreview.classList.remove('hidden');
+        }
+        reader.readAsDataURL(file);
+    }
+}
+
+function submitPhoto() {
+    const photoPreview = document.getElementById('photoPreview');
+    if (photoPreview.src) {
+        alert('Foto enviada com sucesso!');
+        // Aqui você pode adicionar o código para enviar a foto para um servidor
+    } else {
+        alert('Nenhuma foto selecionada.');
+    }
+}
+document.addEventListener('DOMContentLoaded', function () {
         const uploadBtn = document.getElementById('upload-btn');
         const uploadSection = document.getElementById('upload-section');
         const menuToggle = document.querySelector('.menu-toggle');
