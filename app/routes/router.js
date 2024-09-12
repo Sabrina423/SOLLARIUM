@@ -34,11 +34,7 @@ const authenticateToken = (req, res, next) => {
 
 // Rotas
 router.get('/', (req, res) => {
-<<<<<<< HEAD
     res.render('pages/home');
-=======
-    res.render('pages/home.ejs');
->>>>>>> 7a4b715 (atualização :3)
 });
 
 router.get('/entrar', (req, res) => {
@@ -83,6 +79,12 @@ router.get('/feedback', authenticateToken, (req, res) => {
     res.render('pages/feedback');
 });
 
+router.get('/adm', authenticateToken, (req, res) => {
+    res.render('pages/adm');
+});
+
+
+
 //Rota de registro cliente
 router.post(
     "/perfilcliente",
@@ -96,27 +98,31 @@ router.post(
     router.post(
         "/cadastrocliente",
         clienteController.regrasValidacaoFormCad,
-        res.render('pages/home')
-    ); 
+        async function (req, res) {
+            clienteController.cadastrar(req, res);
+            res.render('pages/home')
+        });
+
 
 //Rota de registro profissional
-    router.post(
-        '/cadastroprof', 
-        body("nome")
-            .isLength({ min: 3, max: 45 }).withMessage("Mínimo de 3 letras e máximo de 45!"),
-        body("sobrenome")
-            .isLength({ min: 8, max: 45 }).withMessage("Nome de usuário deve ter de 8 a 45 caracteres!"),
-        body("email")
-            .isEmail().withMessage("Digite um e-mail válido!"),
-        body("phone")
-            .isLength({ min: 12, max: 13 }).withMessage("Digite um telefone válido!"), 
-    (req, res) => {
-    
-
+router.post(
+    "/cadastroprof",
+    clienteController.regrasValidacaoFormCad,
+    async function (req, res) {
         profissionalController.cadastrar(req, res);
-    
+        res.render('pages/home')
+    });
 
-});
+    router.post(
+        "/adm",
+        clienteController.regrasValidacaoFormCad,
+        async function (req, res) {
+            admController.cadastrar(req, res);
+            res.render('pages/home')
+        });
+    
+    
+    
 
 // Rota de Login
 
