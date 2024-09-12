@@ -13,7 +13,7 @@ const adm = require("../models/admModel");
 const uploadFile = require("../util/uplouder.js")("./app/public/imagem/perfil");
 //const uploadFile = require("../util/uploader")();
 const  {  
-    verificarClienteAutorizado,
+    verificarClienteAutenticado,
     limparSessao,
     gravarClienteAutenticado,
     verificarClienteAutorizado,
@@ -107,7 +107,7 @@ router.post(
         clienteController.regrasValidacaoFormCad,
         async function (req, res) {
             clienteController.cadastrar(req, res);
-            res.render('pages/home')
+            res.redirect('/home')
         });
 
 
