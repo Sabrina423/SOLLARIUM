@@ -93,6 +93,11 @@ router.post(
         clienteController.gravarperfil(req, res);
     });
 
+    router.post(
+        "/cadastrocliente",
+        clienteController.regrasValidacaoFormCad,
+        res.render('pages/home')
+    ); 
 
 //Rota de registro profissional
     router.post(
