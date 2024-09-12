@@ -16,7 +16,6 @@ const  {
     verificarClienteAutenticado,
     limparSessao,
     gravarClienteAutenticado,
-    verificarClienteAutorizado,
   } = require("../models/autenticador_middleware.js");
 
 const router = express.Router();

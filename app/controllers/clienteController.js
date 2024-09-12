@@ -108,11 +108,18 @@ mostrarPerfil: async (req, res) => {
         bairro: viaCep.bairro, localidade: viaCep.localidade, uf: viaCep.uf,
         img_perfil_pasta: results[0].img_perfil_pasta,
         img_perfil_banco: results[0].img_perfil_banco != null ? `data:image/jpge;base64,${results[0].img_perfil_banco.toString('base64')}`: null,
+        nomeCliente_cliente: results[0].user_cliente, fone_cliente: results[0].fone_cliente, senha_cliente: ""
     }
-  
+
+    res.render("pages/perfilcliente", { listaErros: null, dadosNotificacao: null, valores: campos })
+} catch (e) {
+    console.log(e);
+    res.render("")
 }
 
-gravaPerfil
+gravarPerfil{
+
+}
 
 module.exports = clienteController;
 
