@@ -117,9 +117,12 @@ mostrarPerfil: async (req, res) => {
     res.render("")
 }
 
+<<<<<<< HEAD
 gravarPerfil{
 
 }
+=======
+>>>>>>> 5528448 (arrumar as rotas)
 
 module.exports = clienteController;
 

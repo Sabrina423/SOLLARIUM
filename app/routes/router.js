@@ -10,7 +10,7 @@ const cliente = require("../models/clienteModel");
 const profissional = require("../models/profissionaisModel");
 const adm = require("../models/admModel");
 
-const uploadFile = require("../util/uplouder.js")("./app/public/imagem/perfil");
+const uploadFile = require("../util/uploader.js")("./app/public/imagem/perfil");
 //const uploadFile = require("../util/uploader")();
 const  {  
     verificarClienteAutenticado,
@@ -115,8 +115,6 @@ router.post(
     "/cadastroprof",
     profissionalController.regrasValidacaoFormCad,
     async function (req, res) {
-    router.post(
-        '/perfilprof', 
         profissionalController.cadastrar(req, res);
         res.redirect('pages/home')
     });
