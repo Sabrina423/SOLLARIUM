@@ -37,7 +37,11 @@ const authenticateToken = (req, res, next) => {
 
 // Rotas
 router.get('/', (req, res) => {
+<<<<<<< HEAD
     res.render('pages/home');
+=======
+    res.render('pages/home.ejs');
+>>>>>>> 291282b (HOME BONITAA)
 });
 
 router.get('/entrar', (req, res) => {
@@ -108,10 +112,26 @@ router.post(
 
 
 //Rota de registro profissional
+<<<<<<< HEAD
 router.post(
     "/cadastroprof",
     clienteController.regrasValidacaoFormCad,
     async function (req, res) {
+=======
+    router.post(
+        '/perfilprof', 
+        body("nome")
+            .isLength({ min: 3, max: 45 }).withMessage("Mínimo de 3 letras e máximo de 45!"),
+        body("sobrenome")
+            .isLength({ min: 8, max: 45 }).withMessage("Nome de usuário deve ter de 8 a 45 caracteres!"),
+        body("email")
+            .isEmail().withMessage("Digite um e-mail válido!"),
+        body("phone")
+            .isLength({ min: 12, max: 13 }).withMessage("Digite um telefone válido!"), 
+    (req, res) => {
+    
+        req.session.user={ nome }
+>>>>>>> 291282b (HOME BONITAA)
         profissionalController.cadastrar(req, res);
         res.render('pages/home')
     });

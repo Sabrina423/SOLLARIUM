@@ -1,54 +1,66 @@
-let items = document.querySelectorAll('.sliderhome .listhome .item');
-let next = document.getElementById('next');
-let prev = document.getElementById('prev');
-let thumbnails = document.querySelectorAll('.thumbnailhome .item');
+document.addEventListener('DOMContentLoaded', () => {
+    const items = document.querySelectorAll('.sliderhome .listhome .item'); 
+    const thumbnails = document.querySelectorAll('.thumbnailhome .item');
+    const sliderContainer = document.querySelector('.sliderhome');
 
-// config param
-let countItem = items.length;
-let itemActive = 0;
-// event next click
-next.onclick = function(){
-    itemActive = itemActive + 1;
-    if(itemActive >= countItem){
-        itemActive = 0;
-    }
-    showSlider();
-}
-//event prev click
-prev.onclick = function(){
-    itemActive = itemActive - 1;
-    if(itemActive < 0){
-        itemActive = countItem - 1;
-    }
-    showSlider();
-}
-// auto run slider
-let refreshInterval = setInterval(() => {
-    next.click();
-}, 5000)
-function showSlider(){
-    // remove item active old
-    let itemActiveOld = document.querySelector('.sliderhome .listhome .item.active');
-    let thumbnailActiveOld = document.querySelector('.thumbnailhome .item.active');
-    itemActiveOld.classList.remove('active');
-    thumbnailActiveOld.classList.remove('active');
+    let countItem = items.length;
+    let itemActive = 0;
+    let refreshInterval;
 
-    // active new item
-    items[itemActive].classList.add('active');
-    thumbnails[itemActive].classList.add('active');
+    const showSlider = (index) => {
+        // Remove old active items
+        const itemActiveOld = document.querySelector('.sliderhome .listhome .item.active');
+        const thumbnailActiveOld = document.querySelector('.thumbnailhome .item.active');
+        if (itemActiveOld) itemActiveOld.classList.remove('active');
+        if (thumbnailActiveOld) thumbnailActiveOld.classList.remove('active');
 
-    // clear auto time run slider
-    clearInterval(refreshInterval);
-    refreshInterval = setInterval(() => {
-        next.click();
-    }, 5000)
-}
+        // Add new active item
+        items[index].classList.add('active');
+        thumbnails[index].classList.add('active');
 
-// click thumbnail
-thumbnails.forEach((thumbnail, index) => {
-    thumbnail.addEventListener('click', () => {
+        // Update the currently active item
         itemActive = index;
-        showSlider();
-    })
-})
+    };
 
+    const startAutoSlide = () => {
+        refreshInterval = setInterval(() => {
+            let nextIndex = (itemActive + 1) % countItem;
+            showSlider(nextIndex);
+        }, 7000); // Aumente o tempo para 7000 milissegundos (7 segundos)
+    };
+
+    const stopAutoSlide = () => {
+        clearInterval(refreshInterval);
+    };
+
+    // Set up event listeners for thumbnails
+    thumbnails.forEach((thumbnail, index) => {
+        thumbnail.addEventListener('click', () => {
+            stopAutoSlide(); // Stop auto-slide on manual interaction
+            showSlider(index);
+            startAutoSlide(); // Restart auto-slide after interaction
+        });
+
+        thumbnail.addEventListener('mouseover', () => {
+            stopAutoSlide(); // Stop auto-slide on mouseover
+            showSlider(index);
+        });
+
+        thumbnail.addEventListener('mouseout', () => {
+            startAutoSlide(); // Resume auto-slide on mouseout
+        });
+    });
+
+    // Start auto-slide on page load
+    startAutoSlide();
+
+    // Pause auto-slide on mouse enter
+    sliderContainer.addEventListener('mouseenter', () => {
+        stopAutoSlide();
+    });
+
+    // Resume auto-slide on mouse leave
+    sliderContainer.addEventListener('mouseleave', () => {
+        startAutoSlide();
+    });
+});

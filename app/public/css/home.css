@@ -41,7 +41,7 @@ header{
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: black;
+    background-color: transparent;
     
 }
 
@@ -53,6 +53,7 @@ header{
 .navbar .links{
     display: flex;
     gap: 3.5rem;
+    color: #000;
 }
 
 
