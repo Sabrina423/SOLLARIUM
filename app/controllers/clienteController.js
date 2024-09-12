@@ -107,7 +107,7 @@ mostrarPerfil: async (req, res) => {
         complemento: results[0].complemento_cliente, logradouro: viaCep. logradouro,
         bairro: viaCep.bairro, localidade: viaCep.localidade, uf: viaCep.uf,
         img_perfil_pasta: results[0].img_perfil_pasta,
-        img_perfil_banco: results[0].img_perfil_banco != null ? 'data: image/jpge;base64,${results[0].img_perfil_banco.toString('base64')}': null,
+        img_perfil_banco: results[0].img_perfil_banco != null ? `data:image/jpge;base64,${results[0].img_perfil_banco.toString('base64')}`: null,
     }
   
 }
