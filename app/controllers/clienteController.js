@@ -109,8 +109,8 @@ const clienteController = {
     }
 };
 
-mostrarPerfil: async (req, res) => {
-    try{
+mostrarPerfil: async (req, res) => 
+    {
     let campos = {
         nome_cliente: results[0].nome_cliente,
         numero: results[0].numero_cliente,
