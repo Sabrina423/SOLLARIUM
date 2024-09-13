@@ -5,7 +5,7 @@ document.getElementById('cadastroFormprof').addEventListener('submit', async fun
         nome_prof: document.getElementById('nome_prof').value,
         cpf_prof: document.getElementById('cpf_prof').value,
         email_prof: document.getElementById('email_prof').value, 
-        telefone_prof: document.getElementById('telefone_prof').value,
+        contato_prof: document.getElementById('telefone_prof').value,
         senha_prof: document.getElementById('senha_prof').value,
         confimasenha_prof: document.getElementById('confimasenha_prof').value,
         estado_cliente: document.getElementById('estado_cliente').value,

@@ -27,7 +27,7 @@ const secretKey = 'your-secret-key';
 const authenticateToken = (req, res, next) => {
     const token = req.session.token;
     if (!token) return res.redirect('/');
-
+                                                         
     jwt.verify(token, secretKey, (err, user) => {
         if (err) return res.redirect('/');
         req.user = user;
@@ -112,7 +112,6 @@ router.post(
     profissionalController.regrasValidacaoFormCad,
     async function (req, res) {
         profissionalController.cadastrar(req, res);
-        res.redirect('pages/home')
     });
 
     router.post(
@@ -120,7 +119,6 @@ router.post(
         clienteController.regrasValidacaoFormCad,
         async function (req, res) {
             admController.cadastrar(req, res);
-            res.redirect('pages/home')
         });
 
 // Rota de Login
@@ -132,23 +130,5 @@ router.post(
           clienteController.logar(req, res);
         }
       );
-
-      router.post(
-        "/entrar",
-        clienteController.regrasValidacaoFormLogin,
-        gravarClienteAutenticado,
-        function (req, res) {
-          clienteController.logar(req, res);
-        }
-      );
-      router.post(
-        "/entrar",
-        clienteController.regrasValidacaoFormLogin,
-        gravarClienteAutenticado,
-        function (req, res) {
-          clienteController.logar(req, res);
-        }
-      );
-
 
 module.exports = router;
