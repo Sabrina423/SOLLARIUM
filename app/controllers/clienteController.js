@@ -110,7 +110,7 @@ const clienteController = {
 };
 
 mostrarPerfil: async (req, res) => {
-
+    try{
     let campos = {
         nome_cliente: results[0].nome_cliente,
         numero: results[0].numero_cliente,
@@ -122,7 +122,6 @@ mostrarPerfil: async (req, res) => {
     }
 
     res.render("pages/perfilcliente", { listaErros: null, dadosNotificacao: null, valores: campos })
-
     console.log(e);
     res.render("")
 }
@@ -130,5 +129,4 @@ mostrarPerfil: async (req, res) => {
 
 
 module.exports = clienteController;
-
 
