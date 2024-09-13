@@ -24,9 +24,9 @@ const clienteController = {
             .isLength({ min : 8}).withMessage('A senha deve conter pelo menos 8 caracteres'),
         body('cpf_cliente')
             .isLength({ min:14 , max: 14}).withMessage('O cpf deve ser válido, contendo 11 dígitos'),
-        body(cep_cliente)
+        body('cep_cliente')
             .isLength({min: 8 , max:8}).withMessage('O cep deve ter entre 8 caracteres'),
-        body(telefone_cliente)
+        body('telefone_cliente')
             .isLength({min:10 , max:15}).withMessage('O contato deve ser válido')
             .custom(async value => {
                 const clienteExistente = await cliente.findById(value); // Ajustado para verificar no modelo correto
@@ -56,7 +56,7 @@ const clienteController = {
             .isEmail().withMessage("Digite um e-mail válido!"),
         body("fone_cliente")
             .isLength({ min: 12, max: 13 }).withMessage("Digite um telefone válido!"),
-        verificarClienteAutorizado[1, 2, 3], ("pages/cadastrocliente"),
+        
     ],
 
     gravarperfil :[

@@ -16,6 +16,7 @@ const  {
     verificarClienteAutenticado,
     limparSessao,
     gravarClienteAutenticado,
+    verificarClienteAutorizado
   } = require("../models/autenticador_middleware.js");
 
 const router = express.Router();
@@ -92,7 +93,7 @@ router.post (
     "/perfilcliente",
     uploadFile("imagem-perfil_cliente"),
     clienteController.regrasValidacaoPerfil,
-    verificarClienteAutorizado [1, 2, 3], ("pages/cadastrocliente"),
+    verificarClienteAutorizado( [1, 2, 3], "pages/cadastrocliente"),
     async function (req, res) {
         clienteController.gravarperfil(req, res);
     });
@@ -101,7 +102,7 @@ router.post (
         "/cadastrocliente",
         clienteController.regrasValidacaoFormCad,
         async function (req, res) {
-            clienteController.cadastrar(req, res);
+            clienteController.cadastrar(req, res); 
             res.redirect('/home')
         });
 
