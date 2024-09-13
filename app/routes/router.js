@@ -61,7 +61,7 @@ router.get('/sobre', (req, res) => {
 });
 
 router.get('/perfilcliente', authenticateToken, (req, res) => {
-    res.render('pages/perfilcliente');
+   
     clienteController.mostrarPerfil(req, res);
 });
 
@@ -102,8 +102,7 @@ router.post (
         "/cadastrocliente",
         clienteController.regrasValidacaoFormCad,
         async function (req, res) {
-            clienteController.cadastrar(req, res); 
-            res.redirect('/home')
+            clienteController.cadastrar(req, res);
         });
 
 
