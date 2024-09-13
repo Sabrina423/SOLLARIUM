@@ -21,7 +21,6 @@
                 </nav>
                 <nav class="input-group">
                     <input type="text" name="cep_cliente" placeholder="CEP" required>
-                    <input type="text" name="estado_cliente" id="cep_cliente placeholder="Estado" required>
                 </nav>
                 <nav class="input-group">
                     <input type="email" name="email_cliente" placeholder="E-mail" required>
@@ -64,9 +63,24 @@
             return lengthCriteria && upperCaseCriteria && specialCharCriteria;
         }
 
-
+        function applyPhoneMask(value) {
+            return value
+                .replace(/\D/g, '') // Remove tudo que não é dígito
+                .replace(/^(\d{2})(\d)/, '($1) $2')
+                .replace(/(\d{5})(\d)/, '$1-$2')
+                .replace(/(\d{5})(\d{1,4})$/, '$1-$2');
+        }
 
         document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('cpf_cliente').addEventListener('input', function() {
+                this.value = applyCPFMask(this.value);
+            });
+
+            document.getElementById('contato_cliente').addEventListener('input', function() {
+                this.value = applyPhoneMask(this.value);
+            });
+        });
+
         function applyCPFMask(value) {
             return value
                 .replace(/\D/g, '') // Remove tudo que não é dígito
@@ -74,24 +88,6 @@
                 .replace(/(\d{3})(\d)/, '$1.$2')
                 .replace(/(\d{3})(\d{1,2})$/, '$1-$2');
         }
-
-        function applyPhoneMask(value) {
-            return value
-                .replace(/\D/g, '') // Remove tudo que não é dígito
-                .replace(/(\d{2})(\d)/, '($1) $2')
-                .replace(/(\d{5})(\d)/, '$1-$2')
-                .replace(/(\d{5})(\d{1,4})$/, '$1-$2');
-        }
-
-        document.getElementById('cpf_cliente').addEventListener('input', function() {
-            this.value = applyCPFMask(this.value);
-        });
-
-        document.getElementById('telefone_cliente').addEventListener('input', function() {
-            this.value = applyPhoneMask(this.value);
-        });
-    });
-
     </script>
 </body>
 </html>
