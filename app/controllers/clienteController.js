@@ -10,18 +10,24 @@ const https = require('https');
 const clienteController = {
     regrasValidacaoFormLogin: [
         body("email")
-            .isLength({ min: 8, max: 45 })
-            .withMessage("O nome de usuário/e-mail deve ter de 8 a 45 caracteres"),
+            .isLength({ min: 8, max: 100 })
+            .withMessage("O nome de usuário/e-mail deve ser válido"),
         body("password")
             .isStrongPassword()
             .withMessage("A senha deve ter no mínimo 8 caracteres")
     ],
 
     regrasValidacaoFormCad: [
-        body("nome_usu")
-            .isLength({ min: 3, max: 45 }).withMessage("Nome deve ter de 3 a 45 caracteres!"),
-        body("nomeusu_usu")
-            .isLength({ min: 8, max: 45 }).withMessage("Nome de usuário deve ter de 8 a 45 caracteres! Incluindo uma letra maiúscula, um caractere especial e um número ")
+        body("nome_cliente")
+            .isString({ min: 3, max: 45 }).withMessage("Nome do usuário é obrigatório"),
+        body("senha_cliente")
+            .isLength({ min : 8}).withMessage('A senha deve conter pelo menos 8 caracteres'),
+        body('cpf_cliente')
+            .isLength({ min:14 , max: 14}).withMessage('O cpf deve ser válido, contendo 11 dígitos'),
+        body(cep_cliente)
+            .isLength({min: 8 , max:8}).withMessage('O cep deve ter entre 8 caracteres'),
+        body(telefone_cliente)
+            .isLength({min:10 , max:15}).withMessage('O contato deve ser válido')
             .custom(async value => {
                 const clienteExistente = await cliente.findById(value); // Ajustado para verificar no modelo correto
                 if (clienteExistente) {
@@ -50,7 +56,11 @@ const clienteController = {
             .isEmail().withMessage("Digite um e-mail válido!"),
         body("fone_cliente")
             .isLength({ min: 12, max: 13 }).withMessage("Digite um telefone válido!"),
-        verificarClienteAutorizado([1, 2, 3], "pages/cadastrocliente"),
+        verificarClienteAutorizado[1, 2, 3], ("pages/cadastrocliente"),
+    ],
+
+    gravarperfil :[
+          
     ],
     
 
@@ -78,7 +88,7 @@ const clienteController = {
             nome_cliente: req.body.nome_cliente,
             email_cliente: req.body.email_cliente,
             estado_cliente : req.body.estado_cliente,
-            endereco_cliente : req.body.endereco_cliente,
+            cep_cliente : req.body.cep_cliente,
         };
 
         try {
@@ -112,17 +122,12 @@ mostrarPerfil: async (req, res) => {
     }
 
     res.render("pages/perfilcliente", { listaErros: null, dadosNotificacao: null, valores: campos })
-} catch (e) {
+
     console.log(e);
     res.render("")
 }
 
-<<<<<<< HEAD
-gravarPerfil{
 
-}
-=======
->>>>>>> 5528448 (arrumar as rotas)
 
 module.exports = clienteController;
 

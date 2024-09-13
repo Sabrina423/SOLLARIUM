@@ -88,11 +88,11 @@ router.get('/adm', authenticateToken, (req, res) => {
 
 
 //Rota de registro cliente
-router.post(
+router.post (
     "/perfilcliente",
     uploadFile("imagem-perfil_cliente"),
     clienteController.regrasValidacaoPerfil,
-    verificarClienteAutorizado([1,2,3], "pages/registro"),
+    verificarClienteAutorizado [1, 2, 3], ("pages/cadastrocliente"),
     async function (req, res) {
         clienteController.gravarperfil(req, res);
     });
