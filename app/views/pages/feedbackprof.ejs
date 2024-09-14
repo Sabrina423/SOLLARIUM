@@ -31,19 +31,19 @@
                 <div class="custom-select">
                     <div class="select-selected">Mais recentes</div>
                     <div class="select-items">
-                        <div>Mais recentes</div>
-                        <div>Mais antigas</div>
-                        <div>Menor avaliação</div>
-                        <div>Maior avaliação</div>
+                        <div data-filter="recent">Mais recentes</div>
+                        <div data-filter="oldest">Mais antigas</div>
+                        <div data-filter="lowest">Menor avaliação</div>
+                        <div data-filter="highest">Maior avaliação</div>
                     </div>
                 </div>
-                </div>
+            </div>
 
             <div class="feedback">
-                <div class="feedback-item">
+                <div class="feedback-item" data-date="09-10-2024" data-quality="5" data-speed="4" data-results="3">
                     <div class="feedback-header">
                         <span class="client-name">Cliente 1</span>
-                        <span class="feedback-date">2024-09-08</span>
+                        <span class="feedback-date">09-10-2024</span>
                     </div>
                     <div class="feedback-ratings">
                         <div class="rating">
@@ -60,10 +60,10 @@
                         </div>
                     </div>
                 </div>
-                <div class="feedback-item">
+                <div class="feedback-item" data-date="06-10-2024" data-quality="3" data-speed="4" data-results="4">
                     <div class="feedback-header">
                         <span class="client-name">Cliente 2</span>
-                        <span class="feedback-date">2024-09-07</span>
+                        <span class="feedback-date">06-10-2024</span>
                     </div>
                     <div class="feedback-ratings">
                         <div class="rating">
@@ -86,34 +86,67 @@
     </main>
 
     <!-- JavaScript -->
-    <script>document.getElementById('menu-toggle').addEventListener('click', function() {
-        var navMenu = document.getElementById('nav-menu');
-        if (navMenu.classList.contains('active')) {
-            navMenu.classList.remove('active');
-        } else {
-            navMenu.classList.add('active');
-        }
-    });
-    document.querySelector('.select-selected').addEventListener('click', function() {
-        this.parentElement.classList.toggle('open');
-    });
-
-    document.querySelectorAll('.select-items div').forEach(item => {
-        item.addEventListener('click', function() {
-            const selectedText = this.textContent;
-            this.parentElement.previousElementSibling.textContent = selectedText;
-            this.parentElement.classList.remove('open');
+    <script>
+        document.getElementById('menu-toggle').addEventListener('click', function() {
+            var navMenu = document.getElementById('nav-menu');
+            if (navMenu.classList.contains('active')) {
+                navMenu.classList.remove('active');
+            } else {
+                navMenu.classList.add('active');
+            }
         });
-    });
 
-    // Close the dropdown if the user clicks outside of it
-    window.addEventListener('click', function(e) {
-        if (!e.target.matches('.select-selected')) {
-            document.querySelectorAll('.custom-select').forEach(select => {
-                select.classList.remove('open');
+        document.querySelector('.select-selected').addEventListener('click', function() {
+            this.parentElement.classList.toggle('open');
+        });
+
+        document.querySelectorAll('.select-items div').forEach(item => {
+            item.addEventListener('click', function() {
+                const selectedText = this.textContent;
+                this.parentElement.previousElementSibling.textContent = selectedText;
+                this.parentElement.classList.remove('open');
+                filterFeedbacks(this.dataset.filter);
             });
+        });
+
+        // Close the dropdown if the user clicks outside of it
+        window.addEventListener('click', function(e) {
+            if (!e.target.matches('.select-selected')) {
+                document.querySelectorAll('.custom-select').forEach(select => {
+                    select.classList.remove('open');
+                });
+            }
+        });
+
+        function filterFeedbacks(filter) {
+            const feedbackItems = document.querySelectorAll('.feedback-item');
+            const feedbackArray = Array.from(feedbackItems);
+
+            switch (filter) {
+                case 'recent':
+                    feedbackArray.sort((a, b) => new Date(b.dataset.date) - new Date(a.dataset.date));
+                    break;
+                case 'oldest':
+                    feedbackArray.sort((a, b) => new Date(a.dataset.date) - new Date(b.dataset.date));
+                    break;
+                case 'lowest':
+                    feedbackArray.sort((a, b) => 
+                        (parseInt(a.dataset.quality) + parseInt(a.dataset.speed) + parseInt(a.dataset.results)) - 
+                        (parseInt(b.dataset.quality) + parseInt(b.dataset.speed) + parseInt(b.dataset.results))
+                    );
+                    break;
+                case 'highest':
+                    feedbackArray.sort((a, b) => 
+                        (parseInt(b.dataset.quality) + parseInt(b.dataset.speed) + parseInt(b.dataset.results)) - 
+                        (parseInt(a.dataset.quality) + parseInt(a.dataset.speed) + parseInt(a.dataset.results))
+                    );
+                    break;
+            }
+
+            const feedbackContainer = document.querySelector('.feedback');
+            feedbackContainer.innerHTML = '';
+            feedbackArray.forEach(item => feedbackContainer.appendChild(item));
         }
-    });
     </script>
 </body>
 </html>
