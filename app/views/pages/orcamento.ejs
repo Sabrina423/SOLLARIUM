@@ -3,14 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Solicitação de Orçamento</title>
-    <link rel="stylesheet" href="css/orcamento.css">
+    <title>Solicitação de Orçamento - Sollarium</title>
+    <link rel="stylesheet" href="/css/orcamento.css">
+    <meta name="description" content="Solicite orçamento para serviços de energia solar com os melhores profissionais da Sollarium.">
+    <meta name="keywords" content="energia solar, orçamento, profissionais, Sollarium, serviços, painel solar">
+    <meta name="author" content="Sollarium">
 </head>
 <body>
-
     <header>
         <div class="logo">
-            <img src="imagens/LOGO_SOLLARIUM (8).png" alt="Logo">
+            <img src="imagens/LOGO_SOLLARIUM (8).png" alt="Logo Sollarium" loading="lazy">
         </div>
         <nav class="navbar">
             <ul class="nav-links">
@@ -27,29 +29,61 @@
     </header>
 
     <main>
-        <section id="contact">
+        <section class="hero-section">
+            <div class="hero-text">
+                <h1>Sollarium - Especialistas em Energia Solar</h1>
+                <p>Transforme a sua energia com soluções sustentáveis e os melhores profissionais do mercado.</p>
+                <a href="#contact" class="cta-button">Solicite seu Orçamento</a>
+            </div>
+            <div class="hero-image">
+                <img src="/imagens/img1.png" alt="Painel Solar" class="shadow-img">
+            </div>
+        </section>
+
+        <section id="services" class="services-section">
+            <h2>Nossos Serviços</h2>
+            <div class="cards">
+                <div class="card">
+                    <img src="/imagens/img2.png" alt="Instalação de painéis solares" class="shadow-img">
+                    <h3>Instalação</h3>
+                    <p>Equipe especializada na instalação de sistemas fotovoltaicos.</p>
+                </div>
+                <div class="card">
+                    <img src="/imagens/img3.png" alt="Manutenção de sistemas solares" class="shadow-img">
+                    <h3>Manutenção</h3>
+                    <p>Serviços de manutenção preventiva e corretiva para garantir o funcionamento contínuo.</p>
+                </div>
+                <div class="card">
+                    <img src="imagens/consultoria.jpg" alt="Consultoria em energia solar" class="shadow-img">
+                    <h3>Consultoria</h3>
+                    <p>Consultoria personalizada para escolher o melhor sistema solar para você.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="contact-section">
+            <h2>Solicite seu Orçamento</h2>
             <form id="orcamento-form">
-                <h1>Solicitação de Orçamento</h1>
                 <div class="form-group">
                     <label for="name">Nome:</label>
-                    <input type="text" id="name" name="name" required>
+                    <input type="text" id="name" name="name" placeholder="Seu nome completo" required>
                 </div>
-                
+
                 <div class="form-group">
                     <label for="text">Serviço:</label>
-                    <textarea id="text" name="serviço" rows="4" required></textarea>
+                    <textarea id="text" name="serviço" rows="4" placeholder="Descreva o serviço desejado" required></textarea>
                 </div>
 
                 <div class="form-group">
                     <label for="valor">Valor esperado:</label>
-                    <input type="text" id="valor" name="valor" required>
+                    <input type="text" id="valor" name="valor" placeholder="Ex.: R$ 2.000,00" required>
                 </div>
 
                 <div class="form-group">
                     <label for="data">Dia e horário que o serviço deve ser realizado:</label>
                     <input type="datetime-local" id="data" name="data" required>
                 </div>
-                
+
                 <button type="submit">Enviar Solicitação</button>
                 <div id="success-message" style="display: none; color: green; margin-top: 1rem;">
                     Sua solicitação foi enviada com sucesso! Logo um profissional será encontrado para te atender.
@@ -71,128 +105,16 @@
         document.getElementById('orcamento-form').addEventListener('submit', function(event) {
             event.preventDefault(); // Previne o envio do formulário para a ação padrão
 
-            // Valida se todos os campos são preenchidos
             const name = document.getElementById('name').value;
             const text = document.getElementById('text').value;
             const valor = document.getElementById('valor').value;
             const data = document.getElementById('data').value;
 
             if (name && text && valor && data) {
-                // Mostra a mensagem de sucesso
                 document.getElementById('success-message').style.display = 'block';
             } else {
-                // Opcional: Mostrar uma mensagem de erro se não todos os campos estiverem preenchidos
                 alert('Por favor, preencha todos os campos.');
             }
-        });
-
-        // Tutorial Script
-        document.addEventListener('DOMContentLoaded', function() {
-            const tutorialOverlay = document.getElementById('tutorial-overlay');
-            const steps = document.querySelectorAll('.tutorial-step');
-            let currentStep = 1;
-
-            function showStep(step) {
-                steps.forEach((el, index) => {
-                    el.style.display = index === step - 1 ? 'block' : 'none';
-                });
-                document.querySelectorAll('.tutorial-tip').forEach((tip, index) => {
-                    tip.style.display = index === step - 1 ? 'block' : 'none';
-                });
-            }
-
-            showStep(currentStep);
-
-            document.getElementById('next-step').addEventListener('click', function() {
-                if (currentStep < steps.length) {
-                    currentStep++;
-                    showStep(currentStep);
-                }
-            });
-
-            document.getElementById('next-step-2').addEventListener('click', function() {
-                if (currentStep < steps.length) {
-                    currentStep++;
-                    showStep(currentStep);
-                }
-            });
-
-            document.getElementById('next-step-3').addEventListener('click', function() {
-                if (currentStep < steps.length) {
-                    currentStep++;
-                    showStep(currentStep);
-                }
-            });
-
-            document.getElementById('skip-tutorial').addEventListener('click', function() {
-                tutorialOverlay.style.display = 'none';
-            });
-
-            document.getElementById('skip-tutorial-2').addEventListener('click', function() {
-                tutorialOverlay.style.display = 'none';
-            });
-
-            document.getElementById('skip-tutorial-3').addEventListener('click', function() {
-                tutorialOverlay.style.display = 'none';
-            });
-
-            document.getElementById('skip-tutorial-final').addEventListener('click', function() {
-                tutorialOverlay.style.display = 'none';
-            });
-            document.addEventListener('DOMContentLoaded', function() {
-    const tutorialOverlay = document.getElementById('tutorial-overlay');
-    const steps = document.querySelectorAll('.tutorial-step');
-    let currentStep = 1;
-
-    function showStep(step) {
-        steps.forEach((el, index) => {
-            el.style.display = index === step - 1 ? 'block' : 'none';
-        });
-        document.querySelectorAll('.tutorial-tip').forEach((tip, index) => {
-            tip.style.display = index === step - 1 ? 'block' : 'none';
-        });
-    }
-
-    showStep(currentStep);
-
-    document.getElementById('next-step').addEventListener('click', function() {
-        if (currentStep < steps.length) {
-            currentStep++;
-            showStep(currentStep);
-        }
-    });
-
-    document.getElementById('next-step-2').addEventListener('click', function() {
-        if (currentStep < steps.length) {
-            currentStep++;
-            showStep(currentStep);
-        }
-    });
-
-    document.getElementById('next-step-3').addEventListener('click', function() {
-        if (currentStep < steps.length) {
-            currentStep++;
-            showStep(currentStep);
-        }
-    });
-
-    document.getElementById('skip-tutorial').addEventListener('click', function() {
-        tutorialOverlay.style.display = 'none';
-    });
-
-    document.getElementById('skip-tutorial-2').addEventListener('click', function() {
-        tutorialOverlay.style.display = 'none';
-    });
-
-    document.getElementById('skip-tutorial-3').addEventListener('click', function() {
-        tutorialOverlay.style.display = 'none';
-    });
-
-    document.getElementById('skip-tutorial-final').addEventListener('click', function() {
-        tutorialOverlay.style.display = 'none';
-    });
-});
-
         });
     </script>
 </body>
