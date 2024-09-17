@@ -25,7 +25,7 @@ const clienteController = {
         body('cpf_cliente')
             .isLength({ min: 14, max: 14 }).withMessage('O cpf deve ser válido, contendo 11 dígitos'),
         body('cep_cliente')
-            .isLength({ min: 8, max: 8 }).withMessage('O cep deve ter entre 8 caracteres'),
+            .isLength({ min: 9, max: 9 }).withMessage('O cep deve ter entre 9 caracteres'),
         body('contato_cliente')
             .isLength({ min: 10, max: 15 }).withMessage('O contato deve ser válido com até 15 caracteres')
             .custom(async value => {

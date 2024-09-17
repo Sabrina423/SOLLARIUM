@@ -25,8 +25,8 @@ const profissionaisModel = {
         try {
             
             const result = await pool.query(
-                'INSERT INTO PROFISSIONAL (NOME_PROF,CONTATO_PROF,EMAIL_PROF,CPF_PROF,CEP_PROF,SENHA_PROF) VALUES (?,?,?,?,?,?)',
-                [profissional.nome+ " "+ profissional.sobrenome,profissional.phone, profissional.email,profissional.cpf,profissional.cep,profissional.hashedsenha]
+                'INSERT INTO PROFISSIONAL (NOME_PROF,CONTATO_PROF,EMAIL_PROF,CPF_PROF,CEP_PROF, AREA_PROF,SENHA_PROF) VALUES (?,?,?,?,?,?,?)',
+                [profissional.nome+ " "+ profissional,profissional.phone, profissional.email,profissional.cpf,profissional.cep,profissional.hashedsenha]
             );
             return result; // Retorna o resultado da inserção
         } catch (error) {
@@ -44,7 +44,7 @@ const profissionaisModel = {
             );
             return result; // Retorna o resultado da atualização
         } catch (error) {
-            console.error('Erro ao atualizar cliente:', error);
+            console.error('Erro ao atualizar profissional:', error);
             throw error;
         }
     },

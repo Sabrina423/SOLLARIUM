@@ -1,26 +1,44 @@
-const profissional = require("../models/profissionaisModel");
-const { body, validationResult } = require("express-validator");
+const prof = require("../models/profissionaisModel");
+const { body, validationResult, Result } = require("express-validator");
 const bcrypt = require("bcryptjs");
 var salt = bcrypt.genSaltSync(12);
+const { removeImg } = require("../util/removeImg");
 const fetch = (...args) => import('node-fetch').then(({ default: fetch }) => fetch(...args));
-const profissionaisController = {
+const verificarProfAutorizado = require('../models/verificarProfAutorizado'); // Corrigido o caminho para o middleware
+const https = require('https');
+
+const profController = {
     regrasValidacaoFormLogin: [
-        body("nome_usu")
-            .isLength({ min: 8, max: 45 })
-            .withMessage("O nome de usuário/e-mail deve ter de 8 a 45 caracteres"),
-        body("senha_usu")
+        body("email")
+            .isLength({ min: 8, max: 100 })
+            .withMessage("O nome de usuário/e-mail deve ser válido"),
+        body("password")
             .isStrongPassword()
             .withMessage("A senha deve ter no mínimo 8 caracteres")
     ],
 
     regrasValidacaoFormCad: [
         body("nome_prof")
-            .isLength({ min: 3, max: 45 }).withMessage("Nome deve ter de 3 a 45 caracteres!"),
+            .isString({ min: 3, max: 45 }).withMessage("Nome do usuário é obrigatório"),
+        body("senha_prof")
+            .isLength({ min: 8 }).withMessage('A senha deve conter pelo menos 8 caracteres'),
+        body('cpf_prof')
+            .isLength({ min: 14, max: 14 }).withMessage('O cpf deve ser válido, contendo 11 dígitos'),
+        body('cep_prof')
+            .isLength({ min: 9, max: 9 }).withMessage('O cep deve ter entre 9 caracteres'),
+        body('contato_prof')
+            .isLength({ min: 10, max: 15 }).withMessage('O contato deve ser válido com até 15 caracteres')
+            .custom(async value => {
+                const profExistente = await prof.findById(value); // Ajustado para verificar no modelo correto
+                if (profExistente) {
+                    throw new Error('Nome de usuário em uso!');
+                }
+            }),
         body("email_prof")
             .isEmail().withMessage("Digite um e-mail válido!")
             .custom(async value => {
-                const profissionalExistente = await cliente.findById(value); // Ajustado para verificar no modelo correto
-                if (profissionalExistente) {
+                const profExistente = await prof.findById(value); // Ajustado para verificar no modelo correto
+                if (profExistente) {
                     throw new Error('E-mail em uso!');
                 }
             }),
@@ -32,13 +50,19 @@ const profissionaisController = {
     regrasValidacaoPerfil: [
         body("nome_prof")
             .isLength({ min: 3, max: 45 }).withMessage("Mínimo de 3 letras e máximo de 45!"),
+        body("nomeusu_prof")
+            .isLength({ min: 8, max: 45 }).withMessage("Nome de usuário deve ter de 8 a 45 caracteres!"),
         body("email_prof")
             .isEmail().withMessage("Digite um e-mail válido!"),
-        body("telefone_prof")
+        body("fone_prof")
             .isLength({ min: 12, max: 13 }).withMessage("Digite um telefone válido!"),
-        body("senha_prof")
-            .isLength({ min: 8, max: 45 }).withMessage("Nome de usuário deve ter de 8 a 45 caracteres!"),
+
     ],
+
+    gravarperfil: [
+
+    ],
+
 
     logar: (req, res) => {
         const erros = validationResult(req);
@@ -53,38 +77,28 @@ const profissionaisController = {
     },
 
     cadastrar: async (req, res) => {
-        console.log("profissionaisController")
         const erros = validationResult(req);
         if (!erros.isEmpty()) {
-            console.log(erros);
+            console.log(erros)
             return res.render("pages/cadastroprof", { listaErros: erros, dadosNotificacao: null, valores: req.body });
         }
 
-        // const dadosForm = {
-        //     NOME_PROF: req.body.nome + " " +req.body.sobrenome, 
-        //     CONTATO_PROF: bcrypt.hashSync(req.body.phone, salt),
-        //     EMAIL_PROF: req.body.email,
-        //     ENDERECO_PROF: req.body.estado,
-        //     CPF_PROF: req.body.cpf,
-        //     DATA_PROF: req.body.estado_cliente,
-        //     DOCUMENTO_PROF: req.body.curriculo,
-        //     CEP_PROF: req.body.cep,
-        //     SENHA_PROF: req.body.estado_cliente
-        // };
-
-        const dadosForm = { 
-            nome_prof: req.body.nome_prof, 
-            telefone_prof: req.body.telefone_prof,
-            cpf_prof: req.body.cpf_prof,
+        const dadosForm = {
+            user_prof: req.body.nomeusu_prof,
+            senha_prof: bcrypt.hashSync(req.body.senha_prof, salt),
+            nome_prof: req.body.nome_prof,
             email_prof: req.body.email_prof,
-            hashedsenha: bcrypt.hashSync(req.body.senha_prof, salt)
-        } ;
-        console.log(dadosForm);
+            estado_prof: req.body.estado_prof,
+            cep_prof: req.body.cep_prof,
+            contato_prof: req.body.contato_prof,
+            cpf_prof: req.body.cpf_prof
+        };
+
         try {
-            await profissional.create(dadosForm); // Correto método de criação
-            res.render("pages/cadastroprof", {
+            await prof.create(dadosForm); // Correto método de criação
+            res.render("pages/home", {
                 listaErros: null, dadosNotificacao: {
-                  titulo: "Cadastro realizado!", mensagem: "Novo usuário criado com sucesso!", tipo: "success"
+                    titulo: "Cadastro realizado!", mensagem: "Novo usuário criado com sucesso!", tipo: "success"
                 }, valores: req.body
             });
         } catch (e) {
@@ -98,4 +112,23 @@ const profissionaisController = {
     }
 };
 
-module.exports = profissionaisController;
+mostrarPerfil: async (req, res) => {
+    let campos = {
+        nome_prof: results[0].nome_prof,
+        numero: results[0].numero_prof,
+        complemento: results[0].complemento_prof, logradouro: viaCep.logradouro,
+        bairro: viaCep.bairro, localidade: viaCep.localidade, uf: viaCep.uf,
+        img_perfil_pasta: results[0].img_perfil_pasta,
+        img_perfil_banco: results[0].img_perfil_banco != null ? `data:image/jpge;base64,${results[0].img_perfil_banco.toString('base64')}` : null,
+        nomeprof_prof: results[0].user_prof, fone_prof: results[0].fone_prof, senha_prof: ""
+    }
+
+    res.render("pages/perfilprof", { listaErros: null, dadosNotificacao: null, valores: campos })
+    console.log(e);
+    res.render("")
+}
+
+
+
+module.exports = profController;
+
