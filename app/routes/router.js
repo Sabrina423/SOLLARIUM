@@ -3,7 +3,7 @@ const { body, validationResult } = require('express-validator');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 var salt = bcrypt.genSaltSync(12);
-const clienteController = require('../controllers/clienteController');
+const clienteController = require('../controllers/clienteController.js');
 const profissionalController = require('../controllers/profissionaisController.js');
 const admController = require('../controllers/admController.js');
 const cliente = require("../models/clienteModel");
@@ -12,6 +12,7 @@ const adm = require("../models/admModel");
 
 const uploadFile = require("../util/uploader.js")("./app/public/imagem/perfil");
 //const uploadFile = require("../util/uploader")();
+
 const  {  
     verificarClienteAutenticado,
     limparSessao,

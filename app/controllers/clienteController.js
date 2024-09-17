@@ -3,7 +3,7 @@ const { body, validationResult, Result } = require("express-validator");
 const bcrypt = require("bcryptjs");
 var salt = bcrypt.genSaltSync(12);
 const { removeImg } = require("../util/removeImg");
-const fetch = (...args) => import('node-fetch').then(({ default: fetch }) => fetch(...args));
+const fetch = require('node-fetch');
 const verificarClienteAutorizado = require('../models/verificarClienteAutorizado'); // Corrigido o caminho para o middleware
 const https = require('https');
 
@@ -109,26 +109,150 @@ const clienteController = {
                 }, valores: req.body
             });
         }
+    },
+
+    mostrarPerfil: async (req, res) => {
+        try {
+            let results = await cliente.findId(req.session.autenticado.id);
+            let viaCep = { logradouro: "", bairro: "", localidade: "", uf: "" };
+            let cep = null;
+    
+            if (results[0].cep_cliente != null) {
+                const httpsAgent = new https.Agent({
+                    rejectUnauthorized: false,
+                });
+    
+                const response = await fetch(`https://viacep.com.br/ws/${results[0].cep_cliente}/json/`, {
+                    method: 'GET',
+                    agent: httpsAgent
+                });
+    
+                if (!response.ok) {
+                    throw new Error(`Failed to fetch CEP data: ${response.statusText}`);
+                }
+    
+                viaCep = await response.json();
+                cep = results[0].cep_cliente.slice(0, 5) + "-" + results[0].cep_cliente.slice(5);
+            }
+    
+            let campos = {
+                nome_cliente: results[0].nome_cliente,
+                numero: results[0].numero_cliente,
+                complemento: results[0].complemento_cliente,
+                logradouro: viaCep.logradouro,
+                bairro: viaCep.bairro,
+                localidade: viaCep.localidade,
+                uf: viaCep.uf,
+                img_perfil_pasta: results[0].img_perfil_pasta,
+                img_perfil_banco: results[0].img_perfil_banco != null 
+                    ? `data:image/jpeg;base64,${results[0].img_perfil_banco.toString('base64')}`
+                    : null,
+                nomeCliente_cliente: results[0].user_cliente,
+                fone_cliente: results[0].fone_cliente,
+                senha_cliente: ""
+            };
+    
+            res.render("pages/perfilcliente", {
+                listaErros: null,
+                dadosNotificacao: null,
+                valores: campos
+            });
+    
+        } catch (e) {
+            console.error(e);
+            res.render("pages/perfilcliente", {
+                listaErros: [e.message],
+                dadosNotificacao: null,
+                valores: {
+                    img_perfil_banco: "",
+                    img_perfil_pasta: "",
+                    nome_cliente: "",
+                    email_cliente: "",
+                    nomeCliente_cliente: "",
+                    fone_cliente: "",
+                    senha_cliente: "",
+                    numero: "",
+                    complemento: "",
+                    logradouro: "",
+                    bairro: "",
+                    localidade: "",
+                    uf: ""
+                }
+            });
+        }
+    },
+
+    gravarPerfil: async (req, res) => {
+
+        const erros = validationResult(req);
+        const erroMulter = req.session.erroMulter;
+        if (!erros.isEmpty() || erroMulter != null) {
+            lista = !erros.isEmpty() ? erros : { formatter: null, errors: [] };
+            if (erroMulter != null) {
+                lista.errors.push(erroMulter);
+            }
+            return res.render("pages/perfilcliente", { listaErros: lista, dadosNotificacao: null, valores: req.body })
+        }
+        try {
+            var dadosForm = {
+                user_cliente: req.body.nomeCliente_cliente,
+                nome_cliente: req.body.nome_cliente,
+                email_cliente: req.body.email_cliente,
+                fone_cliente: req.body.fone_cliente,
+                numero_cliente: req.body.numero,
+                complemento_cliente: req.body.complemento,
+                img_perfil_banco: req.session.autenticado.img_perfil_banco,
+                img_perfil_pasta: req.session.autenticado.img_perfil_pasta,
+            };
+            if (req.body.senha_cliente != "") {
+                dadosForm.senha_cliente = bcrypt.hashSync(req.body.senha_cliente, salt);
+            }
+            if (!req.file) {
+                console.log("falha no carregamento");
+            } else {
+                //armazenando o caminho do arquivo salvo na pasta do projeto
+                caminhoArquivo = "imagem/perfilcliente/" + req.file.filename;
+                //se houve alteração de imagem de perfil apaga a imagem anterior
+                if (dadosForm.img_perfil_pasta != caminhoArquivo) {
+                    removeImg(dadosForm.img_perfil_pasta);
+                }
+                dadosForm.img_perfil_pasta = caminhoArquivo;
+                dadosForm.img_perfil_banco = null;
+
+                // //Armazenando o buffer de dados binários do arquivo
+                // dadosForm.img_perfil_banco = req.file.buffer;
+                // //Apagando a imagem armazenada na pasta
+                // removeImg(dadosForm.img_perfil_pasta)
+                // dadosForm.img_perfil_pasta = null;
+            }
+            let resultUpdate = await cliente.update(dadosForm, req.session.autenticado.id);
+            if (!resultUpdate.isEmpty) {
+                if (resultUpdate.changedRows == 1) {
+                    var result = await cliente.findId(req.session.autenticado.id);
+                    var autenticado = {
+                        autenticado: result[0].nome_cliente,
+                        id: result[0].id_cliente,
+                        tipo: result[0].id_tipo_cliente,
+                        img_perfil_banco: result[0].img_perfil_banco != null ? `data:image/jpeg;base64,${result[0].img_perfil_banco.toString('base64')}` : null,
+                        img_perfil_pasta: result[0].img_perfil_pasta
+                    };
+                    req.session.autenticado = autenticado;
+                    var campos = {
+                        nome_cliente: result[0].nome_cliente, email_cliente: result[0].email_cliente,
+                        img_perfil_pasta: result[0].img_perfil_pasta, img_perfil_banco: result[0].img_perfil_banco,
+                        nomeCliente_cliente: result[0].user_cliente, fone_cliente: result[0].fone_cliente, senha_cliente: ""
+                    }
+                    res.render("pages/perfilcliente", { listaErros: null, dadosNotificacao: { titulo: "Perfil! atualizado com sucesso", mensagem: "Alterações Gravadas", tipo: "success" }, valores: campos });
+                } else {
+                    res.render("pages/perfilcliente", { listaErros: null, dadosNotificacao: { titulo: "Perfil! atualizado com sucesso", mensagem: "Sem alterações", tipo: "success" }, valores: dadosForm });
+                }
+            }
+        } catch (e) {
+            console.log(e)
+            res.render("pages/perfilcliente", { listaErros: erros, dadosNotificacao: { titulo: "Erro ao atualizar o perfil!", mensagem: "verifique os valores digitados!", tipo: "error" }, valores: req.body })
+        }
     }
 };
 
-mostrarPerfil: async (req, res) => {
-    let campos = {
-        nome_cliente: results[0].nome_cliente,
-        numero: results[0].numero_cliente,
-        complemento: results[0].complemento_cliente, logradouro: viaCep.logradouro,
-        bairro: viaCep.bairro, localidade: viaCep.localidade, uf: viaCep.uf,
-        img_perfil_pasta: results[0].img_perfil_pasta,
-        img_perfil_banco: results[0].img_perfil_banco != null ? `data:image/jpge;base64,${results[0].img_perfil_banco.toString('base64')}` : null,
-        nomeCliente_cliente: results[0].user_cliente, fone_cliente: results[0].fone_cliente, senha_cliente: ""
-    }
-
-    res.render("pages/perfilcliente", { listaErros: null, dadosNotificacao: null, valores: campos })
-    console.log(e);
-    res.render("")
-}
-
-
 
 module.exports = clienteController;
-
