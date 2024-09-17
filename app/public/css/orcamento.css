@@ -12,46 +12,42 @@ body {
 }
 
 header {
+    background-image: url('/imagens/'); /* Insira o caminho da imagem de fundo */
+    background-size: cover;
+    background-position: center;
+    height: 400px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem 2rem;
-    background-color: white;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    position: sticky;
-    top: 0;
-    z-index: 10;
+    padding: 20px;
 }
 
-.logo img {
-    width: 150px;
-}
 
+/* Menu transparente */
 .navbar {
-    display: flex;
-    align-items: center;
+    background-color: transparent;
 }
 
+/* Estilo dos links do menu */
 .nav-links {
     list-style: none;
     display: flex;
+    gap: 20px;
 }
 
-.nav-links li {
-    margin-left: 2rem;
-}
-
-.nav-links a {
+.nav-links li a {
+    color: white;
     text-decoration: none;
-    color: #333;
-    font-size: 1rem;
-    transition: color 0.3s;
+    font-size: 18px;
+    font-weight: bold;
+    transition: color 0.3s ease;
 }
 
-.nav-links a:hover {
-    color: #ff7a00; /* Cor laranja para detalhes */
+.nav-links li a:hover {
+    color: #FFA500; /* Cor laranja ao passar o mouse */
 }
 
+/* Menu toggle (para dispositivos móveis) */
 .menu-toggle {
     display: none;
     flex-direction: column;
@@ -61,8 +57,9 @@ header {
 .menu-toggle .bar {
     width: 25px;
     height: 3px;
-    background-color: #333;
-    margin: 4px;
+    background-color: white;
+    margin: 4px 0;
+    transition: 0.3s;
 }
 
 /* Seção Hero */
@@ -159,6 +156,10 @@ header {
 .card p {
     color: #666;
     line-height: 1.6;
+}
+
+.card{
+
 }
 
 .card:hover {

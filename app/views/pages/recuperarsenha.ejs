@@ -8,7 +8,7 @@
 
 </head>
 <body>
-    <div class="container">
+    <nav class="container">
         <h2>Recuperar Senha</h2>
         <form action="/recuperar-senha" method="POST">
             <label for="email">Digite seu e-mail:</label>
@@ -16,7 +16,8 @@
             <button type="submit">Enviar link de recuperação</button>
         </form>
         <p class="message">Você receberá um e-mail com instruções para redefinir sua senha.</p>
-    </div>
+    </nav>
+
     <script>const express = require('express');
         const nodemailer = require('nodemailer');
         const bodyParser = require('body-parser');
@@ -45,14 +46,14 @@
           const transporter = nodemailer.createTransport({
             service: 'Gmail',
             auth: {
-              user: process.env.EMAIL_USER,
+              user: process.env.EMAIL_CLIENTE,
               pass: process.env.EMAIL_PASS
             }
           });
         
           // Configuração do e-mail
           const mailOptions = {
-            from: process.env.EMAIL_USER,
+            from: process.env.EMAIL_CLIENTE,
             to: email,
             subject: 'Recuperação de Senha',
             text: 'Clique no link abaixo para redefinir sua senha:\n\n' +
