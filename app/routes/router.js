@@ -4,7 +4,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 var salt = bcrypt.genSaltSync(12);
 const clienteController = require('../controllers/clienteController.js');
-const profissionalController = require('../controllers/profissionaisController.js');
+const profissionaisController = require('../controllers/profissionaisController.js');
 const admController = require('../controllers/admController.js');
 const cliente = require("../models/clienteModel");
 const profissional = require("../models/profissionaisModel");
@@ -110,14 +110,14 @@ router.post (
 //Rota de registro profissional
 router.post(
     "/cadastroprof",
-    profissionalController.regrasValidacaoFormCad,
+    profissionaisController.regrasValidacaoFormCad,
     async function (req, res) {
-        profissionalController.cadastrar(req, res);
+        profissionaisController.cadastrar(req, res);
     });
 
     router.post(
         "/adm",
-        clienteController.regrasValidacaoFormCad,
+        admController.regrasValidacaoFormCad,
         async function (req, res) {
             admController.cadastrar(req, res);
         });
