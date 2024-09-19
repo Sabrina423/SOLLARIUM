@@ -17,7 +17,8 @@
                 <nav class="logo"></nav>
                 <nav class="input-group">
                     <input type="text" name="nome_cliente" placeholder="Nome Completo" required>
-                    <input type="text" name="cpf_cliente" id="cpf_cliente" placeholder="CPF" required>
+                    <input type="text" name="cpf_cliente" id="cpf_cliente" size="30" maxlength="11" placeholder="CPF" required>
+                    <button type="button" onclick="verificaCPF(document.getElementById('cpf_cliente').value)">Cadastrar</button>
                 </nav>
                 <nav class="input-group">
                     <input type="text" name="cep_cliente" placeholder="CEP" required>
