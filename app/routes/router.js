@@ -16,6 +16,8 @@ const uploadFile = require("../util/uploader.js")("./app/public/imagem/perfil");
 const  {  
     verificarClienteAutenticado,
     limparSessao,
+    verificarAdmAutorizado,
+    gravarAdmAutorizado,
     gravarClienteAutenticado,
     verificarClienteAutorizado
   } = require("../models/autenticador_middleware.js");
