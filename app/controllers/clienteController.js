@@ -92,6 +92,7 @@ const clienteController = {
             cep_cliente: req.body.cep_cliente,
             contato_cliente: req.body.contato_cliente,
             cpf_cliente: req.body.cpf_cliente
+           
         };
 
         try {
