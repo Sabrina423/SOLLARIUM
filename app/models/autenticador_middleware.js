@@ -14,6 +14,7 @@ const verificarClienteAutenticado = (req, res, next) => {
     req.session.logado = 0;
   }
   req.session.autenticado = autenticado;
+
   next();
 };
 
@@ -25,7 +26,7 @@ const limparSessao = (req, res, next) => {
 const gravarClienteAutenticado = async (req, res, next) => {
   const erros = validationResult(req);
   var autenticado = { autenticado: null, id: null, tipo: null };
-    if (erros.isEmpty()) {
+    if (erros.isEmpty()) {                                                                                                                          
         const dadosForm = {
           nome_cliente: req.body.email,
           senha_cliente: req.body.password,
@@ -41,7 +42,8 @@ const gravarClienteAutenticado = async (req, res, next) => {
             autenticado = {
               autenticado: clienteExistente[0].NOME_CLIENTE,
               id: clienteExistente[0].ID_CLIENTE,
-              tipo: 1
+              tipo: 1,
+              imagem: clienteExistente[0].imgem_perfil_cliente,
             };
           }else{
             // if  validar profissional        
@@ -101,4 +103,4 @@ module.exports = {
   limparSessao,
   gravarClienteAutenticado,
   verificarClienteAutorizado,
-};
+}
