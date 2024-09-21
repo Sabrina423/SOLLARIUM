@@ -39,8 +39,8 @@ const authenticateToken = (req, res, next) => {
 };
 
 // Rotas
-router.get('/', (req, res) => {
-    res.render('pages/home');
+router.get('/', verificarClienteAutenticado,(req, res) => {
+    res.render('pages/home',{autenticado:req.session.autenticado});
 });
 
 router.get('/entrar', (req, res) => {

@@ -26,16 +26,16 @@
     
     <main>
         <section class="service-details">
-            <h1>Detalhes do Serviço</h1>
-            <p><strong>Nome do Cliente:</strong> <span id="client-name">João da Silva</span></p>
-            <p><strong>Valor do Serviço:</strong> R$ 500,00</p>
-            <p><strong>Data e Horário:</strong> 09/09/2024 14:30</p>
-            <p><strong>Endereço do Serviço:</strong> Rua Exemplo, 123, Bairro, Cidade</p>
+            <h1 id="service-title">Detalhes do Serviço</h1>
+            <p><strong>Nome do Cliente:</strong> <span id="client-name"></span></p>
+            <p id="service-value"><strong>Valor do Serviço:</strong></p>
+            <p id="service-date"><strong>Data e Horário:</strong></p>
+            <p id="service-address"><strong>Endereço do Serviço:</strong></p>
             
-            <p><strong>Escolha uma opção:</strong></p>
-            <button onclick="document.getElementById('photoInput').click()">Carregar Foto</button>
+            <p id="option-label"><strong>Escolha uma opção:</strong></p>
+            <button id="upload-photo-button" onclick="document.getElementById('photoInput').click()"></button>
             <br>
-            <button onclick="startCamera()">Tirar Foto</button>
+            <button id="take-photo-button" onclick="startCamera()"></button>
             <br>
             <input type="file" id="photoInput" accept="image/*" class="hidden" onchange="previewImage(event)">
             <video id="video" class="hidden" autoplay></video>
@@ -44,8 +44,8 @@
             <img id="photoPreview" class="hidden">
             <br>
             <button id="submitButton" class="button" onclick="submitPhoto()">Enviar Foto</button>
-        </div>    
         </section>
+        
     </main>
 
     <script>
