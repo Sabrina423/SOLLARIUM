@@ -5,100 +5,116 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Solicitação de Orçamento - Sollarium</title>
     <link rel="stylesheet" href="/css/orcamento.css">
+    <link rel="stylesheet" href="/css/home.css">
     <meta name="description" content="Solicite orçamento para serviços de energia solar com os melhores profissionais da Sollarium.">
     <meta name="keywords" content="energia solar, orçamento, profissionais, Sollarium, serviços, painel solar">
     <meta name="author" content="Sollarium">
 </head>
 <body>
     <header>
-        <nav class="logo"><a href="#">Sollarium</a></nav>
         <nav class="navbar">
-            <ul class="nav-links">
-                <li><a href="#home">Início</a></li>
-                <li><a href="#about">Sobre</a></li>
-                <li><a href="#contact">Contato</a></li>
-            </ul>
-            <div class="menu-toggle" id="menu-toggle">
-                <div class="bar"></div>
-                <div class="bar"></div>
-                <div class="bar"></div>
-            </div>
-        </nav>
-    </header>
+     <nav class="logo"><a href="#">Sollarium</a></nav>
+     <ul class="links">
+         <li><a href="/">Início</a></li>
+         <li><a href="/orcamento">Orçamento</a></li>
+         <li><a href="/sobre">Sobre Nós</a></li>
+         <li><a href="/cadastroinicial">Cadastre-se</a></li>
+     </ul>
+     <a href="/entrar" class="action_btn">Entrar</a>
+     <nav class="toggle_btn">
+         <i class="fa-solid fa-bars-staggered"></i>
+     </nav>
+    </nav>
 
-    <main>
+    <nav class="dropdown_menu">
+         <li><a href="/home">Início</a></li>
+         <li><a href="/orcamento">Orçamento</a></li>
+         <li><a href="/sobre">Sobre nós</a></li>
+         <li><a href="/cadastroinicial">Cadastre-se</a></li>
+         <li><a href="/entrar" class="action_btn">Entrar</a></li>
+    </nav>
+ </header>
+
+    <nav class="todo">
+ <main></main>
         <section class="hero-section">
-            <div class="hero-text">
-                <h1>Sollarium - Especialistas em Energia Solar</h1>
-                <p>Transforme a sua energia com soluções sustentáveis e os melhores profissionais do mercado.</p>
+            <nav class="hero-text">
+                <h1>Sollarium</h1>
+                <h2>Profissionais em Soluções de Energia Solar</h2>
+                <h3>Transforme a sua energia com soluções sustentáveis</h3>
+                    <h3>É com os melhores profissionais do mercado.</h3>
+                    
                 <a href="#contact" class="cta-button">Solicite seu Orçamento</a>
-            </div>
-            <div class="hero-image">
-                <img src="/imagens/img1.png" alt="Painel Solar" class="shadow-img">
-            </div>
+            </nav>
+            <nav class="hero-image">
+              
+            </nav>
         </section>
-
+        
         <section id="services" class="services-section">
             <h2>Nossos Serviços</h2>
-            <div class="cards">
-                <div class="card">
+            <nav class="cards">
+                <nav class="card">
                     <img src="/imagens/img2.png" alt="Instalação de painéis solares" class="shadow-img">
                     <h3>Instalação</h3>
                     <p>Equipe especializada na instalação de sistemas fotovoltaicos.</p>
-                </div>
-                <div class="card">
+                </nav>
+                <nav class="card">
                     <img src="/imagens/img3.png" alt="Manutenção de sistemas solares" class="shadow-img">
                     <h3>Manutenção</h3>
                     <p>Serviços de manutenção preventiva e corretiva para garantir o funcionamento contínuo.</p>
-                </div>
-                <div class="card">
+                </nav>
+                <nav class="card">
                     <img src="/imagens/img4.png" alt="Consultoria em energia solar" class="shadow-img">
                     <h3>Consultoria</h3>
                     <p>Consultoria personalizada para escolher o melhor sistema solar para você.</p>
-                </div>
-                <div class="card"></div>
+                </nav>
+                <nav class="card">
                     <img src="/imagens/img4.png" alt="Consultoria em energia solar" class="shadow-img">
                     <h3>Vistoria</h3>
                     <p>Consultoria personalizada para escolher o melhor sistema solar para você.</p>
-                </div>
-                <div class="card"></div>
+                </nav>
+                <nav class="card">
                     <img src="/imagens/img4.png" alt="Consultoria em energia solar" class="shadow-img">
                     <h3>Limpeza</h3>
                     <p>Consultoria personalizada para escolher o melhor sistema solar para você.</p>
-                </div>
-            </div>
+                </nav>
+               
+            </nav>
         </section>
 
         <section id="contact" class="contact-section">
             <h2>Solicite seu Orçamento</h2>
             <form id="orcamento-form">
-                <div class="form-group">
+                <nav class="form-group">
                     <label for="name">Nome:</label>
                     <input type="text" id="name" name="name" placeholder="Seu nome completo" required>
-                </div>
+                </nav>
 
-                <div class="form-group">
+                <nav class="form-group">
                     <label for="text">Serviço:</label>
-                    <textarea id="servico" name="serviço" rows="4" placeholder="Descreva o serviço desejado" required></textarea>
-                </div>
+                    <textarea id="text" name="serviço" rows="4" placeholder="Descreva o serviço desejado" required></textarea>
+                </nav>
 
-                <div class="form-group">
+                <nav class="form-group">
                     <label for="valor">Valor esperado:</label>
                     <input type="text" id="valor" name="valor" placeholder="Ex.: R$ 2.000,00" required>
-                </div>
+                </nav>
 
-                <div class="form-group">
+                <nav class="form-group">
                     <label for="data">Dia e horário que o serviço deve ser realizado:</label>
                     <input type="datetime-local" id="data" name="data" required>
-                </div>
+                </nav>
 
                 <button type="submit">Enviar Solicitação</button>
-                <div id="success-message" style="display: none; color: green; margin-top: 1rem;">
+                <nav id="success-message" style="display: none; color: green; margin-top: 1rem;">
                     Sua solicitação foi enviada com sucesso! Logo um profissional será encontrado para a realização do serviço.
-                </div>
+                </nav>
             </form>
         </section>
     </main>
+    </nav>
+   
 
     <footer>
         <p>&copy; 2024 Sollarium. Todos os direitos reservados.</p>

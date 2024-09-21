@@ -7,58 +7,29 @@
     <title>Cadastro Profissional</title>
 </head>
 <body>
-<<<<<<< HEAD
     <header>
-        <h1>Sobre a Sollarium</h1>
-        <p>Conheça nossa história, missão e valores</p>
-    </header>
-=======
-    <nav class="container">
-        <nav class="hero">
-            <h2>Faça parte da nossa equipe!</h2>
-            <img src="/imagens/pexels-tomfisk-9893729.jpg" alt="">
-        </nav>
-        <main>
-            <form action="/cadastrocliente" method="POST" id="cadastroForm">
-                <nav class="logo"></nav>
-                <nav class="input-group">
-                    <input type="text" name="nome_cliente" placeholder="Nome Completo" required>
-                    <input type="text" name="cpf_cliente" placeholder="CPF" required>
-                </nav>
-                <nav class="input-group">
-                    <select id="estado_cliente" name="estado_cliente">
-                        <option value="São paulo">SP</option>
-                        <option value="Rio de Janeiro">RJ</option>
-                        <option value="Minas Gerais">MG</option>
-                        <option value="Espirito Santo">ES</option>
-                    </select>
-                </nav>
-                <nav class="input-group">
-                    <input type="email" name="email_cliente" placeholder="E-mail" required>
-                    <input type="tel" id="telefone_cliente" name="contato_cliente" placeholder="Contato (00) 00000-0000" required>
-                </nav>
-                <nav class="input-group">
-                    <nav class="password-container">
-                        <input type="password" id="password" placeholder="Senha" onfocus="showMessage()" onblur="hideMessage()" oninput="validatePassword()">
-                        <nav id="message" class="invalid">A senha deve ter pelo menos 8 caracteres, uma letra maiúscula e um caractere especial.</nav>
-                    </nav>
-                    <nav class="password-container">
-                        <input type="password" id="senha_cliente" name="senha_cliente" placeholder="Confirme sua senha" required>
-                    </nav>
-                    <nav class="input-group">
-                        <input type="text" name="area_cliente" placeholder="Área de atuação" required>
-                        <input type="text" id="experiencia_cliente" name="experiencia_cliente" placeholder="Anos de experiência na área" required>
-                    </nav>
-                </nav>
-                <button type="submit">Criar Conta</button>
-            </form>
-        </main>
+        <nav class="navbar">
+     <nav class="logo"><a href="#">Sollarium</a></nav>
+     <ul class="links">
+         <li><a href="/">Início</a></li>
+         <li><a href="/orcamento">Orçamento</a></li>
+         <li><a href="/sobre">Sobre Nós</a></li>
+         <li><a href="/cadastroinicial">Cadastre-se</a></li>
+     </ul>
+     <a href="/entrar" class="action_btn">Entrar</a>
+     <nav class="toggle_btn">
+         <i class="fa-solid fa-bars-staggered"></i>
+     </nav>
     </nav>
-    <script>
-        function showMessage() {
-            document.getElementById('message').style.display = 'block';
-        }
->>>>>>> fa6c7f7 (atualização)
+
+    <nav class="dropdown_menu">
+         <li><a href="/home">Início</a></li>
+         <li><a href="/orcamento">Orçamento</a></li>
+         <li><a href="/sobre">Sobre nós</a></li>
+         <li><a href="/cadastroinicial">Cadastre-se</a></li>
+         <li><a href="/entrar" class="action_btn">Entrar</a></li>
+    </nav>
+ </header>
 
         function hideMessage() {
             document.getElementById('message').style.display = 'none';
