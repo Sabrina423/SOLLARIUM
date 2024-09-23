@@ -73,6 +73,10 @@ router.get('/cadastroprof', (req, res) => {
     res.render('pages/cadastroprof');
 });
 
+router.get('/recuperarsenha', (req, res) => {
+    res.render('pages/recuperarsenha');
+});
+
 router.get('/perfilprof', authenticateToken, (req, res) => {
     res.render('pages/perfilprof');
 });

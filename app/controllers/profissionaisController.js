@@ -84,15 +84,15 @@ const profController = {
         }
 
         const dadosForm = {
-            user_prof: req.body.nomeusu_prof,
-            senha_prof: bcrypt.hashSync(req.body.senha_prof, salt),
             nome_prof: req.body.nome_prof,
-            email_prof: req.body.email_prof,
-            estado_prof: req.body.estado_prof,
-            cep_prof: req.body.cep_prof,
             contato_prof: req.body.contato_prof,
-            cpf_prof: req.body.cpf_prof
+            email_prof: req.body.email_prof,
+            cpf_prof: req.body.cpf_prof,
+            cep_prof: req.body.cep_prof,
+            area_prof: req.body.area_prof,  // Se tiver esse campo no form
+            senha_prof: bcrypt.hashSync(req.body.senha_prof, salt)
         };
+        
 
         try {
             await prof.create(dadosForm); // Correto método de criação

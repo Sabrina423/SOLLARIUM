@@ -14,7 +14,7 @@
 <body>
 
     <% if(autenticado.autenticado != null){
-        if(login == 1){%>
+        if(clienteExistente == 1){%>
        <script>
            notify("Login efetuado com sucesso", 
            "Olá <%= autenticado.autenticado %>", "success", "center")                        
@@ -31,7 +31,7 @@
        <p><a href="/sair">sair</a></p>
    
        <% }else{ %>
-           <span> Olá Cliente, seja bem vindo(a)!</span>
+          
        <% } %>
     
 

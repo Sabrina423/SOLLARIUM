@@ -25,9 +25,10 @@ const profissionaisModel = {
         try {
             
             const result = await pool.query(
-                'INSERT INTO PROFISSIONAL (NOME_PROF,CONTATO_PROF,EMAIL_PROF,CPF_PROF,CEP_PROF, AREA_PROF,SENHA_PROF) VALUES (?,?,?,?,?,?,?)',
-                [profissional.nome+ " "+ profissional,profissional.phone, profissional.email,profissional.cpf,profissional.cep,profissional.hashedsenha]
+                'INSERT INTO PROFISSIONAL (NOME_PROF, CONTATO_PROF, EMAIL_PROF, CPF_PROF, CEP_PROF, AREA_PROF, SENHA_PROF) VALUES (?, ?, ?, ?, ?, ?, ?)',
+                [profissional.nome_prof, profissional.contato_prof, profissional.email_prof, profissional.cpf_prof, profissional.cep_prof, profissional.area_prof, profissional.senha_prof]
             );
+            
             return result; // Retorna o resultado da inserção
         } catch (error) {
             console.error('Erro ao criar usuário:', error);
