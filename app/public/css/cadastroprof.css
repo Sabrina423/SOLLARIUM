@@ -17,6 +17,13 @@ body {
     font-family: 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
+.error-message {
+    color: red;
+    font-size: 0.9em;
+    margin-top: 0.2em;
+}
+
+
 .container {
     position: relative;
     top: 60px;
