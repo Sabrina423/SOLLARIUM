@@ -95,6 +95,13 @@ router.get('/adm', authenticateToken, (req, res) => {
 
 
 
+
+
+
+
+
+
+
 //Rota de registro cliente
 router.post (
     "/perfilcliente",

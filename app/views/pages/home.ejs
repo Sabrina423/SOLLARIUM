@@ -13,17 +13,6 @@
 </head>
 <body>
 
-    <% if(autenticado.autenticado != null){
-        if(clienteExistente == 1){%>
-       <script>
-           notify("Login efetuado com sucesso", 
-           "Olá <%= autenticado.autenticado %>", "success", "center")                        
-       </script>
-       <% } 
-       let arquivo={"imagem":"imagens/perfil/img-perfil.png"} ;
-       if(autenticado.imagem != null){ 
-            arquivo.imagem = autenticado.imagem;
-       }
 
        %>
        <span>Olá <%= autenticado.autenticado %>!</span><br>
