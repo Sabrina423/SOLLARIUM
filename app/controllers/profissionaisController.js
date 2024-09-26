@@ -43,12 +43,18 @@ const profController = {
     regrasValidacaoPerfil: [
         body("nome_prof")
             .isLength({ min: 3, max: 45 }).withMessage("Mínimo de 3 letras e máximo de 45!"),
-        body("nomeusu_prof")
+        body("nome_prof")
             .isLength({ min: 8, max: 45 }).withMessage("Nome de usuário deve ter de 8 a 45 caracteres!"),
         body("email_prof")
             .isEmail().withMessage("Digite um e-mail válido!"),
+<<<<<<< HEAD
         body("fone_prof")
             .isLength({ min: 12, max: 13 }).withMessage("Digite um telefone válido!")
+=======
+        body("telefone_prof")
+            .isLength({ min: 12, max: 13 }).withMessage("Digite um telefone válido!"),
+
+>>>>>>> 6950ea8 (atualiaz)
     ],
 
     // Função de login

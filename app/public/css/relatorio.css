@@ -1,0 +1,153 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: 0;
+    font-family: "Open Sans", sans-serif;
+}
+
+body{
+    background-color: #f1f1f1;
+    justify-content: center;
+}
+
+.caixasnumeradas {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Duas colunas */
+    gap: 20px; /* Espaço entre as colunas */
+    justify-items: center; /* Centraliza os itens dentro de cada coluna */
+    margin: 2%;
+}
+
+.caixas {
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 2px 4px rgba(43, 43, 43, 0.568);
+    width: 50%; /* Ajuste para que a caixa ocupe a largura da coluna */
+    text-align: center;
+}
+
+.caixas h3 {
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+
+.caixas p {
+    font-size: 2em;
+    margin-bottom: 0;
+}
+
+
+
+/* parte do taps */
+
+.conteiner{
+    width: 70%;
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 20px;
+    margin: 0 auto;
+    
+}
+
+.tab_box{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border-bottom: 2px solid rgba(229, 229, 229);
+    position: relative;
+}
+
+.tap_box,.tab_btn{
+    font-size: 18px;
+    font-weight: 600;
+    color: #919191;
+    background:none;
+    border: none;
+    padding: 18px;
+    cursor: pointer;
+}
+
+.tap_box,.tab_btn.active{
+    color: #F59A23 ;
+}
+
+
+.content_box{
+    padding: 20px;
+}
+
+.content_box, .content{
+    display: none;
+    animation: moving .5s ease;
+}
+
+
+
+.content_box, .content.active{
+    display: block;
+}
+
+.content_box, .content h2{
+    margin-bottom: 10px;
+}
+
+.line{
+    position: absolute;
+    top: 60px;
+    left: 0;
+    width: 20%;
+    height: 5px;
+    background: linear-gradient(to right, #F59A23, #8C52FF);;
+    border-radius: 10px;
+    transition: all .3s ease-in-out;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 10px;
+    border: 1px solid #272727;
+    text-align: left;
+}
+
+thead {
+    background-color: #ffffff;
+}
+
+@media (max-width: 768px) {
+    .caixasnumeradas {
+        grid-template-columns: repeat(1, 1fr);
+    }
+    .tap_box, .tab_btn {
+        flex: 1 1 100%; /* Cada botão ocupa 100% da largura em telas menores */
+        font-size: 16px; /* Tamanho da fonte um pouco menor */
+    }
+
+    .line {
+        width: 100%; /* A linha ocupa toda a largura na versão mobile */
+    }
+
+    th, td{
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .caixasnumeradas {
+        grid-template-columns: 1fr;
+        
+    }
+    .tap_box, .tab_btn {
+        font-size: 14px; /* Tamanho da fonte ainda menor */
+    }
+    th, td {
+        font-size: 12px; /* Tamanho da fonte ainda menor */
+    }
+}
+
+
