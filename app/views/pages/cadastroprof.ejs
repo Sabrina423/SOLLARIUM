@@ -4,34 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/cadastroprof.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <title>Cadastro Profissional</title>
 </head>
 <body>
-    <header>
-        <nav class="navbar">
-     <nav class="logo"><a href="#">Sollarium</a></nav>
-     <ul class="links">
-         <li><a href="/">Início</a></li>
-         <li><a href="/orcamento">Orçamento</a></li>
-         <li><a href="/sobre">Sobre Nós</a></li>
-         <li><a href="/cadastroinicial">Cadastre-se</a></li>
-     </ul>
-     <a href="/entrar" class="action_btn">Entrar</a>
-     <nav class="toggle_btn">
-         <i class="fa-solid fa-bars-staggered"></i>
-     </nav>
-    </nav>
-
-    <nav class="dropdown_menu">
-         <li><a href="/home">Início</a></li>
-         <li><a href="/orcamento">Orçamento</a></li>
-         <li><a href="/sobre">Sobre nós</a></li>
-         <li><a href="/cadastroinicial">Cadastre-se</a></li>
-         <li><a href="/entrar" class="action_btn">Entrar</a></li>
-    </nav>
- </header>
     <nav class="container">
         <nav class="hero">
+            <a href="/cadastroinicial" class="material-symbols-outlined">
+                keyboard_backspace
+            </a>
+            <nav class="toggle_btn">
+                <i class="fa-solid fa-bars-staggered"></i>
+            </nav>
             <h3>Saiba como nossas taxações e contrato funcionam!</h3>
             <nav class="termos1">
                 <button type="button" id="openPopup">Quero saber!</button>
@@ -45,51 +29,40 @@
         </nav>
         <hr>
         <main>
-            <main>
-                <form action="/cadastroprof" method="POST" id="cadastroFormprof">
-                    <nav class="logo"></nav>
-                    <nav class="input-group">
-                        <input type="text" name="nome_prof" id="nome_prof" placeholder="Nome Completo" required>
-                        <div class="error-message" id="nomeError"></div> <!-- Mensagem de erro -->
-                        <input type="text" name="cpf_prof" id="cpf_prof" placeholder="CPF" required>
-                        <div class="error-message" id="cpfError"></div> <!-- Mensagem de erro -->
+            <form action="/cadastroprofissional" method="POST" id="cadastroFormprof">
+                <nav class="logo"></nav>
+                <nav class="input-group">
+                    <input type="text" name="nome_prof" id="nome_prof" placeholder="Nome Completo" required>
+                    <input type="text" name="cpf_prof" id="cpf_prof" placeholder="CPF" required>
+                </nav>
+                <nav class="input-group">
+                    <select id="estado_prof" name="estado_prof">
+                        <option value="São paulo">SP</option>
+                        <option value="Rio de Janeiro">RJ</option>
+                        <option value="Minas Gerais">MG</option>
+                        <option value="Espirito Santo">ES</option>
+                    </select>
+                </nav>
+                <nav class="input-group">
+                    <input type="email" name="email_prof" id="email_prof" placeholder="E-mail" required>
+                    <input type="tel" id="telefone_prof" name="contato_prof" placeholder="Contato (00) 00000-0000" required>
+                </nav>
+                <nav class="input-group">
+                    <nav class="password-container">
+                        <input type="password" id="senha_prof" placeholder="Senha" onfocus="showMessage()" onblur="hideMessage()" oninput="validatePassword()">
+                        <nav id="message" class="invalid">A senha deve ter pelo menos 8 caracteres, uma letra maiúscula e um caractere especial.</nav>
                     </nav>
-                    <nav class="input-group">
-                        <select id="estado_prof" name="estado_prof">
-                            <option value="São paulo">SP</option>
-                            <option value="Rio de Janeiro">RJ</option>
-                            <option value="Minas Gerais">MG</option>
-                            <option value="Espirito Santo">ES</option>
-                        </select>
-                        <div class="error-message" id="estadoError"></div> <!-- Mensagem de erro -->
-                    </nav>
-                    <nav class="input-group">
-                        <input type="email" name="email_prof" id="email_prof" placeholder="E-mail" required>
-                        <div class="error-message" id="emailError"></div> <!-- Mensagem de erro -->
-                        <input type="tel" id="telefone_prof" name="contato_prof" placeholder="Contato (00) 00000-0000" required>
-                        <div class="error-message" id="telefoneError"></div> <!-- Mensagem de erro -->
-                    </nav>
-                    <nav class="input-group">
-                        <nav class="password-container">
-                            <input type="password" id="senha_prof" placeholder="Senha" onfocus="showMessage()" onblur="hideMessage()" oninput="validatePassword()">
-                            <div id="message" class="invalid">A senha deve ter pelo menos 8 caracteres, uma letra maiúscula e um caractere especial.</div>
-                            <div class="error-message" id="senhaError"></div> <!-- Mensagem de erro -->
-                        </nav>
-                        <nav class="password-container">
-                            <input type="password" id="confimasenha_prof" name="confimasenha_prof" placeholder="Confirme sua senha" required>
-                            <div class="error-message" id="confirmaSenhaError"></div> <!-- Mensagem de erro -->
-                        </nav>
+                    <nav class="password-container">
+                        <input type="password" id="confimasenha_prof" name="confimasenha_prof" placeholder="Confirme sua senha" required>
                     </nav>
                     <nav class="input-group">
                         <input type="text" name="area_prof" id="area_prof" placeholder="Área de atuação" required>
-                        <div class="error-message" id="areaError"></div> <!-- Mensagem de erro -->
                         <input type="text" id="experiencia_prof" name="experiencia_prof" placeholder="Anos de experiência na área" required>
-                        <div class="error-message" id="experienciaError"></div> <!-- Mensagem de erro -->
                     </nav>
-                    <button type="submit">Criar Conta</button>
-                </form>
-            </main>
-            
+                </nav>
+                <button type="submit">Criar Conta</button>
+            </form>
+        </main>
     </nav>
 
     <!-- Popup Modal -->
@@ -136,99 +109,34 @@ Transparência e Ajustes: A empresa mantém total transparência nos processos d
 O cadastro e a política de comissionamento visam estabelecer um ambiente de trabalho colaborativo e mutuamente benéfico, garantindo que tanto a empresa quanto os profissionais estejam alinhados em seus objetivos e expectativas. Para qualquer dúvida adicional ou necessidade de esclarecimento, os profissionais são encorajados a entrar em contato com o suporte da empresa, que está sempre disponível para fornecer assistência e suporte contínuos.</p>
 
 <p>Sollarium, Departamento de Recursos Humanos / Cadastro de Profissionais.</p>
-
             <button id="acceptTerms">Entendi</button>
         </div>
     </div>
 
     <script>
-       document.getElementById('cadastroFormprof').addEventListener('submit', function(event) {
-    event.preventDefault(); // Previne o envio do formulário
+        // Funções para mostrar e esconder a mensagem de senha
+        function showMessage() {
+            document.getElementById('message').style.display = 'block';
+        }
 
-    // Limpa mensagens de erro anteriores
-    document.querySelectorAll('.error-message').forEach(el => el.innerText = '');
+        function hideMessage() {
+            document.getElementById('message').style.display = 'none';
+        }
 
-    let hasError = false;
+        function validatePassword() {
+            const senha_prof = document.getElementById('senha_prof').value;
+            const message = document.getElementById('message');
+            const isValid = validatePasswordCriteria(senha_prof);
+            message.className = isValid ? 'valid' : 'invalid';
+            message.innerText = isValid ? 'Senha válida' : 'A senha deve ter pelo menos 8 caracteres, uma letra maiúscula e um caractere especial.';
+        }
 
-    // Validação do Nome
-    const nomeProf = document.getElementById('nome_prof').value;
-    if (nomeProf.length < 3 || nomeProf.length > 45) {
-        document.getElementById('nomeError').innerText = "Nome deve ter entre 3 e 45 caracteres.";
-        hasError = true;
-    }
-
-    // Validação do CPF
-    const cpfProf = document.getElementById('cpf_prof').value.replace(/\D/g, ''); // Remove caracteres não numéricos
-    if (cpfProf.length !== 11) {
-        document.getElementById('cpfError').innerText = "CPF deve ter 11 dígitos.";
-        hasError = true;
-    }
-
-    // Validação do Estado
-    const estadoProf = document.getElementById('estado_prof').value;
-    if (!estadoProf) {
-        document.getElementById('estadoError').innerText = "Selecione um estado.";
-        hasError = true;
-    }
-
-    // Validação do E-mail
-    const emailProf = document.getElementById('email_prof').value;
-    const emailPattern = /\S+@\S+\.\S+/;
-    if (!emailPattern.test(emailProf)) {
-        document.getElementById('emailError').innerText = "Digite um e-mail válido.";
-        hasError = true;
-    }
-
-    // Validação do Telefone
-    const telefoneProf = document.getElementById('telefone_prof').value.replace(/\D/g, ''); // Remove caracteres não numéricos
-    if (telefoneProf.length < 10 || telefoneProf.length > 11) {
-        document.getElementById('telefoneError').innerText = "Telefone deve ter entre 10 e 11 dígitos.";
-        hasError = true;
-    }
-
-    // Validação da Senha
-    const senhaProf = document.getElementById('senha_prof').value;
-    const senhaValida = validatePasswordCriteria(senhaProf);
-    if (!senhaValida) {
-        document.getElementById('senhaError').innerText = "A senha deve ter pelo menos 8 caracteres, uma letra maiúscula e um caractere especial.";
-        hasError = true;
-    }
-
-    // Validação da Confirmação de Senha
-    const confirmaSenhaProf = document.getElementById('confimasenha_prof').value;
-    if (confirmaSenhaProf !== senhaProf) {
-        document.getElementById('confirmaSenhaError').innerText = "As senhas não coincidem.";
-        hasError = true;
-    }
-
-    // Validação da Área de Atuação
-    const areaProf = document.getElementById('area_prof').value;
-    if (areaProf.length < 3 || areaProf.length > 30) {
-        document.getElementById('areaError').innerText = "Área de atuação deve ter entre 3 e 30 caracteres.";
-        hasError = true;
-    }
-
-    // Validação da Experiência
-    const experienciaProf = document.getElementById('experiencia_prof').value;
-    if (isNaN(experienciaProf) || experienciaProf < 0) {
-        document.getElementById('experienciaError').innerText = "Anos de experiência devem ser um número positivo.";
-        hasError = true;
-    }
-
-    // Se não houver erros, envie o formulário
-    if (!hasError) {
-        this.submit();
-    }
-});
-
-// Função para validar critérios de senha
-function validatePasswordCriteria(senha_prof) {
-    const lengthCriteria = senha_prof.length >= 8;
-    const upperCaseCriteria = /[A-Z]/.test(senha_prof);
-    const specialCharCriteria = /[!@#$%^&*(),.?":{}|<>]/.test(senha_prof);
-    return lengthCriteria && upperCaseCriteria && specialCharCriteria;
-}
-
+        function validatePasswordCriteria(senha_prof) {
+            const lengthCriteria = senha_prof.length >= 8;
+            const upperCaseCriteria = /[A-Z]/.test(senha_prof);
+            const specialCharCriteria = /[!@#$%^&*(),.?":{}|<>]/.test(senha_prof);
+            return lengthCriteria && upperCaseCriteria && specialCharCriteria;
+        }
 
         // Funções para abrir e fechar o pop-up
         document.getElementById('openPopup').addEventListener('click', function() {

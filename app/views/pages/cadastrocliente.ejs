@@ -4,34 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/cadastrocliente.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <title>Cadastro Cliente</title>
 </head>
 <body>
-    <header>
-        <nav class="navbar">
-     <nav class="logo"><a href="#">Sollarium</a></nav>
-     <ul class="links">
-         <li><a href="/">Início</a></li>
-         <li><a href="/orcamento">Orçamento</a></li>
-         <li><a href="/sobre">Sobre Nós</a></li>
-         <li><a href="/cadastroinicial">Cadastre-se</a></li>
-     </ul>
-     <a href="/entrar" class="action_btn">Entrar</a>
-     <nav class="toggle_btn">
-         <i class="fa-solid fa-bars-staggered"></i>
-     </nav>
-    </nav>
 
-    <nav class="dropdown_menu">
-         <li><a href="/home">Início</a></li>
-         <li><a href="/orcamento">Orçamento</a></li>
-         <li><a href="/sobre">Sobre nós</a></li>
-         <li><a href="/cadastroinicial">Cadastre-se</a></li>
-         <li><a href="/entrar" class="action_btn">Entrar</a></li>
-    </nav>
- </header>
     <nav class="container">
         <nav class="hero">
+            <a href="/cadastroinicial" class="material-symbols-outlined">
+                keyboard_backspace
+            </a>
             <h2>Venha fazer negócios conosco!</h2>
             <img src="/imagens/pexels-tomfisk-9893729.jpg" alt="">
         </nav>
@@ -41,7 +23,7 @@
                 <nav class="input-group">
                     <input type="text" name="nome_cliente" placeholder="Nome Completo" required>
                     <input type="text" name="cpf_cliente" id="cpf_cliente" size="30" maxlength="11" placeholder="CPF" required>
-                    <button type="button" onclick="verificaCPF(document.getElementById('cpf_cliente').value)">Cadastrar</button>
+            
                 </nav>
                 <nav class="input-group">
                     <input type="text" name="cep_cliente" placeholder="CEP" required>
