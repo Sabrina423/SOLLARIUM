@@ -48,6 +48,12 @@ header{
       
 }
 
+.material-symbols-outlined {
+    margin-left: 30px;
+    text-decoration: none;
+    color: #ffffff;
+    }
+
 .navbar .logo a{
     font-size: 1.5rem;
     font-weight: bold;

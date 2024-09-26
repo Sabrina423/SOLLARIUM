@@ -40,7 +40,11 @@ body {
     color: white;
     padding: 40px;
 }
-
+.material-symbols-outlined {
+    align-self: flex-start;
+    text-decoration: none;
+    color: #ffffff;
+    }
 .hero img {
     display: none; /* Esconda a imagem se não for necessária */
 }
