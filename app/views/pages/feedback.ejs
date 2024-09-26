@@ -11,8 +11,8 @@
     <header>
         <div class="container">
             <img src="/imagens/LOGO_SOLLARIUM (8).png" alt="Logo" class="logo">
-            <div class="menu-toggle" id="menu-toggle">☰</div>
-            <nav id="nav-menu">
+            <button class="menu-toggle" id="menu-toggle" aria-expanded="false">☰</button>
+            <nav id="nav-menu" aria-hidden="true">
                 <ul>
                     <li><a href="#">Home</a></li>
                     <li><a href="#">Sobre</a></li>
@@ -24,10 +24,10 @@
 
     <!-- Main Content -->
     <main>
-        <div class="container1">
+        <section class="feedback-section">
             <h2>Feedbacks</h2>
-            <div class="filter">
-                <label for="filter">Filtrar por:</label>
+            <fieldset class="filter">
+                <legend>Filtrar por:</legend>
                 <div class="custom-select">
                     <div class="select-selected">Mais recentes</div>
                     <div class="select-items">
@@ -37,14 +37,14 @@
                         <div data-filter="highest">Maior avaliação</div>
                     </div>
                 </div>
-            </div>
+            </fieldset>
 
-            <div class="feedback">
-                <div class="feedback-item" data-date="09-10-2024" data-quality="5" data-speed="4" data-results="3">
-                    <div class="feedback-header">
+            <section class="feedback">
+                <article class="feedback-item" data-date="09-10-2024" data-quality="5" data-speed="4" data-results="3">
+                    <header class="feedback-header">
                         <span class="client-name">Cliente 1</span>
-                        <span class="feedback-date">09-10-2024</span>
-                    </div>
+                        <time class="feedback-date" datetime="2024-10-09">09-10-2024</time>
+                    </header>
                     <div class="feedback-ratings">
                         <div class="rating">
                             <span>Qualidade:</span>
@@ -59,12 +59,12 @@
                             <div class="stars">★★★☆☆</div>
                         </div>
                     </div>
-                </div>
-                <div class="feedback-item" data-date="06-10-2024" data-quality="3" data-speed="4" data-results="4">
-                    <div class="feedback-header">
+                </article>
+                <article class="feedback-item" data-date="06-10-2024" data-quality="3" data-speed="4" data-results="4">
+                    <header class="feedback-header">
                         <span class="client-name">Cliente 2</span>
-                        <span class="feedback-date">06-10-2024</span>
-                    </div>
+                        <time class="feedback-date" datetime="2024-10-06">06-10-2024</time>
+                    </header>
                     <div class="feedback-ratings">
                         <div class="rating">
                             <span>Qualidade:</span>
@@ -79,21 +79,19 @@
                             <div class="stars">★★★★☆</div>
                         </div>
                     </div>
-                </div>
+                </article>
                 <!-- Adicione mais feedbacks aqui -->
-            </div>
-        </div>
+            </section>
+        </section>
     </main>
 
     <!-- JavaScript -->
     <script>
         document.getElementById('menu-toggle').addEventListener('click', function() {
             var navMenu = document.getElementById('nav-menu');
-            if (navMenu.classList.contains('active')) {
-                navMenu.classList.remove('active');
-            } else {
-                navMenu.classList.add('active');
-            }
+            var isActive = navMenu.classList.toggle('active');
+            this.setAttribute('aria-expanded', isActive);
+            navMenu.setAttribute('aria-hidden', !isActive);
         });
 
         document.querySelector('.select-selected').addEventListener('click', function() {
