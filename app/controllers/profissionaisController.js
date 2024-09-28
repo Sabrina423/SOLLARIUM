@@ -47,8 +47,9 @@ const profController = {
             .isLength({ min: 8, max: 45 }).withMessage("Nome de usuário deve ter de 8 a 45 caracteres!"),
         body("email_prof")
             .isEmail().withMessage("Digite um e-mail válido!"),
-        body("fone_prof")
-            .isLength({ min: 12, max: 13 }).withMessage("Digite um telefone válido!")
+        body("telefone_prof")
+            .isLength({ min: 12, max: 13 }).withMessage("Digite um telefone válido!"),
+
     ],
 
     // Função de login
