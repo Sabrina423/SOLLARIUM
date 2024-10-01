@@ -81,77 +81,7 @@
     </section>
     </section>
 
-    <script>
-        let photoMenuVisible = false;
-        let currentIndex = 0;
-
-        function togglePhotoMenu() {
-            const menu = document.getElementById('photo-menu');
-            photoMenuVisible = !photoMenuVisible;
-            menu.style.display = photoMenuVisible ? 'block' : 'none';
-        }
-
-        function removePhoto() {
-            document.getElementById('profile-pic').src = 'default-profile.jpg';
-            document.getElementById('file-input').value = '';
-            togglePhotoMenu(); // Hide the menu after removing photo
-        }
-
-        document.getElementById('file-input').addEventListener('change', function (event) {
-            const file = event.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function (e) {
-                    document.getElementById('profile-pic').src = e.target.result;
-                    togglePhotoMenu(); // Hide the menu after selecting photo
-                }
-                reader.readAsDataURL(file);
-            }
-        });
-
-        document.addEventListener('click', function (event) {
-            const menu = document.getElementById('photo-menu');
-            const photoButton = document.querySelector('.photo-actions button');
-            if (photoMenuVisible && !menu.contains(event.target) && event.target !== photoButton) {
-                togglePhotoMenu();
-            }
-        });
-
-        function saveProfile() {
-            const fullName = document.getElementById('full-name').value;
-            const email = document.getElementById('email').value;
-            const phone = document.getElementById('phone').value;
-
-            // Aqui você pode adicionar a lógica para salvar as informações do perfil, 
-            // como fazer uma requisição para um servidor.
-
-            alert('Perfil salvo com sucesso!');
-        }
-
-        function showSlide(index) {
-            const container = document.querySelector('.carousel-container');
-            const totalSlides = container.children.length;
-            if (index >= totalSlides) {
-                currentIndex = 0;
-            } else if (index < 0) {
-                currentIndex = totalSlides - 1;
-            } else {
-                currentIndex = index;
-            }
-            container.style.transform = `translateX(-${currentIndex * 100}%)`;
-        }
-
-        function nextSlide() {
-            showSlide(currentIndex + 1);
-        }
-
-        function prevSlide() {
-            showSlide(currentIndex - 1);
-        }
-
-        // Inicializar o carrossel
-        showSlide(currentIndex);
-    </script>
+    <script href="/app/public/js/perfilcliente.js"></script>
 
 </body>
 

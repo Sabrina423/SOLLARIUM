@@ -226,6 +226,8 @@ const clienteController = {
         }
     },
 
+    
+
     gravarPerfil: async (req, res) => {
         const erros = validationResult(req);
         const erroMulter = req.session.erroMulter;
