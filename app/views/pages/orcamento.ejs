@@ -38,18 +38,21 @@
          <li><a href="/entrar" class="action_btn">Entrar</a></li>
     </nav>
  </header>
- https://www.comerc.com.br/simule-sua-economia?utm_feeditemid=&utm_device=c&utm_term=instalador%20paneles%20solares&utm_source=google&utm_medium=ppc&utm_campaign=MOOTAG_FUNDO_GGL_SEA_REGIAO-SP&hsa_cam=21177571404&hsa_grp=162443221393&hsa_mt=b&hsa_src=g&hsa_ad=703825887320&hsa_acc=4887500265&hsa_net=adwords&hsa_kw=instalador%20paneles%20solares&hsa_tgt=kwd-298474585395&hsa_ver=3&gad_source=1&gclid=Cj0KCQjwjNS3BhChARIsAOxBM6opY1CPwYShKMN6G7SQITVXJHr5yByHVqm7bIzWCJ__VoXJZ9Bqk9UaArjuEALw_wcB
     <nav class="grid">
         <section class="texto">
-            <h1>Você sabia que!!-</h1>
-            <h2>********</h2>
+            <h1>Você sabia?</h1>
+            <h2>A energia solar pode reduzir significativamente suas contas de eletricidade a longo prazo.</h2>
+            <h2>É uma fonte renovável que diminui a emissão de gases poluentes.</h2>
+            <h2>Imóveis com sistemas solares tendem a ser mais valorizados no mercado.</h2>
+            <h2>Os sistemas solares têm longa durabilidade e requerem pouca manutenção.</h2>
         </section>
-          <section id="contact" class="contact-section"></section>
-            <h2>Solicite seu Orçamento</h2>
+        
+          <section id="contact" class="contact-section">
             <form id="orcamento-form">
+            <h2>Solicite seu Orçamento</h2>
                 <nav class="form-group">
                     <label for="name">Nome:</label>
-                    <input type="text" id="name" name="name" placeholder="Seu nome completo" required>
+                    <input type="text" id="name" name="name" placeholder="Nome completo" required>
                 </nav>
 
                 <nav class="form-group">
@@ -59,7 +62,7 @@
 
                 <nav class="form-group">
                     <label for="valor">Valor esperado:</label>
-                    <input type="text" id="valor" name="valor" placeholder="Ex.: R$ 2.000,00" required>
+                    <input type="text" id="valor" name="valor" placeholder="R$ 0,00"  onkeyup="formatarMoeda(this)" required>
                 </nav>
 
                 <nav class="form-group">
@@ -70,6 +73,7 @@
                 <button type="submit">Enviar Solicitação</button>
                 <nav id="success-message" style="display: none; color: green; margin-top: 1rem;">
                     Sua solicitação foi enviada com sucesso! Logo um profissional será encontrado para a realização do serviço.
+            </section>
                 </nav>
             </form>
         </section>
@@ -99,6 +103,14 @@
                 alert('Por favor, preencha todos os campos.');
             }
         });
+        function formatarMoeda(input) {
+            let valor = input.value;
+            valor = valor.replace(/\D/g, ""); // Remove caracteres não numéricos
+            valor = (valor / 100).toFixed(2) + ""; // Converte para formato decimal
+            valor = valor.replace(".", ","); // Troca ponto por vírgula
+            valor = valor.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1."); // Adiciona separador de milhar
+            input.value = "R$ " + valor; // Adiciona o símbolo de moeda
+        }
     </script>
 </body>
 </html>

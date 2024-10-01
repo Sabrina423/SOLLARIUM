@@ -11,7 +11,7 @@ const admController = require('../controllers/admController.js');
 const cliente = require("../models/clienteModel");
 const profissional = require("../models/profissionaisModel");
 const adm = require("../models/admModel");
-
+const relatorioController = require("../controllers/relatorioController");
 const uploadFile = require("../util/uploader.js")("./app/public/imagem/perfil");
 
 const {
@@ -55,8 +55,8 @@ router.get('/cadastroinicial', (req, res) => {
     res.render('pages/cadastroinicial');
 });
 
-router.get('/orcamento', (req, res) => {
-    res.render('pages/orcamento');
+router.get('/relatorio', (req, res) => {
+    res.render('pages/relatorio');
 });
 
 router.get('/sobre', (req, res) => {
@@ -96,71 +96,23 @@ router.get('/adm', authenticateToken, (req, res) => {
     res.render('pages/adm');
 });
 
-router.post('/recovery', async (req, res) => {
-    const email = req.body.email;
-    const token = jwt.sign({ email }, secretKey, { expiresIn: '1h' });
-
-    const mailOptions = {
-        from: process.env.EMAIL_USER,
-        to: email,
-        subject: 'Recuperação de Senha',
-        text: `Clique no link para redefinir sua senha: https://congenial-barnacle-5gx456xjgv7w249gr-3000.app.github.dev/resetarsenha/${token}`
-    };
-
-console.log('Tentando enviar email para:', email);
-const transporter = nodemailer.createTransport({
-    service: 'gmail',
-    auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS
-    }
-});
-
-// Enviar email
-try {
-    console.log('Tentando enviar email para:', email);
-    await transporter.sendMail(mailOptions);
-    console.log('Email enviado com sucesso!');
-    res.send('Email de recuperação enviado.');
-} catch (error) {
-    console.error('Erro ao enviar email:', error);
-    return res.status(500).send('Erro ao enviar o email.');
-}
-});
 
 
 
 
 
 
-// Rota para a página de redefinição de senha
-router.get('/resetarsenha/:token', (req, res) => {
-    const token = req.params.token;
 
-    jwt.verify(token, secretKey, (err, decoded) => {
-        if (err) return res.status(400).send('Token inválido.');
-        res.render('resetarsenha', { email: decoded.email });
+
+//Rota de registro cliente
+router.post (
+    "/perfilcliente",
+    uploadFile("imagem-perfil_cliente"),
+    clienteController.regrasValidacaoPerfil,
+    verificarClienteAutorizado( [1, 2, 3], "pages/cadastrocliente"),
+    async function (req, res) {
+        clienteController.gravarperfil(req, res);
     });
-});
-
-// Rota para processar a nova senha
-router.post('/resetarsenha', (req, res) => {
-    const { email, password } = req.body;
-    const hashedPassword = bcrypt.hashSync(password, 8);
-
-    // Substitua pelo seu método de atualização de senha
-    db.query('UPDATE CLIENTE SET SENHA_CLIENTE = ? WHERE EMAIL_CLIENTE = ?', [hashedPassword, email], (err, results) => {
-        if (err) {
-            return res.status(500).send('Erro ao atualizar a senha.');
-        }
-        res.send('Senha atualizada com sucesso!');
-    });
-});
-
-// Rota de registro cliente
-router.post("/perfilcliente", uploadFile("imagemperfil_cliente"), clienteController.regrasValidacaoPerfil, verificarClienteAutorizado([1, 2, 3], "pages/cadastrocliente"), async (req, res) => {
-    clienteController.gravarperfil(req, res);
-});
 
 // Rota de registro cliente
 router.post("/cadastrocliente", clienteController.regrasValidacaoFormCad, async (req, res) => {
@@ -178,10 +130,47 @@ router.post("/adm", admController.regrasValidacaoFormCad, async (req, res) => {
 });
 
 // Rota de Login
-const { gravarClienteAutenticado } = require('../models/autenticadormiddleware'); // ajuste o caminho conforme necessário
-router.post("/entrar", clienteController.regrasValidacaoFormLogin, gravarClienteAutenticado, (req, res) => {
-    clienteController.logar(req, res);
-});
+    router.post(
+        "/entrar",
+        clienteController.regrasValidacaoFormLogin,
+        gravarClienteAutenticado,
+        function (req, res) {
+          clienteController.logar(req, res);
+        }
+      );
 
-// Exportando o router
+
+
+//rota de registro do relatório 
+
+router.get("/",  function (req, res) {
+    relatorioController.listarrelatorioPaginadas(req, res);
+ });
+ 
+ router.get("/editar", function (req, res) {
+   relatorioController.exibirTarefaId(req, res);
+ });
+ 
+ router.get("/excluir", function (req, res) {
+   relatorioController.excluirTarefa(req, res);
+ });
+ 
+ router.get("/finalizar", function (req, res) {
+   relatorioController.finalizarTarefa(req, res);
+ });
+ 
+ router.get("/iniciar", function (req, res) {
+   relatorioController.iniciarTarefa(req, res);
+ });
+ 
+ router.get("/adicionar", function (req, res) {
+   res.locals.moment = moment;
+   res.render("pages/adicionar", { dados: null, listaErros: null });
+ });
+ 
+ router.post("/adicionar", relatorioController.regrasValidacao, function (req, res) {
+     relatorioController.adicionarTarefa(req, res);
+   }
+ );
+ 
 module.exports = router;

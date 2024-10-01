@@ -6,16 +6,50 @@
 }
 
 body {
-    font-family: Poppins;
-    margin: 0;
-    text-decoration: none;
-    list-style: none;
+    font-family: 'Poppins', sans-serif;
+    background-color: #1e1e1e; /* Fundo escuro */
+    color: #f0f0f0; /* Cor do texto */
 }
 
 
+
+.grid {
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+/* Grid responsivo */
+@media (max-width: 768px) {
+    .grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .grid {
+        padding: 10px;
+    }
+
+    .form-group {
+        margin-bottom: 10px;
+    }
+}
+
+.texto {
+}
+
+.texto h1{
+    font-size: 2.5rem;
+    color: #e66b00;
+}
+
+.texto h2{
+    font-size: 1.25rem;
+}
+
 /* Formulário de Orçamento */
 .contact-section {
-    background-color: #f9f9f9;
     padding: 3rem 2rem;
     text-align: center;
 }
@@ -23,61 +57,71 @@ body {
 .contact-section h2 {
     margin-bottom: 2rem;
     font-size: 2rem;
-    color: #333;
+    color: #cfcfcf; /* Cinza claro */
 }
 
 form {
-    width: 40%;
+    width: 100%;
     margin: 0 auto;
-    background-color: #fff;
+    background-color: #2a2a2a; /* Cinza escuro */
     padding: 2rem;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
 }
 
 .form-group {
+    flex-direction: column;
     margin-bottom: 1.5rem;
+    text-align: left;
 }
 
-.form-group label {
-    display: block;
-    font-weight: bold;
-    margin-bottom: 0.5rem;
-    color: #333;
-}
-
-.form-group input, .form-group textarea {
+.form-group input,
+.form-group textarea {
     width: 100%;
     padding: 0.8rem;
-    border-radius: 5px;
-    border: 1px solid #ccc;
+    border-radius: 10px;
+    border: 1px solid #f8bd3f; /* Amarelo */
+    background-color: #313131; /* Cinza mais escuro */
+    color: #f0f0f0; /* Texto claro */
     font-size: 1rem;
+    transition: border-color 0.3s;
 }
 
-.form-group textarea {
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: #ff7a00; /* Amarelo alaranjado */
+    outline: none;
+    
+}
+
+.form-group textarea ,input {
     resize: vertical;
+    color: #d6d5d5;
 }
 
 button[type="submit"] {
     padding: 0.8rem 1.5rem;
-    background-color: #ff7a00;
+    background-color: #ff7a00; /* Laranja */
     color: white;
     border: none;
     border-radius: 25px;
     font-size: 1rem;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s, transform 0.3s;
 }
 
 button[type="submit"]:hover {
-    background-color: #e66b00;
+    background-color: #e66b00; /* Laranja escuro */
+    transform: scale(1.05); /* Efeito de crescimento */
 }
 
 /* Mensagem de sucesso */
 #success-message {
     font-size: 1rem;
     margin-top: 1.5rem;
+    color: #a1e8a1; /* Verde claro */
 }
 
 /* Estilo responsivo */
@@ -119,4 +163,3 @@ button[type="submit"]:hover {
         text-align: center;
     }
 }
-                                                                 

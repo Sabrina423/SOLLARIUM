@@ -43,24 +43,33 @@
                 <tbody>
                     
                 <% let situacoes=["Pendente", "Em andamento", "Finalizada", "Cancelada" ]
-                tarefas.forEach(function(tarefa){ %>
+                relatorio.forEach(function(relatorio){ %>
 
                 <tr>
                     <td>
-                        <%=tarefa.nome_tarefa %>
+                        <%=relatorio.nome_relatorio %>
                     </td>
                     <td>
-                        <!-- <%=tarefa.prazo_tarefa %> -->
-                        <%= moment(tarefa.prazo_tarefa).format( 'DD/MM/YYYY') %>
+                        <!-- <%=relatorio.prazo_tarefa %> -->
+                        <%= moment(relatorio.prazo_relatorio).format( 'DD/MM/YYYY') %>
                     </td>
                     <td>
-                        <%= situacoes[tarefa.situacao_tarefa]%>
+                        <%= situacoes[relatorio.situacao_relatorio]%>
                     </td>
                     <td>
-                        <button onclick=<%="window.location='/editar?id="+ tarefa.id_tarefa+"'" %> class="
-                            material-symbols-outlined edit">
-                            edit
-                        </button>
+                
+                        <td>
+                            <button onclick=<%=" window.location='/finalizar?id="+ tarefa.id_tarefa+"'" %> class="
+                                material-symbols-outlined done_outline">
+                                done_outline
+                            </button>
+                        </td>
+                        <td>
+                            <button onclick=<%=" window.location='/excluir?id="+ tarefa.id_tarefa+"'" %> class="
+                                material-symbols-outlined delete">
+                                delete
+                            </button>
+                        </td>
                     </td>
                 </tbody>
             </table>
