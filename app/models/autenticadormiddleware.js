@@ -1,7 +1,7 @@
 const { validationResult } = require("express-validator");
-const cliente = require("../models/clienteModel");
-const profissional = require("../models/profissionaisModel");
-const adm = require("../models/admModel");
+const cliente = require("./clienteModel");
+const profissional = require("./profissionaisModel");
+const adm = require("./admModel");
 
 const bcrypt = require("bcryptjs");
 

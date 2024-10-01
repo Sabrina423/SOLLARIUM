@@ -11,14 +11,9 @@ const profissionaisModel = {
             throw error;
         }
     },
-<<<<<<< HEAD
 
     // Buscar profissional por email
     findByEmail: async (email) => {
-=======
-  
-    findByEmail: async (id) => {
->>>>>>> 6950ea8 (atualiaz)
         try {
             const [linhas] = await pool.query('SELECT * FROM PROFISSIONAL WHERE EMAIL_PROF = ?', [email]);
             return linhas.length > 0 ? linhas[0] : null; // Retorna o profissional ou null se não encontrado
@@ -47,13 +42,8 @@ const profissionaisModel = {
         try {
             const { nome_prof, telefone_prof, email_prof, cep_prof, cpf_prof, data_prof, senha_prof, area_prof, experiencia_prof, } = prof;
             const result = await pool.query(
-<<<<<<< HEAD
                 'UPDATE PROFISSIONAL SET CPF_PROF = ?, ENDERECO_PROF = ?, NOME_PROF = ?, CONTATO_PROF = ?, EMAIL_PROF = ?, SENHA_PROF = ?, ESTADO_PROF = ?, DOCUMENTO_PROF = ?, DATA_NASC = ?, CEP_PROF = ? WHERE ID_PROF = ?',
                 [cpf_prof, endereco_prof, nome_prof, contato_prof, email_prof, senha_prof, estado_prof, documento_prof, data_nasc, cep_prof, id]
-=======
-                'UPDATE PROFISSIONAL SET NOME_PROF = ?, CONTATO_PROF = ?, EMAIL_PROF = ?, CEP_PROF = ?, CPF_PROF = ?, DATA_PROF = ?, SENHA_PROF = ?, AREA_PROF = ?, EXPERIENCIA_PROF = ?',
-                [nome_prof, telefone_prof, email_prof, cep_prof, cpf_prof, data_prof, senha_prof, area_prof, experiencia_prof, id]
->>>>>>> 6950ea8 (atualiaz)
             );
             return result[0]; // Retorna o resultado da atualização
         } catch (error) {

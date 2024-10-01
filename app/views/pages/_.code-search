@@ -1,0 +1,30 @@
+# Query: <<
+# ContextLines: 1
+
+16 resultados - 3 arquivos
+
+app/controllers/profissionaisController.js:
+  49              .isEmail().withMessage("Digite um e-mail válido!"),
+  50: HEAD
+  51          body("fone_prof")
+
+app/models/profissionaisModel.js:
+  13      },
+  14: HEAD
+  15  
+
+  49              const result = await pool.query(
+  50: HEAD
+  51                  'UPDATE PROFISSIONAL SET CPF_PROF = ?, ENDERECO_PROF = ?, NOME_PROF = ?, CONTATO_PROF = ?, EMAIL_PROF = ?, SENHA_PROF = ?, ESTADO_PROF = ?, DOCUMENTO_PROF = ?, DATA_NASC = ?, CEP_PROF = ? WHERE ID_PROF = ?',
+
+app/views/pages/indexx.ejs:
+    1: HEAD
+    2  <button class="menu-toggle" aria-label="Toggle menu">&#9776;</button>
+
+  137  =======
+  138: HEAD
+  139  <!DOCTYPE html>
+
+  253              <div class="arrows">
+  254:                 <button id="prev"><</button>
+  255                  <button id="next">></button>

@@ -1,10 +1,11 @@
 const cliente = require("../models/clienteModel");
-const { body, validationResult, Result } = require("express-validator");
+const { body, validationResult } = require("express-validator");
 const bcrypt = require("bcryptjs");
 var salt = bcrypt.genSaltSync(12);
 const { removeImg } = require("../util/removeImg");
 const fetch = require('node-fetch');
-const verificarClienteAutorizado = require('../models/verificarClienteAutorizado'); // Corrigido o caminho para o middleware
+const verificarClienteAutorizado = require('../models/verificarClienteAutorizado');
+const jwt = require('jsonwebtoken'); // Certifique-se de incluir isso
 const https = require('https');
 
 const clienteController = {
@@ -29,7 +30,7 @@ const clienteController = {
         body('contato_cliente')
             .isLength({ min: 10, max: 15 }).withMessage('O contato deve ser válido com até 15 caracteres')
             .custom(async value => {
-                const clienteExistente = await cliente.findById(value); // Ajustado para verificar no modelo correto
+                const clienteExistente = await cliente.findById(value);
                 if (clienteExistente) {
                     throw new Error('Nome de usuário em uso!');
                 }
@@ -37,7 +38,7 @@ const clienteController = {
         body("email_cliente")
             .isEmail().withMessage("Digite um e-mail válido!")
             .custom(async value => {
-                const clienteExistente = await cliente.findById(value); // Ajustado para verificar no modelo correto
+                const clienteExistente = await cliente.findById(value);
                 if (clienteExistente) {
                     throw new Error('E-mail em uso!');
                 }
@@ -56,13 +57,7 @@ const clienteController = {
             .isEmail().withMessage("Digite um e-mail válido!"),
         body("fone_cliente")
             .isLength({ min: 12, max: 13 }).withMessage("Digite um telefone válido!"),
-
     ],
-
-    gravarperfil: [
-
-    ],
-
 
     logar: (req, res) => {
         const erros = validationResult(req);
@@ -79,7 +74,7 @@ const clienteController = {
     cadastrar: async (req, res) => {
         const erros = validationResult(req);
         if (!erros.isEmpty()) {
-            console.log(erros)
+            console.log(erros);
             return res.render("pages/cadastrocliente", { listaErros: erros, dadosNotificacao: null, valores: req.body });
         }
 
@@ -92,11 +87,10 @@ const clienteController = {
             cep_cliente: req.body.cep_cliente,
             contato_cliente: req.body.contato_cliente,
             cpf_cliente: req.body.cpf_cliente
-           
         };
 
         try {
-            await cliente.create(dadosForm); // Correto método de criação
+            await cliente.create(dadosForm);
             res.render("pages/home", {
                 listaErros: null, dadosNotificacao: {
                     titulo: "Cadastro realizado!", mensagem: "Novo usuário criado com sucesso!", tipo: "success"
@@ -111,31 +105,79 @@ const clienteController = {
             });
         }
     },
+    validarTokenNovaSenha: async (req, res) => {
+        const token = req.query.token;
+        console.log(token);
+        jwt.verify(token, process.env.SECRET_KEY, (err, decoded) => {
+            if (err) {
+                return res.render("pages/rec-senha", {
+                    listaErros: null,
+                    dadosNotificacao: { 
+                        titulo: "Link expirado!", 
+                        mensagem: "Insira seu e-mail para iniciar o reset de senha.", 
+                        tipo: "error" 
+                    },
+                    valores: req.body
+                });
+            } else {
+                return res.render("pages/resetar-senha", {
+                    listaErros: null,
+                    autenticado: req.session.autenticado,
+                    id_cliente: decoded.userId,
+                    dadosNotificacao: null
+                });
+            }
+        });
+    },
+
+    resetarSenha: async (req, res) => {
+        const erros = validationResult(req);
+        console.log(erros);
+        if (!erros.isEmpty()) {
+            return res.render("pages/resetar-senha", {
+                listaErros: erros,
+                dadosNotificacao: null,
+                valores: req.body,
+            });
+        }
+        try {
+            const senha = bcrypt.hashSync(req.body.senha_cliente);
+            const resetar = await cliente.update({ senha_cliente: senha }, req.body.id_cliente);
+            console.log(resetar);
+            res.render("pages/entrar", {
+                listaErros: null,
+                dadosNotificacao: {
+                    titulo: "Perfil alterado",
+                    mensagem: "Nova senha registrada",
+                    tipo: "success",
+                },
+            });
+        } catch (e) {
+            console.log(e);
+        }
+    },
 
     mostrarPerfil: async (req, res) => {
         try {
             let results = await cliente.findId(req.session.autenticado.id);
             let viaCep = { logradouro: "", bairro: "", localidade: "", uf: "" };
             let cep = null;
-    
+
             if (results[0].cep_cliente != null) {
-                const httpsAgent = new https.Agent({
-                    rejectUnauthorized: false,
-                });
-    
+                const httpsAgent = new https.Agent({ rejectUnauthorized: false });
                 const response = await fetch(`https://viacep.com.br/ws/${results[0].cep_cliente}/json/`, {
                     method: 'GET',
                     agent: httpsAgent
                 });
-    
+
                 if (!response.ok) {
                     throw new Error(`Failed to fetch CEP data: ${response.statusText}`);
                 }
-    
+
                 viaCep = await response.json();
                 cep = results[0].cep_cliente.slice(0, 5) + "-" + results[0].cep_cliente.slice(5);
             }
-    
+
             let campos = {
                 nome_cliente: results[0].nome_cliente,
                 numero: results[0].numero_cliente,
@@ -152,13 +194,12 @@ const clienteController = {
                 fone_cliente: results[0].fone_cliente,
                 senha_cliente: ""
             };
-    
+
             res.render("pages/perfilcliente", {
                 listaErros: null,
                 dadosNotificacao: null,
                 valores: campos
             });
-    
         } catch (e) {
             console.error(e);
             res.render("pages/perfilcliente", {
@@ -184,15 +225,14 @@ const clienteController = {
     },
 
     gravarPerfil: async (req, res) => {
-
         const erros = validationResult(req);
         const erroMulter = req.session.erroMulter;
         if (!erros.isEmpty() || erroMulter != null) {
-            lista = !erros.isEmpty() ? erros : { formatter: null, errors: [] };
+            const lista = !erros.isEmpty() ? erros : { formatter: null, errors: [] };
             if (erroMulter != null) {
                 lista.errors.push(erroMulter);
             }
-            return res.render("pages/perfilcliente", { listaErros: lista, dadosNotificacao: null, valores: req.body })
+            return res.render("pages/perfilcliente", { listaErros: lista, dadosNotificacao: null, valores: req.body });
         }
         try {
             var dadosForm = {
@@ -211,20 +251,12 @@ const clienteController = {
             if (!req.file) {
                 console.log("falha no carregamento");
             } else {
-                //armazenando o caminho do arquivo salvo na pasta do projeto
-                caminhoArquivo = "imagem/perfilcliente/" + req.file.filename;
-                //se houve alteração de imagem de perfil apaga a imagem anterior
+                const caminhoArquivo = "imagem/perfilcliente/" + req.file.filename;
                 if (dadosForm.img_perfil_pasta != caminhoArquivo) {
                     removeImg(dadosForm.img_perfil_pasta);
                 }
                 dadosForm.img_perfil_pasta = caminhoArquivo;
                 dadosForm.img_perfil_banco = null;
-
-                // //Armazenando o buffer de dados binários do arquivo
-                // dadosForm.img_perfil_banco = req.file.buffer;
-                // //Apagando a imagem armazenada na pasta
-                // removeImg(dadosForm.img_perfil_pasta)
-                // dadosForm.img_perfil_pasta = null;
             }
             let resultUpdate = await cliente.update(dadosForm, req.session.autenticado.id);
             if (!resultUpdate.isEmpty) {
@@ -239,21 +271,24 @@ const clienteController = {
                     };
                     req.session.autenticado = autenticado;
                     var campos = {
-                        nome_cliente: result[0].nome_cliente, email_cliente: result[0].email_cliente,
-                        img_perfil_pasta: result[0].img_perfil_pasta, img_perfil_banco: result[0].img_perfil_banco,
-                        nomeCliente_cliente: result[0].user_cliente, fone_cliente: result[0].fone_cliente, senha_cliente: ""
-                    }
+                        nome_cliente: result[0].nome_cliente,
+                        email_cliente: result[0].email_cliente,
+                        img_perfil_pasta: result[0].img_perfil_pasta,
+                        img_perfil_banco: result[0].img_perfil_banco,
+                        nomeCliente_cliente: result[0].user_cliente,
+                        fone_cliente: result[0].fone_cliente,
+                        senha_cliente: ""
+                    };
                     res.render("pages/perfilcliente", { listaErros: null, dadosNotificacao: { titulo: "Perfil! atualizado com sucesso", mensagem: "Alterações Gravadas", tipo: "success" }, valores: campos });
                 } else {
                     res.render("pages/perfilcliente", { listaErros: null, dadosNotificacao: { titulo: "Perfil! atualizado com sucesso", mensagem: "Sem alterações", tipo: "success" }, valores: dadosForm });
                 }
             }
         } catch (e) {
-            console.log(e)
-            res.render("pages/perfilcliente", { listaErros: erros, dadosNotificacao: { titulo: "Erro ao atualizar o perfil!", mensagem: "verifique os valores digitados!", tipo: "error" }, valores: req.body })
+            console.log(e);
+            res.render("pages/perfilcliente", { listaErros: erros, dadosNotificacao: { titulo: "Erro ao atualizar o perfil!", mensagem: "verifique os valores digitados!", tipo: "error" }, valores: req.body });
         }
     }
 };
-
 
 module.exports = clienteController;
