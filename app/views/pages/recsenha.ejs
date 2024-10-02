@@ -13,10 +13,42 @@
         <a href="/entrar" class="material-symbols-outlined">
             keyboard_backspace
         </a>
-        <form id="card-form" action="/recovery" method="post">
-            <p> Insira seu E-mail e enviaremos um link de recuperação de senha</p>
-                <input type="email" name="email" required placeholder="Seu e-mail">
-                <button type="submit">Enviar E-mail</button>
-    </form>
+        <form id="card-form">
+            <p>Insira seu E-mail e enviaremos um link de recuperação de senha</p>
+            <input type="email" name="email" required placeholder="Seu e-mail">
+            <button type="submit">Enviar E-mail</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('card-form').addEventListener('submit', async function(event) {
+            event.preventDefault(); // Evita o envio padrão do formulário
+
+            const email = this.email.value;
+
+            try {
+                const response = await fetch('/recovery', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ email }),
+                });
+
+                const message = await response.text();
+
+                if (!response.ok) {
+                    // Se a resposta não for ok, mostra a mensagem de erro
+                    alert(message);
+                } else {
+                    // Caso contrário, mostra uma mensagem de sucesso
+                    alert('Email de recuperação enviado com sucesso!');
+                }
+            } catch (error) {
+                // Erro ao enviar a requisição
+                alert('Erro ao enviar o e-mail. Tente novamente mais tarde.');
+            }
+        });
+    </script>
 </body>
 </html>
