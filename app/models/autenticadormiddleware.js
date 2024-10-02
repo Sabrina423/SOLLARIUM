@@ -104,3 +104,5 @@ module.exports = {
   gravarClienteAutenticado,
   verificarClienteAutorizado,
 }
+
+
