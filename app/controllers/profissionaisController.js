@@ -49,7 +49,6 @@ const profController = {
             .isEmail().withMessage("Digite um e-mail válido!"),
         body("telefone_prof")
             .isLength({ min: 12, max: 13 }).withMessage("Digite um telefone válido!"),
-
     ],
 
     // Função de login

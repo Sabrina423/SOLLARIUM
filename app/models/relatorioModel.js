@@ -79,5 +79,9 @@ const relatorio = {
   
 };
 
+<<<<<<< HEAD
 module.exports = relatorioModel
 
+=======
+  module.exports = relatorio;
+>>>>>>> fe5fca8 (a)

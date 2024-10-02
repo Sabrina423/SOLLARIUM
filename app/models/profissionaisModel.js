@@ -40,10 +40,10 @@ const profissionaisModel = {
     // Atualizar um profissional existente
     update: async (id, prof) => {
         try {
-            const { nome_prof, telefone_prof, email_prof, cep_prof, cpf_prof, data_prof, senha_prof, area_prof, experiencia_prof, } = prof;
+            const { nome_prof, contato_prof, email_prof, cep_prof, cpf_prof, data_prof, senha_prof, area_prof, experiencia_prof } = prof;
             const result = await pool.query(
-                'UPDATE PROFISSIONAL SET NOME_PROF = ?, CONTATO_PROF = ?, EMAIL_PROF = ?, CEP_PROF = ?, CPF_PROF = ?, DATA_PROF = ?, SENHA_PROF = ?, AREA_PROF = ?, EXPERIENCIA_PROF = ?',
-                [nome_prof, telefone_prof, email_prof, cep_prof, cpf_prof, data_prof, senha_prof, area_prof, experiencia_prof, id]
+                'UPDATE PROFISSIONAL SET NOME_PROF = ?, CONTATO_PROF = ?, EMAIL_PROF = ?, CEP_PROF = ?, CPF_PROF = ?, DATA_PROF = ?, SENHA_PROF = ?, AREA_PROF = ?, EXPERIENCIA_PROF = ? WHERE ID_PROF = ?',
+                nome_prof, contato_prof, email_prof, cep_prof, cpf_prof, data_prof, senha_prof, area_prof, experiencia_prof, id
             );
             return result[0]; // Retorna o resultado da atualização
         } catch (error) {
