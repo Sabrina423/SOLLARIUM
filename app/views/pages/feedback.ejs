@@ -22,69 +22,35 @@
         </div>
     </header>
 
-    <!-- Main Content -->
     <main>
         <section class="feedback-section">
             <h2>Feedbacks</h2>
-            <fieldset class="filter">
-                <legend>Filtrar por:</legend>
-                <div class="custom-select">
-                    <div class="select-selected">Mais recentes</div>
-                    <div class="select-items">
-                        <div data-filter="recent">Mais recentes</div>
-                        <div data-filter="oldest">Mais antigas</div>
-                        <div data-filter="lowest">Menor avaliação</div>
-                        <div data-filter="highest">Maior avaliação</div>
-                    </div>
-                </div>
-            </fieldset>
-
             <section class="feedback">
-                <article class="feedback-item" data-date="09-10-2024" data-quality="5" data-speed="4" data-results="3">
-                    <header class="feedback-header">
-                        <span class="client-name">Cliente 1</span>
-                        <time class="feedback-date" datetime="2024-10-09">09-10-2024</time>
-                    </header>
-                    <div class="feedback-ratings">
-                        <div class="rating">
-                            <span>Qualidade:</span>
-                            <div class="stars">★★★★★</div>
+                <% feedbacks.forEach(feedback => { %>
+                    <article class="feedback-item" data-date="<%= feedback.date.toLocaleDateString() %>" data-quality="<%= feedback.quality %>" data-speed="<%= feedback.speed %>" data-results="<%= feedback.results %>">
+                        <header class="feedback-header">
+                            <span class="client-name"><%= feedback.clientName %></span>
+                            <time class="feedback-date" datetime="<%= feedback.date.toISOString() %>"><%= feedback.date.toLocaleDateString() %></time>
+                        </header>
+                        <div class="feedback-ratings">
+                            <div class="rating">
+                                <span>Qualidade:</span>
+                                <div class="stars"><%= '★'.repeat(feedback.quality) + '☆'.repeat(5 - feedback.quality) %></div>
+                            </div>
+                            <div class="rating">
+                                <span>Rapidez:</span>
+                                <div class="stars"><%= '★'.repeat(feedback.speed) + '☆'.repeat(5 - feedback.speed) %></div>
+                            </div>
+                            <div class="rating">
+                                <span>Resultados:</span>
+                                <div class="stars"><%= '★'.repeat(feedback.results) + '☆'.repeat(5 - feedback.results) %></div>
+                            </div>
                         </div>
-                        <div class="rating">
-                            <span>Rapidez:</span>
-                            <div class="stars">★★★★☆</div>
-                        </div>
-                        <div class="rating">
-                            <span>Resultados:</span>
-                            <div class="stars">★★★☆☆</div>
-                        </div>
-                    </div>
-                </article>
-                <article class="feedback-item" data-date="06-10-2024" data-quality="3" data-speed="4" data-results="4">
-                    <header class="feedback-header">
-                        <span class="client-name">Cliente 2</span>
-                        <time class="feedback-date" datetime="2024-10-06">06-10-2024</time>
-                    </header>
-                    <div class="feedback-ratings">
-                        <div class="rating">
-                            <span>Qualidade:</span>
-                            <div class="stars">★★★☆☆</div>
-                        </div>
-                        <div class="rating">
-                            <span>Rapidez:</span>
-                            <div class="stars">★★★★☆</div>
-                        </div>
-                        <div class="rating">
-                            <span>Resultados:</span>
-                            <div class="stars">★★★★☆</div>
-                        </div>
-                    </div>
-                </article>
-                <!-- Adicione mais feedbacks aqui -->
+                    </article>
+                <% }) %>
             </section>
         </section>
     </main>
-
     <!-- JavaScript -->
     <script>
         document.getElementById('menu-toggle').addEventListener('click', function() {

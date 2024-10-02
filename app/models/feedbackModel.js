@@ -1,25 +1,16 @@
 var pool = require("../../config/pool_conexoes");
+const mongoose = require('mongoose');
 
-const feedback = {
-    findAll: async() =>{
-        try{
-        const[resultados] = await pool.query('SELECT * FROM tarefas WHERE status_tarefa = 1') 
-        return resultados;
-        } catch(error){
-            return error;
-        }
-        
-    },
-
-    create: async(dadosForm)=> {
-        try{
-            const [resultados] = await pool.query('INSERT INTO tarefas SET ?',[dadosForm0]) 
-            return resultados;
-            } catch(error){
-                console.log(error);
-                return null;
-            }
-    }
-};
+    const feedbackSchema = new mongoose.Schema({
+        clientName: { type: String, required: true },
+        date: { type: Date, default: Date.now },
+        quality: { type: Number, required: true },
+        speed: { type: Number, required: true },
+        results: { type: Number, required: true },
+    });
+    
+    const Feedback = mongoose.model('Feedback', feedbackSchema);
+    module.exports = Feedback;
+    
 
 module.exports = feedbackModel

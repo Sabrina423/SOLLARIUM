@@ -13,7 +13,7 @@ const profissional = require("../models/profissionaisModel");
 const adm = require("../models/admModel");
 const relatorioController = require("../controllers/relatorioController");
 const uploadFile = require("../util/uploader.js")("./app/public/imagem/perfil");
-
+const feedbackController = require('../controllers/feedbackController');
 const {
     verificarClienteAutenticado,
     verificarClienteAutorizado
@@ -173,4 +173,10 @@ router.get("/",  function (req, res) {
    }
  );
  
+
+ //feedback 
+
+router.get('/feedback', feedbackController.renderFeedbackPage);
+router.post('/feedback', feedbackController.createFeedback);
+
 module.exports = router;
