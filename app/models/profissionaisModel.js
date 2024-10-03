@@ -25,6 +25,7 @@ const profissionaisModel = {
 
     // Criar um novo profissional
     create: async (profissional) => {
+    create: async (profissional) => {
         try {
             const result = await pool.query(
                 'INSERT INTO PROFISSIONAL (NOME_PROF, CONTATO_PROF, EMAIL_PROF, CPF_PROF, CEP_PROF, AREA_PROF, SENHA_PROF) VALUES (?, ?, ?, ?, ?, ?, ?)',
@@ -40,10 +41,10 @@ const profissionaisModel = {
     // Atualizar um profissional existente
     update: async (id, prof) => {
         try {
-            const { nome_prof, contato_prof, email_prof, cep_prof, cpf_prof, data_prof, senha_prof, area_prof, experiencia_prof } = prof;
+            const { nome_prof, telefone_prof, email_prof, cep_prof, cpf_prof, data_prof, senha_prof, area_prof, experiencia_prof, endereco_prof, contato_prof, estado_prof, documento_prof } = prof;
             const result = await pool.query(
-                'UPDATE PROFISSIONAL SET NOME_PROF = ?, CONTATO_PROF = ?, EMAIL_PROF = ?, CEP_PROF = ?, CPF_PROF = ?, DATA_PROF = ?, SENHA_PROF = ?, AREA_PROF = ?, EXPERIENCIA_PROF = ? WHERE ID_PROF = ?',
-                nome_prof, contato_prof, email_prof, cep_prof, cpf_prof, data_prof, senha_prof, area_prof, experiencia_prof, id
+                'UPDATE PROFISSIONAL SET CPF_PROF = ?, ENDERECO_PROF = ?, NOME_PROF = ?, CONTATO_PROF = ?, EMAIL_PROF = ?, SENHA_PROF = ?, ESTADO_PROF = ?, DOCUMENTO_PROF = ?, DATA_NASC = ?, CEP_PROF = ? WHERE ID_PROF = ?',
+                [cpf_prof, endereco_prof, nome_prof, contato_prof, email_prof, senha_prof, estado_prof, documento_prof, data_prof, cep_prof, id]
             );
             return result[0]; // Retorna o resultado da atualização
         } catch (error) {
@@ -65,3 +66,4 @@ const profissionaisModel = {
 };
 
 module.exports = profissionaisModel;
+
