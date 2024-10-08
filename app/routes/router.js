@@ -95,6 +95,41 @@ router.get('/feedback', authenticateToken, (req, res) => {
 router.get('/adm', authenticateToken, (req, res) => {
     res.render('pages/adm');
 });
+
+// Mercado Pago
+const { MercadoPagoConfig, Preference } = require('Mercadopago');
+const { PedidoController } = require("../controllers/PedidoController");
+
+
+// credenciais
+const MercadoPagoCliente = new MercadoPagoConfig({
+    accessToken: process.env.acessToken
+});
+
+router.post("/createpreference", function (req, res) {
+    const preference = new Preference(MercadoPagoCliente);
+    console.log(req.body.items);
+    preference.create({
+        body: {
+            items: req.body.items,
+            back_urls: {
+                "success": process.env.URL_BASE + "/feedback",
+                "failure": process.env.URL_BASE + "/feedback",
+                "pending": process.env.URL_BASE + "/feedback"
+            },
+            auto_return: "approved",
+        }
+    })
+    .then((value) => {
+        res.json(value);
+    })
+    .catch(console.log);
+});
+
+router.get("/feedback", function (req, res) {
+    PedidoController.gravarpedido(req, res);
+});
+
 // Rota para recuperação de senha
 router.post('/recovery', async (req, res) => {
     const email = req.body.email;
@@ -141,7 +176,6 @@ router.post('/recovery', async (req, res) => {
     });
 });
 
-
 // Rota de registro cliente
 router.post("/perfilcliente", uploadFile("imagemperfil_cliente"), clienteController.regrasValidacaoPerfil, verificarClienteAutorizado([1, 2, 3], "pages/cadastrocliente"), async (req, res) => {
     clienteController.gravarperfil(req, res);
@@ -172,7 +206,6 @@ router.post("/entrar", clienteController.regrasValidacaoFormLogin, gravarCliente
     req.session.user = req.user; // Opcional: armazena informações do usuário na sessão
     res.redirect('/'); // Redireciona para a página inicial
 });
-
 
 // Exportando o router
 module.exports = router;

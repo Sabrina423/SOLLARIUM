@@ -5,72 +5,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro de Cartão</title>
     <link rel="stylesheet" href="/css/cadastrocartão.css">
+    <body>
+        <script src="https://sdk.mercadopago.com/js/v2"></script>
+      </body>
+      
+      <script>
+        const mp = new mercadoPago("APP_USR-b394bbba-78bf-4bf2-b12e-ba014baf5a5e");
+      </script>      
+    <script src="/js/comprarcarrinho.js"></script>
 </head>
 <body>
-    <div class="container">
-    
-        <form id="card-form">
-            <p> Acesse ou crie uma conta no Mercado Pago para terminar seu cadastro!</p>
-            <button type="submit" class="submit-button">Cadastrar Cartão</button>
-        </form>
-    </div>
-
-    <script>
-        // Função para formatar o número do cartão em blocos de 4 dígitos
-        function formatCardNumber(value) {
-            return value.replace(/\D/g, '').replace(/(.{4})/g, '$1 ').trim();
-        }
-
-        // Função para formatar a data de validade no formato MM/AA
-        function formatExpiryDate(value) {
-            return value.replace(/\D/g, '').replace(/(.{2})/g, '$1/').trim().slice(0, 5);
-        }
-
-        // Função para formatar o código de segurança (CVV) para 3 dígitos
-        function formatCVV(value) {
-            return value.replace(/\D/g, '').slice(0, 3);
-        }
-
-        // Atualizar informações do cartão em tempo real
-        function updateCardDisplay() {
-            const cardNumberInput = document.getElementById('card-number');
-            const cardHolderInput = document.getElementById('card-holder');
-            const expiryDateInput = document.getElementById('expiry-date');
-
-            document.getElementById('card-number-display').textContent = formatCardNumber(cardNumberInput.value) || '**** **** **** 1234';
-            document.getElementById('card-holder-display').textContent = cardHolderInput.value || 'Nome do Titular';
-            document.getElementById('expiry-date-display').textContent = formatExpiryDate(expiryDateInput.value) || 'MM/AA';
-        }
-
-        // Função para lidar com a entrada do número do cartão
-        function handleCardNumberInput(event) {
-            const input = event.target;
-            let value = input.value;
-            value = value.replace(/\D/g, '');
-            input.value = formatCardNumber(value);
-            updateCardDisplay();
-        }
-
-        // Função para lidar com a entrada da data de validade
-        function handleExpiryDateInput(event) {
-            const input = event.target;
-            let value = input.value;
-            input.value = formatExpiryDate(value);
-            updateCardDisplay();
-        }
-
-        // Função para lidar com a entrada do código de segurança (CVV)
-        function handleCVVInput(event) {
-            const input = event.target;
-            let value = input.value;
-            input.value = formatCVV(value);
-        }
-
-        // Adicionar eventos de input para atualizar o display
-        document.getElementById('card-number').addEventListener('input', handleCardNumberInput);
-        document.getElementById('card-holder').addEventListener('input', updateCardDisplay);
-        document.getElementById('expiry-date').addEventListener('input', handleExpiryDateInput);
-        document.getElementById('cvv').addEventListener('input', handleCVVInput);
-    </script>
+    <section class="paymentformdark">
+        <div class="containerpayment">
+            <div class="block heading"><h2>Checkout</h2></div>
+            <div class="formpayment">
+                <div class="products">
+                    <h2 class="title"> Resumo do pedido</h2>
+                    <% 
+                    var total = 0;
+                    carrinho.foreach(function(item){
+                        total +=(item.qtde *item.preco);
+                        %>
+    <div class="item">
+        <span class="pricehidden" id="summaryprice"> R$ <%= item.preco.toFixed(2) %></span>
+        <span class="price" id="subtotalprica"> R$ <%=(item.qtde *item.preco).toFixed(2) %></span>
+        <p class="itemname"> <%= item.produto %>
+        ( <span class="summaryquantity"> <%= item.qtde %>
+        </span> x R$ <%= item.preco.toFixed(2) %>)
+        </p>
+        </div>
+        <% }); %>
+        <div class="total">
+            <span class="price" id="summarytotal"> Total R$ <%= total.toFixed(2) %></span>
+        </div>
+                </div>
+            </div>
 </body>
 </html>
