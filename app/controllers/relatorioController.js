@@ -117,4 +117,4 @@ const relatorioController = {
     };
     
 
-module.exports = relatoriosController;
+module.exports = relatorioController;

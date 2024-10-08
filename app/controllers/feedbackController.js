@@ -29,7 +29,8 @@ exports.createFeedback = async (req, res) => {
         res.status(400).send('Erro ao salvar feedback');
     }
 };
-const CEP = require('../models/cep'); // Se necessário
+
+//const CEP = require('../models/cep'); // Se necessário
 
 function formatCEP(cep) {
     return `${cep.substring(0, 5)}-${cep.substring(5)}`;

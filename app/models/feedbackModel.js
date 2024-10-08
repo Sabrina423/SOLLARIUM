@@ -1,6 +1,10 @@
-<<<<<<< HEAD
+
 var pool = require("../../config/pool_conexoes");
 const mongoose = require('mongoose');
+
+const feedbackModel = {
+
+}
 
     const feedbackSchema = new mongoose.Schema({
         clientName: { type: String, required: true },
@@ -17,5 +21,4 @@ const mongoose = require('mongoose');
     
 
 module.exports = feedbackModel
-=======
->>>>>>> 7aaac52 (atualiza)
+

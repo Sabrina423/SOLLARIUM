@@ -1,5 +1,9 @@
-<<<<<<< HEAD
+
 var pool = require("../../config/pool_conexoes");
+
+const relatorioModel = {
+
+}
 
 class CEP {
     constructor(cep) {
@@ -76,5 +80,4 @@ const relatorio = {
 };
 
 module.exports = relatorioModel
-=======
->>>>>>> 7aaac52 (atualiza)
+

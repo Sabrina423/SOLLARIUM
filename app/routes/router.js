@@ -16,7 +16,8 @@ const uploadFile = require("../util/uploader.js")("./app/public/imagem/perfil");
 const feedbackController = require('../controllers/feedbackController');
 const {
     verificarClienteAutenticado,
-    verificarClienteAutorizado
+    verificarClienteAutorizado,
+    gravarClienteAutenticado
 } = require("../models/autenticadormiddleware.js");
 
 const router = express.Router();
@@ -25,7 +26,7 @@ require('dotenv').config(); // Carregar variáveis de ambiente
 
 console.log("Chave Secreta:", process.env.JWT_SECRET); // Debug
 
-const secretKey = process.env.JWT_SECRET || 'default_secret_key'; // Usar chave padrão
+const secretKey = process.env.JWT_SECRET || 'site'; // Usar chave padrão
 
 // Middleware de Autenticação
 const authenticateToken = (req, res, next) => {
@@ -71,7 +72,10 @@ router.get('/cadastroprof', (req, res) => {
     res.render('pages/cadastroprof');
 });
 
-// Rota para recuperação de senha
+router.get('/orcamento', (req, res) => {
+    res.render('pages/orcamento');
+});
+
 router.get('/recsenha', (req, res) => {
     res.render('pages/recsenha');
 });
@@ -80,21 +84,22 @@ router.get('/resetarsenha', (req, res) => {
     res.render('pages/resetarsenha');
 });
 
-router.get('/perfilprof', authenticateToken, (req, res) => {
+router.get('/perfilprof', (req, res) => {
     res.render('pages/perfilprof');
 });
 
-router.get('/relatorio', authenticateToken, (req, res) => {
+router.get('/relatorio',  (req, res) => {
     res.render('pages/relatorio');
 });
 
-router.get('/feedback', authenticateToken, (req, res) => {
+router.get('/feedback',  (req, res) => {
     res.render('pages/feedback');
 });
 
-router.get('/adm', authenticateToken, (req, res) => {
+router.get('/adm',  (req, res) => {
     res.render('pages/adm');
 });
+<<<<<<< HEAD
 
 // Mercado Pago
 const { MercadoPagoConfig, Preference } = require('Mercadopago');
@@ -173,6 +178,16 @@ router.post('/recovery', async (req, res) => {
             console.error('Erro ao enviar email:', error);
             return res.status(500).send('Erro ao enviar o email.');
         }
+=======
+//Rota de registro cliente
+router.post (
+    "/perfilcliente",
+    uploadFile("imagem-perfil_cliente"),
+    clienteController.regrasValidacaoPerfil,
+    verificarClienteAutorizado( [1, 2, 3], "pages/cadastrocliente"),
+    async function (req, res) {
+        clienteController.gravarperfil(req, res);
+>>>>>>> ad267de (atualizaaa)
     });
 });
 
@@ -181,13 +196,12 @@ router.post("/perfilcliente", uploadFile("imagemperfil_cliente"), clienteControl
     clienteController.gravarperfil(req, res);
 });
 
-// Rota de registro cliente
 router.post("/cadastrocliente", clienteController.regrasValidacaoFormCad, async (req, res) => {
     clienteController.cadastrar(req, res);
 });
 
 // Rota de registro profissional
-router.post("/cadastroprof", profissionaisController.regrasValidacaoFormCad, async (req, res) => {
+router.post("/cadastroprofissional", profissionaisController.regrasValidacaoFormCad, async (req, res) => {
     profissionaisController.cadastrar(req, res);
 });
 

@@ -70,7 +70,8 @@ const profController = {
     cadastrar: async (req, res) => {
         const erros = validationResult(req);
         if (!erros.isEmpty()) {
-            return res.render("pages/cadastroprof", { listaErros: erros.array(), dadosNotificacao: null, valores: req.body });
+            console.log(erros)
+            return res.render("pages/cadastroprof", { listaErros: erros, dadosNotificacao: null, valores: req.body });
         }
 
         const dadosForm = {
