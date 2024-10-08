@@ -21,6 +21,16 @@ const {
 } = require("../models/autenticadormiddleware.js");
 
 const router = express.Router();
+// Mercado Pago
+const { MercadoPagoConfig, Preference } = require('mercadopago');
+const { PedidoController } = require("../controllers/PedidoController");
+
+
+// credenciais
+const MercadoPagoCliente = new MercadoPagoConfig({
+    accessToken: process.env.acessToken
+});
+
 
 require('dotenv').config(); // Carregar variáveis de ambiente
 
@@ -99,17 +109,7 @@ router.get('/feedback',  (req, res) => {
 router.get('/adm',  (req, res) => {
     res.render('pages/adm');
 });
-<<<<<<< HEAD
 
-// Mercado Pago
-const { MercadoPagoConfig, Preference } = require('Mercadopago');
-const { PedidoController } = require("../controllers/PedidoController");
-
-
-// credenciais
-const MercadoPagoCliente = new MercadoPagoConfig({
-    accessToken: process.env.acessToken
-});
 
 router.post("/createpreference", function (req, res) {
     const preference = new Preference(MercadoPagoCliente);
@@ -136,7 +136,7 @@ router.get("/feedback", function (req, res) {
 });
 
 // Rota para recuperação de senha
-router.post('/recovery', async (req, res) => {
+router.post ('/recovery', async (req, res) => {
     const email = req.body.email;
 
     // Verifica se o e-mail está cadastrado no banco de dados
@@ -178,7 +178,8 @@ router.post('/recovery', async (req, res) => {
             console.error('Erro ao enviar email:', error);
             return res.status(500).send('Erro ao enviar o email.');
         }
-=======
+    });
+
 //Rota de registro cliente
 router.post (
     "/perfilcliente",
@@ -187,7 +188,7 @@ router.post (
     verificarClienteAutorizado( [1, 2, 3], "pages/cadastrocliente"),
     async function (req, res) {
         clienteController.gravarperfil(req, res);
->>>>>>> ad267de (atualizaaa)
+
     });
 });
 
@@ -211,9 +212,6 @@ router.post("/adm", admController.regrasValidacaoFormCad, async (req, res) => {
 });
 
 // Rota de Login
-const { gravarClienteAutenticado } = require('../models/autenticadormiddleware'); // ajuste o caminho conforme necessário
-const { pool } = require("../../config/pool_conexoes.js");
-
 router.post("/entrar", clienteController.regrasValidacaoFormLogin, gravarClienteAutenticado, (req, res) => {
     // Presumindo que o login foi bem-sucedido e as informações do usuário estão na req.user
     req.session.autenticado = true; // Define a variável de autenticação na sessão
@@ -222,4 +220,5 @@ router.post("/entrar", clienteController.regrasValidacaoFormLogin, gravarCliente
 });
 
 // Exportando o router
+
 module.exports = router;
