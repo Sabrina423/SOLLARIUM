@@ -7,50 +7,36 @@
     <link rel="stylesheet" href="css/feedbackmobile.css">
 </head>
 <body>
-    <!-- Header -->
-    <header>
-        <div class="container">
-            <img src="/imagens/LOGO_SOLLARIUM (8).png" alt="Logo" class="logo">
-            <button class="menu-toggle" id="menu-toggle" aria-expanded="false">☰</button>
-            <nav id="nav-menu" aria-hidden="true">
-                <ul>
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">Sobre</a></li>
-                    <li><a href="#">Contato</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
-
-    <main>
-        <section class="feedback-section">
-            <h2>Feedbacks</h2>
-            <section class="feedback">
-                <% feedbacks.forEach(feedback => { %>
-                    <article class="feedback-item" data-date="<%= feedback.date.toLocaleDateString() %>" data-quality="<%= feedback.quality %>" data-speed="<%= feedback.speed %>" data-results="<%= feedback.results %>">
-                        <header class="feedback-header">
-                            <span class="client-name"><%= feedback.clientName %></span>
-                            <time class="feedback-date" datetime="<%= feedback.date.toISOString() %>"><%= feedback.date.toLocaleDateString() %></time>
-                        </header>
-                        <div class="feedback-ratings">
-                            <div class="rating">
-                                <span>Qualidade:</span>
-                                <div class="stars"><%= '★'.repeat(feedback.quality) + '☆'.repeat(5 - feedback.quality) %></div>
-                            </div>
-                            <div class="rating">
-                                <span>Rapidez:</span>
-                                <div class="stars"><%= '★'.repeat(feedback.speed) + '☆'.repeat(5 - feedback.speed) %></div>
-                            </div>
-                            <div class="rating">
-                                <span>Resultados:</span>
-                                <div class="stars"><%= '★'.repeat(feedback.results) + '☆'.repeat(5 - feedback.results) %></div>
-                            </div>
+<main>
+    <section class="feedback-section" id="feedback-section">
+        <h2 id="feedback-title">Feedbacks</h2>
+        <section class="feedback" id="feedback-list">
+            <% feedbacks.forEach(feedback => { %>
+                <article class="feedback-item" id="feedback-<%= feedback.id %>" data-date="<%= feedback.date.toLocaleDateString() %>" data-quality="<%= feedback.quality %>" data-speed="<%= feedback.speed %>" data-results="<%= feedback.results %>">
+                    <header class="feedback-header">
+                        <span class="client-name" id="client-<%= feedback.id %>"><%= feedback.clientName %></span>
+                        <time class="feedback-date" datetime="<%= feedback.date.toISOString() %>"><%= feedback.date.toLocaleDateString() %></time>
+                    </header>
+                    <div class="feedback-ratings">
+                        <div class="rating">
+                            <span>Qualidade:</span>
+                            <div class="stars"><%= '★'.repeat(feedback.quality) + '☆'.repeat(5 - feedback.quality) %></div>
                         </div>
-                    </article>
-                <% }) %>
-            </section>
+                        <div class="rating">
+                            <span>Rapidez:</span>
+                            <div class="stars"><%= '★'.repeat(feedback.speed) + '☆'.repeat(5 - feedback.speed) %></div>
+                        </div>
+                        <div class="rating">
+                            <span>Resultados:</span>
+                            <div class="stars"><%= '★'.repeat(feedback.results) + '☆'.repeat(5 - feedback.results) %></div>
+                        </div>
+                    </div>
+                </article>
+            <% }) %>
         </section>
-    </main>
+    </section>
+</main>
+
     <!-- JavaScript -->
     <script>
         document.getElementById('menu-toggle').addEventListener('click', function() {

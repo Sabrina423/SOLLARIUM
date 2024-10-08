@@ -12,8 +12,8 @@ class Transaction {
     }
 }
 
-const relatorio = {
-    findAll: async () => {
+const relatorioModel = {
+    findAll: async (id) => {
         try {
             const [linhas] = await pool.query('SELECT * FROM tarefas WHERE status_tarefa = 1')
             return linhas;
@@ -74,4 +74,4 @@ const relatorio = {
   
 };
 
-module.exports = relatorioModel
+module.exports = relatorioModel;

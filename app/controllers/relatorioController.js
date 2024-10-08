@@ -1,6 +1,7 @@
 const relatorioModel = require("../models/relatorioModel");
 const moment = require("moment");
 const{body,validationResult} = require("express-validator");
+
 const relatorioController = {
     regrasValidacao:[
         body("tarefa")
@@ -117,4 +118,4 @@ const relatorioController = {
     };
     
 
-module.exports = relatoriosController;
+module.exports = relatorioController;

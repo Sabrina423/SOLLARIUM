@@ -1,40 +1,43 @@
-const Feedback = require('../models/feedbackModel');
+const { feedbackModel } = require("../models/feedbackModel");
+const { body, validationResult } = require("express-validator");
 
-// Função para renderizar a página de feedback
-exports.renderFeedbackPage = async (req, res) => {
-    try {
-        const feedbacks = await Feedback.find().sort({ date: -1 });
-        res.render('feedback', { feedbacks });
-    } catch (error) {
-        res.status(500).send('Erro ao obter feedbacks');
+const feedbackModel = {
+
+    listar: async (req, res) => {
+        results = await feedbackModel.findAll(req.session.autenticado.id);
+        carrinho.atualizarCarrinho(req);
+        res.render("pages/index", {
+            autenticado: req.session.autenticado,
+            login: req.session.logado,
+            listaHq: results,
+            carrinho: req.session.carrinho
+        });
+    },
+
+    favoritar: async (req, res) => {
+        if (req.session.autenticado.autenticado == null) {
+            res.render("pages/login", { 
+                listaErros: null,
+                 dadosNotificacao: {
+                     titulo: "Faça seu Login!", 
+                     mensagem: "Para favoritar é necessário estar logado !", 
+                     tipo: "warning" 
+                    } 
+                });
+        } else {
+            await feedbackModel.favoritar({
+                idfeedback: req.query.id,
+                situacao: req.query.sit,
+                idCliente: req.session.autenticado.id
+            });
+            res.redirect("/")
+        }
     }
-};
 
-// Função para criar um novo feedback
-exports.createFeedback = async (req, res) => {
-    const { clientName, quality, speed, results } = req.body;
-
-    const newFeedback = new Feedback({
-        clientName,
-        quality,
-        speed,
-        results,
-    });
-
-    try {
-        await newFeedback.save();
-        res.redirect('/feedback');
-    } catch (error) {
-        res.status(400).send('Erro ao salvar feedback');
-    }
-};
-const CEP = require('../models/cep'); // Se necessário
-
-function formatCEP(cep) {
-    return `${cep.substring(0, 5)}-${cep.substring(5)}`;
 }
 
-exports.showCEP = (req, res) => {
-    const cep = '12345678'; // Isso pode vir de uma requisição ou banco de dados
-    res.render('index', { cep: formatCEP(cep) });
-};
+
+module.exports = { feedbackModel }
+
+
+
