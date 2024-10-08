@@ -104,4 +104,17 @@ const relatorioController = {
     },
     };
 
+    function formatCurrency(value) {
+        return value.toLocaleString('pt-BR', {
+            style: 'currency',
+            currency: 'BRL'
+        });
+    }
+    
+    exports.showTransaction = (req, res) => {
+        const amount = 12345.67; // Isso pode vir de uma requisição ou banco de dados
+        res.render('index', { amount: formatCurrency(amount) });
+    };
+    
+
 module.exports = relatoriosController;

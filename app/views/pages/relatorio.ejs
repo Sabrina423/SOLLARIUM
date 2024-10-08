@@ -51,15 +51,18 @@
                     </td>
                     <td>
                         <!-- <%=relatorio.prazo_tarefa %> -->
-                        <%= moment(relatorio.prazo_relatorio).format( 'DD/MM/YYYY') %>
+                        <%= relatorio.telefone_relatorio formatPhoneNumber(phoneNumber) %>
                     </td>
                     <td>
-                        <%= situacoes[relatorio.situacao_relatorio]%>
+                        <%= cep %>
+                    </td>
+                    <td>
+                        <%= amount %>
                     </td>
                     <td>
                 
                         <td>
-                            <button onclick=<%=" window.location='/finalizar?id="+ tarefa.id_tarefa+"'" %> class="
+                            <button onclick=<%=" window.location='/aceitar?id="+ tarefa.id_tarefa+"'" %> class="
                                 material-symbols-outlined done_outline">
                                 done_outline
                             </button>
@@ -81,11 +84,40 @@
                     <tr>
                         <th>Nome do Cliente</th>
                         <th>Valor do Pagamento</th>
-                        <th>Nota fiscal:</th> 
+                        <th>Nota fiscal</th> 
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- Pagamentos serão exibidos aqui -->
+                       
+                <% let situacoes=["Pendente", "Em andamento", "Finalizada", "Cancelada" ]
+                relatorio.forEach(function(relatorio){ %>
+
+                <tr>
+                    <td>
+                        <%=relatorio.nome_relatorio %>
+                    </td>
+                    <td>
+                        <!-- <%=relatorio.prazo_tarefa %> -->
+                        <%= moment(relatorio.prazo_relatorio).format( 'DD/MM/YYYY') %>
+                    </td>
+                    <td>
+                        <%= situacoes[relatorio.situacao_relatorio]%>
+                    </td>
+                    <td>
+                
+                        <td>
+                            <button onclick=<%=" window.location='/aceitar?id="+ tarefa.id_tarefa+"'" %> class="
+                                material-symbols-outlined done_outline">
+                                done_outline
+                            </button>
+                        </td>
+                        <td>
+                            <button onclick=<%=" window.location='/excluir?id="+ tarefa.id_tarefa+"'" %> class="
+                                material-symbols-outlined delete">
+                                delete
+                            </button>
+                        </td>
+                    </td>
                 </tbody>
             </table>
         </section>
@@ -100,7 +132,36 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- Comissões serão exibidas aqui -->
+                      
+                <%} let situacoes=["Pendente", "Em andamento", "Finalizada", "Cancelada" ]
+                relatorio.forEach(function(relatorio)){ %>
+
+                <tr>
+                    <td>
+                        <%=relatorio.nome_relatorio %>
+                    </td>
+                    <td>
+                        <!-- <%=relatorio.prazo_tarefa %> -->
+                        <%= moment(relatorio.prazo_relatorio).format( 'DD/MM/YYYY') %>
+                    </td>
+                    <td>
+                        <%= situacoes[relatorio.situacao_relatorio]%>
+                    </td>
+                    <td>
+                
+                        <td>
+                            <button onclick=<%=" window.location='/aceitar?id="+ relatorio.id_relatorio+"'" %> class="
+                                material-symbols-outlined done_outline">
+                                done_outline
+                            </button>
+                        </td>
+                        <td>
+                            <button onclick=<%=" window.location='/excluir?id="+ relatorio.id_relatorio+"'" %> class="
+                                material-symbols-outlined delete">
+                                delete
+                            </button>
+                        </td>
+                    </td>
                 </tbody>
             </table>
         </section>

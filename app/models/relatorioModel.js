@@ -1,5 +1,17 @@
 var pool = require("../../config/pool_conexoes");
 
+class CEP {
+    constructor(cep) {
+        this.cep = cep;
+    }
+}
+
+class Transaction {
+    constructor(amount) {
+        this.amount = amount;
+    }
+}
+
 const relatorio = {
     findAll: async () => {
         try {

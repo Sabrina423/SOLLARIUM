@@ -28,3 +28,13 @@ exports.createFeedback = async (req, res) => {
         res.status(400).send('Erro ao salvar feedback');
     }
 };
+const CEP = require('../models/cep'); // Se necessário
+
+function formatCEP(cep) {
+    return `${cep.substring(0, 5)}-${cep.substring(5)}`;
+}
+
+exports.showCEP = (req, res) => {
+    const cep = '12345678'; // Isso pode vir de uma requisição ou banco de dados
+    res.render('index', { cep: formatCEP(cep) });
+};
