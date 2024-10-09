@@ -1,14 +1,8 @@
-
 var pool = require("../../config/pool_conexoes");
-<<<<<<< HEAD
 
 const feedbackModel = {
 
 }
-
-   
-    
-=======
 const mysql = require('mysql');
 
     const feedbackSchema = new mysql.Schema({
@@ -21,7 +15,7 @@ const mysql = require('mysql');
     
     const Feedback = mysql.model('Feedback', feedbackSchema);
     module.exports = Feedback;
->>>>>>> fe5fca8 (a)
+
     
 
 module.exports = feedbackModel
