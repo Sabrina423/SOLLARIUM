@@ -1,9 +1,4 @@
-
 var pool = require("../../config/pool_conexoes");
-
-const relatorioModel = {
-
-}
 
 class CEP {
     constructor(cep) {
@@ -17,7 +12,7 @@ class Transaction {
     }
 }
 
-const relatorio = {
+const relatorioModel = {
     findAll: async () => {
         try {
             const [linhas] = await pool.query('SELECT * FROM tarefas WHERE status_tarefa = 1')
@@ -79,9 +74,4 @@ const relatorio = {
   
 };
 
-<<<<<<< HEAD
-module.exports = relatorioModel
-
-=======
-  module.exports = relatorio;
->>>>>>> fe5fca8 (a)
+module.exports = relatorioModel;

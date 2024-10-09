@@ -51,3 +51,24 @@ P{
     text-decoration: none;
     color: #000000;
     }
+    @media (max-width: 768px) {
+        
+        .container {
+            height: 250px;
+        }
+    }
+
+    input{
+        margin-left: 10%;
+    }
+
+    button{
+        margin-left: 10%;
+    }
+    
+    @media (max-width: 480px) {
+        p {
+            font-size: 14px;
+        }
+    }
+    

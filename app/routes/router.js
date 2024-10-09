@@ -39,6 +39,16 @@ console.log("Chave Secreta:", process.env.JWT_SECRET); // Debug
 const secretKey = process.env.JWT_SECRET || 'site'; // Usar chave padrão
 
 
+// middleware de Autenticação
+const authenticateToken = (req, res, next) => {
+    const token = req.session.token;
+    if (!token) return res.redirect('/');
+    jwt.verify(token, secretKey, (err, user) => {
+        if (err) return res.redirect('/');
+        req.user = user;
+        next();
+    });
+};
 
 // Rotas
 router.get('/', verificarClienteAutenticado, (req, res) => {
@@ -55,6 +65,10 @@ router.get('/cadastrocliente', verificarClienteAutenticado, (req, res) => {
 
 router.get('/cadastroinicial',  (req, res) => {
     res.render('pages/cadastroinicial');
+});
+
+router.get('/cadastrocartao',  (req, res) => {
+    res.render('pages/cadastrocartao');
 });
 
 router.get('/relatorio', (req, res) => {
@@ -102,8 +116,13 @@ router.get('/adm',  (req, res) => {
 });
 
 
+// credenciais
+const mercadoPagoCliente = new MercadoPagoConfig({
+    accessToken: process.env.acessToken
+});
+
 router.post("/createpreference", function (req, res) {
-    const preference = new Preference(MercadoPagoCliente);
+    const preference = new Preference(mercadoPagoCliente);
     console.log(req.body.items);
     preference.create({
         body: {
@@ -125,6 +144,8 @@ router.post("/createpreference", function (req, res) {
 router.get("/feedback", function (req, res) {
     PedidoController.gravarpedido(req, res);
 });
+
+const pool = require('/workspaces/SOLLARIUM/config/pool_conexoes');
 
 // Rota para recuperação de senha
 router.post ('/recovery', async (req, res) => {
@@ -161,14 +182,15 @@ router.post ('/recovery', async (req, res) => {
         });
 
         // Enviar email
-        try {
-            await transporter.sendMail(mailOptions);
-            console.log('Email enviado com sucesso para:', email);
-            res.send('Email de recuperação enviado.');
-        } catch (error) {
-            console.error('Erro ao enviar email:', error);
-            return res.status(500).send('Erro ao enviar o email.');
-        }
+    // Enviar email
+try {
+    await transporter.sendMail(mailOptions); // Corrigido aqui
+    console.log('Email enviado com sucesso para:', email);
+    res.send('Email de recuperação enviado.');
+} catch (error) {
+    console.error('Erro ao enviar email:', error);
+    return res.status(500).send('Erro ao enviar o email.');
+}
     });
 
 //Rota de registro cliente
