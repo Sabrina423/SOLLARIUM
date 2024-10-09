@@ -118,8 +118,4 @@ const relatorioController = {
     };
     
 
-<<<<<<< HEAD
 module.exports = relatorioController;
-=======
-module.exports = relatorioController;
->>>>>>> ff76d34d7d91ef2094a4e6f78f1100a88c19f630
