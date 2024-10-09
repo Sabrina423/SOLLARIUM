@@ -196,7 +196,7 @@ ul.box-redes-sociais {
   }
   ul.box-redes-sociais li a .icon {
     position: relative;
-    top:-8px;
+    top:-0px;
     color: #262626;
     transition: .3s;
     z-index: 3;

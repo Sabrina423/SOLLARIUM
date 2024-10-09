@@ -35,6 +35,7 @@ const clienteController = {
                     throw new Error('Nome de usuário em uso!');
                 }
             }),
+
         body("email_cliente")
             .isEmail().withMessage("Digite um e-mail válido!")
             .custom(async value => {
@@ -43,6 +44,7 @@ const clienteController = {
                     throw new Error('E-mail em uso!');
                 }
             }),
+            
         body("senha_cliente")
             .isStrongPassword()
             .withMessage("A senha deve ter no mínimo 8 caracteres")

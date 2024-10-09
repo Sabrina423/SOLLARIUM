@@ -23,10 +23,10 @@ const orcamentoModel = {
 
     create: async (orcamento) => {
         try {
-            const { id_orcamento, valor_orcamento,  descricao_orcamento, data_orcamento} = orcamento;
+            const { id_orcamento, valor_orcamento,  descricao_orcamento, data_orcamento, status_orcamento} = orcamento;
             const result = await pool.query(
-                'INSERT INTO ORCAME ( ID_ORCAMENO, VALOR_ORCAMENTO, DESCRICAO_ORCAMENTO, DATA_ORCAMENTO) VALUES (?, ?, ?,?)',
-                [id_orcamento, valor_orcamento, descricao_orcamento, data_orcamento]
+                'INSERT INTO ORCAME ( ID_ORCAMENO, VALOR_ORCAMENTO, DESCRICAO_ORCAMENTO, DATA_ORCAMENTO, STATUS_ORCAMENTO) VALUES (?, ?, ?,?, ?)',
+                [id_orcamento, valor_orcamento, descricao_orcamento, data_orcamento, status_orcamento]
             );
             return result; // Retorna o resultado da inserção
         } catch (error) {
@@ -37,10 +37,10 @@ const orcamentoModel = {
 
     update: async (id, orcamento) => {
         try {
-            const { id_orcamento, valor_orcamento,  descricao_orcamento, data_orcamento } = orcamento;
+            const { id_orcamento, valor_orcamento,  descricao_orcamento, data_orcamento, status_orcamento } = orcamento;
             const result = await pool.query(
-                'UPDATE ORCAMENTO SET ID_ORCAMENTO = ?, VALOR_ORCAMENTO = ?, DESCRICAO_ORCAMENTO = ?, DATA_ORCAMENTO = ? WHERE ID_ORCAMENTO = ?',
-                [id_orcamento, valor_orcamento, descricao_orcamento, data_orcamento, id]
+                'UPDATE ORCAMENTO SET ID_ORCAMENTO = ?, VALOR_ORCAMENTO = ?, DESCRICAO_ORCAMENTO = ?, DATA_ORCAMENTO = ?, STATUS_ORCAMENTO WHERE ID_ORCAMENTO = ?',
+                [id_orcamento, valor_orcamento, descricao_orcamento, data_orcamento, status_orcamento, id]
             );
             return result; // Retorna o resultado da atualização
         } catch (error) {

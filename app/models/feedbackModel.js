@@ -1,20 +1,11 @@
 const moment = require("moment");
 var pool = require("../../config/pool_conexoes");
+const { feedbackModel } = require("../controllers/feedbackController");
 
-const feedbackModel = {
-    findAll: async (id = null) => {
+const favoritoModel = {
+    findAll: async () => {
         try {
-            const [resultados] = await pool.query("SELECT ID_FEEDBACK,ID_CLIENTE, CLASSIF_FEEDBACK, DATA_FEEDBACK, ITEM_PEDIDO_PEDIDOS_ID_CLIENTE, ITEM_PEDIDO_SERVICOS_PROF_ID_PROF, ITEM_PEDIDO_ID_ITEM_PEDIDO " 
-                , [id]);
-                return resultados;
-        } catch (error) {
-            console.log(error);
-            return error;
-        }
-    },
-    findID: async (id) => {
-        try {
-            const [resultados] = await pool.query("SELECT * FROM where ID_FEEDBACK = ? ", [id]);
+            const [resultados] = await pool.query("SELECT * FROM favorito");
             return resultados;
         } catch (error) {
             console.log(error);
@@ -22,54 +13,33 @@ const feedbackModel = {
         }
     },
 
-    findID: async (id) => {
+    findID: async (Idfeedback, idUsuario) => {
         try {
-            const [resultados] = await pool.query("SELECT * FROM where ID_CLIENTE = ? ", [id]);
+            const [resultados] = await pool.query(
+                "SELECT * FROM favorito where feedback_ID_FEEDBACK = ? and usuario_id_usuario = ? ",
+                [Idfeedback, idUsuario]);
             return resultados;
         } catch (error) {
             console.log(error);
             return error;
         }
-    },
-
-
-    FindPage: async (pagina, total) => {
-        try {
-            const [resultados] = await pool.query("SELECT * FROM  limit ?, ?", [pagina, total]);
-            return resultados;
-        } catch (error) {
-            console.log(error);
-            return error;
-        }
-
-    },
-
-    TotalReg: async () => {
-        try {
-            const [resultados] = await pool.query('SELECT count(*) total FROM hq ');
-            return resultados;
-        } catch (error) {
-            console.log(error);
-            return error;
-        }
-
     },
 
     create: async (camposJson) => {
         try {
-            const [resultados] = await pool.query("insert into hq set ?", camposJson);
+            const [resultados] = await pool.query("insert into favorito set ?", camposJson);
             return resultados;
         } catch (error) {
             console.log(error);
             return error;
         }
-
-
     },
 
-    update: async (camposJson, id) => {
+    update: async (camposJson, Idfeedback, idUsuario) => {
         try {
-            const [resultados] = await pool.query("UPDATE hq SET ? WHERE id_hq = ?", [camposJson, id])
+            const [resultados] = await pool.query(
+                "UPDATE favorito SET ? WHERE hq_id_hq = ? and usuario_id_usuario = ? ", 
+                [camposJson, Idfeedback, idUsuario])
             return resultados;
         } catch (error) {
             console.log(error);
@@ -80,13 +50,48 @@ const feedbackModel = {
 
     delete: async (id) => {
         try {
-            const [resultados] = await pool.query("UPDATE hq SET status_hq = 0 WHERE id_hq = ?", [id]);
+            const [resultados] = await pool.query(
+                "UPDATE favorito SET status_favorito = 0 WHERE hq_id_hq = ? and usuario_id_usuario = ?", 
+                [Idfeedback, idUsuario]);
             return resultados;
         } catch (error) {
             console.log(error);
             return error;
         }
     },
+
+    favoritar: async (dadosFavorito) => {
+        try {
+            if (dadosFavorito.situacao == "favorito") {
+                const resultados = await favoritoModel.update(
+                    { status_favorito: 0 }, dadosFavorito.Idfeedback, dadosFavorito.idUsuario
+                );
+            } else if (dadosFavorito.situacao == "favoritar") {
+                const result = await favoritoModel.findID(
+                    dadosFavorito.Idfeedback, dadosFavorito.idUsuario
+                );
+                var total = Object.keys(result).length;
+                if (total == 0) {
+                    let obj = {
+                        hq_id_hq: dadosFavorito.Idfeedback,
+                        usuario_id_usuario: dadosFavorito.idUsuario,
+                        dt_inclusao_favorito: moment().format("YYYY/MM/DD"),
+                        status_favorito: 1
+                    }
+                    const resultados = await favoritoModel.create(obj);
+                } else {
+                    const resultados = await favoritoModel.update(
+                        { status_favorito: 1 }, dadosFavorito.Idfeedback, dadosFavorito.idUsuario
+                    );
+                }
+
+            }
+        } catch (error) {
+            console.log(error);
+            return error;
+        }
+    }
+
 }
 
-module.exports = { feedbackModel };
+module.exports = feedbackModel ;

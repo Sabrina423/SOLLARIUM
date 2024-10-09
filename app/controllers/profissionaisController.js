@@ -18,10 +18,10 @@ const profController = {
     // Regras de validação para cadastro
     regrasValidacaoFormCad: [
         body('nome_prof').isLength({ min: 3, max: 45 }).withMessage('Nome deve ter entre 3 e 45 caracteres.'),
-        body('cpf_prof').isLength({ min: 11, max: 11 }).withMessage('CPF deve ter 11 dígitos.').isNumeric().withMessage('CPF deve conter apenas números.'),
+        body('cpf_prof').isLength({ min: 14, max: 14 }).withMessage('CPF deve ter 11 dígitos.').isNumeric().withMessage('CPF deve conter apenas números.'),
         body('estado_prof').notEmpty().withMessage('Selecione um estado.'),
         body('email_prof').isEmail().withMessage('Digite um e-mail válido.'),
-        body('contato_prof').isLength({ min: 10, max: 11 }).withMessage('Telefone deve ter entre 10 e 11 dígitos.').isNumeric().withMessage('Telefone deve conter apenas números.'),
+        body('contato_prof').isLength({ min: 10, max: 15 }).withMessage('Telefone deve ter entre 10 e 11 dígitos.').isNumeric().withMessage('Telefone deve conter apenas números.'),
         body('senha_prof').custom(value => {
             const senhaValida = validatePasswordCriteria(value);
             if (!senhaValida) {
@@ -36,7 +36,7 @@ const profController = {
             return true;
         }),
         body('area_prof').isLength({ min: 3, max: 30 }).withMessage('Área de atuação deve ter entre 3 e 30 caracteres.'),
-        body('experiencia_prof').isNumeric().withMessage('Anos de experiência devem ser um número positivo.').isFloat({ min: 0 }).withMessage('Anos de experiência devem ser um número positivo.')
+        body('experiencia_prof').isLength().withMessage('Este campo é obrigatório.')
     ],
 
     // Regras de validação para perfil
@@ -70,7 +70,8 @@ const profController = {
     cadastrar: async (req, res) => {
         const erros = validationResult(req);
         if (!erros.isEmpty()) {
-            return res.render("pages/cadastroprof", { listaErros: erros.array(), dadosNotificacao: null, valores: req.body });
+            console.log(erros)
+            return res.render("pages/cadastroprof", { listaErros: erros, dadosNotificacao: null, valores: req.body });
         }
 
         const dadosForm = {

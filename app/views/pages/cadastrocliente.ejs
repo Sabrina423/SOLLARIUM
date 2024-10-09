@@ -21,6 +21,7 @@
             <form action="/cadastrocliente" method="POST" id="cadastroForm">
                 <nav class="logo"></nav>
                 <nav class="input-group">
+                    <input type="hidden" name="tipo_usuario" value="1"> <!-- 1 para cliente, pode ser mudado dinamicamente -->
                     <input type="text" name="nome_cliente" placeholder="Nome Completo" required>
                     <input type="text" name="cpf_cliente" id="cpf_cliente" size="30" maxlength="11" placeholder="CPF" required>
             
