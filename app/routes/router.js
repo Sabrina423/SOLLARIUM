@@ -38,16 +38,7 @@ console.log("Chave Secreta:", process.env.JWT_SECRET); // Debug
 
 const secretKey = process.env.JWT_SECRET || 'site'; // Usar chave padrão
 
-// Middleware de Autenticação
-const authenticateToken = (req, res, next) => {
-    const token = req.session.token;
-    if (!token) return res.redirect('/');
-    jwt.verify(token, secretKey, (err, user) => {
-        if (err) return res.redirect('/');
-        req.user = user;
-        next();
-    });
-};
+
 
 // Rotas
 router.get('/', verificarClienteAutenticado, (req, res) => {
@@ -58,11 +49,11 @@ router.get('/entrar', (req, res) => {
     res.render('pages/entrar', { dadosNotificacao: null });
 });
 
-router.get('/cadastrocliente', (req, res) => {
-    res.render('pages/cadastrocliente');
+router.get('/cadastrocliente', verificarClienteAutenticado, (req, res) => {
+    res.render('pages/cadastrocliente' , { autenticado: req.session.autenticado });
 });
 
-router.get('/cadastroinicial', (req, res) => {
+router.get('/cadastroinicial',  (req, res) => {
     res.render('pages/cadastroinicial');
 });
 
@@ -74,7 +65,7 @@ router.get('/sobre', (req, res) => {
     res.render('pages/sobre');
 });
 
-router.get('/perfilcliente', authenticateToken, (req, res) => {
+router.get('/perfilcliente',  (req, res) => {
     clienteController.mostrarPerfil(req, res);
 });
 
@@ -214,9 +205,9 @@ router.post("/adm", admController.regrasValidacaoFormCad, async (req, res) => {
 // Rota de Login
 router.post("/entrar", clienteController.regrasValidacaoFormLogin, gravarClienteAutenticado, (req, res) => {
     // Presumindo que o login foi bem-sucedido e as informações do usuário estão na req.user
-    req.session.autenticado = true; // Define a variável de autenticação na sessão
-    req.session.user = req.user; // Opcional: armazena informações do usuário na sessão
-    res.redirect('/'); // Redireciona para a página inicial
+  clienteController.logar(req,res)
+
+  
 });
 
 // Exportando o router

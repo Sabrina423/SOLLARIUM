@@ -10,7 +10,7 @@ const verificarClienteAutenticado = (req, res, next) => {
     var autenticado = req.session.autenticado;
     req.session.logado = req.session.logado + 1;
   } else {
-    var autenticado = { autenticado: null, id: null, tipo: null };
+    var autenticado = { autenticado: null, id: null, tipo: null, imagem:null };
     req.session.logado = 0;
   }
   req.session.autenticado = autenticado;
@@ -25,7 +25,7 @@ const limparSessao = (req, res, next) => {
 
 const gravarClienteAutenticado = async (req, res, next) => {
   const erros = validationResult(req);
-  var autenticado = { autenticado: null, id: null, tipo: null };
+  var autenticado = { autenticado: null, id: null, tipo: null , imagem:null};
     if (erros.isEmpty()) {                                                                                                                          
         const dadosForm = {
           nome_cliente: req.body.email,
@@ -37,20 +37,20 @@ const gravarClienteAutenticado = async (req, res, next) => {
           const clienteExistente = await cliente.findByEmail(dadosForm.nome_cliente);
           console.log(clienteExistente)
           if (clienteExistente && bcrypt.compareSync( dadosForm.senha_cliente, clienteExistente[0].SENHA_CLIENTE)) {
-                console.log("validou a senha")
+                console.log("validou a senha 1 ")
           
             autenticado = {
               autenticado: clienteExistente[0].NOME_CLIENTE,
               id: clienteExistente[0].ID_CLIENTE,
               tipo: 1,
-              imagem: clienteExistente[0].imgem_perfil_cliente,
+              imagem: clienteExistente[0].IMAGEM_PERFIL_CLIENTE,
             };
           }else{
             // if  validar profissional        
               const profissionalExistente = await profissional.findByEmail(dadosForm.email_profissional);
               console.log(profissionalExistente)
               if (profissionalExistente && bcrypt.compareSync( dadosForm.senha_cliente, profissionalExistente[0].SENHA_PROF)) {
-                    console.log("validou a senha")
+                    console.log("validou a senha 2")
         
                 autenticado = {
                   autenticado: profissionalExistente[0].NOME_PROF,
@@ -62,7 +62,7 @@ const gravarClienteAutenticado = async (req, res, next) => {
               const admExistente = await adm.findByEmail(dadosForm.email_adm);
               console.log(admExistente)
               if (admExistente && bcrypt.compareSync( dadosForm.senha_adm, admExistente[0].SENHA_ADM)) {
-                    console.log("validou a senha")
+                    console.log("validou a senha 3")
         
                 autenticado = {
                   autenticado: admExistente[0].EMAIL_ADM,

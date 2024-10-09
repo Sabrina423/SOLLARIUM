@@ -50,7 +50,7 @@ const profController = {
         body("telefone_prof")
             .isLength({ min: 12, max: 13 }).withMessage("Digite um telefone válido!"),
     ],
-
+     
     // Função de login
     logar: (req, res) => {
         const erros = validationResult(req);

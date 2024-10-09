@@ -24,7 +24,7 @@ const clienteController = {
         body("senha_cliente")
             .isLength({ min: 8 }).withMessage('A senha deve conter pelo menos 8 caracteres'),
         body('cpf_cliente')
-            .isLength({ min: 14, max: 14 }).withMessage('O cpf deve ser válido, contendo 11 dígitos'),
+            .isLength({ min: 14, max: 14 }).withMessage('Campo obrigatório'),
         body('cep_cliente')
             .isLength({ min: 9, max: 9 }).withMessage('O cep deve ter entre 9 caracteres'),
         body('contato_cliente')
@@ -67,7 +67,7 @@ const clienteController = {
             return res.render("pages/entrar", { listaErros: erros, dadosNotificacao: null });
         }
         if (req.session.autenticado.autenticado != null) {
-            res.redirect("/");
+            res.render('pages/home', { autenticado: req.session.autenticado ,login:req.session.logado}); 
         } else {
             res.render("pages/entrar", { listaErros: null, dadosNotificacao: { titulo: "Falha ao logar!", mensagem: "Usuário e/ou senha inválidos!", tipo: "error" } });
         }
@@ -77,7 +77,7 @@ const clienteController = {
         const erros = validationResult(req);
         if (!erros.isEmpty()) {
             console.log(erros);
-            return res.render("pages/cadastrocliente", { listaErros: erros, dadosNotificacao: null, valores: req.body });
+            return res.render("pages/cadastrocliente", { listaErros: erros, dadosNotificacao: null, valores: req.body , autenticado: req.session.autenticado});
         }
 
         const dadosForm = {
@@ -94,14 +94,14 @@ const clienteController = {
         try {
             await cliente.create(dadosForm);
             res.render("pages/home", {
-                listaErros: null, dadosNotificacao: {
+                listaErros: null, autenticado: req.session.autenticado, dadosNotificacao: {
                     titulo: "Cadastro realizado!", mensagem: "Novo usuário criado com sucesso!", tipo: "success"
                 }, valores: req.body
             });
         } catch (e) {
             console.log(e);
             res.render("pages/cadastrocliente", {
-                listaErros: erros, dadosNotificacao: {
+                listaErros: null, autenticado: req.session.autenticado, dadosNotificacao: {
                     titulo: "Erro ao cadastrar!", mensagem: "Verifique os valores digitados!", tipo: "error"
                 }, valores: req.body
             });
