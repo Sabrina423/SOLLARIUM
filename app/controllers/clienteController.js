@@ -7,6 +7,7 @@ const fetch = require('node-fetch');
 const verificarClienteAutorizado = require('../models/verificarClienteAutorizado');
 const jwt = require('jsonwebtoken'); // Certifique-se de incluir isso
 const https = require('https');
+const tipoClienteModel = require("../models/tipoClienteModel");
 
 const clienteController = {
     regrasValidacaoFormLogin: [
@@ -161,7 +162,7 @@ const clienteController = {
 
     mostrarPerfil: async (req, res) => {
         try {
-            let results = await cliente.findId(req.session.autenticado.id);
+            let results = await tipoClienteModel.findId(req.session.autenticado.id);
             let viaCep = { logradouro: "", bairro: "", localidade: "", uf: "" };
             let cep = null;
 

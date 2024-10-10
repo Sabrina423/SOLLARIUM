@@ -74,4 +74,6 @@ const relatorioModel = {
   
 };
 
+
 module.exports = relatorioModel;
+
