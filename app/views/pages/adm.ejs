@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
+    <link rel="stylesheet" href="/css/adm.css">
+    <title>Painel adm</title>
+</head>
+
+<body>
+
+    <div class="container">
+        <aside>
+            <div class="toggle">
+                <div class="logo">
+                    <span class="danger">ADM</span>
+                    <h2>Sollari<span class="danger">um</span></h2>
+                </div>
+                <div class="close" id="close-btn">
+                    <span class="material-icons-sharp">
+                        close
+                    </span>
+                </div>
+            </div>
+
+            <div class="sidebar">
+                <a href="#">
+                    <span class="material-icons-sharp">
+                        dashboard
+                    </span>
+                    <h3>Painel</h3>
+                </a>
+                <a href="#">
+                    <span class="material-icons-sharp">
+                        person_outline
+                    </span>
+                    <h3>ADM's</h3>
+                </a>
+                <a href="#">
+                    <span class="material-icons-sharp">
+                        receipt_long
+                    </span>
+                    <h3>Orçamentos</h3>
+                    <span class="message-count">200</span>
+                </a>
+                <a href="#" class="active">
+                    <span class="material-icons-sharp">
+                        insights
+                    </span>
+                    <h3>Análises</h3>
+                </a>
+                <a href="#">
+                    <span class="material-icons-sharp">
+                        mail_outline
+                    </span>
+                    <h3>Chamados</h3>
+                    <span class="message-count">02</span>
+                </a>
+                
+                <a href="#">
+                    <span class="material-icons-sharp">
+                        report_gmailerrorred
+                    </span>
+                    <h3>Denúncias</h3>
+                    <span class="message-count">11</span>
+                </a>
+                <a href="#">
+                    <span class="material-icons-sharp">
+                        settings
+                    </span>
+                    <h3>Configurações</h3>
+                </a>
+                <a href="#">
+                    <span class="material-icons-sharp">
+                        add
+                    </span>
+                    <h3>ADD novo ADM</h3>
+                </a>
+                <a href="#">
+                    <span class="material-icons-sharp">
+                        logout
+                    </span>
+                    <h3>Desconectar</h3>
+                </a>
+            </div>
+        </aside>
+        
+
+        <main>
+            <h1>Análises</h1>
+            
+            <div class="analyse">
+                <div class="sales">
+                    <div class="status">
+                        <div class="info">
+                            <h3>Ganhos</h3>
+                            <h1>$31,702</h1>
+                        </div>
+                        <div class="progresss">
+                            <svg>
+                                <circle cx="38" cy="38" r="36"></circle>
+                            </svg>
+                            <div class="percentage">
+                                <p>+90%</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="visits">
+                    <div class="status">
+                        <div class="info">
+                            <h3>Visitas Mensais</h3>
+                            <h1>18,209</h1>
+                        </div>
+                        
+                        <div class="progresss">
+                            <svg>
+                                <circle cx="38" cy="38" r="36"></circle>
+                            </svg>
+                            <div class="percentage">
+                                <p>+12%</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="searches">
+                    <div class="status">
+                        <div class="info">
+                            <h3>Orçamentos Semanais</h3>
+                            <h1>7,943</h1>
+                        </div>
+                        <div class="progresss">
+                            <svg>
+                                <circle cx="38" cy="38" r="36"></circle>
+                            </svg>
+                            <div class="percentage">
+                                <p>-23%</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="new-users">
+                <h2>Novos Usuários</h2>
+                <div class="user-list">
+                    <div class="user">
+                        <img src="images/jim.jpeg">
+                        <h2>Jim Halpert</h2>
+                        <p>2 Horas atrás</p>
+                    </div>
+                    
+                    <div class="user">
+                        <img src="images/scott.jpg">
+                        <h2>Michael Scott</h2>
+                        <p>6 Horas atrás</p>
+                    </div>
+                    <div class="user">
+                        <img src="images/plus.png">
+                        <h2>Mais</h2>
+                        <p>Mostrar mais</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="recent-orders">
+                <h2>Últimas Atualizações</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Ordens</th>
+                            <th>Pazo</th>
+                            <th>Responsável</th>
+                            <th>Status</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+                
+            </div>
+        </main>
+       
+        <div class="right-section">
+            <div class="nav">
+                <button id="menu-btn">
+                    <span class="material-icons-sharp">
+                        menu
+                    </span>
+                </button>
+                <div class="dark-mode">
+                    <span class="material-icons-sharp active">
+                        
+                    </span>
+                    <span class="material-icons-sharp">
+                        
+                    </span>
+                </div>
+
+                <div class="profile">
+                    <div class="info">
+                        <b>Dwight Schrute</b>
+                        <small class="text-muted">ADM</small>
+                    </div>
+                    <div class="profile-photo">
+                        <img src="images/dwight.jpg">
+                    </div>
+                </div>
+
+            </div>
+            
+
+            <div class="reminders">
+                <div class="header">
+                    <h2>Reuniões</h2>
+                    
+                </div>
+
+                <div class="notification">
+                   
+                    <div class="content">
+                        <div class="info">
+                            <h3>Modificações na Equipe1</h3>
+                            <small class="text_muted">
+                                 04/11/24 - 08:15 AM - 10:00 AM
+                            </small>
+                        </div>
+                        <span class="material-icons-sharp">
+                            more_vert
+                        </span>
+                    </div>
+                </div>
+                
+
+                
+
+                <div class="notification add-reminder">
+                    <div>
+                        <span class="material-icons-sharp">
+                            add
+                        </span>
+                        <h3>Add Reunião</h3>
+                    </div>
+                </div>
+                
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+    <script src="/js/orders.js"></script>
+    <script src="/js/adm.js"></script>
+</body>
+
+</html>
