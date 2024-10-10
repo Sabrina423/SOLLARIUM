@@ -8,10 +8,11 @@
 }
 
 body {
+    margin-top: 70px;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-image: url(/imagens/painelsolar_.png);
+    background-color:#1e1e1e;
     background-repeat: no-repeat;
     background-size: cover;
     font-family: 'Open Sans', 'Helvetica Neue', sans-serif;
@@ -178,7 +179,7 @@ form {
 .buttonlink a{
     font-size: 16px;
     text-decoration: none;
-    color: white;
+    color: rgb(255, 255, 255);
 }
 
 #message {

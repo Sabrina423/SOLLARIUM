@@ -10,7 +10,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: white;
+    background-color: #1e1e1e;
     min-height: 100vh;
 }
 
@@ -44,7 +44,7 @@ body {
 .material-symbols-outlined {
     align-self: flex-start;
     text-decoration: none;
-    color: #ffffff;
+    color: #f8bd3f;
     }
 .hero h2 {
     font-family: sans-serif;

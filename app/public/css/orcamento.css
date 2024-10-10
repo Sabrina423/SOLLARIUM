@@ -11,6 +11,65 @@ body {
     color: #f0f0f0; /* Cor do texto */
 }
 
+.material-symbols-outlined {
+    margin-left:30px;
+}
+
+.navbar a{
+    margin-right: 100px;
+}
+.footer{
+    text-decoration: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(170px, auto));
+    background: #0a0a0a;
+    gap: 3.5rem;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.footer-content h4{
+    margin-bottom: 1.5rem;
+    font-size: 20px;
+}
+
+.footer-content li{
+    margin-bottom: 15px;
+}
+
+.footer-content li{
+    display: block;
+    color: #d6d6d6;
+    font-size: 15px;
+    font-weight: 400;
+    transition: all .40s ease;
+}
+
+.footer-content li:hover{
+    transform: translateY(-3px) translateX(-5px);
+    color: #fff;
+}
+
+.footer-content p{
+    color: #d6d6d6;
+    font-size: 16px;
+    line-height: 30px;
+    margin: 20px 0;
+}
+
+.icons a{
+    display: inline-block;
+    font-size: 22px;
+    color: #d6d6d6;
+    margin-right: 17px;
+    transition: all .40s ease;
+}
+
+.icons a:hover{
+    color: #fff;
+    transform: translateY(-5px);
+}
 
 
 .grid {
@@ -41,11 +100,17 @@ body {
 
 .texto h1{
     font-size: 2.5rem;
-    color: #e66b00;
+    color: #f8bd3f;
+    font-family: sans-serif;
+    margin-bottom: 30px;
+    margin-top:35px ;
 }
 
 .texto h2{
     font-size: 1.25rem;
+    font-family:sans-serif;
+    line-height: 30px;
+    font-weight: 500;
 }
 
 /* Formulário de Orçamento */
@@ -61,7 +126,7 @@ body {
 }
 
 form {
-    width: 100%;
+    width: 80%;
     margin: 0 auto;
     background-color: #2a2a2a; /* Cinza escuro */
     padding: 2rem;
@@ -69,6 +134,7 @@ form {
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
     display: flex;
     flex-direction: column;
+    margin-left: 50px;
 }
 
 .form-group {
@@ -82,29 +148,29 @@ form {
     width: 100%;
     padding: 0.8rem;
     border-radius: 10px;
-    border: 1px solid #f8bd3f; /* Amarelo */
-    background-color: #313131; /* Cinza mais escuro */
-    color: #f0f0f0; /* Texto claro */
+    border:none;
+    background-color: #5858586b; /* Cinza mais escuro */
+    color: #ffffff; /* Texto claro */
     font-size: 1rem;
     transition: border-color 0.3s;
 }
 
 .form-group input:focus,
 .form-group textarea:focus {
-    border-color: #ff7a00; /* Amarelo alaranjado */
+    border-color:  #f8bd3f;; /* Amarelo alaranjado */
     outline: none;
     
 }
 
 .form-group textarea ,input {
     resize: vertical;
-    color: #d6d5d5;
+    color: #ffffff;
 }
 
 button[type="submit"] {
     padding: 0.8rem 1.5rem;
-    background-color: #ff7a00; /* Laranja */
-    color: white;
+    background-color:white; /* Laranja */
+    color: black;
     border: none;
     border-radius: 25px;
     font-size: 1rem;
@@ -113,7 +179,7 @@ button[type="submit"] {
 }
 
 button[type="submit"]:hover {
-    background-color: #e66b00; /* Laranja escuro */
+    background-color:  #f8bd3f;; /* Laranja escuro */
     transform: scale(1.05); /* Efeito de crescimento */
 }
 

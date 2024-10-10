@@ -112,7 +112,7 @@ const clienteController = {
         console.log(token);
         jwt.verify(token, process.env.SECRET_KEY, (err, decoded) => {
             if (err) {
-                return res.render("pages/rec-senha", {
+                return res.render("pages/recsenha", {
                     listaErros: null,
                     dadosNotificacao: { 
                         titulo: "Link expirado!", 
@@ -122,7 +122,7 @@ const clienteController = {
                     valores: req.body
                 });
             } else {
-                return res.render("pages/resetar-senha", {
+                return res.render("pages/resetarsenha", {
                     listaErros: null,
                     autenticado: req.session.autenticado,
                     id_cliente: decoded.userId,
@@ -136,7 +136,7 @@ const clienteController = {
         const erros = validationResult(req);
         console.log(erros);
         if (!erros.isEmpty()) {
-            return res.render("pages/resetar-senha", {
+            return res.render("pages/resetarsenha", {
                 listaErros: erros,
                 dadosNotificacao: null,
                 valores: req.body,
@@ -146,7 +146,7 @@ const clienteController = {
             const senha = bcrypt.hashSync(req.body.senha_cliente);
             const resetar = await cliente.update({ senha_cliente: senha }, req.body.id_cliente);
             console.log(resetar);
-            res.render("pages/entrar", {
+            res.render("/", {
                 listaErros: null,
                 dadosNotificacao: {
                     titulo: "Perfil alterado",
