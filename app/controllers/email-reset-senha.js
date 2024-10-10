@@ -1,5 +1,6 @@
 module.exports=(url,token)=>{
 
+
     return`<!DOCTYPE html>
     <html lang="pt-br">
     
@@ -24,4 +25,4 @@ module.exports=(url,token)=>{
         <script src="server.js"></script>
     </body>
     </html>
-    }
+}
