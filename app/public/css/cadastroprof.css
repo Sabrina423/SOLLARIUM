@@ -80,26 +80,12 @@ hr {
     margin: 20px;
 }
 
-.termos1 {
+.termos {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     margin-left: 10px;
     margin-bottom: 0;
-}
-
-.termos1 button {
-    width: 90%;
-    height: 50px;
-    padding: 12px;
-    background-color: black;
-    color: rgb(255, 255, 255);
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    margin-top: 30px;
 }
 
 .termos1 button:hover {
@@ -157,7 +143,9 @@ form {
     padding-right: 30px;
 }
 /* Estilo do botão de submit */
-.buttonlink {
+button {
+    font-size: 14px;
+    font-family: sans-serif;
     width: 100%;
     height: 50px;
     padding: 16px;
@@ -168,18 +156,14 @@ form {
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s;
+    text-align: left;
 
 }
 
-.buttonlink:hover {
+button:hover {
     background-color: white;
     border: 1px solid black;
-}
-
-.buttonlink a{
-    font-size: 16px;
-    text-decoration: none;
-    color: rgb(255, 255, 255);
+    color: #000;
 }
 
 #message {
@@ -246,9 +230,6 @@ form {
 
 #acceptTerms {
     display: block;
-    width: 100%;
-    height: 40px;
-    padding: 10px;
     background-color: black;
     color: white;
     border: none;
