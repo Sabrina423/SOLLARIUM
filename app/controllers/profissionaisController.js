@@ -19,14 +19,13 @@ const profController = {
     // Regras de validação para cadastro
 regrasValidacaoFormCad: [
     body('nome_prof').isLength({ min: 3, max: 45 }).withMessage('Nome deve ter entre 3 e 45 caracteres.'),
-
+    body('cep_cliente')
+    .isLength({ min: 9, max: 9 }).withMessage('O cep deve ter entre 9 caracteres'),
     // Sanitizar o CPF antes de validar
     body('cpf_prof')
         .isLength({ min: 11, max: 14 }).withMessage('CPF deve ter 11 dígitos.')
         .customSanitizer(value => value.replace(/[^\d]/g, '')) // Remove pontos e traços
         .isNumeric().withMessage('CPF deve conter apenas números.'),
-
-    body('estado_prof').notEmpty().withMessage('Selecione um estado.'),
     body('email_prof').isEmail().withMessage('Digite um e-mail válido.'),
 
     // Sanitizar o telefone antes de validar
@@ -43,6 +42,7 @@ regrasValidacaoFormCad: [
         }
         return true;
     }),
+
     // Corrigindo o nome do campo de confirmação de senha
     body('confirmasenha_prof')
         .custom((value, { req }) => {
@@ -64,7 +64,7 @@ regrasValidacaoFormCad: [
             .isLength({ min: 8, max: 45 }).withMessage("Nome de usuário deve ter de 8 a 45 caracteres!"),
         body("email_prof")
             .isEmail().withMessage("Digite um e-mail válido!"),
-        body("telefone_prof")
+        body("contato_prof")
             .isLength({ min: 12, max: 13 }).withMessage("Digite um telefone válido!"),
     ],
      

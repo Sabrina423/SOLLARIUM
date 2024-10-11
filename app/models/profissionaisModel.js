@@ -16,11 +16,10 @@ const profissionaisModel = {
     findByEmail: async (email) => {
         try {
             const [linhas] = await pool.query('SELECT * FROM PROFISSIONAL WHERE EMAIL_PROF = ?', [email]);
-<<<<<<< HEAD
+
             return linhas.length > 0 ? linhas[0] : null;
-=======
             return linhas.length > 0 ? linhas[0] : null; // Retorna o profissional ou null se não encontrado
->>>>>>> 5f55786 (as)
+
         } catch (error) {
             console.error('Erro ao buscar profissional por email:', error);
             throw error;
@@ -31,13 +30,8 @@ const profissionaisModel = {
     create: async (profissional) => {
         try {
             const result = await pool.query(
-<<<<<<< HEAD
-                'INSERT INTO PROFISSIONAL (NOME_PROF, CONTATO_PROF, EMAIL_PROF, CPF_PROF, CEP_PROF, AREA_PROF, EXPERIENCIA_PROF, SENHA_PROF, IMAGEM_PROF) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',
+                'INSERT INTO PROFISSIONAIS (NOME_PROF, CONTATO_PROF, EMAIL_PROF, CPF_PROF, CEP_PROF, AREA_PROF, EXPERIENCIA_PROF, SENHA_PROF, IMAGEM_PROF) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',
                 [profissional.nome_prof, profissional.contato_prof, profissional.email_prof, profissional.cpf_prof, profissional.cep_prof, profissional.area_prof, profissional.experiencia_prof, profissional.senha_prof, profissional.imagem_prof]
-=======
-                'INSERT INTO PROFISSIONAL (NOME_PROF, CONTATO_PROF, EMAIL_PROF, CPF_PROF, CEP_PROF, AREA_PROF, SENHA_PROF) VALUES (?, ?, ?, ?, ?, ?, ?)',
-                [profissional.nome_prof, profissional.contato_prof, profissional.email_prof, profissional.cpf_prof, profissional.cep_prof, profissional.area_prof, profissional.senha_prof]
->>>>>>> 5f55786 (as)
             );
             return result[0]; // Retorna o resultado da inserção
         } catch (error) {
@@ -49,31 +43,11 @@ const profissionaisModel = {
     // Atualizar um profissional existente
     update: async (id, prof) => {
         try {
-<<<<<<< HEAD
             const { nome_prof, contato_prof, email_prof, cep_prof, cpf_prof, data_prof, senha_prof, area_prof, experiencia_prof, endereco_prof, estado_prof, documento_prof, imagem_prof } = prof;
             const result = await pool.query(
-                'UPDATE PROFISSIONAL SET CPF_PROF = ?, ENDERECO_PROF = ?, NOME_PROF = ?, CONTATO_PROF = ?, EMAIL_PROF = ?, SENHA_PROF = ?, AREA_PROF = ?, EXPERIENCIA_PROF = ?, ESTADO_PROF = ?, DOCUMENTO_PROF = ?, DATA_NASC = ?, CEP_PROF = ?, IMAGEM_PROF = ? WHERE ID_PROF = ?',
+                'UPDATE PROFISSIONAIS SET CPF_PROF = ?, ENDERECO_PROF = ?, NOME_PROF = ?, CONTATO_PROF = ?, EMAIL_PROF = ?, SENHA_PROF = ?, AREA_PROF = ?, EXPERIENCIA_PROF = ?, ESTADO_PROF = ?, DOCUMENTO_PROF = ?, DATA_NASC = ?, CEP_PROF = ?, IMAGEM_PROF = ? WHERE ID_PROF = ?',
                 [cpf_prof, endereco_prof, nome_prof, contato_prof, email_prof, senha_prof, area_prof, experiencia_prof, estado_prof, documento_prof, data_prof, cep_prof, imagem_prof, id]
             );
-=======
-            const { 
-                nome_prof, 
-                contato_prof, 
-                email_prof, 
-                cep_prof, 
-                cpf_prof, 
-                data_prof, 
-                senha_prof, 
-                estado_prof, 
-                documento_prof 
-            } = prof;
-
-            const result = await pool.query(
-                'UPDATE PROFISSIONAL SET CPF_PROF = ?, NOME_PROF = ?, CONTATO_PROF = ?, EMAIL_PROF = ?, SENHA_PROF = ?, ESTADO_PROF = ?, DOCUMENTO_PROF = ?, DATA_NASC = ?, CEP_PROF = ? WHERE ID_PROF = ?',
-                [cpf_prof, nome_prof, contato_prof, email_prof, senha_prof, estado_prof, documento_prof, data_prof, cep_prof, id]
-            );
-
->>>>>>> 5f55786 (as)
             return result[0]; // Retorna o resultado da atualização
         } catch (error) {
             console.error('Erro ao atualizar profissional:', error);
@@ -93,8 +67,4 @@ const profissionaisModel = {
     }
 };
 
-<<<<<<< HEAD
 module.exports = profissionaisModel;
-=======
-module.exports = profissionaisModel;
->>>>>>> 5f55786 (as)
