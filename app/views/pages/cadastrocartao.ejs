@@ -20,6 +20,7 @@
                     <h2 class="title"> Resumo do pedido</h2>
                     <% 
                     var total = 0;
+                    if(carrinho){
                     carrinho.forEach(function(item) {
                         total += (item.qtde * item.preco);
                     %>
@@ -31,7 +32,8 @@
                         </span> x R$ <%= item.preco.toFixed(2) %>)
                         </p>
                     </div>
-                    <% }); %>
+                    <% })
+                }; %>
                     <div class="total">
                         <span class="price" id="summarytotal"> Total R$ <%= total.toFixed(2) %></span>
                     </div>

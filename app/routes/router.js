@@ -215,7 +215,7 @@ router.post("/cadastrocliente", clienteController.regrasValidacaoFormCad, async 
 });
 
 // Rota de registro profissional
-router.post("/cadastroprofissional", profissionaisController.regrasValidacaoFormCad, async (req, res) => {
+router.post("/cadastroprof", profissionaisController.regrasValidacaoFormCad, async (req, res) => {
     profissionaisController.cadastrar(req, res);
 });
 

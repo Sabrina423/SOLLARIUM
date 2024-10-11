@@ -40,7 +40,7 @@ gravarPedido: async (req, res) => {
         req.session.carrinho = [];
         
         // Redireciona o usuário para a página do pedido ou checkout, garantindo que o carrinho esteja disponível
-        res.render("pages/cadastrocartao", { autenticado:req.session.autenticado,carrinho:req.session.carrinho});
+        res.render("pages/cadastrocartao", { autenticado:req.session.autenticado, carrinho: req.session.carrinho});
     } catch (e) {
         console.log(e);
         res.status(500).send('Erro ao gravar pedido');

@@ -67,7 +67,7 @@ const clienteController = {
             return res.render("pages/entrar", { listaErros: erros, dadosNotificacao: null });
         }
         if (req.session.autenticado.autenticado != null) {
-            res.render('pages/home', { autenticado: req.session.autenticado ,login:req.session.logado}); 
+            res.render('pages/home', { autenticado: req.session.autenticado ,carrinho:null,login:req.session.logado}); 
         } else {
             res.render("pages/entrar", { listaErros: null, dadosNotificacao: { titulo: "Falha ao logar!", mensagem: "Usuário e/ou senha inválidos!", tipo: "error" } });
         }
@@ -94,7 +94,7 @@ const clienteController = {
         try {
             await cliente.create(dadosForm);
             res.render("pages/home", {
-                listaErros: null, autenticado: req.session.autenticado, dadosNotificacao: {
+                listaErros: null, carrinho:null, autenticado: req.session.autenticado, dadosNotificacao: {
                     titulo: "Cadastro realizado!", mensagem: "Novo usuário criado com sucesso!", tipo: "success"
                 }, valores: req.body
             });
