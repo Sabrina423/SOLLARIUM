@@ -23,6 +23,7 @@
                     <input type="checkbox" id="termos" name="termos" required>
                     <label for="termos">Li e aceito os termos de taxação e assinatura!</label>
                 </div>
+                
             </nav>
             
             <img src="/imagens/pexels-tomfisk-9893729.jpg" alt="">
@@ -117,6 +118,14 @@ O cadastro e a política de comissionamento visam estabelecer um ambiente de tra
     </div>
 
     <script>
+        document.getElementById('cadastroFormprof').addEventListener('submit', function(event) {
+    const termosCheckbox = document.getElementById('termos');
+    if (!termosCheckbox.checked) {
+        alert('Você precisa aceitar os termos para continuar.');
+        event.preventDefault(); // Impede o envio do formulário
+    }
+});
+
         // Funções para mostrar e esconder a mensagem de senha
         function showMessage() {
             document.getElementById('message').style.display = 'block';
