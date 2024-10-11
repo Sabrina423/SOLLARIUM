@@ -36,14 +36,13 @@ regrasValidacaoFormCad: [
         .isNumeric().withMessage('Telefone deve conter apenas números.'),
 
     // Validação de senha mais forte
-    body('senha_prof')
-        .isStrongPassword({
-            minLength: 8,
-            minUppercase: 1,
-            minNumbers: 1,
-            minSymbols: 1
-        }).withMessage('A senha deve ter pelo menos 8 caracteres, uma letra maiúscula e um caractere especial.'),
-
+    body('senha_prof').custom(value => {
+        const senhaValida = /^(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z]).{8,}$/.test(value);
+        if (!senhaValida) {
+            throw new Error('A senha deve ter pelo menos 8 caracteres, uma letra maiúscula e um caractere especial.');
+        }
+        return true;
+    }),
     // Corrigindo o nome do campo de confirmação de senha
     body('confirmasenha_prof')
         .custom((value, { req }) => {
