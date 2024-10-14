@@ -245,6 +245,7 @@ const clienteController = {
                 nome_cliente: req.body.nome_cliente,
                 email_cliente: req.body.email_cliente,
                 fone_cliente: req.body.fone_cliente,
+                cep_cliente: req.body.cep.replace("-",""),
                 numero_cliente: req.body.numero,
                 complemento_cliente: req.body.complemento,
                 img_perfil_banco: req.session.autenticado.img_perfil_banco,
