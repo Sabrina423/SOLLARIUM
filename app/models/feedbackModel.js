@@ -1,6 +1,6 @@
 const moment = require("moment");
 var pool = require("../../config/pool_conexoes");
-const { feedbackModel } = require("../controllers/feedbackController");
+
 
 const feedbackModel = {
     findAll: async () => {
