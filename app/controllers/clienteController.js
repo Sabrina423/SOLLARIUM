@@ -68,7 +68,6 @@ const clienteController = {
             return res.render("pages/entrar", { listaErros: erros, dadosNotificacao: null });
         }
         if (req.session.autenticado.autenticado != null) {
-            console.log("teste coracao")
             console.log(req.session.autenticado )
             
             res.render('pages/home', { autenticado: req.session.autenticado, carrinho:null, login:req.session.logado}); 

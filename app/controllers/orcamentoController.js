@@ -16,6 +16,11 @@ const validarOrcamento = (dados) => {
         errors.push({ field: 'valor', message: 'Valor esperado é obrigatório.' });
     }
 
+    if (!data) {
+        errors.push({ field: 'data', message: 'Valor esperado é obrigatório.' });
+    }
+
+
     return errors;
 }
 
@@ -30,8 +35,8 @@ const criarOrcamento = async (req, res) => {
 
     try {
         const [rows] = await pool.query(
-            'INSERT INTO orcamentos (servico, detalhe, valor) VALUES (?, ?, ?, ?, ?)',
-            [estado, cidade, servico, detalhe, valor]
+            'INSERT INTO orcamento (servico, detalhe, valor, data) VALUES (?, ?, ?, ?, ?)',
+            [estado, cidade, servico, detalhe, valor, data]
         );
         res.status(200).json({ mensagem: 'Orçamento enviado com sucesso!' });
     } catch (err) {

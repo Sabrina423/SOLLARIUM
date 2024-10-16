@@ -20,12 +20,12 @@ const orcamentoModel = {
             throw error;
         }
     },
-
+    
     create: async (orcamento) => {
         try {
             const { id_orcamento, valor_orcamento,  descricao_orcamento, data_orcamento, status_orcamento} = orcamento;
             const result = await pool.query(
-                'INSERT INTO ORCAME ( ID_ORCAMENO, VALOR_ORCAMENTO, DESCRICAO_ORCAMENTO, DATA_ORCAMENTO, STATUS_ORCAMENTO) VALUES (?, ?, ?,?, ?)',
+                'INSERT INTO ORCAMENTO ( ID_ORCAMENO, VALOR_ORCAMENTO, DESCRICAO_ORCAMENTO, DATA_ORCAMENTO, STATUS_ORCAMENTO) VALUES (?, ?, ?,?, ?)',
                 [id_orcamento, valor_orcamento, descricao_orcamento, data_orcamento, status_orcamento]
             );
             return result; // Retorna o resultado da inserção
