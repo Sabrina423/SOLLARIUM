@@ -93,7 +93,8 @@ const verificarClienteAutorizado = (tipoPermitido, destinoFalha) => {
     ) {
       next();
     } else {
-      res.render(destinoFalha, req.session.autenticado);
+
+      res.render(destinoFalha, {autenticado:req.session.autenticado,dadosNotificacao:null});
     }
   };
 };
@@ -104,5 +105,7 @@ module.exports = {
   gravarClienteAutenticado,
   verificarClienteAutorizado,
 }
+
+
 
 

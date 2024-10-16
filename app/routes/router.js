@@ -88,7 +88,7 @@ router.get('/cadastroprof', (req, res) => {
     res.render('pages/cadastroprof');
 });
 
-router.get('/orcamento', (req, res) => {
+router.get('/orcamento', verificarClienteAutorizado([1],'pages/entrar'), (req, res) => {
     res.render('pages/orcamento');
 });
 
