@@ -1,7 +1,7 @@
 const { feedbackModel } = require("../models/feedbackModel");
 const { body, validationResult } = require("express-validator");
 
-const feedbackModel = {
+const feedbackController = {
 
     listar: async (req, res) => {
         results = await feedbackModel.findAll(req.session.autenticado.id);

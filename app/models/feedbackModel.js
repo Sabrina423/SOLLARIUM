@@ -2,10 +2,10 @@ const moment = require("moment");
 var pool = require("../../config/pool_conexoes");
 const { feedbackModel } = require("../controllers/feedbackController");
 
-const favoritoModel = {
+const feedbackModel = {
     findAll: async () => {
         try {
-            const [resultados] = await pool.query("SELECT * FROM favorito");
+            const [resultados] = await pool.query("SELECT * FROM FEEDBACK");
             return resultados;
         } catch (error) {
             console.log(error);
@@ -13,11 +13,11 @@ const favoritoModel = {
         }
     },
 
-    findID: async (Idfeedback, idUsuario) => {
+    findID: async (idFeedback, idCliente,idprofissionais) => {
         try {
             const [resultados] = await pool.query(
-                "SELECT * FROM favorito where feedback_ID_FEEDBACK = ? and usuario_id_usuario = ? ",
-                [Idfeedback, idUsuario]);
+                "SELECT * FROM FEEDBACK where ID_FEEDBACK = ? ID_CLIENTE = ? ID_PROFISSIONAIS = ? ",
+                [idFeedback, idCliente,idprofissionais]);
             return resultados;
         } catch (error) {
             console.log(error);
@@ -27,7 +27,7 @@ const favoritoModel = {
 
     create: async (camposJson) => {
         try {
-            const [resultados] = await pool.query("insert into favorito set ?", camposJson);
+            const [resultados] = await pool.query("insert into feedback set ?", camposJson);
             return resultados;
         } catch (error) {
             console.log(error);
@@ -35,11 +35,11 @@ const favoritoModel = {
         }
     },
 
-    update: async (camposJson, Idfeedback, idUsuario) => {
+    update: async (camposJson, idFeedback, idCliente,idprofissionais) => {
         try {
             const [resultados] = await pool.query(
-                "UPDATE favorito SET ? WHERE hq_id_hq = ? and usuario_id_usuario = ? ", 
-                [camposJson, Idfeedback, idUsuario])
+                "UPDATE FEEDBACK SET ? WHERE ID_FEEDBACK = ? and ID_CLIENTE = ? and ID_PROFISSIONAL = ?", 
+                [camposJson, idFeedback, idCliente])
             return resultados;
         } catch (error) {
             console.log(error);
@@ -51,8 +51,8 @@ const favoritoModel = {
     delete: async (id) => {
         try {
             const [resultados] = await pool.query(
-                "UPDATE favorito SET status_favorito = 0 WHERE hq_id_hq = ? and usuario_id_usuario = ?", 
-                [Idfeedback, idUsuario]);
+                "UPDATE FEEDBACK SET CLASSIF_FEEDBACK = 0  WHERE ID_FEEDBACK = ? and COMENTARIO_FEEDBACK = ?", 
+                [idFeedback, idCliente]);
             return resultados;
         } catch (error) {
             console.log(error);
@@ -60,28 +60,35 @@ const favoritoModel = {
         }
     },
 
-    favoritar: async (dadosFavorito) => {
+    feedback: async (dadosfeedback) => {
         try {
-            if (dadosFavorito.situacao == "favorito") {
-                const resultados = await favoritoModel.update(
-                    { status_favorito: 0 }, dadosFavorito.Idfeedback, dadosFavorito.idUsuario
+            if (dadosfeedback.situacao == "FEEDBACK") {
+                const resultados = await feedbackModel.update(
+                    { status_feedback: 0 }, dadosfeedback.idFeedback, dadosfeedback.idCliente
                 );
-            } else if (dadosFavorito.situacao == "favoritar") {
-                const result = await favoritoModel.findID(
-                    dadosFavorito.Idfeedback, dadosFavorito.idUsuario
+            } else if (dadosfeedback.situacao == "feedback") {
+                const result = await feedbackModel.findID(
+                    dadosfeedback.idFeedback, dadosfeedback.idCliente
                 );
                 var total = Object.keys(result).length;
                 if (total == 0) {
                     let obj = {
-                        hq_id_hq: dadosFavorito.Idfeedback,
-                        usuario_id_usuario: dadosFavorito.idUsuario,
-                        dt_inclusao_favorito: moment().format("YYYY/MM/DD"),
-                        status_favorito: 1
+                        ID_FEEDBACK: dadosfeedback.idFeedback,
+                        ID_CLIENTE:dadosfeedback.idCliente,
+                        ID_PROF: dadosfeedback.idprofissionais,
+                        CLASSIF_FEEDBACK:dadosfeedback.rating,
+                        COMENTARIO_FEEDBACK: dadosfeedback.rating,
+                        DATA_FEEDBACK: moment().format("YYYY/MM/DD"),
+                        ITEM_PEDIDO_PEDIDOS_ID_CLIENTE: 1,
+                        ITEM_PEDIDO_SERVICOS_PROF_ID_PROFISSIONAIS: 2,
+                        ITEM_PEDIDO_ID_ITEM_PEDIDO: 3,
                     }
-                    const resultados = await favoritoModel.create(obj);
+                    const resultados = await feedbackModel.create(obj);
                 } else {
-                    const resultados = await favoritoModel.update(
-                        { status_favorito: 1 }, dadosFavorito.Idfeedback, dadosFavorito.idUsuario
+                    const resultados = await feedbackModel.update(
+                        { ITEM_PEDIDO_PEDIDOS_ID_CLIENTE: 1 }, dadosfeedback.idFeedback, dadosfeedback.idCliente, dadosfeedback.idprofissionais,
+                        {ITEM_PEDIDO_SERVICOS_PROF_ID_PROFISSIONAIS: 2 }, dadosfeedback.idFeedback, dadosfeedback.idCliente, dadosfeedback.idprofissionais,
+                        {ITEM_PEDIDO_ID_ITEM_PEDIDO: 3 }, dadosfeedback.idFeedback, dadosfeedback.idCliente, dadosfeedback.idprofissionais
                     );
                 }
 
@@ -94,4 +101,4 @@ const favoritoModel = {
 
 }
 
-module.exports = feedbackModel ;
+module.exports = feedbackModel;

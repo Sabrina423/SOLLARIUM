@@ -12,25 +12,26 @@
         <h2 id="feedback-title">Feedbacks</h2>
         <section class="feedback" id="feedback-list">
             <% feedbacks.forEach(feedback => { %>
-                <article class="feedback-item" id="feedback-<%= feedback.id %>" data-date="<%= feedback.date.toLocaleDateString() %>" data-quality="<%= feedback.quality %>" data-speed="<%= feedback.speed %>" data-results="<%= feedback.results %>">
+                <article class="feedback-item" id="feedback-<%= idFeedback %>" data-date="<%= feedback.date.toLocaleDateString() %>" data-quality="<%= feedback.quality %>" data-speed="<%= feedback.speed %>" data-results="<%= feedback.results %>">
                     <header class="feedback-header">
-                        <span class="client-name" id="client-<%= feedback.id %>"><%= feedback.clientName %></span>
+                        <span class="client-name" id="client-<%= idFeedback %>"><%= feedback.clientName %></span>
                         <time class="feedback-date" datetime="<%= feedback.date.toISOString() %>"><%= feedback.date.toLocaleDateString() %></time>
                     </header>
-                    <div class="feedback-ratings">
-                        <div class="rating">
+                    <meta class="feedback-ratings">
+                        <meta class="rating">
                             <span>Qualidade:</span>
-                            <div class="stars"><%= '★'.repeat(feedback.quality) + '☆'.repeat(5 - feedback.quality) %></div>
-                        </div>
-                        <div class="rating">
+                            <meta class="stars"><%= '★'.repeat(feedback.quality) + '☆'.repeat(5 - feedback.quality) %></meta>
+                        </meta>
+                        <meta class="rating">
                             <span>Rapidez:</span>
-                            <div class="stars"><%= '★'.repeat(feedback.speed) + '☆'.repeat(5 - feedback.speed) %></div>
-                        </div>
-                        <div class="rating">
+                            <meta class="stars"><%= '★'.repeat(feedback.speed) + '☆'.repeat(5 - feedback.speed) %></meta>
+                        </meta>
+                        <meta class="rating">
                             <span>Resultados:</span>
-                            <div class="stars"><%= '★'.repeat(feedback.results) + '☆'.repeat(5 - feedback.results) %></div>
-                        </div>
-                    </div>
+                            <meta class="stars"><%= '★'.repeat(feedback.results) + '☆'.repeat(5 - feedback.results) %></meta>
+                        </meta>
+                        
+                    </meta>
                 </article>
             <% }) %>
         </section>
@@ -50,7 +51,7 @@
             this.parentElement.classList.toggle('open');
         });
 
-        document.querySelectorAll('.select-items div').forEach(item => {
+        document.querySelectorAll('.select-items meta').forEach(item => {
             item.addEventListener('click', function() {
                 const selectedText = this.textContent;
                 this.parentElement.previousElementSibling.textContent = selectedText;
