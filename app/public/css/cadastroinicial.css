@@ -1,28 +1,29 @@
 /* Estilos gerais */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap');
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-family: Poppins, sans-serif;
 }
 
 body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #1e1e1e;
+    background-color: #0a0a0a;
     min-height: 100vh;
 }
 
 .container {
     position: relative;
-    top: 0px;
+    top: 20px;
     display: flex;
     flex-direction: row; /* Layout padrão: lado a lado */
     width: 90%;
     height: 500px;
     max-width: 900px;
-    background-color: white;
+    background-color: #0a0a0a;
     border-radius: 10px;
     overflow: hidden;
     box-shadow: 0 0 30px rgba(0, 0, 0, 0.753);
@@ -36,18 +37,14 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 10px;
+    padding: 17%;
     background-image: url(/imagens/painelsolar_.png);
     background-size: cover; /* Ajusta a imagem ao tamanho do contêiner */
     background-position: center; /* Centraliza a imagem */
 }
-.material-symbols-outlined {
-    align-self: flex-start;
-    text-decoration: none;
-    color: #f8bd3f;
-    }
+
 .hero h2 {
-    font-family: sans-serif;
+    
     font-size: 2.0em;
     color: white;
     text-align: left;
@@ -55,11 +52,13 @@ body {
 }
 
 main {
+    color: #fff;
     width: 60%;
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 20px;
+    margin-top: 20px;
 }
 
 .profissional {
@@ -67,10 +66,11 @@ main {
     width: 100%;
     max-width: 300px;
     height: 50px;
-    border-radius: 5px;
-    background-color: black;
+    border-radius: 200px;
+    background-color: #e0ad4c;
     text-align: center;
     margin-top: 40px;
+    margin-bottom: 0px;
 }
 
 .cliente {
@@ -78,15 +78,16 @@ main {
     width: 100%;
     max-width: 300px;
     height: 50px;
-    border-radius: 5px;
-    background-color: black;
+    border-radius: 200px;
+    background-color: #e0ad4c;
     text-align: center;
-    margin-top: 50px;
-    margin-bottom: 20px;
+    
+    margin-bottom: 140px;
 }
 
 .profissional:hover, .cliente:hover {
-    background-color: white;
+    background-color: #8dadd1;
+    color: #fff;
     border: 2px solid black;
 }
 
@@ -95,19 +96,20 @@ main {
     padding: 1rem;
     text-decoration: none;
     border-radius: 15px;
-    font-size: 0.9rem;
+    
     cursor: pointer;
     transition: 0.2s ease;
 }
 
 .profissional:hover a, .cliente:hover a {
-    color: black;
+    color: rgb(255, 255, 255);
 }
 
 h3 {
-    font-family: sans-serif;
+    
     text-align: center;
-    margin-top: 40px;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 .login {
@@ -115,8 +117,8 @@ h3 {
     width: 100%;
     max-width: 300px;
     height: 50px;
-    border-radius: 5px;
-    background-color: rgb(255, 255, 255);
+    border-radius: 200px;
+    background-color: #8dadd1;
     text-align: center;
     margin-top: 40px;
     border: 1px solid rgb(0, 0, 0);
@@ -124,7 +126,7 @@ h3 {
 }
 
 .login a {
-    color: rgb(0, 0, 0);
+    color: #fff;
     padding: 1rem;
     text-decoration: none;
     border-radius: 15px;
@@ -133,13 +135,13 @@ h3 {
 }
 
 .login:hover {
-    background-color: black;
+    background-color: rgb(255, 255, 255);
     color: rgb(255, 255, 255);
     border-color: rgb(0, 0, 0);
 }
 
 .login:hover a {
-    color: rgb(255, 255, 255);
+    color: #e0ad4c;
 }
 
 /* Media Queries para Layout Responsivo */

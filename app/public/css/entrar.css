@@ -1,8 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap');
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: Arial, sans-serif;
+    font-family: Poppins, sans-serif;
     
 }
 html, body {
@@ -16,36 +17,34 @@ body {
     align-items: center;
     width: 100%;
     height: 100%;
-    background-color: #000000;
+    background-color: #0a0a0a;
+    
 }
 
 .container {
+    color: #fff;
     display: flex;
     height: 100%;
     max-height: 700px;
-    background-color: rgb(255, 255, 255);
+    background-color: #0a0a0a;
     backdrop-filter: blur(2px);
     border: solid 1px;
-    border-color: rgba(39, 39, 39, 0.753);
-    border-radius: 10px;
+    border-color: #0a0a0a;
+    border-radius: 20px;
     overflow: hidden;
-    box-shadow: 0 0 140px rgba(83, 83, 83, 0.445);
+    box-shadow: 0 0 140px rgba(0, 0, 0, 0.753);
 }
 
 .hero {
-    width: 50%;
-    background-image: url(/imagens/painelsolar_.png);
+    width: 40%;
+    background-image: url(/imagens/solarr.png);
     display: flex;
     align-items: center;
     justify-content: center;
     color: white;
     padding: 40px;
 }
-.material-symbols-outlined {
-    align-self: flex-start;
-    text-decoration: none;
-    color: #f8bd3f;
-    }
+
 .hero img {
     display: none; /* Esconda a imagem se não for necessária */
 }
@@ -61,7 +60,7 @@ main {
 }
 
 .input-group label {
-    font-family: sans-serif;
+    
     font-size: 18px;
     margin-bottom: 30px;
     color: white;
@@ -72,7 +71,9 @@ main {
     width: 100%;
     padding: 10px;
     margin-bottom: 10px;
-    border: 1px solid #ddd;
+    color: #fff;
+    background-color: #1d1a1a;
+    border: 1px solid #1d1a1a;
     border-radius: 5px;
     font-size: 14px;
     margin-top: 25px;
@@ -85,7 +86,7 @@ h1 {
 }
 
 h2 {
-    font-family: sans-serif;
+    
     font-size: 40px;
     width: 250px;
 }
@@ -112,22 +113,30 @@ h2 {
 }
 
 button[type="submit"] {
+
     width: 100%;
     padding: 12px;
-    background-color: #000000;
+    background-color: #e0ad4c;
     color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: 200px;
     font-size: 16px;
     cursor: pointer;
     transition: background-color 0.3s;
     margin-top: 20px;
 }
 
+button:hover{
+    background-color: #fff;
+    color: #e0ad4c;
+}
+
 button[type="submit"] a {
     color: white;
     text-decoration: none;
 }
+
+
 
 .link-container {
     text-align: center; /* Centraliza o conteúdo do contêiner */
@@ -136,7 +145,7 @@ button[type="submit"] a {
 
 .link-container a {
     text-decoration: none;
-    color: #000000;
+    color: #b1c0c9;
     font-size: 17px;
     font-family: sans-serif;
     display: inline-block; /* Permite aplicar padding e margin */
@@ -150,7 +159,7 @@ link-container-senha {
 
 .link-container-senha a {
     text-decoration: none;
-    color: #000000;
+    color: #dadada;
     font-size: 14px;
     font-family: sans-serif;
     display: inline-block; /* Permite aplicar padding e margin */
@@ -158,10 +167,10 @@ text-align:end ;
 margin-bottom: 20px;
 }
 .link-container-senha:hover a {
-color: rgb(252, 182, 52);
+color: #e0ad4c;
 }
 .link-container:hover a {
-    color: rgb(252, 182, 52);
+    color: #e0ad4c;
     }
 
 hr{
@@ -183,7 +192,7 @@ ul.box-redes-sociais {
     
     width: 50px;
     height: 50px;
-    background-color: #fff;
+    background-color: #e0ad4c;
     text-align: center;
     line-height: 45px;
     font-size: 22px;
@@ -191,13 +200,13 @@ ul.box-redes-sociais {
     border-radius: 50%;
     position: relative;
     overflow: hidden;
-    border: 2px solid #eaeaea;
+    border: 2px solid #e0ad4c;
     z-index: 1;
     margin-top: 20px;
   }
   ul.box-redes-sociais li a .icon {
     position: relative;
-    top:-0px;
+    top:-8px;
     color: #262626;
     transition: .3s;
     z-index: 3;

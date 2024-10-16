@@ -80,6 +80,7 @@ router.get('/sobre', (req, res) => {
 });
 
 router.get('/perfilcliente',  (req, res) => {
+    res.render('pages/perfilcliente');
     clienteController.mostrarPerfil(req, res);
 });
 
