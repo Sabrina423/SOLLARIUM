@@ -13,10 +13,10 @@
         <a href="/entrar" class="material-symbols-outlined">
             keyboard_backspace
         </a>
-        <form id="card-form">
-            <p>Insira seu E-mail e enviaremos um link de recuperação de senha</p>
-            <input type="email" name="email" required placeholder="Seu e-mail">
-            <button type="submit">Enviar E-mail</button>
+        <form id="card-form" action="/recovery" method="post">
+            <p> Insira seu E-mail e enviaremos um link de recuperação de senha</p>
+                <input type="email" name="email" required placeholder="Seu e-mail">
+                <button type="submit">Enviar E-mail</button>
         </form>
     </div>
 
