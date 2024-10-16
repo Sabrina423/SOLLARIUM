@@ -181,8 +181,6 @@ router.post ('/recovery', async (req, res) => {
                 pass: process.env.EMAIL_PASS
             }
         });
-
-        // Enviar email
     // Enviar email
 try {
     await transporter.sendMail(mailOptions); // Corrigido aqui
