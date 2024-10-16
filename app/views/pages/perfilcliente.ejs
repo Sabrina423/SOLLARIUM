@@ -1,124 +1,84 @@
-
 <!DOCTYPE html>
-<html lang="pt-br">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Perfil Profissional</title>
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"/>
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
-    <link rel="stylesheet" href="/css/perfilcliente.css" />
-  </head>
-  <body>
-    <div class="header__wrapper">
-      <header></header>
-      <div class="cols__container">
-        <div class="left__col">
-          <div class="img__container">
-            <img src="img/images.jfif" alt="Dwight" />
-            <span></span>
-          </div>
-          <h2>Peter</h2>
-          <p>Cliente</p>
-          <p>Peter@example.com</p>
+<html lang="pt-BR">
 
-          <ul class="about">
-            <li><span>400</span>Seguidores</li>
-            <li><span>1 anos e 6m</span>Na Plataforma</li>
-            <li><span>04</span>Orçamentos</li>
-          </ul>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/images/favicon.ico">
+    <link rel="stylesheet" href="/css/perfilcliente.css">
+    <title>Perfil do Usuário</title>
+</head>
 
-          <div class="content">
-            <p>
-              Endereços:
-            </p>
-            <p>
-              ********** *********** ****************
-              ************** ************
-            </p>
+<body>
 
-            <ul>
-              
-            </ul>
-          </div>
-        </div>
-        <div class="right__col">
-          <nav>
-            <ul>
-              <li><a href="">Projetos</a></li>
-              <li><a href="">Profissionais Contratados</a></li>
-              <li><a href=""></a></li>
-            </ul>
-            <div class="bell"><i class="fa-solid fa-bell"></i></div>
-            <button>Voltar ao Início</button>
-          </nav>
+    <header class="site-header">
+        <section class="header-container">
+            <section class="logo">Logo</section>
+            <nav class="main-nav">
+                <a href="#home">Home</a>
+                <a href="#orcamento">Orçamento</a>
+                <a href="#configuracoes">
+                    <img src="/images/settings-icon.png" alt="Configurações">
+                </a>
+            </nav>
+            <button class="menu-toggle" aria-label="Toggle menu">&#9776;</button>
+        </section>
+    </header>
+    <form action="/app/views/pages/perfilcliente.ejs" method="post" enctype="multipart/form-data"> 
+        <section class="profile-container">
+            <section class="profile-left">
+                <section class="profile-header">
+                    <img id="profile-pic" src="default-profile.jpg">
+                    <section>
+                        <h1 id="user-name">Nome do Usuário</h1>
+                        <p id="user-state">Estado</p>
+                        <nav class="photo-actions">
+                            <input type="file" id="file-input" accept="image/*" placeholder="Alterar Foto">
+                            <img class="" id="" src="<%= arquivo.imagem %>">
+                        </nav>
+                    </section>
+                </section>
+            </section>
 
-          <div class="photos">
-            <img src="/img/dwight.webp" alt="Photo" />
-            <img src="/img/17124052466014.webp" alt="Photo" />
-            <img src="/img/IMG_4013.webp" alt="Photo" />
-            <img src="/img/meneson.jpg" alt="Photo" />
-            <img src="/img/pessoas-mulheres-negocios-e-conceito-de-retrato-rosto-de-jovem-sorridente-feliz_380164-119770.avif" alt="Photo" />
-            <img src="/img/pessoas-mulheres-negocios-e-conceito-de-retrato-rosto-de-jovem-sorridente-feliz_380164-121867.avif" alt="Photo" />
-            
-          </div>
-        </div>
-      </div>
-    </div>
-    
-    <footer>
-      <section class="footer">
-          <div class="footer-content">
-              <h2>Sollarium</h2>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident dolorum 
-                 accusantium nihil laudantium non.</p>
+            <nav class="profile-right">
+                <div class="profile-details">
+                    <h2>Informações do Perfil</h2>
+                    <input type="text" id="full-name" placeholder="Nome Completo">
+                    <input type="text" id="email" placeholder="Email">
+                    <input type="text" id="phone" placeholder="Telefone">
+                    <button onclick="saveProfile()">Salvar</button>
+            </nav>
+    </form>
+    <section class="professionals-carousel">
+        <h2>Profissionais contratados</h2>
+        <nav class="carousel-wrapper">
+            <section class="carousel-container">
+                <nav class="professional-card">
+                    <img src="/imagens/icon1.webp" alt="Profissional 1">
+                    <h3>João Silva</h3>
+                    <p>Especialização: Instalador de Painéis Solares</p>
+                </nav>
+                <section class="professional-card">
+                    <img src="/imagens/icon1.webp" alt="Profissional 2">
+                    <h3>Maria Oliveira</h3>
+                    <p>Especialização: Consultora de Energia Solar</p>
+                </section>
+                <nav class="professional-card">
+                    <img src="/imagens/icon1.webp" alt="Profissional 3">
+                    <h3>Pedro Santos</h3>
+                    <p>Especialização: Projetista de Sistemas Solares</p>
+                </nav>
+                <!-- Adicione mais cartões conforme necessário -->
+        </nav>
+        <button class="carousel-button carousel-prev" onclick="prevSlide()">&#10094;</button>
+        <button class="carousel-button carousel-next" onclick="nextSlide()">&#10095;</button>
+    </section>
+    </section>
+    </section>
+    </section>
 
-              <div class="icons">
-                  <a href=""><i class='bx bxl-facebook-circle'></i></a>
-                  <a href=""><i class='bx bxl-twitter'></i></a>
-                  <a href=""><i class='bx bxl-instagram-alt' ></i></a>
-                  
-              </div>
-          </div>
-          
-          <div class="footer-content">
-              <h4>Projetos</h4>
-              <li><a href=""></a>Instalação</li>
-              <li><a href=""></a>Vistoria</li>
-              <li><a href=""></a>Manutenção</li>
-              <li><a href=""></a>Consultoria</li>
-              <li><a href=""></a>Limpeza</li>
-          </div>
+    <script href="/app/public/js/perfilcliente.js"></script>
 
-          <div class="footer-content">
-              <h4>Company</h4>
-              <li><a href=""></a>Instalação</li>
-              <li><a href=""></a>Vistoria</li>
-              <li><a href=""></a>Manutenção</li>
-              <li><a href=""></a>Consultoria</li>
-          </div>
+</body>
 
-          <div class="footer-content">
-            <h4>Company</h4>
-            <li><a href=""></a>Instalação</li>
-            <li><a href=""></a>Vistoria</li>
-            <li><a href=""></a>Manutenção</li>
-            <li><a href=""></a>Consultoria</li>
-        </div>
-
-          
-
-          <div class="footer-content">
-              <h4>Ajuda</h4>
-              <li><a href=""></a>Instalação</li>
-              <li><a href=""></a>Vistoria</li>
-              <li><a href=""></a>Manutenção</li>
-              <li><a href=""></a>Consultoria</li>
-          </div>
-      </section>
-  </footer>
-  </body>
 </html>
