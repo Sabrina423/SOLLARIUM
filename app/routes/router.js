@@ -38,7 +38,8 @@ console.log("Chave Secreta:", process.env.JWT_SECRET); // Debug
 
 const secretKey = process.env.JWT_SECRET || 'site'; // Usar chave padrão
 
-// Middleware de Autenticação
+
+// middleware de Autenticação
 const authenticateToken = (req, res, next) => {
     const token = req.session.token;
     if (!token) return res.redirect('/');
@@ -58,12 +59,16 @@ router.get('/entrar', (req, res) => {
     res.render('pages/entrar', { dadosNotificacao: null });
 });
 
-router.get('/cadastrocliente', (req, res) => {
-    res.render('pages/cadastrocliente');
+router.get('/cadastrocliente', verificarClienteAutenticado, (req, res) => {
+    res.render('pages/cadastrocliente' , { autenticado: req.session.autenticado });
 });
 
-router.get('/cadastroinicial', (req, res) => {
+router.get('/cadastroinicial',  (req, res) => {
     res.render('pages/cadastroinicial');
+});
+
+router.get('/cadastrocartao',  (req, res) => {
+    res.render('pages/cadastrocartao');
 });
 
 router.get('/relatorio', (req, res) => {
@@ -74,7 +79,8 @@ router.get('/sobre', (req, res) => {
     res.render('pages/sobre');
 });
 
-router.get('/perfilcliente', authenticateToken, (req, res) => {
+router.get('/perfilcliente',  (req, res) => {
+    res.render('pages/perfilcliente');
     clienteController.mostrarPerfil(req, res);
 });
 
@@ -111,8 +117,13 @@ router.get('/adm',  (req, res) => {
 });
 
 
+// credenciais
+const mercadoPagoCliente = new MercadoPagoConfig({
+    accessToken: process.env.acessToken
+});
+
 router.post("/createpreference", function (req, res) {
-    const preference = new Preference(MercadoPagoCliente);
+    const preference = new Preference(mercadoPagoCliente);
     console.log(req.body.items);
     preference.create({
         body: {
@@ -134,6 +145,8 @@ router.post("/createpreference", function (req, res) {
 router.get("/feedback", function (req, res) {
     PedidoController.gravarpedido(req, res);
 });
+
+const pool = require('/workspaces/SOLLARIUM/config/pool_conexoes');
 
 // Rota para recuperação de senha
 router.post ('/recovery', async (req, res) => {
@@ -170,14 +183,15 @@ router.post ('/recovery', async (req, res) => {
         });
 
         // Enviar email
-        try {
-            await transporter.sendMail(mailOptions);
-            console.log('Email enviado com sucesso para:', email);
-            res.send('Email de recuperação enviado.');
-        } catch (error) {
-            console.error('Erro ao enviar email:', error);
-            return res.status(500).send('Erro ao enviar o email.');
-        }
+    // Enviar email
+try {
+    await transporter.sendMail(mailOptions); // Corrigido aqui
+    console.log('Email enviado com sucesso para:', email);
+    res.send('Email de recuperação enviado.');
+} catch (error) {
+    console.error('Erro ao enviar email:', error);
+    return res.status(500).send('Erro ao enviar o email.');
+}
     });
 
 //Rota de registro cliente
@@ -202,7 +216,7 @@ router.post("/cadastrocliente", clienteController.regrasValidacaoFormCad, async 
 });
 
 // Rota de registro profissional
-router.post("/cadastroprofissional", profissionaisController.regrasValidacaoFormCad, async (req, res) => {
+router.post("/cadastroprof", profissionaisController.regrasValidacaoFormCad, async (req, res) => {
     profissionaisController.cadastrar(req, res);
 });
 
@@ -214,9 +228,9 @@ router.post("/adm", admController.regrasValidacaoFormCad, async (req, res) => {
 // Rota de Login
 router.post("/entrar", clienteController.regrasValidacaoFormLogin, gravarClienteAutenticado, (req, res) => {
     // Presumindo que o login foi bem-sucedido e as informações do usuário estão na req.user
-    req.session.autenticado = true; // Define a variável de autenticação na sessão
-    req.session.user = req.user; // Opcional: armazena informações do usuário na sessão
-    res.redirect('/'); // Redireciona para a página inicial
+  clienteController.logar(req,res)
+
+  
 });
 
 // Exportando o router

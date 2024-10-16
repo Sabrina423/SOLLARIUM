@@ -23,11 +23,11 @@
                 <nav class="input-group">
                     <input type="hidden" name="tipo_usuario" value="1"> <!-- 1 para cliente, pode ser mudado dinamicamente -->
                     <input type="text" name="nome_cliente" placeholder="Nome Completo" required>
-                    <input type="text" name="cpf_cliente" id="cpf_cliente" size="30" maxlength="11" placeholder="CPF" required>
+                    <input type="text" name="cpf_cliente" id="cpf_cliente" size="30" maxlength="14" placeholder="CPF" required>
             
                 </nav>
                 <nav class="input-group">
-                    <input type="text" name="cep_cliente" placeholder="CEP" required>
+                    <input type="text" name="cep_cliente" placeholder="CEP"maxlength="9" placeholder="00000-000" oninput="mascaraCep(this)" required>
                 </nav>
                 <nav class="input-group">
                     <input type="email" name="email_cliente" placeholder="E-mail" required>
@@ -88,6 +88,16 @@
             });
         });
 
+
+    function mascaraCep(input) {
+        let cep = input.value.replace(/\D/g, ""); // Remove tudo que não é número
+        if (cep.length > 5) {
+            cep = cep.replace(/^(\d{5})(\d)/, "$1-$2"); // Aplica a máscara 00000-000
+        }
+        input.value = cep; // Atualiza o valor do input
+    }
+
+
         function applyCPFMask(value) {
             return value
                 .replace(/\D/g, '') // Remove tudo que não é dígito
@@ -96,6 +106,8 @@
                 .replace(/(\d{3})(\d{1,2})$/, '$1-$2');
                 
         }
+
+        
     </script>
 </body>
 </html>

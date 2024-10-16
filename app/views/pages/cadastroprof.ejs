@@ -12,7 +12,7 @@
         <nav class="hero">
             <a href="/cadastroinicial" class="material-symbols-outlined">
                 keyboard_backspace
-            </a>
+            <a>
             <nav class="toggle_btn">
                 <i class="fa-solid fa-bars-staggered"></i>
             </nav>
@@ -23,6 +23,7 @@
                     <input type="checkbox" id="termos" name="termos" required>
                     <label for="termos">Li e aceito os termos de taxação e assinatura!</label>
                 </div>
+                
             </nav>
             
             <img src="/imagens/pexels-tomfisk-9893729.jpg" alt="">
@@ -36,31 +37,30 @@
                     <input type="text" name="cpf_prof" id="cpf_prof" placeholder="CPF" required>
                 </nav>
                 <nav class="input-group">
-                    <select id="estado_prof" name="estado_prof">
-                        <option value="São paulo">SP</option>
-                        <option value="Rio de Janeiro">RJ</option>
-                        <option value="Minas Gerais">MG</option>
-                        <option value="Espirito Santo">ES</option>
-                    </select>
+                    <input type="text" name="cep_cliente" placeholder="CEP"maxlength="9" placeholder="00000-000" oninput="mascaraCep(this)" required>
                 </nav>
+               
                 <nav class="input-group">
                     <input type="email" name="email_prof" id="email_prof" placeholder="E-mail" required>
-                    <input type="tel" id="telefone_prof" name="contato_prof" placeholder="Contato (00) 00000-0000" required>
+                    <input type="tel" id="contato_prof" name="contato_prof" placeholder="Contato (00) 00000-0000" required>
                 </nav>
                 <nav class="input-group">
                     <nav class="password-container">
-                        <input type="password" id="senha_prof" placeholder="Senha" onfocus="showMessage()" onblur="hideMessage()" oninput="validatePassword()">
+                        <input type="password" id="senha_prof" name="senha_prof" placeholder="Senha" onfocus="showMessage()" onblur="hideMessage()" oninput="validatePassword()">
                         <nav id="message" class="invalid">A senha deve ter pelo menos 8 caracteres, uma letra maiúscula e um caractere especial.</nav>
                     </nav>
                     <nav class="password-container">
-                        <input type="password" id="confimasenha_prof" name="confimasenha_prof" placeholder="Confirme sua senha" required>
+                        <input type="password" id="confimasenha_prof" name="confirmasenha_prof" placeholder="Confirme sua senha" required>
                     </nav>
                     <nav class="input-group">
                         <input type="text" name="area_prof" id="area_prof" placeholder="Área de atuação" required>
                         <input type="text" id="experiencia_prof" name="experiencia_prof" placeholder="Anos de experiência na área" required>
                     </nav>
                 </nav>
-                <a href="/cadastrocartão" class="button-link">Criar Conta</a>
+                <!-- <nav class="buttonlink">
+                <a href="/cadastroprof"></a>
+                </nav> -->
+                <button type="submit">Criar Conta</button>
             </form>
         </main>
     </nav>
@@ -114,6 +114,14 @@ O cadastro e a política de comissionamento visam estabelecer um ambiente de tra
     </div>
 
     <script>
+        document.getElementById('cadastroFormprof').addEventListener('submit', function(event) {
+    const termosCheckbox = document.getElementById('termos');
+    if (!termosCheckbox.checked) {
+        alert('Você precisa aceitar os termos para continuar.');
+        event.preventDefault(); // Impede o envio do formulário
+    }
+});
+
         // Funções para mostrar e esconder a mensagem de senha
         function showMessage() {
             document.getElementById('message').style.display = 'block';
@@ -137,6 +145,15 @@ O cadastro e a política de comissionamento visam estabelecer um ambiente de tra
             const specialCharCriteria = /[!@#$%^&*(),.?":{}|<>]/.test(senha_prof);
             return lengthCriteria && upperCaseCriteria && specialCharCriteria;
         }
+
+        function mascaraCep(input) {
+        let cep = input.value.replace(/\D/g, ""); // Remove tudo que não é número
+        if (cep.length > 5) {
+            cep = cep.replace(/^(\d{5})(\d)/, "$1-$2"); // Aplica a máscara 00000-000
+        }
+        input.value = cep; // Atualiza o valor do input
+    }
+
 
         // Funções para abrir e fechar o pop-up
         document.getElementById('openPopup').addEventListener('click', function() {

@@ -1,0 +1,316 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap");
+body {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  min-height: 100vh;
+  font-family: "Poppins", sans-serif;
+  background: #1d1d1d;
+  color: #d6d6d6;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+}
+
+a {
+  text-decoration: none;
+}
+
+.header__wrapper header {
+  width: 100%;
+  background: url("/img/how-much-electricity.jpg") no-repeat 50% 20% / cover;
+  min-height: calc(90px + 15vw);
+}
+
+.header__wrapper .cols__container .left__col {
+  padding: 25px 20px;
+  text-align: center;
+  max-width: 350px;
+  position: relative;
+  margin: 0 auto;
+}
+
+.header__wrapper .cols__container .left__col .img__container {
+  position: absolute;
+  top: -60px;
+  left: 50%;
+  transform: translatex(-50%);
+}
+.header__wrapper .cols__container .left__col .img__container img {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 50%;
+  display: block;
+  box-shadow: 1px 3px 12px rgba(0, 0, 0, 0.18);
+}
+.header__wrapper .cols__container .left__col .img__container span {
+  position: absolute;
+  background: orangered;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  bottom: 3px;
+  right: 11px;
+  border: 2px solid #fff;
+}
+.header__wrapper .cols__container .left__col h2 {
+  margin-top: 60px;
+  font-weight: 600;
+  font-size: 22px;
+  margin-bottom: 5px;
+}
+.header__wrapper .cols__container .left__col p {
+  font-size: 0.9rem;
+  color: #8dadd1;
+  margin: 0;
+}
+
+.header__wrapper .cols__container .left__col .about {
+  justify-content: space-between;
+  position: relative;
+  margin: 35px 0;
+}
+.header__wrapper .cols__container .left__col .about li {
+  display: flex;
+  flex-direction: column;
+  color: #e0ad4c;
+  font-size: 0.9rem;
+}
+.header__wrapper .cols__container .left__col .about li span {
+  color: #ffffff;
+  font-weight: 600;
+}
+.header__wrapper .cols__container .left__col .about:after {
+  position: absolute;
+  content: "";
+  bottom: -16px;
+  display: block;
+  background: #cccccc;
+  height: 1px;
+  width: 100%;
+}
+.header__wrapper .cols__container .content p {
+  font-size: 1rem;
+  color: #d6d6d6;
+  line-height: 1.8em;
+}
+.header__wrapper .cols__container .content ul {
+  gap: 30px;
+  justify-content: center;
+  align-items: center;
+  margin-top: 25px;
+}
+.header__wrapper .cols__container .content ul li {
+  display: flex;
+}
+.header__wrapper .cols__container .content ul i {
+  font-size: 1.3rem;
+}
+.header__wrapper .cols__container .right__col{
+  margin: 30px;
+}
+.header__wrapper .cols__container .right__col nav {
+  display: flex;
+  align-items: center;
+  padding: 30px 0;
+  justify-content: space-between;
+  flex-direction: column;
+}
+.header__wrapper .cols__container .right__col nav ul {
+  display: flex;
+  gap: 20px;
+  flex-direction: column;
+}
+.header__wrapper .cols__container .right__col nav ul li a {
+  text-transform: uppercase;
+  color: #818181;
+}
+.header__wrapper .cols__container .right__col nav ul li:nth-child(1) a {
+  color: #e0ad4c;
+  font-weight: 600;
+}
+.header__wrapper .cols__container .right__col nav button {
+  color: #e0ad4c;
+  padding: 0.3rem 2rem;
+  border: solid;
+  border-color: #eee;
+  border-width: 2.5px;
+  outline: none;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: scale 0.2 ease;
+  font-size: 15px;
+  margin: 15px;
+  text-transform: uppercase;
+}
+.header__wrapper .cols__container .right__col nav button:hover {
+  background-color: #e0ad4c;
+  border-color: #e0ad4c;
+  color: #fff;
+}
+.header__wrapper .cols__container .right__col .photos {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  gap: 20px;
+}
+.header__wrapper .cols__container .right__col .photos img {
+  max-width: 100%;
+  display: block;
+  height: 100%;
+  object-fit: cover;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.bell{
+  cursor: pointer;
+  padding: 25px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media (min-width: 868px) {
+  .header__wrapper .cols__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 90%;
+    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 50px;
+  }
+  .header__wrapper .cols__container .left__col {
+    padding: 25px 0px;
+  }
+  .header__wrapper .cols__container .right__col nav ul {
+    flex-direction: row;
+    gap: 30px;
+  }
+  .header__wrapper .cols__container .right__col .photos {
+    height: 365px;
+    overflow: auto;
+    padding: 0 0 30px;
+  }
+  
+}
+
+@media (min-width: 1017px) {
+  .header__wrapper .cols__container .left__col {
+    margin: 0;
+    margin-right: auto;
+  }
+  .header__wrapper .cols__container .right__col nav {
+    flex-direction: row;
+  }
+  .header__wrapper .cols__container .right__col nav button {
+    margin-top: 0;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+.footer{
+  text-decoration: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, auto));
+  background: #0a0a0a;
+  gap: 3.5rem;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  color: #d6d6d6;
+}
+
+.footer-content h4{
+  margin-bottom: 1.5rem;
+  font-size: 20px;
+}
+
+.footer-content li{
+  margin-bottom: 15px;
+}
+
+.footer-content li{
+  display: block;
+  color: #d6d6d6;
+  font-size: 15px;
+  font-weight: 400;
+  transition: all .40s ease;
+}
+
+.footer-content li:hover{
+  transform: translateY(-3px) translateX(-5px);
+  color: #fff;
+}
+
+.footer-content p{
+  color: #d6d6d6;
+  font-size: 16px;
+  line-height: 30px;
+  margin: 20px 0;
+}
+
+.icons a{
+  display: inline-block;
+  font-size: 22px;
+  color: #d6d6d6;
+  margin-right: 17px;
+  transition: all .40s ease;
+}
+
+.icons a:hover{
+  color: #fff;
+  transform: translateY(-5px);
+}
+
+@media (max-width:1690px) {
+  section{
+      padding: 50px 5% 40px;
+  }
+}
+
+@media (max-width:1120px){
+  .footer{
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, auto));
+      gap: 2rem;
+  }
+}
+
+@media (max-width:700px){
+  .footer{
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, auto));
+      gap: 2.5rem;
+      
+  }
+  
+}

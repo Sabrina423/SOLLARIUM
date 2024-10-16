@@ -34,16 +34,19 @@
         </nav>
        </nav>
 
-       <nav class="dropdown_menu">
+        <nav class="dropdown_menu">
             <li><a href="/home">Início</a></li>
             <li><a href="/orcamento">Orçamento</a></li>
             <li><a href="/sobre">Sobre nós</a></li>
-            <li><a href="/cadastroinicial">Cadastre-se</a></li>
-            <li><a href="/entrar" class="action_btn">Entrar</a></li>
-       </nav>
+            <% if (autenticado.autenticado == null) { %>
+                <li><a href="/cadastroinicial">Cadastre-se</a></li>
+            <% } %>
+            <% if (autenticado.autenticado == null) { %>
+                <li><a href="/entrar" class="action_btn">Entrar</a></li>
+            <% } %>
+        </nav>
     </header>
     
-
     <main>
         <nav class="sliderhome">
             <nav class="listhome">
@@ -104,7 +107,6 @@
                 </nav>
             </nav>
             
-            
             <nav class="thumbnailhome">
                 <nav class="item active">
                     <img src="imagens/insalacao.png">
@@ -144,52 +146,51 @@
             <nav class="footer-content">
                 <h2>Sollarium</h2>
                 <p>Sua plataforma de serviços solares em suas mãos.</p>
-
                 <nav class="icons">
                     <a href=""><i class='bx bxl-facebook-circle'></i></a>
                     <a href=""><i class='bx bxl-twitter'></i></a>
-                    <a href=""><i class='bx bxl-instagram-alt' ></i></a>
-                    <a href=""><i class='bx bxl-youtube' ></i></a>
+                    <a href=""><i class='bx bxl-instagram-alt'></i></a>
+                    <a href=""><i class='bx bxl-youtube'></i></a>
                 </nav>
             </nav>
             
             <nav class="footer-content">
                 <h4>Serviços</h4>
-                <li><a href=""></a>Instalação</li>
-                <li><a href=""></a>Vistoria</li>
-                <li><a href=""></a>Manutenção</li>
-                <li><a href=""></a>Consultoria</li>
-                <li><a href=""></a>Limpeza</li>
+                <li><a href="">Instalação</a></li>
+                <li><a href="">Vistoria</a></li>
+                <li><a href="">Manutenção</a></li>
+                <li><a href="">Consultoria</a></li>
+                <li><a href="">Limpeza</a></li>
             </nav>
 
             <nav class="footer-content">
                 <h4>Menu</h4>
-                <li><a href=""></a>Orçamento</li>
-                <li><a href=""></a>Sobre Nós</li>
-                <li><a href=""></a>Início</li>
-                <li><a href=""></a>Consultoria</li>
+                <li><a href="">Orçamento</a></li>
+                <li><a href="">Sobre Nós</a></li>
+                <li><a href="">Início</a></li>
+                <li><a href="">Consultoria</a></li>
             </nav>
 
             <nav class="footer-content">
                 <h4>Ajuda</h4>
-                <li><a href=""></a>Contato email</li>
-                <li><a href=""></a>Contato telefone</li>
+                <li><a href="">Contato email</a></li>
+                <li><a href="">Contato telefone</a></li>
             </nav>
         </section>
     </footer>
 
     <script>
-        const toggleBtn = document.querySelector('.toggle_btn')
-        const toggleBtnIcon = document.querySelector('.toggle_btn i')
-        const dropDownMenu = document.querySelector('.dropdown_menu')
+        const toggleBtn = document.querySelector('.toggle_btn');
+        const toggleBtnIcon = document.querySelector('.toggle_btn i');
+        const dropDownMenu = document.querySelector('.dropdown_menu');
 
         toggleBtn.onclick = function () {
-            dropDownMenu.classList.toggle('open')
-            const isOpen = dropDownMenu.classList.contains('open')
+            dropDownMenu.classList.toggle('open');
+            const isOpen = dropDownMenu.classList.contains('open');
 
             toggleBtnIcon.classList = isOpen
-            ? 'fa-solid fa-xmark'
-            : 'fa-solid fa-bars-staggered'
+                ? 'fa-solid fa-xmark'
+                : 'fa-solid fa-bars-staggered';
         }
     </script>
     <script src="app.js"></script>

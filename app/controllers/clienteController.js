@@ -7,6 +7,7 @@ const fetch = require('node-fetch');
 const verificarClienteAutorizado = require('../models/verificarClienteAutorizado');
 const jwt = require('jsonwebtoken'); // Certifique-se de incluir isso
 const https = require('https');
+const tipoClienteModel = require("../models/tipoClienteModel");
 
 const clienteController = {
     regrasValidacaoFormLogin: [
@@ -24,7 +25,7 @@ const clienteController = {
         body("senha_cliente")
             .isLength({ min: 8 }).withMessage('A senha deve conter pelo menos 8 caracteres'),
         body('cpf_cliente')
-            .isLength({ min: 14, max: 14 }).withMessage('O cpf deve ser válido, contendo 11 dígitos'),
+            .isLength({ min: 14, max: 14 }).withMessage('Campo obrigatório'),
         body('cep_cliente')
             .isLength({ min: 9, max: 9 }).withMessage('O cep deve ter entre 9 caracteres'),
         body('contato_cliente')
@@ -67,7 +68,7 @@ const clienteController = {
             return res.render("pages/entrar", { listaErros: erros, dadosNotificacao: null });
         }
         if (req.session.autenticado.autenticado != null) {
-            res.redirect("/");
+            res.render('pages/home', { autenticado: req.session.autenticado ,carrinho:null,login:req.session.logado}); 
         } else {
             res.render("pages/entrar", { listaErros: null, dadosNotificacao: { titulo: "Falha ao logar!", mensagem: "Usuário e/ou senha inválidos!", tipo: "error" } });
         }
@@ -77,7 +78,7 @@ const clienteController = {
         const erros = validationResult(req);
         if (!erros.isEmpty()) {
             console.log(erros);
-            return res.render("pages/cadastrocliente", { listaErros: erros, dadosNotificacao: null, valores: req.body });
+            return res.render("pages/cadastrocliente", { listaErros: erros, dadosNotificacao: null, valores: req.body , autenticado: req.session.autenticado});
         }
 
         const dadosForm = {
@@ -94,14 +95,14 @@ const clienteController = {
         try {
             await cliente.create(dadosForm);
             res.render("pages/home", {
-                listaErros: null, dadosNotificacao: {
+                listaErros: null, carrinho:null, autenticado: req.session.autenticado, dadosNotificacao: {
                     titulo: "Cadastro realizado!", mensagem: "Novo usuário criado com sucesso!", tipo: "success"
                 }, valores: req.body
             });
         } catch (e) {
             console.log(e);
             res.render("pages/cadastrocliente", {
-                listaErros: erros, dadosNotificacao: {
+                listaErros: null, autenticado: req.session.autenticado, dadosNotificacao: {
                     titulo: "Erro ao cadastrar!", mensagem: "Verifique os valores digitados!", tipo: "error"
                 }, valores: req.body
             });
@@ -112,7 +113,7 @@ const clienteController = {
         console.log(token);
         jwt.verify(token, process.env.SECRET_KEY, (err, decoded) => {
             if (err) {
-                return res.render("pages/rec-senha", {
+                return res.render("pages/recsenha", {
                     listaErros: null,
                     dadosNotificacao: { 
                         titulo: "Link expirado!", 
@@ -122,7 +123,7 @@ const clienteController = {
                     valores: req.body
                 });
             } else {
-                return res.render("pages/resetar-senha", {
+                return res.render("pages/resetarsenha", {
                     listaErros: null,
                     autenticado: req.session.autenticado,
                     id_cliente: decoded.userId,
@@ -136,7 +137,7 @@ const clienteController = {
         const erros = validationResult(req);
         console.log(erros);
         if (!erros.isEmpty()) {
-            return res.render("pages/resetar-senha", {
+            return res.render("pages/resetarsenha", {
                 listaErros: erros,
                 dadosNotificacao: null,
                 valores: req.body,
@@ -146,7 +147,7 @@ const clienteController = {
             const senha = bcrypt.hashSync(req.body.senha_cliente);
             const resetar = await cliente.update({ senha_cliente: senha }, req.body.id_cliente);
             console.log(resetar);
-            res.render("pages/entrar", {
+            res.render("/", {
                 listaErros: null,
                 dadosNotificacao: {
                     titulo: "Perfil alterado",
@@ -161,7 +162,7 @@ const clienteController = {
 
     mostrarPerfil: async (req, res) => {
         try {
-            let results = await cliente.findId(req.session.autenticado.id);
+            let results = await tipoClienteModel.findId(req.session.autenticado.id);
             let viaCep = { logradouro: "", bairro: "", localidade: "", uf: "" };
             let cep = null;
 
@@ -226,6 +227,8 @@ const clienteController = {
         }
     },
 
+    
+
     gravarPerfil: async (req, res) => {
         const erros = validationResult(req);
         const erroMulter = req.session.erroMulter;
@@ -242,6 +245,7 @@ const clienteController = {
                 nome_cliente: req.body.nome_cliente,
                 email_cliente: req.body.email_cliente,
                 fone_cliente: req.body.fone_cliente,
+                cep_cliente: req.body.cep.replace("-",""),
                 numero_cliente: req.body.numero,
                 complemento_cliente: req.body.complemento,
                 img_perfil_banco: req.session.autenticado.img_perfil_banco,
