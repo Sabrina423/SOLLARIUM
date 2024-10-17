@@ -21,10 +21,12 @@ body {
     flex-direction: row; /* Layout padrão: lado a lado */
     width: 60%;
     max-width: 900px;
-    background-color: white;
+    background-color: #0a0a0a;
+    backdrop-filter: blur(2px);
+    border: solid 1px;
+    border-color: #0a0a0a;
     border-radius: 10px;
     overflow: hidden;
-    box-shadow: 0 0 30px rgba(0, 0, 0, 0.753);
 }
 
 /* O Hero é a parte esquerda e o formulário é a parte direita */
@@ -72,19 +74,25 @@ main {
     width: 100%;
     padding: 10px;
     margin-bottom: 10px;
-    border: 1px solid #ddd;
+    color: #fff;
+    background-color: #1d1a1a;
+    border: 1px solid #1d1a1a;
     border-radius: 5px;
     font-size: 14px;
     height: 40px;
+
 }
 .input-group select {
     width: 100%;
     padding: 10px;
     margin-bottom: 10px;
-    border: 1px solid #ddd;
+    color: #fff;
+    background-color: #1d1a1a;
+    border: 1px solid #1d1a1a;
     border-radius: 5px;
     font-size: 14px;
     height: 40px;
+
 }
 
 .password-container {
@@ -100,7 +108,7 @@ button[type="submit"] {
     width: 100%;
     height: 50px;
     padding: 12px;
-    background-color: black;
+    background-color: #ffac40;
     color: white;
     border: none;
     border-radius: 5px;
@@ -108,11 +116,15 @@ button[type="submit"] {
     cursor: pointer;
     transition: background-color 0.3s;
 }
-
-button[type="submit"]:hover {
-    background-color: darken(#000, 10%);
+button:hover{
+    background-color: #fff;
+    color: #e0ad4c;
 }
 
+button[type="submit"] a {
+    color: white;
+    text-decoration: none;
+}
 #message {
     display: none;
     margin-top: 10px;

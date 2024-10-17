@@ -90,7 +90,11 @@ h2 {
     font-size: 40px;
     width: 250px;
 }
-
+.material-symbols-outlined {
+    align-self: flex-start;
+    text-decoration: none;
+    color: #ffffff;
+    }
 .radio-group {
     margin-bottom: 15px;
 }
@@ -116,7 +120,7 @@ button[type="submit"] {
 
     width: 100%;
     padding: 12px;
-    background-color: #e0ad4c;
+    background-color: #ffac40;
     color: white;
     border: none;
     border-radius: 200px;

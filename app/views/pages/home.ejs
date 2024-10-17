@@ -16,14 +16,27 @@
 <body>
     
 <header>
-           <nav class="navbar">
+        <nav class="navbar">
         <nav class="logo"><a href="#">Sollarium</a></nav>
         <ul class="links">
             <li><a href="/">Início</a></li>
             <li><a href="/orcamento">Orçamento</a></li>
             <li><a href="/cadastroinicial">Cadastre-se</a></li>
         </ul>
-        <a href="/entrar" class="action_btn">Entrar</a>
+        <% if (autenticado.autenticado != null) { 
+            let arquivo = { "imagem": "imagens/perfil/imgperfil.png" }; 
+            %>
+            <div class="profile-container" style="margin-left: 30px; display: flex; align-items: center;">
+                <span style="margin-right: 20px;">Olá <%= autenticado.autenticado %>!</span>
+                <a href="<%= autenticado.tipo === 'profissional' ? '/perfilprof' : '/perfilcliente' %>" style="display: inline-block; margin-right: 20px;">
+                    <img src="<%= arquivo.imagem %>" alt="Imagem de perfil" style="max-width: 60px; max-height: 60px;" 
+                         onerror="this.onerror=null; this.src='imagens/perfil/imgperfil.png';">
+                </a>
+                <p style="margin: 0;"><a href="/">sair</a></p>
+            </div>                
+        <% } else { %>
+            <a href="/entrar" class="action_btn">Entrar</a>
+        <% } %>   
         <nav class="toggle_btn">
             <i class="fa-solid fa-bars-staggered"></i>
         </nav>
@@ -33,12 +46,21 @@
             <li><a href="/home">Início</a></li>
             <li><a href="/orcamento">Orçamento</a></li>
             <li><a href="/sobre">Sobre nós</a></li>
-            <% if (autenticado.autenticado == null) { %>
-                <li><a href="/cadastroinicial">Cadastre-se</a></li>
-            <% } %>
-            <% if (autenticado.autenticado == null) { %>
-                <li><a href="/entrar" class="action_btn">Entrar</a></li>
-            <% } %>
+            <% if (autenticado.autenticado != null) { 
+                let arquivo = { "imagem": "imagens/perfil/imgperfil.png" }; 
+                %>
+                <div class="profile-container" style="margin-left: 30px; display: flex; align-items: center;">
+                    <span style="margin-right: 20px;">Olá <%= autenticado.autenticado %>!</span>
+                    <a href="<%= autenticado.tipo === 'profissional' ? '/perfilprofissional' : '/perfilcliente' %>" style="display: inline-block; margin-right: 20px;">
+                        <img src="<%= arquivo.imagem %>" alt="Imagem de perfil" style="max-width: 60px; max-height: 60px;" 
+                             onerror="this.onerror=null; this.src='imagens/perfil/imgperfil.png';">
+                    </a>
+                    <p style="margin: 0;"><a href="/">sair</a></p>
+                </div>                
+            <% } else { %>
+                <a href="/entrar" class="action_btn">Entrar</a>
+            <% } %>   
+            
         </nav>
     </header>
     

@@ -68,7 +68,9 @@ const clienteController = {
             return res.render("pages/entrar", { listaErros: erros, dadosNotificacao: null });
         }
         if (req.session.autenticado.autenticado != null) {
-            res.render('pages/home', { autenticado: req.session.autenticado ,carrinho:null,login:req.session.logado}); 
+            console.log(req.session.autenticado )
+            
+            res.render('pages/home', { autenticado: req.session.autenticado, carrinho:null, login:req.session.logado}); 
         } else {
             res.render("pages/entrar", { listaErros: null, dadosNotificacao: { titulo: "Falha ao logar!", mensagem: "Usuário e/ou senha inválidos!", tipo: "error" } });
         }

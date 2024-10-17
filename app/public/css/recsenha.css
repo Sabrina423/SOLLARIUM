@@ -7,13 +7,17 @@ body {
     align-items: center;
     height: 100vh;
     margin: 0;
+    background-color: #0a0a0a;
 }
 
 .container {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 140px rgba(83, 83, 83, 0.445);
+    background-color: #0a0a0a;
+    backdrop-filter: blur(2px);
+    border: solid 1px;
+    border-color: #646363;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 0 140px rgba(0, 0, 0, 0.753);
     width: 100%;
     max-width: 400px;
     height: 300px;
@@ -25,15 +29,18 @@ input{
     height: 40px;
     font-family: sans-serif;
     font-size: 14px;
-   border: 1px solid rgb(31, 31, 31);
-   color: black;
+    background-color: #1d1a1a;
+    border: 1px solid #1d1a1a;
+    border-radius: 5px;
+    color: white;
 }
 button{
 margin-left: 40px;
 margin-top: 50px;
 height: 50px;
 width: 80%;
-background-color: black;
+background-color: #ffac40;
+border-radius: 200px;
 font-family: sans-serif;
 font-size: 16px;
 color: #fff;
@@ -44,12 +51,13 @@ P{
     font-size: 18px;
     font-weight: 400;
     text-align: center;
+    color: white;
 }
-
 .material-symbols-outlined {
-    align-self: flex-start;
+    margin-left: 20px;
+    margin-top: 20px;
     text-decoration: none;
-    color: #000000;
+    color: #ffffff;
     }
     @media (max-width: 768px) {
         

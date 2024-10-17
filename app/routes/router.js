@@ -14,6 +14,9 @@ const adm = require("../models/admModel");
 const relatorioController = require("../controllers/relatorioController");
 const uploadFile = require("../util/uploader.js")("./app/public/imagem/perfil");
 const feedbackController = require('../controllers/feedbackController');
+const orcamentoController = require('../controllers/orcamentoController.js');
+
+
 const {
     verificarClienteAutenticado,
     verificarClienteAutorizado,
@@ -88,7 +91,7 @@ router.get('/cadastroprof', (req, res) => {
     res.render('pages/cadastroprof');
 });
 
-router.get('/orcamento', (req, res) => {
+router.get('/orcamento', verificarClienteAutorizado([1],'pages/entrar'), (req, res) => {
     res.render('pages/orcamento');
 });
 
@@ -227,9 +230,15 @@ router.post("/adm", admController.regrasValidacaoFormCad, async (req, res) => {
 router.post("/entrar", clienteController.regrasValidacaoFormLogin, gravarClienteAutenticado, (req, res) => {
     // Presumindo que o login foi bem-sucedido e as informações do usuário estão na req.user
   clienteController.logar(req,res)
+});
+
+router.post("/orcamento", orcamentoController.regrasValidacaoFormOrcamento, (req, res) => {
+    // Presumindo que o login foi bem-sucedido e as informações do usuário estão na req.user
+  orcamentoController.cadastrarOrcamento(req,res)
 
   
 });
+
 
 // Exportando o router
 

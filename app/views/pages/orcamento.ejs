@@ -46,26 +46,26 @@
         </section>
         
           <section id="contact" class="contact-section">
-            <form id="orcamento-form">
+            <form id="orcamento-form" method="post" action="/orcamento">
             <h2>Solicite seu Orçamento</h2>
                 <nav class="form-group">
                     <label for="name">Nome:</label>
-                    <input type="text" id="name" name="name" placeholder="Nome completo" required>
+                    <input type="text" id="name" name="nome_cliente" placeholder="Nome completo" required>
                 </nav>
 
                 <nav class="form-group">
                     <label for="text">Serviço:</label>
-                    <textarea id="text" name="serviço" rows="4" placeholder="Descreva o serviço desejado" required></textarea>
+                    <input type="text" id="descricao_orcamento" name="descricao_orcamento" rows="4" placeholder="Descreva o serviço desejado" required>
                 </nav>
 
                 <nav class="form-group">
                     <label for="valor">Valor esperado:</label>
-                    <input type="text" id="valor" name="valor" placeholder="R$ 0,00"  onkeyup="formatarMoeda(this)" required>
+                    <input type="text" id="valor_orcamento" name="valor_orcamento" placeholder="R$ 0,00"  onkeyup="formatarMoeda(this)" required>
                 </nav>
 
                 <nav class="form-group">
                     <label for="data">Dia e horário que o serviço deve ser realizado:</label>
-                    <input type="datetime-local" id="data" name="data" required>
+                    <input type="datetime-local" id="data_orcamento" name="data_orcamento" required>
                 </nav>
 
                 <button type="submit">Enviar Solicitação</button>

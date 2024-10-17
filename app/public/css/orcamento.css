@@ -5,6 +5,12 @@
     box-sizing: border-box;
 }
 
+.material-symbols-outlined {
+    align-self: flex-start;
+    text-decoration: none;
+    color: #ffffff;
+    }
+
 body {
     font-family: 'Poppins', sans-serif;
     background-color: #1e1e1e; /* Fundo escuro */

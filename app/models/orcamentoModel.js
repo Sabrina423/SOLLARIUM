@@ -1,4 +1,4 @@
-const pool = require('../../config/pool_conexoes'); 
+const pool = require('../../config/pool_conexoes');
 
 const orcamentoModel = {
     findById: async (id) => {
@@ -6,45 +6,35 @@ const orcamentoModel = {
             const [linhas] = await pool.query('SELECT * FROM ORCAMENTO WHERE ID_ORCAMENTO = ?', [id]);
             return linhas[0];
         } catch (error) {
-            console.error('Erro ao buscar orçamento por ID:', error);
+            console.error('Erro ao buscar orcamento por ID:', error);
             throw error;
         }
     },
-
-    findByEmail: async (id) => {
-        try {
-            const [linhas] = await pool.query('SELECT * FROM ORCAMENTO WHERE ID_ORCAMENTO = ?', [id]);
-            return linhas;
-        } catch (error) {
-            console.error('Erro ao buscar orçamento por ID:', error);
-            throw error;
-        }
-    },
-
+    
     create: async (orcamento) => {
         try {
-            const { id_orcamento, valor_orcamento,  descricao_orcamento, data_orcamento, status_orcamento} = orcamento;
+            const { id_orcamento, valor_orcamento, descricao_orcamento, data_orcamento, status_orcamento } = orcamento;
             const result = await pool.query(
-                'INSERT INTO ORCAME ( ID_ORCAMENO, VALOR_ORCAMENTO, DESCRICAO_ORCAMENTO, DATA_ORCAMENTO, STATUS_ORCAMENTO) VALUES (?, ?, ?,?, ?)',
+                'INSERT INTO ORCAMENTO (ID_ORCAMENTO, VALOR_ORCAMENTO, DESCRICAO_ORCAMENTO, DATA_ORCAMENTO, STATUS_ORCAMENTO) VALUES (?, ?, ?, ?, ?)',
                 [id_orcamento, valor_orcamento, descricao_orcamento, data_orcamento, status_orcamento]
             );
-            return result; // Retorna o resultado da inserção
+            return result;
         } catch (error) {
-            console.error('Erro ao criar cliente:', error);
+            console.error('Erro ao criar orcamento:', error);
             throw error;
         }
     },
 
     update: async (id, orcamento) => {
         try {
-            const { id_orcamento, valor_orcamento,  descricao_orcamento, data_orcamento, status_orcamento } = orcamento;
+            const { valor_orcamento, descricao_orcamento, data_orcamento, status_orcamento } = orcamento;
             const result = await pool.query(
-                'UPDATE ORCAMENTO SET ID_ORCAMENTO = ?, VALOR_ORCAMENTO = ?, DESCRICAO_ORCAMENTO = ?, DATA_ORCAMENTO = ?, STATUS_ORCAMENTO WHERE ID_ORCAMENTO = ?',
-                [id_orcamento, valor_orcamento, descricao_orcamento, data_orcamento, status_orcamento, id]
+                'UPDATE ORCAMENTO SET VALOR_ORCAMENTO = ?, DESCRICAO_ORCAMENTO = ?, DATA_ORCAMENTO = ?, STATUS_ORCAMENTO = ? WHERE ID_ORCAMENTO = ?',
+                [valor_orcamento, descricao_orcamento, data_orcamento, status_orcamento, id]
             );
-            return result; // Retorna o resultado da atualização
+            return result;
         } catch (error) {
-            console.error('Erro ao atualizar cliente:', error);
+            console.error('Erro ao atualizar orcamento:', error);
             throw error;
         }
     },
@@ -52,7 +42,7 @@ const orcamentoModel = {
     delete: async (id) => {
         try {
             const result = await pool.query('DELETE FROM ORCAMENTO WHERE ID_ORCAMENTO = ?', [id]);
-            return result; // Retorna o resultado da exclusão
+            return result;
         } catch (error) {
             console.error('Erro ao deletar orcamento:', error);
             throw error;

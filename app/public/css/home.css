@@ -390,9 +390,8 @@ section {
 
 /* Novas adições para ajustes do cabeçalho */ 
 .navbar {     
-    justify-content: flex-start; /* Alinha os itens à esquerda */ 
-}  
-
+    justify-content: center; /* Alinha os itens à esquerda */ 
+}
 .navbar .profile-container {     
     display: flex; /* Flex para alinhar os itens dentro do contêiner */     
     align-items: center; /* Alinha verticalmente */     
