@@ -19,10 +19,10 @@
             <h3>Saiba como nossas taxações e contrato funcionam!</h3>
             <nav class="termos1">
                 <button type="button" id="openPopup">Quero saber!</button>
-                <div class="checkbox-label">
+                <nav class="checkbox-label">
                     <input type="checkbox" id="termos" name="termos" required>
                     <label for="termos">Li e aceito os termos de taxação e assinatura!</label>
-                </div>                
+                </nav>                
                 
             </nav>
             
@@ -37,7 +37,7 @@
                     <input type="text" name="cpf_prof" id="cpf_prof" placeholder="CPF" required>
                 </nav>
                 <nav class="input-group">
-                    <input type="text" name="cep_cliente" placeholder="CEP"maxlength="9" placeholder="00000-000" oninput="mascaraCep(this)" required>
+                    <input type="text" name="cep_prof" placeholder="CEP"maxlength="9" placeholder="00000-000" oninput="mascaraCep(this)" required>
                 </nav>
                
                 <nav class="input-group">
@@ -66,8 +66,8 @@
     </nav>
 
     <!-- Popup Modal -->
-    <div id="popup" class="popup">
-        <div class="popup-content">
+    <nav id="popup" class="popup">
+        <nav class="popup-content">
             <span class="popup-close" id="closePopup">&times;</span>
             <p>
                 <h2>Termos de Taxação e Assinatura</h2>
@@ -110,8 +110,8 @@ O cadastro e a política de comissionamento visam estabelecer um ambiente de tra
 
 <p>Sollarium, Departamento de Recursos Humanos / Cadastro de Profissionais.</p>
             <button id="acceptTerms">Entendi</button>
-        </div>
-    </div>
+        </nav>
+    </nav>
 
     <script>
    document.getElementById('cadastroFormprof').addEventListener('submit', function(event) {

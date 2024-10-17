@@ -19,7 +19,7 @@ const profController = {
     // Regras de validação para cadastro
 regrasValidacaoFormCad: [
     body('nome_prof').isLength({ min: 3, max: 45 }).withMessage('Nome deve ter entre 3 e 45 caracteres.'),
-    body('cep_cliente')
+    body('cep_prof')
     .isLength({ min: 9, max: 9 }).withMessage('O cep deve ter entre 9 caracteres'),
     // Sanitizar o CPF antes de validar
     body('cpf_prof')
