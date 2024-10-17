@@ -24,7 +24,7 @@ a {
 
 .header__wrapper header {
   width: 100%;
-  background: url("/imagens/sollarium_homepage178.png") no-repeat 50% 20% / cover;
+  background: url("/imagens/painel1.png") no-repeat 50% 20% / cover;
   min-height: calc(90px + 15vw);
 }
 
