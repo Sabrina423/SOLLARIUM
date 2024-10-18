@@ -24,7 +24,7 @@
             <li><a href="/cadastroinicial">Cadastre-se</a></li>
         </ul>
         <% if (autenticado.autenticado != null) { 
-            let arquivo = { "imagem": "imagens/perfil/imgperfil.png" }; 
+            let arquivo = autenticado.autenticado.imagem == null ? { "imagem": "imagens/perfil/imgperfil.png" } :{ "imagem": autenticado.autenticado.imagem   }; 
             %>
             <div class="profile-container" style="margin-left: 30px; display: flex; align-items: center;">
                 <span style="margin-right: 20px;">Olá <%= autenticado.autenticado %>!</span>

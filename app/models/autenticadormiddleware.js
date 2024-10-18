@@ -55,7 +55,8 @@ const gravarClienteAutenticado = async (req, res, next) => {
                 autenticado = {
                   autenticado: profissionalExistente[0].NOME_PROF,
                   id: profissionalExistente[0].ID_PROF,
-                  tipo: 2
+                  tipo: 2,
+                  imagem:profissionalExistente[0].IMAGEM_PERFIL_PROFISSIONAL
                 };
             //else validar adm
               }else{

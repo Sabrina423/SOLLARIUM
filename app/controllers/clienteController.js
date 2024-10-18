@@ -168,9 +168,9 @@ const clienteController = {
             let viaCep = { logradouro: "", bairro: "", localidade: "", uf: "" };
             let cep = null;
 
-            if (results[0].cep_cliente != null) {
+            if (results[0].CEP_CLIENTE!= null) {
                 const httpsAgent = new https.Agent({ rejectUnauthorized: false });
-                const response = await fetch(`https://viacep.com.br/ws/${results[0].cep_cliente}/json/`, {
+                const response = await fetch(`https://viacep.com.br/ws/${results[0].CEP_CLIENTE}/json/`, {
                     method: 'GET',
                     agent: httpsAgent
                 });
@@ -180,7 +180,7 @@ const clienteController = {
                 }
 
                 viaCep = await response.json();
-                cep = results[0].cep_cliente.slice(0, 5) + "-" + results[0].cep_cliente.slice(5);
+                cep = results[0].CEP_CLIENTE.slice(0, 5) + "-" + results[0].CEP_CLIENTE.slice(5);
             }
 
             let campos = {
