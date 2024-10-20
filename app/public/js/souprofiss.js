@@ -16,10 +16,11 @@ app.post('/perfilprof', [
         }, {});
         return res.render('soucliente', { errors: errorObj });
     }
-   
+
     res.send('Login realizado com sucesso');
 });
 
 app.listen(3000, () => {
     console.log('Servidor rodando na porta 3000');
 });
+

@@ -1,125 +1,142 @@
-
 <!DOCTYPE html>
 <html lang="pt-br">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Perfil Profissional</title>
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"/>
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
-    <link rel="stylesheet" href="/css/perfilprof.css" />
-  </head>
-  <body>
-    <div class="header__wrapper">
-      <header></header>
 
-      <div class="cols__container">
-        <div class="left__col">
-          <div class="img__container">
-            <input type="file" name="" id=""><img src="/imagens/perfil/imgperfil.png" alt="">
-            <span></span>
-          </div>
-          <h2>Dwight Schrute</h2>
-          <p>Assistente do Gerente Regional</p>
-          <p>DwAss@example.com</p>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Perfil Profissional</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  <link rel="stylesheet" href="/css/perfilprof.css" />
+</head>
 
-          <ul class="about">
-            <li><span>4,073</span>Seguidores</li>
-            <li><span>3 anos e 9m</span>Na Plataforma</li>
-            <li><span>180</span>Finalizados</li>
-          </ul>
+<body>
+  <div class="header__wrapper">
+    <header></header>
 
-          <div class="content">
-            <p>
-              Melhor funcionario do mundo. Inimigo mortal de Jim Halpert.
-              Melhor amigo e funcionario de Michael Scott.
-              Dominante em artes marciais e disparo de armas, além de caçador nas horas vagas.
-              O mais perto de Deus 
-            </p>
-
-            <ul>
-              <li><i class="fa-brands fa-x-twitter"></i></li>
-              <i class="fa-brands fa-whatsapp"></i>
-              <i class="fa-brands fa-instagram"></i>
-              <i class="fa-brands fa-facebook"></i>
-            </ul>
-          </div>
+    <div class="cols__container">
+      <div class="left__col">
+        <div class="img__container">
+          <input type="file" id="inputArquivo" style="display: none;" accept="image/*" />
+          <img id="imagem" src="/imagens/perfil/imgperfil.png" alt="Clique para mudar a imagem" />
+          <script>
+            const inputArquivo = document.getElementById('inputArquivo');
+            const imagem = document.getElementById('imagem');
+        
+            imagem.addEventListener('click', () => {
+                inputArquivo.click();
+            });
+        
+            inputArquivo.addEventListener('change', (event) => {
+                const arquivo = event.target.files[0];
+                if (arquivo) {
+                    const url = URL.createObjectURL(arquivo);
+                    imagem.src = url;
+                }
+            });
+        </script>
+          <span></span>
         </div>
-        <div class="right__col">
-          <nav>
-            <ul>
-              <li><a href="">Editar perfil</a></li>
-              <li><a href=""></a>Orçamentos</li>
-            </ul>
-            <div class="bell"><i class="fa-solid fa-bell"></i></div>
-            <button>Voltar ao Início</button>
-          </nav>
+        <h2>Dwight Schrute</h2>
+        <p>Assistente do Gerente Regional</p>
+        <p>DwAss@example.com</p>
 
-          <div class="photos">
-            <img src="/imagens/perfil/imgperfil.png" alt="Photo" />
-            <img src="/imagens/perfil/imgperfil.png" alt="Photo" />
-            <img src="/imagens/perfil/imgperfil.png" alt="Photo" />
-            <img src="/imagens/perfil/imgperfil.png" alt="Photo" />
-            <img src="/imagens/perfil/imgperfil.png" alt="Photo" />
-            
-          </div>
+        <ul class="about">
+          <li><span>4,073</span>Seguidores</li>
+          <li><span>3 anos e 9m</span>Na Plataforma</li>
+          <li><span>180</span>Finalizados</li>
+        </ul>
+
+        <div class="content">
+          <p>
+            Melhor funcionario do mundo. Inimigo mortal de Jim Halpert.
+            Melhor amigo e funcionario de Michael Scott.
+            Dominante em artes marciais e disparo de armas, além de caçador nas horas vagas.
+            O mais perto de Deus
+          </p>
+
+          <ul>
+            <li><i class="fa-brands fa-x-twitter"></i></li>
+            <i class="fa-brands fa-whatsapp"></i>
+            <i class="fa-brands fa-instagram"></i>
+            <i class="fa-brands fa-facebook"></i>
+          </ul>
+        </div>
+      </div>
+      <div class="right__col">
+        <nav>
+          <ul>
+            <li><a href="">Editar perfil</a></li>
+            <li><a href=""></a>Orçamentos</li>
+          </ul>
+          <div class="bell"><i class="fa-solid fa-bell"></i></div>
+          <button>Voltar ao Início</button>
+        </nav>
+
+        <div class="photos">
+          <img src="/imagens/perfil/imgperfil.png" alt="Photo" />
+          <img src="/imagens/perfil/imgperfil.png" alt="Photo" />
+          <img src="/imagens/perfil/imgperfil.png" alt="Photo" />
+          <img src="/imagens/perfil/imgperfil.png" alt="Photo" />
+          <img src="/imagens/perfil/imgperfil.png" alt="Photo" />
+
         </div>
       </div>
     </div>
-    
-    <footer>
-      <section class="footer">
-          <div class="footer-content">
-              <h2>Sollarium</h2>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident dolorum 
-                 accusantium nihil laudantium non.</p>
+  </div>
 
-              <div class="icons">
-                  <a href=""><i class='bx bxl-facebook-circle'></i></a>
-                  <a href=""><i class='bx bxl-twitter'></i></a>
-                  <a href=""><i class='bx bxl-instagram-alt' ></i></a>
-                  
-              </div>
-          </div>
-          
-          <div class="footer-content">
-              <h4>Projetos</h4>
-              <li><a href=""></a>Instalação</li>
-              <li><a href=""></a>Vistoria</li>
-              <li><a href=""></a>Manutenção</li>
-              <li><a href=""></a>Consultoria</li>
-              <li><a href=""></a>Limpeza</li>
-          </div>
+  <footer>
+    <section class="footer">
+      <div class="footer-content">
+        <h2>Sollarium</h2>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident dolorum
+          accusantium nihil laudantium non.</p>
 
-          <div class="footer-content">
-              <h4>Company</h4>
-              <li><a href=""></a>Instalação</li>
-              <li><a href=""></a>Vistoria</li>
-              <li><a href=""></a>Manutenção</li>
-              <li><a href=""></a>Consultoria</li>
-          </div>
+        <div class="icons">
+          <a href=""><i class='bx bxl-facebook-circle'></i></a>
+          <a href=""><i class='bx bxl-twitter'></i></a>
+          <a href=""><i class='bx bxl-instagram-alt'></i></a>
 
-          <div class="footer-content">
-            <h4>Company</h4>
-            <li><a href=""></a>Instalação</li>
-            <li><a href=""></a>Vistoria</li>
-            <li><a href=""></a>Manutenção</li>
-            <li><a href=""></a>Consultoria</li>
         </div>
+      </div>
 
-          
+      <div class="footer-content">
+        <h4>Projetos</h4>
+        <li><a href=""></a>Instalação</li>
+        <li><a href=""></a>Vistoria</li>
+        <li><a href=""></a>Manutenção</li>
+        <li><a href=""></a>Consultoria</li>
+        <li><a href=""></a>Limpeza</li>
+      </div>
 
-          <div class="footer-content">
-              <h4>Ajuda</h4>
-              <li><a href=""></a>Instalação</li>
-              <li><a href=""></a>Vistoria</li>
-              <li><a href=""></a>Manutenção</li>
-              <li><a href=""></a>Consultoria</li>
-          </div>
-      </section>
+      <div class="footer-content">
+        <h4>Company</h4>
+        <li><a href=""></a>Instalação</li>
+        <li><a href=""></a>Vistoria</li>
+        <li><a href=""></a>Manutenção</li>
+        <li><a href=""></a>Consultoria</li>
+      </div>
+
+      <div class="footer-content">
+        <h4>Company</h4>
+        <li><a href=""></a>Instalação</li>
+        <li><a href=""></a>Vistoria</li>
+        <li><a href=""></a>Manutenção</li>
+        <li><a href=""></a>Consultoria</li>
+      </div>
+
+
+
+      <div class="footer-content">
+        <h4>Ajuda</h4>
+        <li><a href=""></a>Instalação</li>
+        <li><a href=""></a>Vistoria</li>
+        <li><a href=""></a>Manutenção</li>
+        <li><a href=""></a>Consultoria</li>
+      </div>
+    </section>
   </footer>
-  </body>
+</body>
+
 </html>

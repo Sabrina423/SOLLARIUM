@@ -1,7 +1,7 @@
-module.exports=(url,token)=>{
+module.exports = (url, token) => {
 
 
-    return`<!DOCTYPE html>
+    return `<!DOCTYPE html>
     <html lang="pt-br">
     
     <head>
@@ -25,4 +25,6 @@ module.exports=(url,token)=>{
         <script src="server.js"></script>
     </body>
     </html>
-}
+};
+
+module.exports = ;
