@@ -33,9 +33,9 @@
                         <h1 id="user-name">Nome do Usuário</h1>
                         <p id="user-state">Estado</p>
                         <nav class="photo-actions">
-                            <% let arquivo={"imagem": "imagem/img-perfil.png" }; if(autenticado.img_perfil_pasta !=null)
-                                { arquivo.imagem=autenticado.img_perfil_pasta; }else if(autenticado.img_perfil_banco
-                                !=null){ arquivo.imagem=autenticado.img_perfil_banco; } %>
+                            <% let arquivo={"imagem": "imagem/img-perfil.png" }; if(autenticado.autenticado.IMAGEM_PERFIL_CLIENTE !=null)
+                                { arquivo.imagem=autenticado.autenticado.IMAGEM_PERFIL_CLIENTE; }else if(autenticado.autenticado.IMAGEM_PERFIL_CLIENTE
+                                !=null){ arquivo.imagem=autenticado.autenticado.IMAGEM_PERFIL_CLIENTE; } %>
                                 <input type="file" id="inputArquivo" style="display: none;" accept="image/*" />
                                 <img id="imagem" src="/imagens/perfil/imgperfil.png" alt="Clique para mudar a imagem" />
                                 <script>
