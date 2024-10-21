@@ -33,8 +33,25 @@
                         <h1 id="user-name">Nome do Usuário</h1>
                         <p id="user-state">Estado</p>
                         <nav class="photo-actions">
-                            <input type="file" id="file-input" accept="image/*" placeholder="Alterar Foto">
-                            
+                            <input type="file" id="inputArquivo" style="display: none;" accept="image/*" />
+          <img id="imagem" src="/imagens/perfil/imgperfil.png" alt="Clique para mudar a imagem" />
+          <script>
+            const inputArquivo = document.getElementById('inputArquivo');
+            const imagem = document.getElementById('imagem');
+        
+            imagem.addEventListener('click', () => {
+                inputArquivo.click();
+            });
+        
+            inputArquivo.addEventListener('change', (event) => {
+                const arquivo = event.target.files[0];
+                if (arquivo) {
+                    const url = URL.createObjectURL(arquivo);
+                    imagem.src = url;
+                }
+            });
+        </script>
+                        
                         </nav>
                     </section>
                 </section>

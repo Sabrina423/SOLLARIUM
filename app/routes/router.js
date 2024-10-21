@@ -12,7 +12,7 @@ const cliente = require("../models/clienteModel");
 const profissional = require("../models/profissionaisModel");
 const adm = require("../models/admModel");
 const relatorioController = require("../controllers/relatorioController");
-const uploadFile = require("../util/uploader.js")("./app/public/imagem/perfil");
+const uploadFile = require("../util/uploader.js")("./app/public/imagens/imgperfil");
 const feedbackController = require('../controllers/feedbackController');
 const orcamentoController = require('../controllers/orcamentoController.js');
 
@@ -202,14 +202,17 @@ router.post (
     clienteController.regrasValidacaoPerfil,
     verificarClienteAutorizado( [1, 2, 3], "pages/cadastrocliente"),
     async function (req, res) {
-        clienteController.gravarperfil(req, res);
+        clienteController.gravarPerfil(req, res);
+
+router.get (
+    "/perfilcliente",
+    verificarClienteAutorizado( [1, 2, 3], "pages/cadastrocliente"),
+    async function (req, res) {
+        clienteController.mostrarPerfil(req, res);
+    }
+)        
 
     });
-});
-
-// Rota de registro cliente
-router.post("/perfilcliente", uploadFile("imagemperfil_cliente"), clienteController.regrasValidacaoPerfil, verificarClienteAutorizado([1, 2, 3], "pages/cadastrocliente"), async (req, res) => {
-    clienteController.gravarperfil(req, res);
 });
 
 router.post("/cadastrocliente", clienteController.regrasValidacaoFormCad, async (req, res) => {
