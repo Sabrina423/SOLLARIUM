@@ -28,6 +28,7 @@ const profissionaisModel = {
         try {
             const result = await pool.query(
                 'INSERT INTO PROFISSIONAIS (NOME_PROF, CONTATO_PROF, EMAIL_PROF, CPF_PROF, CEP_PROF, AREA_PROF, SENHA_PROF, IMAGEM_PROF) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
+                'INSERT INTO PROFISSIONAIS (NOME_PROF, CONTATO_PROF, EMAIL_PROF, CPF_PROF, CEP_PROF, AREA_PROF, SENHA_PROF, IMAGEM_PROF) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
                 [
                     profissionais.nome_prof,
                     profissionais.contato_prof,
@@ -63,6 +64,7 @@ const profissionaisModel = {
 
             const result = await pool.query(
                 'UPDATE PROFISSIONAIS SET CPF_PROF = ?, NOME_PROF = ?, CONTATO_PROF = ?, EMAIL_PROF = ?, SENHA_PROF = ?, ESTADO_PROF = ?, DOCUMENTO_PROF = ?, DATA_NASC = ?, CEP_PROF = ? WHERE ID_PROF = ?',
+                'UPDATE PROFISSIONAIS SET CPF_PROF = ?, NOME_PROF = ?, CONTATO_PROF = ?, EMAIL_PROF = ?, SENHA_PROF = ?, ESTADO_PROF = ?, DOCUMENTO_PROF = ?, DATA_NASC = ?, CEP_PROF = ? WHERE ID_PROF = ?',
                 [
                     cpf_prof,
                     nome_prof,
@@ -86,7 +88,7 @@ const profissionaisModel = {
     // Deletar um profissionais pelo ID
     delete: async (id) => {
         try {
-            const result = await pool.query('DELETE FROM PROFISSIONAL WHERE ID_PROF = ?', [id]);
+            const result = await pool.query('DELETE FROM PROFISSIONAIS WHERE ID_PROF = ?', [id]);
             return result[0]; // Retorna o resultado da exclusão
         } catch (error) {
             console.error('Erro ao deletar profissionais:', error);

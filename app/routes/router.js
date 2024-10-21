@@ -16,6 +16,13 @@ const uploadFile = require("../util/uploader.js")("./app/public/imagens/imgperfi
 const feedbackController = require('../controllers/feedbackController');
 const orcamentoController = require('../controllers/orcamentoController.js');
 
+function validateEmail(email) {
+    const errors = [];
+    if (!email) {
+        errors.push({ path: "email_cliente", msg: "O e-mail é obrigatório." });
+    }
+    return errors.length > 0 ? { errors } : {};
+}
 
 const {
     verificarClienteAutenticado,
@@ -151,9 +158,17 @@ router.get("/feedback", function (req, res) {
 
 const pool = require('/workspaces/SOLLARIUM/config/pool_conexoes');
 
-// Rota para recuperação de senha
-router.post ('/recovery', async (req, res) => {
+router.post('/recsenha', async (req, res) => {
     const email = req.body.email;
+
+    // Validação do e-mail
+    const listaErros = validateEmail(email);
+    if (listaErros.errors) {
+        return res.render('pages/recsenha', {
+            listaErros: listaErros,
+            dadosNotificacao: null // ou qualquer outra variável necessária
+        });
+    }
 
     // Verifica se o e-mail está cadastrado no banco de dados
     pool.query('SELECT * FROM CLIENTE WHERE EMAIL_CLIENTE = ?', [email], async (err, results) => {
@@ -174,7 +189,7 @@ router.post ('/recovery', async (req, res) => {
             from: process.env.EMAIL_USER,
             to: email,
             subject: 'Recuperação de Senha',
-            html: `Clique no link para redefinir sua senha: https://congenial-barnacle-5gx456xjgv7w249gr-3000.app.github.dev/resetarsenha/${token}`
+            html: `Clique no link para redefinir sua senha: https://seusite.com/resetarsenha/${token}`
         };
 
         const transporter = nodemailer.createTransport({
@@ -184,16 +199,28 @@ router.post ('/recovery', async (req, res) => {
                 pass: process.env.EMAIL_PASS
             }
         });
-    // Enviar email
-try {
-    await transporter.sendMail(mailOptions); // Corrigido aqui
-    console.log('Email enviado com sucesso para:', email);
-    res.send('Email de recuperação enviado.');
-} catch (error) {
-    console.error('Erro ao enviar email:', error);
-    return res.status(500).send('Erro ao enviar o email.');
-}
+
+        // Enviar email
+        try {
+            await transporter.sendMail(mailOptions);
+            console.log('Email enviado com sucesso para:', email);
+            res.send('Email de recuperação enviado.');
+        } catch (error) {
+            console.error('Erro ao enviar email:', error);
+            return res.status(500).send('Erro ao enviar o email.');
+        }
     });
+});
+
+router.post('/logout', (req, res) => {
+    req.session.destroy(err => {
+        if (err) {
+            return res.status(500).send('Erro ao fazer logout');
+        }
+        res.sendStatus(200); // Sucesso
+    });
+});
+
 
 //Rota de registro cliente
 router.post (
@@ -203,7 +230,7 @@ router.post (
     verificarClienteAutorizado( [1, 2, 3], "pages/cadastrocliente"),
     async function (req, res) {
         clienteController.gravarPerfil(req, res);
-
+    });
 router.get (
     "/perfilcliente",
     verificarClienteAutorizado( [1, 2, 3], "pages/cadastrocliente"),
@@ -211,9 +238,6 @@ router.get (
         clienteController.mostrarPerfil(req, res);
     }
 )        
-
-    });
-});
 
 router.post("/cadastrocliente", clienteController.regrasValidacaoFormCad, async (req, res) => {
     clienteController.cadastrar(req, res);

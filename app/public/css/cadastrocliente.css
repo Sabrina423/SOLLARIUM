@@ -12,6 +12,23 @@ body {
     align-items: center;
     background-color: rgb(0, 0, 0);
 }
+.password-container {
+    position: relative; /* Permite que o ícone seja posicionado dentro do input */
+}
+
+.password-container input {
+    width: 100%; /* Faz o input ocupar toda a largura do contêiner */
+    padding-right: 40px; /* Espaço para o ícone à direita */
+    box-sizing: border-box; /* Inclui padding no cálculo da largura */
+}
+
+.toggle-icon {
+    position: absolute; /* Permite posicionar o ícone sobre o input */
+    right: 15px; /* Distância da borda direita do input */
+    top: 50%; /* Posiciona o ícone verticalmente */
+    transform: translateY(-50%); /* Centraliza verticalmente */
+    cursor: pointer; /* Muda o cursor para indicar que é clicável */
+}
 
 .container {
     position: relative;

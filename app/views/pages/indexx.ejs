@@ -1,138 +1,3 @@
-<button class="menu-toggle" aria-label="Toggle menu">&#9776;</button>
-</section>
-</header>
-
-<section class="profile-container">
-<section class="profile-left">
-    <section class="profile-header">
-        <img id="profile-pic" src="default-profile.jpg" >
-        <section>
-            <h1 id="user-name">Nome do Usuário</h1>
-    <p id="user-state">Estado</p>
-            <nav class="photo-actions">
-                <button onclick="togglePhotoMenu()">Alterar Foto</button>
-                <nav id="photo-menu" class="photo-menu">
-                    <input type="file" id="file-input" accept="image/*" style="display: none;">
-                    <button onclick="document.getElementById('file-input').click()">Selecionar Foto</button>
-                    <button onclick="removePhoto()">Remover Foto</button>
-                </nav>
-            </nav>
-        </section>
-    </section>
-</section>
-
-<nav class="profile-right">
-    <div class="profile-details">
-        <h2>Informações do Perfil</h2>
-        <input type="text" id="full-name" placeholder="Nome Completo">
-        <input type="text" id="email" placeholder="Email">
-        <input type="text" id="phone" placeholder="Telefone">
-        <button onclick="saveProfile()">Salvar</button>
-    </nav>
-
-    <section class="professionals-carousel">
-        <h2>Profissionais contratados</h2>
-        <nav class="carousel-wrapper">
-            <section class="carousel-container">
-                <nav class="professional-card">
-                    <img src="/imagens/icon1.webp" alt="Profissional 1">
-                    <h3>João Silva</h3>
-                    <p>Especialização: Instalador de Painéis Solares</p>
-                </nav>
-                <section class="professional-card">
-                    <img src="/imagens/icon1.webp" alt="Profissional 2">
-                    <h3>Maria Oliveira</h3>
-                    <p>Especialização: Consultora de Energia Solar</p>
-                </section>
-                <nav class="professional-card">
-                    <img src="/imagens/icon1.webp" alt="Profissional 3">
-                    <h3>Pedro Santos</h3>
-                    <p>Especialização: Projetista de Sistemas Solares</p>
-                </nav>
-                <!-- Adicione mais cartões conforme necessário -->
-            </nav>
-            <button class="carousel-button carousel-prev" onclick="prevSlide()">&#10094;</button>
-            <button class="carousel-button carousel-next" onclick="nextSlide()">&#10095;</button>
-        </section>
-    </section>
-</section>
-</section>
-
-<script>
-let photoMenuVisible = false;
-let currentIndex = 0;
-
-function togglePhotoMenu() {
-    const menu = document.getElementById('photo-menu');
-    photoMenuVisible = !photoMenuVisible;
-    menu.style.display = photoMenuVisible ? 'block' : 'none';
-}
-
-function removePhoto() {
-    document.getElementById('profile-pic').src = 'default-profile.jpg';
-    document.getElementById('file-input').value = '';
-    togglePhotoMenu(); // Hide the menu after removing photo
-}
-
-document.getElementById('file-input').addEventListener('change', function(event) {
-    const file = event.target.files[0];
-    if (file) {
-        const reader = new FileReader();
-        reader.onload = function(e) {
-            document.getElementById('profile-pic').src = e.target.result;
-            togglePhotoMenu(); // Hide the menu after selecting photo
-        }
-        reader.readAsDataURL(file);
-    }
-});
-
-document.addEventListener('click', function(event) {
-    const menu = document.getElementById('photo-menu');
-    const photoButton = document.querySelector('.photo-actions button');
-    if (photoMenuVisible && !menu.contains(event.target) && event.target !== photoButton) {
-        togglePhotoMenu();
-    }
-});
-
-function saveProfile() {
-    const fullName = document.getElementById('full-name').value;
-    const email = document.getElementById('email').value;
-    const phone = document.getElementById('phone').value;
-
-    // Aqui você pode adicionar a lógica para salvar as informações do perfil, 
-    // como fazer uma requisição para um servidor.
-
-    alert('Perfil salvo com sucesso!');
-}
-
-function showSlide(index) {
-    const container = document.querySelector('.carousel-container');
-    const totalSlides = container.children.length;
-    if (index >= totalSlides) {
-        currentIndex = 0;
-    } else if (index < 0) {
-        currentIndex = totalSlides - 1;
-    } else {
-        currentIndex = index;
-    }
-    container.style.transform = `translateX(-${currentIndex * 100}%)`;
-}
-
-function nextSlide() {
-    showSlide(currentIndex + 1);
-}
-
-function prevSlide() {
-    showSlide(currentIndex - 1);
-}
-
-// Inicializar o carrossel
-showSlide(currentIndex);
-</script>
-
-</body>
-</html>
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -145,198 +10,241 @@ showSlide(currentIndex);
     <title>Sollarium</title>
     <script src="/js/home.js"></script>
     <link rel="stylesheet" href="/css/home.css">
+    <script src="https://sdk.mercadopago.com/js/V2"></script>
 </head>
+
 <body>
     <header>
-       <div class="navbar">
-        <div class="logo"><a href="#">Sollarium</a></div>
-        <ul class="links">
-            <li><a href="/home">Início</a></li>
-            <li><a href="/orcamento">Orçamento</a></li>
-            <li><a href="/sobre">Sobre Nós</a></li>
-            <li><a href="/cadastroinicial">Cadastre-se</a></li>
-            <li><a href="/perfilcliente">perfil cliente</a></li>
-        </ul>
-        <a href="/entrar" class="action_btn">Entrar</a>
-        <div class="toggle_btn">
-            <i class="fa-solid fa-bars-staggered"></i>
-        </div>
-       </div>
+        <nav class="navbar">
+            <nav class="logo"><a href="#">Sollarium</a></nav>
+            <ul class="links">
+                <li><a href="/">Início</a></li>
+                <li><a href="/orcamento">Orçamento</a></li>
+                <li><a href="/cadastroinicial" id="cadastre-se">Cadastre-se</a></li>
 
-       <div class="dropdown_menu">
+            </ul>
+            <% if (autenticado.autenticado != null) { 
+                let arquivo = { "imagem": "imagens/perfil/imgperfil.png" }; 
+            %>
+            <div class="profile-container">
+                <span>Olá <%= autenticado.autenticado %>!</span>
+                <a href="<%= autenticado.tipo === 'profissional' ? '/perfilprof' : '/perfilcliente' %>">
+                    <img src="<%= arquivo.imagem %>" alt="Imagem de perfil" style="max-width: 60px; max-height: 60px;" 
+                         onerror="this.onerror=null; this.src='imagens/perfil/imgperfil.png';">
+                </a>
+                <p><a href="/">sair</a></p>
+            </div>
+            
+            <% } else { %>
+                <a href="/entrar" class="action_btn">Entrar</a>
+            <% } %>   
+            <nav class="toggle_btn">
+                <i class="fa-solid fa-bars-staggered"></i>
+            </nav>
+        </nav>
+    
+        <nav class="dropdown_menu">
             <li><a href="/home">Início</a></li>
             <li><a href="/orcamento">Orçamento</a></li>
             <li><a href="/sobre">Sobre nós</a></li>
-            <li><a href="#">Cadastre-se</a></li>
-            <li><a href="/entrar" class="action_btn">Entrar</a></li>
-       </div>
-    </header>
-
-    <script>
-        const toggleBtn = document.querySelector('.toggle_btn')
-        const toggleBtnIcon = document.querySelector('.toggle_btn i')
-        const dropDownMenu = document.querySelector('.dropdown_menu')
-
-        toggleBtn.onclick = function () {
-            dropDownMenu.classList.toggle('open')
-            const isOpen = dropDownMenu.classList.contains('open')
-
-            toggleBtnIcon.classList = isOpen
-            ? 'fa-solid fa-xmark'
-            : 'fa-solid fa-bars-staggered'
-        }
-    </script>
-
+            <% if (autenticado.autenticado != null) { 
+                let arquivo = { "imagem": "imagens/perfil/imgperfil.png" }; 
+            %>
+                <div class="profile-container" style="margin: 10px 0; display: flex; flex-direction: column; align-items: center;">
+                    <span>Olá <%= autenticado.autenticado %>!</span>
+                    <a href="<%= autenticado.tipo === 'profissional' ? '/perfilprofissional' : '/perfilcliente' %>">
+                        <img src="<%= arquivo.imagem %>" alt="Imagem de perfil" style="max-width: 60px; max-height: 60px;" 
+                             onerror="this.onerror=null; this.src='imagens/perfil/imgperfil.png';">
+                    </a>
+                    <p><a href="/">sair</a></p>
+                </div>                
+            <% } else { %>
+                <a href="/entrar" class="action_btn">Entrar</a>
+            <% } %>   
+        </nav>
+    </header>    
+    
     <main>
-        <div class="sliderhome">
-            <div class="listhome">
-                <div class="item active">
-                    <img src="image/img1.webp">
-                    <div class="content">
-                        <p>design</p>
+        <nav class="sliderhome">
+            <nav class="listhome">
+                <nav class="item active">
+                    <img src="imagens/home1.jpg">
+                    <nav class="content">
+                        <p>serviço</p>
                         <h2>Instalação</h2>
                         <p class="pp">
                             Oferecemos instalação completa de sistemas de energia solar, 
                             desde o planejamento até a ativação, garantindo eficiência e segurança em cada etapa.
                         </p>
-                    </div>
-                </div>
-                <div class="item">
-                    <img src="image/img2.jpg">
-                    <div class="content">
-                        <p>design</p>
+                    </nav>
+                </nav>
+                <nav class="item">
+                    <img src="imagens/1.png">
+                    <nav class="content">
+                        <p>serviço</p>
                         <h2>Vistoria</h2>
                         <p class="pp">
                             Realizamos vistorias detalhadas para avaliar a viabilidade e o estado dos sistemas solares,
                             identificando possíveis melhorias e garantindo seu funcionamento ideal.
                         </p>
-                    </div>
-                </div>
-                <div class="item">
-                    <img src="image/img3.jpg">
-                    <div class="content">
-                        <p>design</p>
+                    </nav>
+                </nav>
+                <nav class="item">
+                    <img src="imagens/2.png">
+                    <nav class="content">
+                        <p>serviço</p>
                         <h2>Manutenção</h2>
                         <p class="pp">
                             Nosso serviço de manutenção preventiva e corretiva assegura que seu sistema solar opere
                             com máxima eficiência e longevidade, minimizando interrupções.
                         </p>
-                    </div>
-                </div>
-                <div class="item">
-                    <img src="image/img4.jpg">
-                    <div class="content">
-                        <p>design</p>
+                    </nav>
+                </nav>
+                <nav class="item">
+                    <img src="imagens/3.png">
+                    <nav class="content">
+                        <p>serviço</p>
                         <h2>Consultoria</h2>
                         <p class="pp">
                             Fornecemos consultoria especializada para ajudá-lo a escolher e implementar a melhor
                             solução de energia solar, adaptada às suas necessidades específicas e orçamento.
                         </p>
-                    </div>
-                </div>
-                <div class="item">
-                    <img src="image/img5.jpg">
-                    <div class="content">
-                        <p>design</p>
+                    </nav>
+                </nav>
+                <nav class="item">
+                    <img src="imagens/4.png">
+                    <nav class="content">
+                        <p>serviço</p>
                         <h2>Limpeza</h2>
                         <p class="pp">
                             Oferecemos serviços de limpeza profissional para painéis solares, removendo sujeira e
                             detritos que podem reduzir a eficiência do sistema, garantindo desempenho ótimo.
                         </p>
-                    </div>
-                </div>
-            </div>
+                    </nav>
+                </nav>
+            </nav>
             
-            <div class="arrows">
-                <button id="prev"></button>
-                <button id="next">></button>
-            </div>
-            
-            <div class="thumbnailhome">
-                <div class="item active">
-                    <img src="image/img1.webp">
-                    <div class="content">
+            <nav class="thumbnailhome">
+                <nav class="item active">
+                    <img src="imagens/insalacao.png">
+                    <nav class="content">
                         Instalação
-                    </div>
-                </div>
-                <div class="item">
-                    <img src="image/img2.jpg">
-                    <div class="content">
+                    </nav>
+                </nav>
+                <nav class="item">
+                    <img src="imagens/vistoria.png">
+                    <nav class="content">
                         Vistoria
-                    </div>
-                </div>
-                <div class="item">
-                    <img src="image/img3.jpg">
-                    <div class="content">
+                    </nav>
+                </nav>
+                <nav class="item">
+                    <img src="imagens/manutencao.png">
+                    <nav class="content">
                         Manutenção
-                    </div>
-                </div>
-                <div class="item">
-                    <img src="image/img4.jpg">
-                    <div class="content">
+                    </nav>
+                </nav>
+                <nav class="item">
+                    <img src="imagens/consultoria.png">
+                    <nav class="content">
                         Consultoria
-                    </div>
-                </div>
-                <div class="item">
-                    <img src="image/img5.jpg">
-                    <div class="content">
+                    </nav>
+                </nav>
+                <nav class="item">
+                    <img src="imagens/limpeza.png">
+                    <nav class="content">
                         Limpeza
-                    </div>
-                </div>
-            </div>
-        </div>
+                    </nav>
+                </nav>
+            </nav>
+        </nav>
     </main>
     <footer>
         <section class="footer">
-            <div class="footer-content">
+            <nav class="footer-content">
                 <h2>Sollarium</h2>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident dolorum 
-                   accusantium nihil laudantium non.</p>
-
-                <div class="icons">
+                <p>Sua plataforma de serviços solares em suas mãos.</p>
+                <nav class="icons">
                     <a href=""><i class='bx bxl-facebook-circle'></i></a>
                     <a href=""><i class='bx bxl-twitter'></i></a>
-                    <a href=""><i class='bx bxl-instagram-alt' ></i></a>
-                    <a href=""><i class='bx bxl-youtube' ></i></a>
-                </div>
-            </div>
+                    <a href=""><i class='bx bxl-instagram-alt'></i></a>
+                    <a href=""><i class='bx bxl-youtube'></i></a>
+                </nav>
+            </nav>
             
-            <div class="footer-content">
-                <h4>Projetos</h4>
-                <li><a href=""></a>Instalação</li>
-                <li><a href=""></a>Vistoria</li>
-                <li><a href=""></a>Manutenção</li>
-                <li><a href=""></a>Consultoria</li>
-                <li><a href=""></a>Limpeza</li>
-            </div>
+            <nav class="footer-content">
+                <h4>Serviços</h4>
+                <li><a href="">Instalação</a></li>
+                <li><a href="">Vistoria</a></li>
+                <li><a href="">Manutenção</a></li>
+                <li><a href="">Consultoria</a></li>
+                <li><a href="">Limpeza</a></li>
+            </nav>
 
-            <div class="footer-content">
-                <h4>Company</h4>
-                <li><a href=""></a>Instalação</li>
-                <li><a href=""></a>Vistoria</li>
-                <li><a href=""></a>Manutenção</li>
-                <li><a href=""></a>Consultoria</li>
-            </div>
+            <nav class="footer-content">
+                <h4>Menu</h4>
+                <li><a href="">Orçamento</a></li>
+                <li><a href="">Sobre Nós</a></li>
+                <li><a href="">Início</a></li>
+                <li><a href="">Consultoria</a></li>
+            </nav>
 
-            <div class="footer-content">
-                <h4>Movement</h4>
-                <li><a href=""></a>Instalação</li>
-                <li><a href=""></a>Vistoria</li>
-                <li><a href=""></a>Manutenção</li>
-                <li><a href=""></a>Consultoria</li>
-            </div>
-
-            <div class="footer-content">
-                <h4>Help</h4>
-                <li><a href=""></a>Instalação</li>
-                <li><a href=""></a>Vistoria</li>
-                <li><a href=""></a>Manutenção</li>
-                <li><a href=""></a>Consultoria</li>
-            </div>
+            <nav class="footer-content">
+                <h4>Ajuda</h4>
+                <li><a href="">Contato email</a></li>
+                <li><a href="">Contato telefone</a></li>
+            </nav>
         </section>
     </footer>
 
+    <script>
+        function login() {
+    // Código de autenticação...
+
+    // Após o login, ocultar o botão "Cadastre-se"
+    const cadastroButton = document.getElementById('cadastre-se');
+    if (cadastroButton) {
+        cadastroButton.style.display = 'none'; // Esconde o botão
+    }
+
+    // Mostrar o profile-container, se necessário
+    const profileContainer = document.querySelector('.profile-container');
+    if (profileContainer) {
+        profileContainer.style.display = 'flex'; // Exibe o perfil
+    }
+}
+        
+        const toggleBtn = document.querySelector('.toggle_btn');
+        const toggleBtnIcon = document.querySelector('.toggle_btn i');
+        const dropDownMenu = document.querySelector('.dropdown_menu');
+
+        toggleBtn.onclick = function () {
+            dropDownMenu.classList.toggle('open');
+            const isOpen = dropDownMenu.classList.contains('open');
+
+            toggleBtnIcon.classList = isOpen
+                ? 'fa-solid fa-xmark'
+                : 'fa-solid fa-bars-staggered';
+        }
+        // Supondo que você tenha um evento de login
+function login() {
+    // Código de autenticação...
+
+    // Após o login, ocultar o botão "Cadastre-se"
+    const cadastroButton = document.getElementById('cadastre-se'); // ajuste o ID conforme necessário
+    if (cadastroButton) {
+        cadastroButton.style.display = 'none';
+    }
+
+    // Mostrar o profile-container, se necessário
+    const profileContainer = document.querySelector('.profile-container');
+    if (profileContainer) {
+        profileContainer.style.display = 'flex';
+    }
+}
+
+// Exemplo de uso: chamar a função login quando o usuário se autenticar com sucesso
+
+    </script>
     <script src="app.js"></script>
 </body>
 </html>
-// (pags de recuperar senha, cadastro prof, cadastro cartão totalmente prontas)

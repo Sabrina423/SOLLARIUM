@@ -36,17 +36,27 @@
                 <nav class="input-group">
                     <nav class="password-container">
                         <input type="password" id="password" placeholder="Senha" onfocus="showMessage()" onblur="hideMessage()" oninput="validatePassword()">
+                       
                         <nav id="message" class="invalid">A senha deve ter pelo menos 8 caracteres, uma letra maiúscula e um caractere especial.</nav>
-                    </nav>
+                    </nav>                    
                     <nav class="password-container">
                         <input type="password" id="senha_cliente" name="senha_cliente" placeholder="Confirme sua senha" required>
                     </nav>
-                </nav>
+                </nav>                
                 <button type="submit">Criar Conta</button>
             </form>
         </main>
     </nav>
     <script>
+        function togglePassword() {
+    const passwordInput = document.getElementById('password');
+    const passwordType = passwordInput.type === 'password' ? 'text' : 'password';
+    passwordInput.type = passwordType;
+
+    const toggleIcon = document.getElementById('togglePassword');
+    toggleIcon.innerText = passwordType === 'password' ? 'visibility' : 'visibility_off';
+}
+
         function showMessage() {
             document.getElementById('message').style.display = 'block';
         }

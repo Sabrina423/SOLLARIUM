@@ -1,215 +1,420 @@
-/* Estilos gerais */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap');
+
 * {
-    margin: 0;
-    padding: 0;
     box-sizing: border-box;
-    font-family: 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
 body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-image: url(/imagens/painelsolar_.png);
-    background-repeat: no-repeat;
-    Background-size: cover;
+    font-family: Poppins, sans-serif;
+    margin: 0;
+    color: #ececec;
+    text-decoration: none;
+    list-style: none;
+}
 
-.container {
+li {
+    list-style: none;
+}
+
+svg {
+    width: 25px;
+}
+
+a {
+    text-decoration: none;
+    font-size: 1rem;
+    color: #eee;
+}
+
+header {
+    height: 70px;
+    width: 100%;
+    display: grid;
     position: relative;
-    top: 100px;
-    height: 50%;
+    z-index: 100;
+}
+
+.navbar {
+    width: 100%;
+    max-width: 100%;
     display: flex;
-    flex-direction: row; /* Layout padrão: lado a lado */
-    width: 60%;
-    max-width: 900px;
-    background-color: rgba(255, 255, 255, 0.363);
-    backdrop-filter: blur(5px);
+    align-items: center;
+    justify-content: space-between;
+    background-color: rgba(0, 0, 0, 0.103);
+    padding: 0 10px;
+}
+
+.navbar .logo a {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.navbar .links {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    flex-grow: 1;
+    flex-wrap: wrap;
+}
+
+.navbar .toggle_btn {
+    color: #fff;
+    font-size: 1.5rem;
+    cursor: pointer;
+    display: none;    
+}
+
+.action_btn {
+    color: #fff;
+    padding: 0.3rem 2rem;
+    border: solid;
+    border-color: #eee;
+    border-width: 2.5px;
+    outline: none;
+    border-radius: 15px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: scale 0.2 ease;
+    margin-right: 30px;
+}
+
+.action_btn:hover {
+    scale: 1.05;
+}
+
+.action_btn:active {
+    scale: 0.95;
+}
+
+.dropdown_menu {
+    display: none;
+    position: absolute;
+    right: 2rem;
+    top: 60px;
+    width: 300px; /* Você pode ajustar a largura conforme necessário */
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(15px);
     border-radius: 10px;
     overflow: hidden;
-    box-shadow: 0 0 30px rgba(0, 0, 0, 0.753);
+    transition: height .2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    text-align: center;
+    padding: 20px; /* Adiciona preenchimento para aumentar a altura */
 }
 
-.container h3{
-    font-family: sans-serif;
-    font-size: 22px;
-    width: 320px;
-    text-align: left;
-    margin-top: 40px;
-    margin-left: 30px;
-    color: rgb(0, 0, 0);
-
+.dropdown_menu .profile-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centraliza verticalmente */
+    justify-content: center; /* Centraliza horizontalmente */
+    margin: 10px 0; /* Espaçamento em cima e embaixo */
+    text-align: center; /* Centraliza o texto */
+    width: 100%; /* Para garantir que ocupe toda a largura disponível */
 }
-    hr{
-        color: #ffffff;
+
+.dropdown_menu img {
+    max-width: 80px; /* Ajusta o tamanho da imagem para garantir que não corte */
+    max-height: 80px; /* Aumenta a altura máxima para a imagem */
+}
+
+.dropdown_menu.open {
+    display: block;
+    height: 350px;
+}
+
+.dropdown_menu li {
+    padding: 0.7rem;
+    display: block;
+}
+
+.dropdown_menu .action_btn {
+    width: auto;
+    margin: 0 auto;
+    border: solid;
+    border-color: #eee;
+    border-width: 2.5px;
+    border-radius: 15px;
+    padding: 0.3rem 1.5rem;
+    color: #fff;
+    transition: scale 0.2 ease;
+}
+
+.dropdown_menu .action_btn:hover {
+    scale: 1.05;
+}
+
+.dropdown_menu .action_btn:active {
+    scale: 0.95;
+}
+
+.profile-container {
+    display: flex; /* Usar flexbox para alinhar os itens */
+    align-items: center; /* Alinha verticalmente no centro */
+    margin-left: 30px; /* Margem para separar do menu */
+}
+
+
+.dropdown_menu .profile-container span,
+.dropdown_menu .profile-container a,
+.dropdown_menu .profile-container p {
+    margin: 5px 0; /* Ajuste as margens para evitar espaçamento excessivo */
+}
+.profile-container span {
+    margin-right: 20px; /* Espaço entre o texto e a imagem */
+}
+.profile-container a {
+    margin-right: 20px; /* Espaço entre o texto e a imagem */
+}
+
+.profile-container img {
+    margin-right: 30px; /* Espaço entre a imagem e o link "sair" */
+}
+@media (max-width: 992px) {
+    .profile-container {
+        display: none; /* Oculta o container em telas menores */
     }
-    .termos{
-        height: 720px;
-        background-color: rgba(255, 255, 255, 0);
-    
+}
+
+@media (max-width: 768px) {
+    .navbar .links {
+        display: none; /* Oculta links da navbar em telas menores */
     }
-.termos1 button{
-    width: 90%;
-    height: 50px;
-    padding: 12px;
-    background-color: black;
-    color: rgb(255, 255, 255);
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    margin-left: 20px;
-    margin-top: 30px;
-}
-.termos1 :hover{
-    background-color: rgba(255, 255, 255, 0.151);
-    backdrop-filter: blur(5px);
-    border: 1px solid black;
-}
-.termos1 button:hover{
-color: #000000;
-}
 
-.termos1 input{
-  width: 20px;
-  margin-left: 23px;
-  margin-top: 428px;
-}
-.termos1 label{
-    font-family: sans-serif;
-    font-size: 18px;
-    color: rgb(0, 0, 0);
-  }
-h2 {
-    width: 500px;
-    font-family: sans-serif;
-    font-size: 2.0em;
-    color: white;
-    text-align: left;
-    margin-left: 20px;
-}
+    .navbar .toggle_btn {
+        display: block; /* Exibe o botão de menu hamburguer */
+    }
 
-main {
-    width: 60%;
-    padding: 20px;
-}
+    .navbar .profile-container {
+        display: none; /* Oculta o profile-container na navbar em telas menores */
+    }
 
-.input-group {
-    margin-top: 20px;
-    margin-bottom: 12px;
+    .dropdown_menu .profile-container {
+        display: flex; /* Exibe o profile-container no menu hambúrguer */
+        flex-direction: column; /* Coloca os elementos um em cima do outro */
+        align-items: center; /* Centraliza os itens */
+        margin: 10px 0; /* Espaçamento em cima e embaixo */
+    }
 }
-
-.input-group input{
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    font-size: 14px;
-    height: 40px;
+@media (min-width: 769px) {
+    .navbar .profile-container {
+        display: flex; /* Exibe o profile-container na navbar em telas maiores */
+    }
 }
-.input-group select {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    font-size: 14px;
-    height: 40px;
-}
-
-.password-container {
+.sliderhome {
+    height: 100vh;
+    margin-top: -70px;
     position: relative;
 }
 
-.password-container input {
-    width: 100%;
-    padding-right: 30px;
+.sliderhome .listhome .item {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: .5s;
 }
 
-button[type="submit"] {
+.sliderhome .listhome .item img {
     width: 100%;
-    height: 50px;
-    padding: 12px;
-    background-color: black;
-    color: white;
+    height: 100%;
+    object-fit: cover;
+}
+
+.sliderhome .listhome .item::after {
+    content: '';
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    background-image: linear-gradient(to top, #000 40%, transparent);
+}
+
+.sliderhome .listhome .item .content {
+    position: absolute;
+    left: 10%;
+    top: 20%;
+    width: 500px;
+    max-width: 80%;
+    z-index: 1;
+}
+
+.sliderhome .listhome .item .content p:nth-child(1) {
+    text-transform: uppercase;
+    letter-spacing: 10px;
+}
+
+.sliderhome .listhome .item .content h2 {
+    font-size: 60px;
+    margin: 0;
+}
+
+.sliderhome .listhome .item.active {
+    opacity: 1;
+    z-index: 10;
+}
+
+@keyframes showContent {
+    to {
+        transform: translateY(0);
+        filter: blur(0);
+        opacity: 1;
+    }
+}
+
+.sliderhome .listhome .item.active p:nth-child(1),
+.sliderhome .listhome .item.active h2,
+.sliderhome .listhome .item.active p:nth-child(3) {
+    transform: translateY(30px);
+    filter: blur(20px);
+    opacity: 0;
+    animation: showContent .5s .7s ease-in-out 1 forwards;
+}
+
+.sliderhome .listhome .item.active h2 {
+    animation-delay: 1s;
+}
+
+.sliderhome .listhome .item.active p:nth-child(3) {
+    animation-duration: 1.3s;
+}
+
+.arrows {
+    position: absolute;
+    top: 30%;
+    right: 50px;
+    z-index: 100;
+}
+
+.arrows button {
+    background-color: #eee5;
     border: none;
+    font-family: monospace;
+    width: 40px;
+    height: 40px;
     border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s;
+    font-size: x-large;
+    color: #eee;
+    transition: .5s;
 }
 
-.container [type="submit"]:hover {
-    background-color: darken(#000, 10%);
+.arrows button:hover {
+    background-color: #eee;
+    color: black;
 }
 
-#message {
-    display: none;
-    margin-top: 10px;
-    margin-bottom: 20px;
-    font-size: 12px;
+.thumbnailhome {
+    position: absolute;
+    bottom: 50px;
+    z-index: 11;
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    height: 250px;
+    padding: 0 50px;
+    box-sizing: border-box;
+    overflow: auto;
+    justify-content: center;
 }
 
-.valid {
-    color: green;
+.thumbnailhome::-webkit-scrollbar {
+    width: 0;
 }
 
-.invalid {
-    color: red;
+.thumbnailhome .item {
+    width: 150px;
+    height: 220px;
+    filter: brightness(.5);
+    transition: .5s;
+    flex-shrink: 0;
 }
 
-/* Media Queries para Layout Responsivo */
-@media (max-width: 768px) {
-    .container {
-        position: relative;
-        top: 0px;
-        flex-direction: column; /* Layout vertical: hero em cima e formulário embaixo */
-        height:100%;
-        width: 90%;
-    }
-
-
-
-    .hero {
-        width: 100%;
-        height: 120px; /* Ajusta a altura da imagem */
-    }
-
-    main {
-        width: 100%;
-    }
-    .hero h2 {
-        font-size: 1.4em;
-        margin: 10px;
-        text-align: left;
-        margin-left: 70px;
-    }
-
-    .input-group input,
-    .input-group select {
-        font-size: 12px;
-        height: 40px;
-    }
-
-    button[type="submit"] {
-        font-size: 14px;
-        }
+.thumbnailhome .item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
 }
 
-@media (max-width: 480px) {
-    h2 {
-        font-size: 1.5em;
-    }
+.thumbnailhome .item.active {
+    filter: brightness(1.5);
+}
 
-    .input-group input,
-    .input-group select {
-        font-size: 10px;
-        height: 35px;
-    }
+.thumbnailhome .item .content {
+    position: absolute;
+    inset: auto 10px 10px 10px;
+}
 
-    button[type="submit"] {
-        font-size: 12px;
+@media screen and (max-width: 678px) {
+    .thumbnail {
+        justify-content: start;
+    }
+    .sliderhome .listhome .item .content h2 {
+        font-size: 30px;
+    }
+    .arrows {
+        top: 10%;
+    }
+    .pp {
+        font-size: 13.5px;
     }
 }
+
+section {
+    padding: 80px 13% 70px;
+}
+
+.footer {
+    text-decoration: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(170px, auto));
+    background: #0a0a0a;
+    gap: 3.5rem;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.footer-content h4 {
+    margin-bottom: 1.5rem;
+    font-size: 20px;
+    color: #fff;
+}
+
+.footer-content a {
+    color: #eee;
+    font-size: 14px;
+    display: block;
+    transition: 0.3s;
+}
+
+.footer-content a:hover {
+    color: #e04e39;
+}
+
+.footer-bottom {
+    text-align: center;
+    margin-top: 1.5rem;
+}
+
+@media (max-width: 373px) {
+    .navbar {
+        padding: 0 5px; /* Reduz o padding */
+    }
+
+    .navbar .links {
+        flex-direction: column; /* Muda a direção para coluna */
+        gap: 1rem; /* Espaçamento entre os itens */
+    }
+
+    .navbar .toggle_btn {
+        font-size: 1.2rem; /* Ajusta o tamanho do botão */
+    }
+
+    .action_btn {
+        font-size: 0.8rem; /* Ajusta o tamanho do botão */
+    }
+
+    .footer-content {
+        text-align: left; /* Alinha o texto à esquerda */
+    }
 }

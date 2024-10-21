@@ -3,27 +3,19 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-}
-
-.material-symbols-outlined {
-
-    text-decoration: none;
-    color: #ffffff;
-    }
-
+} 
 body {
     font-family: 'Poppins', sans-serif;
     background-color: #1e1e1e; /* Fundo escuro */
     color: #f0f0f0; /* Cor do texto */
 }
 
-.material-symbols-outlined {
-    margin-left:30px;
+.logo a{
+    font-size: 1.5rem;     
+    font-weight: bold;     
+    padding: 0 20px; 
 }
 
-.navbar a{
-    margin-right: 100px;
-}
 .footer{
     text-decoration: none;
     display: grid;

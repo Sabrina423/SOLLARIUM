@@ -1,11 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap');
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: Poppins, sans-serif;
-    
 }
+
 html, body {
     height: 100%;
     margin: 0;
@@ -18,7 +19,6 @@ body {
     width: 100%;
     height: 100%;
     background-color: #0a0a0a;
-    
 }
 
 .container {
@@ -60,7 +60,6 @@ main {
 }
 
 .input-group label {
-    
     font-size: 18px;
     margin-bottom: 30px;
     color: white;
@@ -78,34 +77,29 @@ main {
     font-size: 14px;
     margin-top: 25px;
 }
-
-h1 {
-    font-size: 30px;
-    text-align: center;
-    margin-top: 30px;
-}
-
-h2 {
-    
-    font-size: 40px;
-    width: 250px;
-}
-.material-symbols-outlined {
-    align-self: flex-start;
-    text-decoration: none;
-    color: #ffffff;
-    }
-.radio-group {
-    margin-bottom: 15px;
-}
-
 .password-container {
     position: relative;
+    margin-bottom: 10px; /* Espaço entre o campo de senha e a mensagem */
+}
+
+.error-message {
+    display: none; /* Mantenha oculto por padrão */
+    color: red; /* Cor da mensagem de erro */
+    margin-top: 5px; /* Espaçamento acima da mensagem */
+    font-size: 14px; /* Ajuste o tamanho da fonte conforme necessário */
+    line-height: 1.2; /* Para melhor espaçamento se necessário */
 }
 
 .password-container input {
-    width: calc(100% - 30px);
-    padding-right: 30px;
+    width: 100%; /* Igual ao campo de email */
+    padding: 10px; /* Igual ao campo de email */
+    margin-bottom: 10px; /* Igual ao campo de email */
+    color: #fff;
+    background-color: #1d1a1a;
+    border: 1px solid #1d1a1a;
+    border-radius: 5px;
+    font-size: 14px;
+    margin-top: 25px; /* Igual ao campo de email */
 }
 
 .toggle-password {
@@ -116,8 +110,24 @@ h2 {
     cursor: pointer;
 }
 
-button[type="submit"] {
+h1 {
+    font-size: 30px;
+    text-align: center;
+    margin-top: 30px;
+}
 
+h2 {
+    font-size: 40px;
+    width: 250px;
+}
+
+.material-symbols-outlined {
+    align-self: flex-start;
+    text-decoration: none;
+    color: #ffffff;
+}
+
+button[type="submit"] {
     width: 100%;
     padding: 12px;
     background-color: #ffac40;
@@ -130,7 +140,12 @@ button[type="submit"] {
     margin-top: 20px;
 }
 
-button:hover{
+.error-message.senha {
+    margin-top: 15px; /* Aumente o espaçamento */
+    font-weight: 300; /* Altere o peso da fonte */
+}
+
+button:hover {
     background-color: #fff;
     color: #e0ad4c;
 }
@@ -140,11 +155,9 @@ button[type="submit"] a {
     text-decoration: none;
 }
 
-
-
 .link-container {
-    text-align: center; /* Centraliza o conteúdo do contêiner */
-    margin-top: 20px; /* Espaçamento acima do contêiner */
+    text-align: center;
+    margin-top: 20px;
 }
 
 .link-container a {
@@ -152,13 +165,14 @@ button[type="submit"] a {
     color: #b1c0c9;
     font-size: 17px;
     font-family: sans-serif;
-    display: inline-block; /* Permite aplicar padding e margin */
-    margin: 0; /* Remove margem padrão */
-    padding: 10px; /* Espaçamento interno do link */
+    display: inline-block;
+    margin: 0;
+    padding: 10px;
 }
-link-container-senha {
-    text-align: center; /* Centraliza o conteúdo do contêiner */
-    margin-top: 20px; /* Espaçamento acima do contêiner */
+
+.link-container-senha {
+    text-align: center;
+    margin-top: 20px;
 }
 
 .link-container-senha a {
@@ -166,34 +180,36 @@ link-container-senha {
     color: #dadada;
     font-size: 14px;
     font-family: sans-serif;
-    display: inline-block; /* Permite aplicar padding e margin */
-text-align:end ;
-margin-bottom: 20px;
+    display: inline-block;
+    margin-bottom: 20px;
 }
+
 .link-container-senha:hover a {
-color: #e0ad4c;
+    color: #e0ad4c;
 }
+
 .link-container:hover a {
     color: #e0ad4c;
-    }
+}
 
-hr{
+hr {
     margin-top: 20px;
 }
+
 ul.box-redes-sociais {
-  
     display: flex;
     background: transparent;
     width: 305px;
     float: none;
     margin: auto;
-  }
-  ul.box-redes-sociais li {
+}
+
+ul.box-redes-sociais li {
     list-style: none;
     margin: auto;
-  }
-  ul.box-redes-sociais li a {
-    
+}
+
+ul.box-redes-sociais li a {
     width: 50px;
     height: 50px;
     background-color: #e0ad4c;
@@ -207,19 +223,22 @@ ul.box-redes-sociais {
     border: 2px solid #e0ad4c;
     z-index: 1;
     margin-top: 20px;
-  }
-  ul.box-redes-sociais li a .icon {
+}
+
+ul.box-redes-sociais li a .icon {
     position: relative;
-    top:-8px;
+    top: -8px;
     color: #262626;
     transition: .3s;
     z-index: 3;
-  }
-  ul.box-redes-sociais li a:hover .icon {
+}
+
+ul.box-redes-sociais li a:hover .icon {
     color: #fff;
     scale: 1.2;
-  }
-  ul.box-redes-sociais li a:before {
+}
+
+ul.box-redes-sociais li a:before {
     content: "";
     position: absolute;
     top: 100%;
@@ -229,24 +248,27 @@ ul.box-redes-sociais {
     background: #f00;
     transition: .6s;
     z-index: 2;
-  }
-  ul.box-redes-sociais li a:hover:before {
-    top: 0;
-  }
-  ul.box-redes-sociais li.facebook a:before{
-    background: #3b5999;
-  }
-  ul.box-redes-sociais li.instagram a:before{
-    background:hsl(0 0% 10%);
-    background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%,#d6249f 60%,#285AEB 90%);
+}
 
-  }
+ul.box-redes-sociais li a:hover:before {
+    top: 0;
+}
+
+ul.box-redes-sociais li.facebook a:before {
+    background: #3b5999;
+}
+
+ul.box-redes-sociais li.instagram a:before {
+    background: hsl(0 0% 10%);
+    background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+}
+
 /* Media Queries para Layout Responsivo */
 @media (max-width: 768px) {
-    h1{
+    h1 {
         margin-bottom: -40px;
     }
-    
+
     .container {
         height: 800px;
         flex-direction: column; /* Layout vertical: hero em cima e formulário embaixo */

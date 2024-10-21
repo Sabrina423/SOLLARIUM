@@ -5,7 +5,7 @@ var salt = bcrypt.genSaltSync(12);
 const { removeImg } = require("../util/removeImg");
 const fetch = require('node-fetch');
 const verificarClienteAutorizado = require('../models/verificarClienteAutorizado');
-const jwt = require('jsonwebtoken'); // Certifique-se de incluir isso
+const jwt = require('jsonwebtoken');
 const https = require('https');
 const tipoClienteModel = require("../models/tipoClienteModel");
 
@@ -45,7 +45,7 @@ const clienteController = {
                     throw new Error('E-mail em uso!');
                 }
             }),
-            
+
         body("senha_cliente")
             .isStrongPassword()
             .withMessage("A senha deve ter no mínimo 8 caracteres")
@@ -67,10 +67,8 @@ const clienteController = {
         if (!erros.isEmpty()) {
             return res.render("pages/entrar", { listaErros: erros, dadosNotificacao: null });
         }
-        if (req.session.autenticado.autenticado != null) {
-            console.log(req.session.autenticado )
-            
-            res.render('pages/home', { autenticado: req.session.autenticado, carrinho:null, login:req.session.logado}); 
+        if (req.session.autenticado && req.session.autenticado.autenticado != null) {
+            res.render('pages/home', { autenticado: req.session.autenticado, carrinho: null, login: req.session.logado });
         } else {
             res.render("pages/entrar", { listaErros: null, dadosNotificacao: { titulo: "Falha ao logar!", mensagem: "Usuário e/ou senha inválidos!", tipo: "error" } });
         }
@@ -80,7 +78,7 @@ const clienteController = {
         const erros = validationResult(req);
         if (!erros.isEmpty()) {
             console.log(erros);
-            return res.render("pages/cadastrocliente", { listaErros: erros, dadosNotificacao: null, valores: req.body , autenticado: req.session.autenticado});
+            return res.render("pages/cadastrocliente", { listaErros: erros, dadosNotificacao: null, valores: req.body, autenticado: req.session.autenticado });
         }
 
         const dadosForm = {
@@ -97,70 +95,21 @@ const clienteController = {
         try {
             await cliente.create(dadosForm);
             res.render("pages/home", {
-                listaErros: null, carrinho:null, autenticado: req.session.autenticado, dadosNotificacao: {
+                listaErros: null, carrinho: null, autenticado: req.session.autenticado, dadosNotificacao: {
                     titulo: "Cadastro realizado!", mensagem: "Novo usuário criado com sucesso!", tipo: "success"
                 }, valores: req.body
             });
         } catch (e) {
             console.log(e);
             res.render("pages/cadastrocliente", {
-                listaErros: null, autenticado: req.session.autenticado, dadosNotificacao: {
+                listaErros: null, carrinho: null, autenticado: req.session.autenticado, dadosNotificacao: {
                     titulo: "Erro ao cadastrar!", mensagem: "Verifique os valores digitados!", tipo: "error"
                 }, valores: req.body
             });
         }
     },
-    validarTokenNovaSenha: async (req, res) => {
-        const token = req.query.token;
-        console.log(token);
-        jwt.verify(token, process.env.SECRET_KEY, (err, decoded) => {
-            if (err) {
-                return res.render("pages/recsenha", {
-                    listaErros: null,
-                    dadosNotificacao: { 
-                        titulo: "Link expirado!", 
-                        mensagem: "Insira seu e-mail para iniciar o reset de senha.", 
-                        tipo: "error" 
-                    },
-                    valores: req.body
-                });
-            } else {
-                return res.render("pages/resetarsenha", {
-                    listaErros: null,
-                    autenticado: req.session.autenticado,
-                    id_cliente: decoded.userId,
-                    dadosNotificacao: null
-                });
-            }
-        });
-    },
 
-    resetarSenha: async (req, res) => {
-        const erros = validationResult(req);
-        console.log(erros);
-        if (!erros.isEmpty()) {
-            return res.render("pages/resetarsenha", {
-                listaErros: erros,
-                dadosNotificacao: null,
-                valores: req.body,
-            });
-        }
-        try {
-            const senha = bcrypt.hashSync(req.body.senha_cliente);
-            const resetar = await cliente.update({ senha_cliente: senha }, req.body.id_cliente);
-            console.log(resetar);
-            res.render("/", {
-                listaErros: null,
-                dadosNotificacao: {
-                    titulo: "Perfil alterado",
-                    mensagem: "Nova senha registrada",
-                    tipo: "success",
-                },
-            });
-        } catch (e) {
-            console.log(e);
-        }
-    },
+    // Additional methods...
 
     mostrarPerfil: async (req, res) => {
         try {
@@ -232,7 +181,95 @@ const clienteController = {
         }
     },
 
+    recuperarSenha: async (req, res) => {
+        const erros = validationResult(req);
+        console.log(erros);
+        if (!erros.isEmpty()) {
+          return res.render("pages/recsenha", {
+            listaErros: erros,
+            dadosNotificacao: null,
+            valores: req.body,
+          });
+        }
+        try {
+          //logica do token
+          user = await cliente.findUserCustom({
+            email_cliente: req.body.email_cliente,
+          });
+          const token = jwt.sign(
+            { userId: user[0].id_cliente, expiresIn: "40m" },
+            process.env.SECRET_KEY
+          );
+          //enviar e-mail com link usando o token
+          html = require("../util/email-reset-senha")(process.env.URL_BASE, token)
+          enviarEmail(req.body.email_cliente, "Pedido de recuperação de senha", null, html, ()=>{
+            return res.render("/", {
+              listaErros: null,
+              autenticado: req.session.autenticado,
+              dadosNotificacao: {
+                titulo: "Recuperação de senha",
+                mensagem: "Enviamos um e-mail com instruções para resetar sua senha",
+                tipo: "success",
+              },
+            });
+          });
     
+        } catch (e) {
+          console.log(e);
+        }
+      },
+    
+      validarTokenNovaSenha: async (req, res) => {
+        //receber token da URL
+    
+        const token = req.query.token;
+        console.log(token);
+        //validar token
+        jwt.verify(token, process.env.SECRET_KEY, (err, decoded) => {
+          if (err) {
+            res.render("pages/recsenha", {
+              listaErros: null,
+              dadosNotificacao: { titulo: "Link expirado!", mensagem: "Insira seu e-mail para iniciar o reset de senha.", tipo: "error", },
+              valores: req.body
+            });
+          } else {
+            res.render("pages/resetarsenha", {
+              listaErros: null,
+              autenticado: req.session.autenticado,
+              id_cliente: decoded.userId,
+              dadosNotificacao: null
+            });
+          }
+        });
+      },
+    
+      resetarSenha: async (req, res) => {
+        const erros = validationResult(req);
+        console.log(erros);
+        if (!erros.isEmpty()) {
+          return res.render("pages/resetarsenha", {
+            listaErros: erros,
+            dadosNotificacao: null,
+            valores: req.body,
+          });
+        }
+        try {
+          //gravar nova senha
+          senha = bcrypt.hashSync(req.body.senha_cliente);
+          const resetar = await cliente.update({ senha_cliente: senha }, req.body.id_cliente);
+          console.log(resetar);
+          res.render("pages/entrar", {
+            listaErros: null,
+            dadosNotificacao: {
+              titulo: "Perfil alterado",
+              mensagem: "Nova senha registrada",
+              tipo: "success",
+            },
+          });
+        } catch (e) {
+          console.log(e);
+        }
+      },
 
     gravarPerfil: async (req, res) => {
         const erros = validationResult(req);
@@ -250,7 +287,7 @@ const clienteController = {
                 nome_cliente: req.body.nome_cliente,
                 email_cliente: req.body.email_cliente,
                 fone_cliente: req.body.fone_cliente,
-                cep_cliente: req.body.cep.replace("-",""),
+                cep_cliente: req.body.cep.replace("-", ""),
                 numero_cliente: req.body.numero,
                 complemento_cliente: req.body.complemento,
                 img_perfil_banco: req.session.autenticado.img_perfil_banco,
@@ -290,14 +327,14 @@ const clienteController = {
                         fone_cliente: result[0].fone_cliente,
                         senha_cliente: ""
                     };
-                    res.render("pages/perfilcliente", { listaErros: null, dadosNotificacao: { titulo: "Perfil! atualizado com sucesso", mensagem: "Alterações Gravadas", tipo: "success" }, valores: campos });
+                    res.render("pages/perfilcliente", { listaErros: null, dadosNotificacao: { titulo: "Perfil atualizado com sucesso", mensagem: "Alterações gravadas", tipo: "success" }, valores: campos });
                 } else {
-                    res.render("pages/perfilcliente", { listaErros: null, dadosNotificacao: { titulo: "Perfil! atualizado com sucesso", mensagem: "Sem alterações", tipo: "success" }, valores: dadosForm });
+                    res.render("pages/perfilcliente", { listaErros: null, dadosNotificacao: { titulo: "Perfil atualizado com sucesso", mensagem: "Sem alterações", tipo: "success" }, valores: dadosForm });
                 }
             }
         } catch (e) {
             console.log(e);
-            res.render("pages/perfilcliente", { listaErros: erros, dadosNotificacao: { titulo: "Erro ao atualizar o perfil!", mensagem: "verifique os valores digitados!", tipo: "error" }, valores: req.body });
+            res.render("pages/perfilcliente", { listaErros: erros, dadosNotificacao: { titulo: "Erro ao atualizar o perfil!", mensagem: "Verifique os valores digitados!", tipo: "error" }, valores: req.body });
         }
     }
 };

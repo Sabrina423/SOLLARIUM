@@ -15,3 +15,4 @@ function removeImg(caminho) {
 }
 
 module.exports = { removeImg }
+
