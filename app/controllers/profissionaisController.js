@@ -28,7 +28,7 @@ regrasValidacaoFormCad: [
         .isNumeric().withMessage('CPF deve conter apenas números.'),
     body('email_prof').isEmail().withMessage('Digite um e-mail válido.'),
 
-    // Sanitizar o telefone antes de validar
+    
     body('contato_prof')
         .isLength({ min: 10, max: 15 }).withMessage('Telefone deve ter entre 10 e 11 dígitos.')
         .customSanitizer(value => value.replace(/[^\d]/g, '')) // Remove caracteres não numéricos

@@ -137,14 +137,13 @@
                 alert('Por favor, preencha todos os campos.');
             }
         });
-        function formatarMoeda(input) {
-            let valor = input.value;
-            valor = valor.replace(/\D/g, ""); // Remove caracteres não numéricos
-            valor = (valor / 100).toFixed(2) + ""; // Converte para formato decimal
-            valor = valor.replace(".", ","); // Troca ponto por vírgula
-            valor = valor.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1."); // Adiciona separador de milhar
-            input.value = "R$ " + valor; // Adiciona o símbolo de moeda
-        }
+        document.getElementById('valor_orcamento').addEventListener('input', function (e) {
+    let valor = this.value;
+    valor = valor.replace(/[^\d,]/g, '') // Remove caracteres não numéricos
+                 .replace(/(\d)(?=(\d{3})+\,)/g, '$1.'); // Formata com ponto e vírgula
+    this.value = valor;
+});
+
     </script>
 </body>
 </html>

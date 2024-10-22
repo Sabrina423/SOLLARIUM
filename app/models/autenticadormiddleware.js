@@ -10,7 +10,7 @@ const verificarClienteAutenticado = (req, res, next) => {
     var autenticado = req.session.autenticado;
     req.session.logado = req.session.logado + 1;
   } else {
-    var autenticado = { autenticado: null, id: null, tipo: null, imagem:null };
+    var autenticado = { autenticado: null, id: null, tipo: null, imagem: null };
     req.session.logado = 0;
   }
   req.session.autenticado = autenticado;
@@ -25,64 +25,69 @@ const limparSessao = (req, res, next) => {
 
 const gravarClienteAutenticado = async (req, res, next) => {
   const erros = validationResult(req);
-  var autenticado = { autenticado: null, id: null, tipo: null , imagem:null};
-    if (erros.isEmpty()) {                                                                                                                          
-        const dadosForm = {
-          nome_cliente: req.body.email,
-          senha_cliente: req.body.password,
-        };
+  var autenticado = { autenticado: null, id: null, tipo: null, imagem: null };
+  
+  if (erros.isEmpty()) {
+    const dadosForm = {
+      nome_cliente: req.body.email,
+      senha_cliente: req.body.password,
+    };
+
+    console.log(dadosForm);
+    
+    try {
+      const clienteExistente = await cliente.findByEmail(dadosForm.nome_cliente);
+      console.log(clienteExistente);
       
-      console.log(dadosForm);
-      try {
-          const clienteExistente = await cliente.findByEmail(dadosForm.nome_cliente);
-          console.log(clienteExistente)
-          if (clienteExistente && bcrypt.compareSync( dadosForm.senha_cliente, clienteExistente[0].SENHA_CLIENTE)) {
-                console.log("validou a senha 1 ")
+      if (clienteExistente && bcrypt.compareSync(dadosForm.senha_cliente, clienteExistente[0].SENHA_CLIENTE)) {
+        console.log("validou a senha 1");
+        
+        autenticado = {
+          autenticado: clienteExistente[0].NOME_CLIENTE,
+          id: clienteExistente[0].ID_CLIENTE,
+          tipo: 1,
+          imagem: clienteExistente[0].IMAGEM_PERFIL_CLIENTE,
+        };
+      } else {
+        // Valida profissional
+        const profissionalExistente = await profissional.findByEmail(dadosForm.nome_cliente);
+        console.log(profissionalExistente);
+        
+        if (profissionalExistente && bcrypt.compareSync(dadosForm.senha_cliente, profissionalExistente[0].SENHA_PROF)) {
+          console.log("validou a senha 2");
+
+          autenticado = {
+            autenticado: profissionalExistente[0].NOME_PROF,
+            id: profissionalExistente[0].ID_PROF,
+            tipo: 2,
+            imagem: profissionalExistente[0].IMAGEM_PERFIL_PROFISSIONAL,
+          };
+        } else {
+          // Valida administrador
+          const admExistente = await adm.findByEmail(dadosForm.nome_cliente);
+          console.log(admExistente);
           
+          if (admExistente && bcrypt.compareSync(dadosForm.senha_cliente, admExistente[0].SENHA_ADM)) {
+            console.log("validou a senha 3");
+
             autenticado = {
-              autenticado: clienteExistente[0].NOME_CLIENTE,
-              id: clienteExistente[0].ID_CLIENTE,
-              tipo: 1,
-              imagem: clienteExistente[0].IMAGEM_PERFIL_CLIENTE,
+              autenticado: admExistente[0].EMAIL_ADM,
+              id: admExistente[0].ID_ADM,
+              tipo: 3,
             };
-          }else{
-            // if  validar profissional        
-              const profissionalExistente = await profissional.findByEmail(dadosForm.email_profissional);
-              console.log(profissionalExistente)
-              if (profissionalExistente && bcrypt.compareSync( dadosForm.senha_cliente, profissionalExistente[0].SENHA_PROF)) {
-                    console.log("validou a senha 2")
-        
-                autenticado = {
-                  autenticado: profissionalExistente[0].NOME_PROF,
-                  id: profissionalExistente[0].ID_PROF,
-                  tipo: 2,
-                  imagem:profissionalExistente[0].IMAGEM_PERFIL_PROFISSIONAL
-                };
-            //else validar adm
-              }else{
-              const admExistente = await adm.findByEmail(dadosForm.email_adm);
-              console.log(admExistente)
-              if (admExistente && bcrypt.compareSync( dadosForm.senha_adm, admExistente[0].SENHA_ADM)) {
-                    console.log("validou a senha 3")
-        
-                autenticado = {
-                  autenticado: admExistente[0].EMAIL_ADM,
-                  id: admExistente[0].ID_ADM,
-                  tipo: 3
-                    };
-              }
-            }
+          }
         }
-    }catch (e) {
-        console.log(e);
+      }
+    } catch (e) {
+      console.log(e);
     }
-  }else{
+  } else {
     console.log(erros);
   }
 
   req.session.autenticado = autenticado;
   req.session.logado = 0;
-  console.log(req.session.autenticado)
+  console.log(req.session.autenticado);
   next();
 };
 
@@ -94,8 +99,7 @@ const verificarClienteAutorizado = (tipoPermitido, destinoFalha) => {
     ) {
       next();
     } else {
-
-      res.render(destinoFalha, {autenticado:req.session.autenticado,dadosNotificacao:null});
+      res.render(destinoFalha, { autenticado: req.session.autenticado, dadosNotificacao: null });
     }
   };
 };
@@ -105,8 +109,4 @@ module.exports = {
   limparSessao,
   gravarClienteAutenticado,
   verificarClienteAutorizado,
-}
-
-
-
-
+};

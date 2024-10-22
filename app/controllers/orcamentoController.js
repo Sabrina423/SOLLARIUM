@@ -11,12 +11,10 @@ const orcamentoController = {
     regrasValidacaoFormOrcamento: [
         body("nome_cliente")
             .isString({ min: 3, max: 45 }).withMessage("O nome do cliente é obrigatório."),
-        body("descricao_orcamento")
-            .isString({ min: 3 }).withMessage('O serviço solicitado deve ser informado.'),
         body('descricao_orcamento')
             .isString({ min: 10 }).withMessage('A descrição deve conter no mínimo 10 caracteres.'),
-        body('valor_orcamento')
-            .isCurrency({ symbol: 'R$', require_symbol: true, allow_space_after_symbol: true, symbol_after_digits: false, allow_negatives: true, parens_for_negatives: false, negative_sign_before_digits: false, negative_sign_after_digits: false, allow_negative_sign_placeholder: false, thousands_separator: ',', decimal_separator: '.', allow_decimal: true, require_decimal: false, digits_after_decimal: [2], allow_space_after_digits: false  }).withMessage('O valor estimado deve ser válido e maior que 0.'),
+            body('valor_orcamento')
+            .matches(/^R?\$?\s?\d{1,3}(\.\d{3})*(\,\d{2})?$/).withMessage('Digite um valor válido em reais, por exemplo: 1.000,00'),
         body('data_orcamento')
             .isISO8601().withMessage('A data para execução do serviço deve ser válida.')
     ],
@@ -30,10 +28,9 @@ const orcamentoController = {
 
         const dadosForm = {
             nome_cliente: req.body.nome_cliente,
-            servico: req.body.servico_cliente,
-            descricao: req.body.descricao_orcamento,
-            valor_estimado: req.body.valor_orcamento,
-            prazo_execucao: req.body.data_orcamento,
+            descricao_orcamento: req.body.descricao_orcamento,
+            valor_orcamento: req.body.valor_orcamento,
+            data_orcamento: req.body.data_orcamento,
             id_cliente: req.session.autenticado.id, // Atribui o ID do cliente autenticado
         };
 

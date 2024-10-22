@@ -10,7 +10,16 @@
 </head>
 
 <body>
-
+    <% 
+    let arquivo = { "imagem": "imagens/perfil/imgperfil.png" }; 
+    if (autenticado.autenticado != null) { 
+                        
+        // Verifica se a imagem está na pasta ou no banco de dados
+        if (autenticado.imagem != null) { 
+            arquivo.imagem = `data:image/jpeg;base64,${autenticado.imagem.toString('base64')}`;
+        } 
+    }
+    %>
     <header class="site-header">
         <section class="header-container">
             <section class="logo">Logo</section>
