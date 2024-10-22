@@ -24,80 +24,85 @@
             <button class="menu-toggle" aria-label="Toggle menu">&#9776;</button>
         </section>
     </header>
+
     <form action="/app/views/pages/perfilcliente.ejs" method="post" enctype="multipart/form-data">
         <section class="profile-container">
             <section class="profile-left">
                 <section class="profile-header">
-                    <img id="profile-pic" src="default-profile.jpg">
+                    <img id="profile-pic" src="default-profile.jpg" alt="Foto de Perfil">
                     <section>
                         <h1 id="user-name">Nome do Usuário</h1>
                         <p id="user-state">Estado</p>
                         <nav class="photo-actions">
-                            <% let arquivo={"imagem": "imagem/img-perfil.png" }; if(autenticado.autenticado.IMAGEM_PERFIL_CLIENTE !=null)
-                                { arquivo.imagem=autenticado.autenticado.IMAGEM_PERFIL_CLIENTE; }else if(autenticado.autenticado.IMAGEM_PERFIL_CLIENTE
-                                !=null){ arquivo.imagem=autenticado.autenticado.IMAGEM_PERFIL_CLIENTE; } %>
-                                <input type="file" id="inputArquivo" style="display: none;" accept="image/*" />
-                                <img id="imagem" src="/imagens/perfil/imgperfil.png" alt="Clique para mudar a imagem" />
-                                <script>
-                                    const inputArquivo = document.getElementById('inputArquivo');
-                                    const imagem = document.getElementById('imagem');
+                            <%
+                                let arquivo = { imagem: "/imagens/perfil/imgperfil.png" };
+                                if (autenticado && autenticado.IMAGEM_PERFIL_CLIENTE != null) {
+                                    arquivo.imagem = autenticado.IMAGEM_PERFIL_CLIENTE;
+                                }
+                            %>
+                            <input type="file" id="inputArquivo" style="display: none;" accept="image/*" />
+                            <img id="imagem" src="<%= arquivo.imagem %>" alt="Clique para mudar a imagem" />
 
-                                    imagem.addEventListener('click', () => {
-                                        inputArquivo.click();
-                                    });
+                            <script>
+                                const inputArquivo = document.getElementById('inputArquivo');
+                                const imagem = document.getElementById('imagem');
 
-                                    inputArquivo.addEventListener('change', (event) => {
-                                        const arquivo = event.target.files[0];
-                                        if (arquivo) {
-                                            const url = URL.createObjectURL(arquivo);
-                                            imagem.src = url;
-                                        }
-                                    });
-                                </script>
+                                imagem.addEventListener('click', () => {
+                                    inputArquivo.click();
+                                });
 
+                                inputArquivo.addEventListener('change', (event) => {
+                                    const arquivo = event.target.files[0];
+                                    if (arquivo) {
+                                        const url = URL.createObjectURL(arquivo);
+                                        imagem.src = url;
+                                    }
+                                });
+                            </script>
                         </nav>
                     </section>
                 </section>
             </section>
 
-            <nav class="profile-right">
+            <section class="profile-right">
                 <div class="profile-details">
                     <h2>Informações do Perfil</h2>
                     <input type="text" id="full-name" placeholder="Nome Completo">
                     <input type="text" id="email" placeholder="Email">
                     <input type="text" id="phone" placeholder="Telefone">
-                    <button onclick="saveProfile()">Salvar</button>
-            </nav>
+                    <button type="submit">Salvar</button>
+                </div>
+            </section>
+        </section>
     </form>
+
     <section class="professionals-carousel">
         <h2>Profissionais contratados</h2>
-        <nav class="carousel-wrapper">
-            <section class="carousel-container">
-                <nav class="professional-card">
+        <div class="carousel-wrapper">
+            <div class="carousel-container">
+                <div class="professional-card">
                     <img src="/imagens/icon1.webp" alt="Profissional 1">
                     <h3>João Silva</h3>
                     <p>Especialização: Instalador de Painéis Solares</p>
-                </nav>
-                <section class="professional-card">
+                </div>
+                <div class="professional-card">
                     <img src="/imagens/icon1.webp" alt="Profissional 2">
                     <h3>Maria Oliveira</h3>
                     <p>Especialização: Consultora de Energia Solar</p>
-                </section>
-                <nav class="professional-card">
+                </div>
+                <div class="professional-card">
                     <img src="/imagens/icon1.webp" alt="Profissional 3">
                     <h3>Pedro Santos</h3>
                     <p>Especialização: Projetista de Sistemas Solares</p>
-                </nav>
+                </div>
                 <!-- Adicione mais cartões conforme necessário -->
-        </nav>
+            </div>
+        </div>
         <button class="carousel-button carousel-prev" onclick="prevSlide()">&#10094;</button>
         <button class="carousel-button carousel-next" onclick="nextSlide()">&#10095;</button>
     </section>
-    </section>
-    </section>
-    </section>
 
-    <script href="/app/public/js/perfilcliente.js"></script>
+    <script src="/js/perfilcliente.js"></script>
 
 </body>
 
