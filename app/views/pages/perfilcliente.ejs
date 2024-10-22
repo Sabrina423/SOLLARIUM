@@ -45,9 +45,9 @@
                         <nav class="photo-actions">
                             <%
                                 let arquivo = { imagem: "/imagens/perfil/imgperfil.png" };
-                                if (autenticado && autenticado.IMAGEM_PERFIL_CLIENTE != null) {
-                                    arquivo.imagem = autenticado.IMAGEM_PERFIL_CLIENTE;
-                                }
+                                if (autenticado.imagem != null) {
+                                    arquivo.imagem = imagem;
+                                } 
                             %>
                             <input type="file" id="inputArquivo" style="display: none;" accept="image/*" />
                             <img id="imagem" src="<%= arquivo.imagem %>" alt="Clique para mudar a imagem" />
