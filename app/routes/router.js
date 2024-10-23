@@ -176,7 +176,7 @@ router.get("/resetarsenha",
     });
 
 router.post("/resetarenha",
-    clienteController.regrasValidacaoFormNovaSenha,
+    // clienteController.regrasValidacaoFormNovaSenha,
     function (req, res) {
         clienteController.resetarSenha(req, res);
     });
