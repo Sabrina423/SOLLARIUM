@@ -301,7 +301,7 @@ router.post (
     profissionaisController.regrasValidacaoPerfil,
 
     verificarClienteAutorizado( [1, 2, 3], "pages/cadastroprof"),
-    verificarProfAutorizado( [1, 2, 3], "pages/cadastroprof"),
+    
 
     async function (req, res) {
         profissionaisController.gravarPerfil(req, res);
