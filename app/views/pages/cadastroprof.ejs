@@ -42,6 +42,8 @@
                 </nav>
                 <nav class="input-group">
                     <input type="text" name="cep_prof" placeholder="CEP" maxlength="9" oninput="mascaraCep(this)" required>
+
+                        onblur="pesquisacep(this.value);" onkeyup="mascaraCEP(event)"/><b>>*</b>
                 </nav>
                 <nav class="input-group">
                     <input type="email" name="email_prof" id="email_prof" placeholder="E-mail" required>
