@@ -13,6 +13,11 @@ body {
     background-color: #1e1e1e;
     min-height: 100vh;
 }
+.material-symbols-outlined {
+    align-self: flex-start;
+    text-decoration: none;
+    color: #ffffff;
+    }
 
 .container {
     position: relative;
@@ -37,16 +42,12 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 10px;
+    color: white;
+    padding: 40px;
     background-image: url(/imagens/painelsolar_.png);
-    background-size: cover; /* Ajusta a imagem ao tamanho do contêiner */
-    background-position: center; /* Centraliza a imagem */
+ 
+
 }
-.material-symbols-outlined {
-    align-self: flex-start;
-    text-decoration: none;
-    color: #f8bd3f;
-    }
 .hero h2 {
     font-family: sans-serif;
     font-size: 2.0em;
@@ -68,7 +69,6 @@ main {
     width: 100%;
     max-width: 300px;
     height: 50px;
-    text-align: center;
     margin-top: 40px;
     background-color: #ffac40;
     color: white;
@@ -95,7 +95,18 @@ main {
     border: 2px solid black;
 }
 
-.profissional a, .cliente a {
+.profissional a{
+    color: white;
+    padding: 1rem;
+    text-decoration: none;
+    border-radius: 15px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: 0.2s ease;
+    margin-left: 8px;
+}
+
+.cliente a{
     color: white;
     padding: 1rem;
     text-decoration: none;
@@ -112,7 +123,7 @@ main {
 h3 {
     font-family: sans-serif;
     text-align: center;
-    margin-top: 40px;
+    margin-top: 45px;
     color: white;
 }
 

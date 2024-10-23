@@ -67,7 +67,12 @@ body {
     height: auto;
     border-radius: 10px;
 }
-
+.password-container .error-message{
+    display: none;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    font-size: 12px;
+}
 h2 {
     width: 500px;
     font-family: sans-serif;
