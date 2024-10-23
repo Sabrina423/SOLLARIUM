@@ -170,7 +170,7 @@ router.get("/feedback", function (req, res) {
     PedidoController.gravarpedido(req, res);
 });
 
-const pool = require('/workspaces/SOLLARIUM/config/pool_conexoes');
+
 const projetosreController = require("../controllers/projetosreController.js");
 
 const verificarProfAutorizado = require("../models/verificarProfAutorizado.js");
