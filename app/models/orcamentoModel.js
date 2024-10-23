@@ -13,10 +13,10 @@ const orcamentoModel = {
     
     create: async (orcamento) => {
         try {
-            const { id_orcamento, valor_orcamento, descricao_orcamento, data_orcamento, status_orcamento } = orcamento;
+            const { id_orcamento, valor_orcamento, descricao_orcamento, data_orcamento, status_orcamento, id_cliente } = orcamento;
             const result = await pool.query(
-                'INSERT INTO ORCAMENTO (ID_ORCAMENTO, VALOR_ORCAMENTO, DESCRICAO_ORCAMENTO, DATA_ORCAMENTO, STATUS_ORCAMENTO) VALUES (?, ?, ?, ?, ?)',
-                [id_orcamento, valor_orcamento, descricao_orcamento, data_orcamento, status_orcamento]
+                'INSERT INTO ORCAMENTO (ID_ORCAMENTO, VALOR_ORCAMENTO, DESCRICAO_ORCAMENTO, DATA_ORCAMENTO, STATUS_ORCAMENTO, ID_CLIENTE) VALUES (?, ?, ?, ?, ?,?)',
+                [id_orcamento, valor_orcamento, descricao_orcamento, data_orcamento, status_orcamento, id_cliente]
             );
             return result;
         } catch (error) {
@@ -27,10 +27,10 @@ const orcamentoModel = {
 
     update: async (id, orcamento) => {
         try {
-            const { valor_orcamento, descricao_orcamento, data_orcamento, status_orcamento } = orcamento;
+            const { valor_orcamento, descricao_orcamento, data_orcamento, status_orcamento, id_cliente } = orcamento;
             const result = await pool.query(
-                'UPDATE ORCAMENTO SET VALOR_ORCAMENTO = ?, DESCRICAO_ORCAMENTO = ?, DATA_ORCAMENTO = ?, STATUS_ORCAMENTO = ? WHERE ID_ORCAMENTO = ?',
-                [valor_orcamento, descricao_orcamento, data_orcamento, status_orcamento, id]
+                'UPDATE ORCAMENTO SET VALOR_ORCAMENTO = ?, DESCRICAO_ORCAMENTO = ?, DATA_ORCAMENTO = ?, STATUS_ORCAMENTO = ?, ID_CLIENTE = ? WHERE ID_ORCAMENTO = ?',
+                [valor_orcamento, descricao_orcamento, data_orcamento, status_orcamento, id_cliente, id]
             );
             return result;
         } catch (error) {
@@ -38,7 +38,7 @@ const orcamentoModel = {
             throw error;
         }
     },
-
+    
     delete: async (id) => {
         try {
             const result = await pool.query('DELETE FROM ORCAMENTO WHERE ID_ORCAMENTO = ?', [id]);
