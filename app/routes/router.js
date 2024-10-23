@@ -95,9 +95,6 @@ router.get('/cadastrocartao',  (req, res) => {
     res.render('pages/cadastrocartao');
 });
 
-router.get('/relatorio', (req, res) => {
-    res.render('pages/relatorio');
-});
 
 router.get('/sobre', (req, res) => {
     res.render('pages/sobre');
