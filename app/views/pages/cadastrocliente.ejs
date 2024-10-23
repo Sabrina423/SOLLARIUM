@@ -35,7 +35,8 @@
                     <input type="text" name="cep_cliente" placeholder="CEP" maxlength="9" oninput="mascaraCep(this)" required>
                 </nav>
                 <nav class="input-group">
-                    <input type="email" name="email_cliente" placeholder="E-mail" required>
+                    <input type="email" name="email_cliente" id="email_cliente" placeholder="E-mail" required>
+                    <div id="email-error" class="error-message">Este e-mail já está em uso.</div>
                     <input type="tel" id="contato_cliente" name="contato_cliente" placeholder="Contato (00) 00000-0000" required>
                 </nav>
                 <nav class="input-group">
@@ -58,12 +59,20 @@
             const password = document.getElementById('senha_cliente').value;
             const confirmPassword = document.getElementById('password').value;
             const errorMessage = document.getElementById('error-message');
+            const emailError = document.getElementById('email-error');
+            const emailInput = document.getElementById('email_cliente').value;
 
-            // Reseta a mensagem de erro
+            // Reseta as mensagens de erro
             errorMessage.style.display = 'none';
+            emailError.style.display = 'none';
 
-            // Valida se as senhas correspondem
-            if (password !== confirmPassword) {
+            // Lógica simulada para verificar se o e-mail já está em uso
+            const existingEmails = ["teste@example.com", "user@example.com"]; // Exemplo de e-mails existentes
+
+            if (existingEmails.includes(emailInput)) {
+                emailError.style.display = 'block'; // Exibe mensagem se o e-mail já estiver em uso
+                event.preventDefault(); // Impede o envio do formulário
+            } else if (password !== confirmPassword) {
                 errorMessage.style.display = 'block'; // Exibe a mensagem de erro
                 event.preventDefault(); // Impede o envio do formulário
             } else {
@@ -87,13 +96,8 @@
                 errorMessage.style.display = 'none'; // Oculta a mensagem de erro
             }
         });
-<<<<<<< HEAD
 
         // Validação de senha
-=======
-        // Validação de senha
-
->>>>>>> 0acc9e2 (vazio)
         function showMessage() {
             document.getElementById('message').style.display = 'block';
         }
@@ -126,10 +130,6 @@
                 .replace(/(\d{5})(\d{1,4})$/, '$1-$2');
         }
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 0acc9e2 (vazio)
         document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('cpf_cliente').addEventListener('input', function() {
                 this.value = applyCPFMask(this.value);
@@ -137,20 +137,6 @@
 
             document.getElementById('contato_cliente').addEventListener('input', function() {
                 this.value = applyPhoneMask(this.value);
-            });
-
-            // Adicionando validação em tempo real das senhas
-            document.getElementById('senha_cliente').addEventListener('input', function() {
-                const password = this.value;
-                const confirmPassword = document.getElementById('password').value;
-                const errorMessage = document.getElementById('error-message');
-
-                // Mostra a mensagem se as senhas não coincidirem
-                if (password && password !== confirmPassword) {
-                    errorMessage.style.display = 'block'; // Exibe a mensagem de erro
-                } else {
-                    errorMessage.style.display = 'none'; // Oculta a mensagem de erro
-                }
             });
         });
 
@@ -162,11 +148,6 @@
             input.value = cep; // Atualiza o valor do input
         }
 
-<<<<<<< HEAD
-=======
-
-        // Máscara para CPF
->>>>>>> 0acc9e2 (vazio)
         function applyCPFMask(value) {
             return value
                 .replace(/\D/g, '') // Remove tudo que não é dígito

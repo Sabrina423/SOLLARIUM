@@ -1,59 +1,61 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
+
 <head>
-    <meta charset="UTF-8">
+    <title>Recuperar senha</title>
+    <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/recsenha.css">
+    <link rel="stylesheet" href="css/recsenha.css">
+    <script src="js/script.js"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-    <title>Recuperação de Senha</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-notify@0.5.5/dist/simple-notify.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/simple-notify@0.5.5/dist/simple-notify.min.js"></script>
 </head>
+
 <body>
-    <% 
-    // Inicializa avisoErro e msgErro
-    let avisoErro = { "email_cliente": "" };
-    let msgErro = "";
+    <main>
+        <% 
+            let avisoErro = {"email_cliente":""}
+            let msgErro = ""
+                if(listaErros){
+                    listaErros.errors.forEach(function(itemErro){
+                        if(itemErro.path == "email_cliente"){
+                            avisoErro.email_cliente = "erro";
+                            msgErro += `* ${itemErro.msg} <br>`
+                        }
+                    })
+                    if(msgErro != ""){
+                    %>
+                        <script>
+                            let msgErro ="<%= msgErro %>"
+                            notify("Erro(s) no preenchimento", 
+                                   "Verifique o(s) campo(s) <br> " + msgErro.replace(/&lt;/g,"<").replace(/&gt;/g,">"), 
+                                   "error", "center", 5000)                        
+                        </script>
+                    <%
+                    }
+                }
+                if (dadosNotificacao) { %>
+                    <script>
+                            notify("<%= dadosNotificacao.titulo%>","<%= dadosNotificacao.mensagem%>", "<%= dadosNotificacao.tipo%>", "center")
+                            if("<%= dadosNotificacao.tipo %>" == "success"){
+                                setTimeout(function(){window.location="/"}, 3000)
+                            }                        
+                    </script>
+                <% } %>              
+                <div class="container">
+                    <a href="/entrar" class="material-symbols-outlined">
+                        keyboard_backspace
+                    </a>
+                    <form id="card-form" action="/recsenha" method="post">
+                        <p> Insira seu E-mail e enviaremos um link de recuperação de senha</p>
+                        <input type="email" name="email" required placeholder="Seu e-mail">
+                        <button type="submit">Enviar E-mail</button>
+                    </form>
+                    </div>
+                </div>
+    </main>
 
-    // Verifica se listaErros foi passada; se não, inicializa como um objeto vazio
-    //let listaErros = typeof listaErros !== 'undefined' ? listaErros : { errors: [] };
-if(listaErros){
-
-
-    if (listaErros.errors.length > 0) {
-        listaErros.errors.forEach(function(itemErro) {
-            if (itemErro.path === "email_cliente") {
-                avisoErro.email_cliente = "erro";
-                msgErro += `* ${itemErro.msg} <br>`;
-            }
-        });
-    
-        if (msgErro !== "") { %>
-            <script>
-                let msgErro = "<%= msgErro %>";
-                notify("Erro(s) no preenchimento", 
-                       "Verifique o(s) campo(s) <br> " + msgErro.replace(/&lt;/g, "<").replace(/&gt;/g, ">"), 
-                       "error", "center", 5000);
-            </script>
-        <% }
-    }
-}
-    if (dadosNotificacao) { %>
-        <script>
-            notify("<%= dadosNotificacao.titulo %>", "<%= dadosNotificacao.mensagem %>", "<%= dadosNotificacao.tipo %>", "center");
-            if ("<%= dadosNotificacao.tipo %>" === "success") {
-                setTimeout(function() { window.location = "/"; }, 3000);
-            }
-        </script>
-    <% } %>
-
-    <nav class="container">
-        <a href="/entrar" class="material-symbols-outlined">
-            keyboard_backspace
-        </a>
-        <form id="card-form" action="/recsenha" method="post">
-            <p> Insira seu E-mail e enviaremos um link de recuperação de senha</p>
-            <input type="email" name="email" required placeholder="Seu e-mail">
-            <button type="submit">Enviar E-mail</button>
-        </form>
-    </nav>
 </body>
+
 </html>

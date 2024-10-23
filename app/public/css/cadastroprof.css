@@ -147,7 +147,7 @@ form {
 }
 
 .password-container input {
-    width: 100%;
+    width: 500px;
     padding-right: 30px;
 }
 /* Estilo do botão de submit */

@@ -1,54 +1,66 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
+
 <head>
-    <meta charset="UTF-8">
+    <title>Resetar senha</title>
+    <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/resetarsenha.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-    <title>Redefinir Senha</title>
+    <link rel="stylesheet" href="css/estilo.css">
+    <script src="js/script.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-notify@0.5.5/dist/simple-notify.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/simple-notify@0.5.5/dist/simple-notify.min.js"></script>
 </head>
+
 <body>
-    <% 
-    let avisoErro = {"senha_cliente":"","senha_cliente":""}
-    let msgErro = ""
-        if(listaErros){
-            listaErros.errors.forEach(function(itemErro){
-                if(itemErro.path == "senha_cliente"){
-                    avisoErro.senha_cliente = "erro";
-                    msgErro += `* ${itemErro.msg} <br>`
+    <main>
+        <% 
+            let avisoErro = {"senha_cliente":"","csenha_cliente":""}
+            let msgErro = ""
+                if(listaErros){
+                    listaErros.errors.forEach(function(itemErro){
+                        if(itemErro.path == "senha_cliente"){
+                            avisoErro.senha_cliente = "erro";
+                            msgErro += `* ${itemErro.msg} <br>`
+                        }
+                        if(itemErro.path == "csenha_cliente"){
+                            avisoErro.csenha_cliente = "erro";
+                            msgErro += `* ${itemErro.msg} <br>`
+                        }
+                    })
+                    if(msgErro != ""){
+                    %>
+                        <script>
+                            let msgErro ="<%= msgErro %>"
+                            notify("Erro(s) no preenchimento", 
+                                   "Verifique o(s) campo(s) <br> " + msgErro.replace(/&lt;/g,"<").replace(/&gt;/g,">"), 
+                                   "error", "center", 5000)                        
+                        </script>
+                    <%
+                    }
                 }
-                if(itemErro.path == "senha_cliente"){
-                    avisoErro.senha_cliente = "erro";
-                    msgErro += `* ${itemErro.msg} <br>`
-                }
-            })
-            if(msgErro != ""){
-            %>
-                <script>
-                    let msgErro ="<%= msgErro %>"
-                    notify("Erro(s) no preenchimento", 
-                           "Verifique o(s) campo(s) <br> " + msgErro.replace(/&lt;/g,"<").replace(/&gt;/g,">"), 
-                           "error", "center", 5000)                        
-                </script>
-            <%
-            }
-        }
-        if (dadosNotificacao) { %>
-            <script>
-                    notify("<%= dadosNotificacao.titulo%>","<%= dadosNotificacao.mensagem%>", "<%= dadosNotificacao.tipo%>", "center")
-                    if("<%= dadosNotificacao.tipo %>" == "success"){
-                        setTimeout(function(){window.location="/"}, 3000)
-                    }                        
-            </script>
-        <% } %>              
-    <nav class="container">
-        <a href="/" class="material-symbols-outlined">
-            keyboard_backspace
-        </a>
-        <form id="card-form" action="/resetarsenha" method="post">
-            <p> Insira sua nova senha:</p>
-                <input type="password" name="password" required placeholder="Sua nova senha">
-                <button type="submit">Criar nova senha</button>
-    </form>
+                if (dadosNotificacao) { %>
+                    <script>
+                            notify("<%= dadosNotificacao.titulo%>","<%= dadosNotificacao.mensagem%>", "<%= dadosNotificacao.tipo%>", "center")
+                            if("<%= dadosNotificacao.tipo %>" == "success"){
+                                setTimeout(function(){window.location="/"}, 3000)
+                            }                        
+                    </script>
+                <% } %>              
+                <div class="login-page">
+                    <div class="form-cadastro">
+                        <h2>Resetar senha</h2>
+                        <form action="/resetarsenha" method="post">
+                            <input type="hidden" name="id_cliente" value="<%= id_cliente %>">
+                            <input type="password" name="senha_cliente" placeholder="Nova senha" value=""
+                                class="<%= avisoErro.senha_cliente %>" /><br>
+                           <input type="password" name="csenha_cliente" placeholder="Repita a senha" value=""
+                                class="<%=  avisoErro.csenha_cliente %>" /><br>
+                           <button type="submit">Entrar</button><br>
+                        </form>
+                    </div>
+                </div>
+    </main>
+
 </body>
+
 </html>

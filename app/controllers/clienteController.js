@@ -33,10 +33,9 @@ const clienteController = {
         body("email_cliente")
             .isEmail().withMessage("Digite um e-mail válido!")
             .custom(async value => {
-                const clienteExistente = await clienteModel.findByEmailTot(value);
-                console.log('clienteExistente tot')
-                console.log(clienteExistente[0].tot)
-                if (clienteExistente[0].tot !=0) {
+                const clienteExistente = await cliente.findByEmail(value);
+                console.log(clienteExistente.lengtht)
+                if (clienteExistente.lenght != undefined) {
                     throw new Error('E-mail em uso!');
                 }
             }),
@@ -89,8 +88,7 @@ const clienteController = {
         };
 
         try {
-            let cliente = await clienteModel.create(dadosForm);
-            console.log(cliente)
+            await cliente.create(dadosForm);
             res.render("pages/home", {
                 listaErros: null, carrinho: null, autenticado: req.session.autenticado, dadosNotificacao: {
                     titulo: "Cadastro realizado!", mensagem: "Novo usuário criado com sucesso!", tipo: "success"
@@ -214,7 +212,6 @@ const clienteController = {
       },
     
       validarTokenNovaSenha: async (req, res) => {
-        //receber token da URL
     
         const token = req.query.token;
         console.log(token);

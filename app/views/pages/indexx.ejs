@@ -1,250 +1,59 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
-    <meta charset="UTF-8">
+    <title>Recuperar senha</title>
+    <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" 
-    integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" 
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <title>Sollarium</title>
-    <script src="/js/home.js"></script>
-    <link rel="stylesheet" href="/css/home.css">
-    <script src="https://sdk.mercadopago.com/js/V2"></script>
+    <link rel="stylesheet" href="css/recsenha.css">
+    <script src="js/script.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-notify@0.5.5/dist/simple-notify.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/simple-notify@0.5.5/dist/simple-notify.min.js"></script>
 </head>
 
 <body>
-    <header>
-        <nav class="navbar">
-            <nav class="logo"><a href="#">Sollarium</a></nav>
-            <ul class="links">
-                <li><a href="/">Início</a></li>
-                <li><a href="/orcamento">Orçamento</a></li>
-                <li><a href="/cadastroinicial" id="cadastre-se">Cadastre-se</a></li>
-
-            </ul>
-            <% if (autenticado.autenticado != null) { 
-                let arquivo = { "imagem": "imagens/perfil/imgperfil.png" }; 
-            %>
-            <nav class="profile-container">
-                <span>Olá <%= autenticado.autenticado %>!</span>
-                <a href="<%= autenticado.tipo === 'profissional' ? '/perfilprof' : '/perfilcliente' %>">
-                    <img src="<%= arquivo.imagem %>" alt="Imagem de perfil" style="max-width: 60px; max-height: 60px;" 
-                         onerror="this.onerror=null; this.src='imagens/perfil/imgperfil.png';">
-                </a>
-                <p><a href="/">sair</a></p>
-            </nav>
-            
-            <% } else { %>
-                <a href="/entrar" class="action_btn">Entrar</a>
-            <% } %>   
-            <nav class="toggle_btn">
-                <i class="fa-solid fa-bars-staggered"></i>
-            </nav>
-        </nav>
-    
-        <nav class="dropdown_menu">
-            <li><a href="/home">Início</a></li>
-            <li><a href="/orcamento">Orçamento</a></li>
-            <li><a href="/sobre">Sobre nós</a></li>
-            <% if (autenticado.autenticado != null) { 
-                let arquivo = { "imagem": "imagens/perfil/imgperfil.png" }; 
-            %>
-                <nav class="profile-container" style="margin: 10px 0; display: flex; flex-direction: column; align-items: center;">
-                    <span>Olá <%= autenticado.autenticado %>!</span>
-                    <a href="<%= autenticado.tipo === 'profissional' ? '/perfilprofissional' : '/perfilcliente' %>">
-                        <img src="<%= arquivo.imagem %>" alt="Imagem de perfil" style="max-width: 60px; max-height: 60px;" 
-                             onerror="this.onerror=null; this.src='imagens/perfil/imgperfil.png';">
-                    </a>
-                    <p><a href="/">sair</a></p>
-                </nav>                
-            <% } else { %>
-                <a href="/entrar" class="action_btn">Entrar</a>
-            <% } %>   
-        </nav>
-    </header>    
-    
     <main>
-        <nav class="sliderhome">
-            <nav class="listhome">
-                <nav class="item active">
-                    <img src="imagens/home1.jpg">
-                    <nav class="content">
-                        <p>serviço</p>
-                        <h2>Instalação</h2>
-                        <p class="pp">
-                            Oferecemos instalação completa de sistemas de energia solar, 
-                            desde o planejamento até a ativação, garantindo eficiência e segurança em cada etapa.
-                        </p>
-                    </nav>
-                </nav>
-                <nav class="item">
-                    <img src="imagens/1.png">
-                    <nav class="content">
-                        <p>serviço</p>
-                        <h2>Vistoria</h2>
-                        <p class="pp">
-                            Realizamos vistorias detalhadas para avaliar a viabilidade e o estado dos sistemas solares,
-                            identificando possíveis melhorias e garantindo seu funcionamento ideal.
-                        </p>
-                    </nav>
-                </nav>
-                <nav class="item">
-                    <img src="imagens/2.png">
-                    <nav class="content">
-                        <p>serviço</p>
-                        <h2>Manutenção</h2>
-                        <p class="pp">
-                            Nosso serviço de manutenção preventiva e corretiva assegura que seu sistema solar opere
-                            com máxima eficiência e longevidade, minimizando interrupções.
-                        </p>
-                    </nav>
-                </nav>
-                <nav class="item">
-                    <img src="imagens/3.png">
-                    <nav class="content">
-                        <p>serviço</p>
-                        <h2>Consultoria</h2>
-                        <p class="pp">
-                            Fornecemos consultoria especializada para ajudá-lo a escolher e implementar a melhor
-                            solução de energia solar, adaptada às suas necessidades específicas e orçamento.
-                        </p>
-                    </nav>
-                </nav>
-                <nav class="item">
-                    <img src="imagens/4.png">
-                    <nav class="content">
-                        <p>serviço</p>
-                        <h2>Limpeza</h2>
-                        <p class="pp">
-                            Oferecemos serviços de limpeza profissional para painéis solares, removendo sujeira e
-                            detritos que podem reduzir a eficiência do sistema, garantindo desempenho ótimo.
-                        </p>
-                    </nav>
-                </nav>
-            </nav>
-            
-            <nav class="thumbnailhome">
-                <nav class="item active">
-                    <img src="imagens/insalacao.png">
-                    <nav class="content">
-                        Instalação
-                    </nav>
-                </nav>
-                <nav class="item">
-                    <img src="imagens/vistoria.png">
-                    <nav class="content">
-                        Vistoria
-                    </nav>
-                </nav>
-                <nav class="item">
-                    <img src="imagens/manutencao.png">
-                    <nav class="content">
-                        Manutenção
-                    </nav>
-                </nav>
-                <nav class="item">
-                    <img src="imagens/consultoria.png">
-                    <nav class="content">
-                        Consultoria
-                    </nav>
-                </nav>
-                <nav class="item">
-                    <img src="imagens/limpeza.png">
-                    <nav class="content">
-                        Limpeza
-                    </nav>
-                </nav>
-            </nav>
-        </nav>
+        <% 
+            let avisoErro = {"email_cliente":""}
+            let msgErro = ""
+                if(listaErros){
+                    listaErros.errors.forEach(function(itemErro){
+                        if(itemErro.path == "email_cliente"){
+                            avisoErro.email_cliente = "erro";
+                            msgErro += `* ${itemErro.msg} <br>`
+                        }
+                    })
+                    if(msgErro != ""){
+                    %>
+                        <script>
+                            let msgErro ="<%= msgErro %>"
+                            notify("Erro(s) no preenchimento", 
+                                   "Verifique o(s) campo(s) <br> " + msgErro.replace(/&lt;/g,"<").replace(/&gt;/g,">"), 
+                                   "error", "center", 5000)                        
+                        </script>
+                    <%
+                    }
+                }
+                if (dadosNotificacao) { %>
+                    <script>
+                            notify("<%= dadosNotificacao.titulo%>","<%= dadosNotificacao.mensagem%>", "<%= dadosNotificacao.tipo%>", "center")
+                            if("<%= dadosNotificacao.tipo %>" == "success"){
+                                setTimeout(function(){window.location="/"}, 3000)
+                            }                        
+                    </script>
+                <% } %>              
+                <div class="login-page">
+                    <div class="form-cadastro">
+                        <h2>Recuperar a senha</h2>
+                        <form action="/recsenha" method="post">
+                            <input type="text" name="email_cliente" placeholder="e-mail" value=""
+                                class="<%= avisoErro.email_cliente %>" /><br>
+                           <button type="submit">Enviar</button><br>
+                        </form>
+                    </div>
+                </div>
     </main>
-    <footer>
-        <section class="footer">
-            <nav class="footer-content">
-                <h2>Sollarium</h2>
-                <p>Sua plataforma de serviços solares em suas mãos.</p>
-                <nav class="icons">
-                    <a href=""><i class='bx bxl-facebook-circle'></i></a>
-                    <a href=""><i class='bx bxl-twitter'></i></a>
-                    <a href=""><i class='bx bxl-instagram-alt'></i></a>
-                    <a href=""><i class='bx bxl-youtube'></i></a>
-                </nav>
-            </nav>
-            
-            <nav class="footer-content">
-                <h4>Serviços</h4>
-                <li><a href="">Instalação</a></li>
-                <li><a href="">Vistoria</a></li>
-                <li><a href="">Manutenção</a></li>
-                <li><a href="">Consultoria</a></li>
-                <li><a href="">Limpeza</a></li>
-            </nav>
 
-            <nav class="footer-content">
-                <h4>Menu</h4>
-                <li><a href="">Orçamento</a></li>
-                <li><a href="">Sobre Nós</a></li>
-                <li><a href="">Início</a></li>
-                <li><a href="">Consultoria</a></li>
-            </nav>
-
-            <nav class="footer-content">
-                <h4>Ajuda</h4>
-                <li><a href="">Contato email</a></li>
-                <li><a href="">Contato telefone</a></li>
-            </nav>
-        </section>
-    </footer>
-
-    <script>
-        function login() {
-    // Código de autenticação...
-
-    // Após o login, ocultar o botão "Cadastre-se"
-    const cadastroButton = document.getElementById('cadastre-se');
-    if (cadastroButton) {
-        cadastroButton.style.display = 'none'; // Esconde o botão
-    }
-
-    // Mostrar o profile-container, se necessário
-    const profileContainer = document.querySelector('.profile-container');
-    if (profileContainer) {
-        profileContainer.style.display = 'flex'; // Exibe o perfil
-    }
-}
-        
-        const toggleBtn = document.querySelector('.toggle_btn');
-        const toggleBtnIcon = document.querySelector('.toggle_btn i');
-        const dropDownMenu = document.querySelector('.dropdown_menu');
-
-        toggleBtn.onclick = function () {
-            dropDownMenu.classList.toggle('open');
-            const isOpen = dropDownMenu.classList.contains('open');
-
-            toggleBtnIcon.classList = isOpen
-                ? 'fa-solid fa-xmark'
-                : 'fa-solid fa-bars-staggered';
-        }
-        // Supondo que você tenha um evento de login
-function login() {
-    // Código de autenticação...
-
-    // Após o login, ocultar o botão "Cadastre-se"
-    const cadastroButton = document.getElementById('cadastre-se'); // ajuste o ID conforme necessário
-    if (cadastroButton) {
-        cadastroButton.style.display = 'none';
-    }
-
-    // Mostrar o profile-container, se necessário
-    const profileContainer = document.querySelector('.profile-container');
-    if (profileContainer) {
-        profileContainer.style.display = 'flex';
-    }
-}
-
-// Exemplo de uso: chamar a função login quando o usuário se autenticar com sucesso
-
-    </script>
-    <script src="app.js"></script>
 </body>
+
 </html>

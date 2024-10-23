@@ -10,7 +10,7 @@ const profissionaisController = require('../controllers/profissionaisController.
 const admController = require('../controllers/admController.js');
 const cliente = require("../models/clienteModel");
 const profissional = require("../models/profissionaisModel");
-const adm = require("../models/admModel");
+const admModel = require("../models/admModel");
 const uploadFile = require("../util/uploader.js")("./app/public/imagens/imgperfil");
 const orcamentoController = require('../controllers/orcamentoController.js');
 function validateEmail(email) {
@@ -23,10 +23,9 @@ function validateEmail(email) {
 
 const {
     verificarClienteAutenticado,
-    limparSessao,
-    gravarClienteAutenticado,
     verificarClienteAutorizado,
-  } = require("../models/autenticadormiddleware.js");
+    gravarClienteAutenticado
+} = require("../models/autenticadormiddleware.js");
 
 const router = express.Router();
 // Mercado Pago
@@ -127,11 +126,10 @@ router.get('/resetarsenha', (req, res) => {
     res.render('pages/resetarsenha', {listaErros: null,dadosNotificacao: null, msgErro: null});
 });
 
-
-router.get('/perfilprof', verificarClienteAutorizado, (req, res) => {
+router.get('/perfilprof', (req, res) => {
     res.render('pages/perfilprof');
+    profissionaisController.mostrarPerfil(req, res);
 });
-
 
 
 router.get('/feedback',  (req, res) => {
@@ -175,70 +173,30 @@ router.get("/feedback", function (req, res) {
 const pool = require('/workspaces/SOLLARIUM/config/pool_conexoes');
 const projetosreController = require("../controllers/projetosreController.js");
 
-router.post('/recsenha', async (req, res) => {
-    const email = req.body.email;
+const verificarProfAutorizado = require("../models/verificarProfAutorizado.js");
 
-    // Validação do e-mail
-    const listaErros = validateEmail(email);
-    if (listaErros.errors) {
-        console.log(listaErros);
-        return res.render('pages/recsenha', {
-            listaErros: listaErros,
-            dadosNotificacao: null // ou qualquer outra variável necessária
-        }); 
-    }
+router.get("/recuperar-senha", verificarClienteAutenticado, function(req, res){
+    res.render("pages/recsenha",{ listaErros: null, dadosNotificacao: null });
+  });
+  
+  router.post("/recuperar-senha",
+    verificarClienteAutenticado,
+    clienteController.regrasValidacaoFormRecSenha, 
+    function(req, res){
+      clienteController.recuperarSenha(req, res);
+  });
+  
+  
+  router.get("/resetarsenha", 
+    function(req, res){
+      clienteController.validarTokenNovaSenha(req, res);
 
-    // Verifica se o e-mail está cadastrado no banco de dados
-    pool.query('SELECT * FROM CLIENTE WHERE EMAIL_CLIENTE = ?', [email], async (err, results) => {
-        if (err) {
-            console.error('Erro ao consultar o banco de dados:', err);
-            return res.status(500).send('Erro ao consultar o banco de dados.');
-        }
-        
-        // Se não encontrar resultados, retorna um erro
-        if (results.length === 0) {
-            
-            console.error('E-mail não cadastrado');
-            return res.status(404).send('E-mail não cadastrado.');
-        }
+  router.post("/resetarenha", 
+      clienteController.regrasValidacaoFormNovaSenha,
+    function(req, res){
+      clienteController.resetarSenha(req, res);
+  });
 
-        // Se o e-mail estiver cadastrado, gera o token
-        const token = jwt.sign({ email }, secretKey, { expiresIn: '1h' });
-
-        const mailOptions = {
-            from: process.env.EMAIL_USER,
-            to: email,
-            subject: 'Recuperação de Senha',
-            html: `Clique no link para redefinir sua senha: https://congenial-barnacle-5gx456xjgv7w249gr-3000.app.github.dev/resetarsenha${token}`
-        }
-
-        const transporter = nodemailer.createTransport({
-            service: 'gmail',
-            auth: {
-                user: process.env.EMAIL_USER,
-                pass: process.env.EMAIL_PASS
-            },  tls: {
-                secure: false,
-                ignoreTLS: true,
-                rejectUnauthorized: false, // ignorar certificado digital - APENAS EM DESENVOLVIMENTO
-            }
-        });
-
-        // Enviar email
-        try {
-            await transporter.sendMail(mailOptions);
-            console.log('Email enviado com sucesso para:', email);
-            // res.send('Email de recuperação enviado.');
-            console.log("enviou")
-        } catch (error) {
-            console.error('Erro ao enviar email:', error);
-            // return res.status(500).send('Erro ao enviar o email.');
-            console.log("não enviou")
-        
-        }
-    });
-       
-    });
 
 
 router.post('/logout', (req, res) => {
@@ -269,7 +227,6 @@ router.get (
 )        
 
 router.post("/cadastrocliente", clienteController.regrasValidacaoFormCad, async (req, res) => {
-    console.log('erro')
     clienteController.cadastrar(req, res);
 });
 
@@ -300,21 +257,18 @@ router.post (
     "/perfilprof",
     uploadFile("imagem-perfil_prof"),
     profissionaisController.regrasValidacaoPerfil,
-
-    verificarClienteAutorizado( [1, 2, 3], "pages/cadastroprof"),
-    
-
+    verificarProfAutorizado( [1, 2, 3], "pages/cadastroprof"),
     async function (req, res) {
         profissionaisController.gravarPerfil(req, res);
     });
 router.get (
     "/perfilprof",
-    verificarClienteAutorizado( [1, 2, 3], "pages/cadastroprof"),
+    verificarProfAutorizado( [1, 2, 3], "pages/cadastroprof"),
     async function (req, res) {
         profissionaisController.mostrarPerfil(req, res);
     }
 )        
-
+    });
 // Exportando o router
 
 module.exports = router;
