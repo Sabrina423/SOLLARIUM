@@ -153,7 +153,77 @@ regrasValidacaoFormCad: [
             console.error('Erro ao mostrar perfil:', error);
             res.status(500).render("pages/error", { dadosNotificacao: { titulo: "Erro Interno", mensagem: "Ocorreu um erro ao carregar o perfil.", tipo: "error" } });
         }
+    },
+
+    gravarPerfil: async (req, res) => {
+        const erros = validationResult(req);
+        const erroMulter = req.session.erroMulter;
+        if (!erros.isEmpty() || erroMulter != null) {
+            const lista = !erros.isEmpty() ? erros : { formatter: null, errors: [] };
+            if (erroMulter != null) {
+                lista.errors.push(erroMulter);
+            }
+            return res.render("pages/perfilprof", { listaErros: lista, dadosNotificacao: null, valores: req.body });
+        }
+        try {
+            var dadosForm = {
+                user_prof: req.body.nomeprof_prof,
+                nome_prof: req.body.nome_prof,
+                email_prof: req.body.email_prof,
+                fone_prof: req.body.fone_prof,
+                cep_prof: req.body.cep.replace("-", ""),
+                numero_prof: req.body.numero,
+                complemento_prof: req.body.complemento,
+                img_perfilprof_banco: req.session.autenticado.img_perfil_banco,
+                img_perfilprof_pasta: req.session.autenticado.img_perfil_pasta,
+            };
+            if (req.body.senha_prof != "") {
+                dadosForm.senha_prof = bcrypt.hashSync(req.body.senha_cliente, salt);
+            }
+            if (!req.file) {
+                console.log("falha no carregamento");
+            } else {
+                const caminhoArquivo = "imagem/perfilprof/" + req.file.filename;
+                if (dadosForm.img_perfilprof_pasta != caminhoArquivo) {
+                    removeImg(dadosForm.img_perfilprof_pasta);
+                }
+                dadosForm.img_perfilprof_pasta = caminhoArquivo;
+                dadosForm.img_perfilprof_banco = null;
+            }
+            let resultUpdate = await prof.update(dadosForm, req.session.autenticado.id);
+            if (!resultUpdate.isEmpty) {
+                if (resultUpdate.changedRows == 1) {
+                    var result = await cliente.findId(req.session.autenticado.id);
+                    var autenticado = {
+                        autenticado: result[0].nome_cliente,
+                        id: result[0].id_cliente,
+                        tipo: result[0].id_tipo_cliente,
+                        img_perfil_banco: result[0].img_perfil_banco != null ? `data:image/jpeg;base64,${result[0].img_perfil_banco.toString('base64')}` : null,
+                        img_perfil_pasta: result[0].img_perfil_pasta
+                    };
+                    req.session.autenticado = autenticado;
+                    var campos = {
+                        nome_cliente: result[0].nome_cliente,
+                        email_cliente: result[0].email_cliente,
+                        img_perfil_pasta: result[0].img_perfil_pasta,
+                        img_perfil_banco: result[0].img_perfil_banco,
+                        nomeCliente_cliente: result[0].user_cliente,
+                        fone_cliente: result[0].fone_cliente,
+                        senha_cliente: ""
+                    };
+                    res.render("pages/perfilcliente", { listaErros: null, dadosNotificacao: { titulo: "Perfil atualizado com sucesso", mensagem: "Alterações gravadas", tipo: "success" }, valores: campos });
+                } else {
+                    res.render("pages/perfilcliente", { listaErros: null, dadosNotificacao: { titulo: "Perfil atualizado com sucesso", mensagem: "Sem alterações", tipo: "success" }, valores: dadosForm });
+                }
+            }
+        } catch (e) {
+            console.log(e);
+            res.render("pages/perfilcliente", { listaErros: erros, dadosNotificacao: { titulo: "Erro ao atualizar o perfil!", mensagem: "Verifique os valores digitados!", tipo: "error" }, valores: req.body });
+        }
     }
 };
+
+
+
 
 module.exports = profController;
