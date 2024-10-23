@@ -174,11 +174,11 @@ regrasValidacaoFormCad: [
                 cep_prof: req.body.cep.replace("-", ""),
                 numero_prof: req.body.numero,
                 complemento_prof: req.body.complemento,
-                img_perfilprof_banco: req.session.autenticado.img_perfil_banco,
-                img_perfilprof_pasta: req.session.autenticado.img_perfil_pasta,
+                img_perfilprof_banco: req.session.autenticado.img_perfilprof_banco,
+                img_perfilprof_pasta: req.session.autenticado.img_perfilprof_pasta,
             };
             if (req.body.senha_prof != "") {
-                dadosForm.senha_prof = bcrypt.hashSync(req.body.senha_cliente, salt);
+                dadosForm.senha_prof = bcrypt.hashSync(req.body.senha_prof, salt);
             }
             if (!req.file) {
                 console.log("falha no carregamento");
@@ -195,30 +195,30 @@ regrasValidacaoFormCad: [
                 if (resultUpdate.changedRows == 1) {
                     var result = await cliente.findId(req.session.autenticado.id);
                     var autenticado = {
-                        autenticado: result[0].nome_cliente,
-                        id: result[0].id_cliente,
-                        tipo: result[0].id_tipo_cliente,
-                        img_perfil_banco: result[0].img_perfil_banco != null ? `data:image/jpeg;base64,${result[0].img_perfil_banco.toString('base64')}` : null,
-                        img_perfil_pasta: result[0].img_perfil_pasta
+                        autenticado: result[0].nome_prof,
+                        id: result[0].id_prof,
+                        tipo: result[0].id_tipo_prof,
+                        img_perfilprof_banco: result[0].img_perfilprof_banco != null ? `data:image/jpeg;base64,${result[0].img_perfilprof_banco.toString('base64')}` : null,
+                        img_perfilprof_pasta: result[0].img_perfilprof_pasta
                     };
                     req.session.autenticado = autenticado;
                     var campos = {
-                        nome_cliente: result[0].nome_cliente,
-                        email_cliente: result[0].email_cliente,
-                        img_perfil_pasta: result[0].img_perfil_pasta,
-                        img_perfil_banco: result[0].img_perfil_banco,
-                        nomeCliente_cliente: result[0].user_cliente,
-                        fone_cliente: result[0].fone_cliente,
-                        senha_cliente: ""
+                        nome_prof: result[0].nome_prof,
+                        email_prof: result[0].email_prof,
+                        img_perfilprof_pasta: result[0].img_perfilprof_pasta,
+                        img_perfilprof_banco: result[0].img_perfilprof_banco,
+                        nomeprof_prof: result[0].user_prof,
+                        fone_prof: result[0].fone_prof,
+                        senha_prof: ""
                     };
-                    res.render("pages/perfilcliente", { listaErros: null, dadosNotificacao: { titulo: "Perfil atualizado com sucesso", mensagem: "Alterações gravadas", tipo: "success" }, valores: campos });
+                    res.render("pages/perfilprof", { listaErros: null, dadosNotificacao: { titulo: "Perfil atualizado com sucesso", mensagem: "Alterações gravadas", tipo: "success" }, valores: campos });
                 } else {
-                    res.render("pages/perfilcliente", { listaErros: null, dadosNotificacao: { titulo: "Perfil atualizado com sucesso", mensagem: "Sem alterações", tipo: "success" }, valores: dadosForm });
+                    res.render("pages/perfilprof", { listaErros: null, dadosNotificacao: { titulo: "Perfil atualizado com sucesso", mensagem: "Sem alterações", tipo: "success" }, valores: dadosForm });
                 }
             }
         } catch (e) {
             console.log(e);
-            res.render("pages/perfilcliente", { listaErros: erros, dadosNotificacao: { titulo: "Erro ao atualizar o perfil!", mensagem: "Verifique os valores digitados!", tipo: "error" }, valores: req.body });
+            res.render("pages/perfilprof", { listaErros: erros, dadosNotificacao: { titulo: "Erro ao atualizar o perfil!", mensagem: "Verifique os valores digitados!", tipo: "error" }, valores: req.body });
         }
     }
 };

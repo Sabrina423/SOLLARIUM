@@ -18,8 +18,15 @@
     <nav class="cols__container">
       <nav class="left__col">
         <nav class="img__container">
-          <input type="file" id="inputArquivo" style="display: none;" accept="image/*" />
-          <img id="imagem" src="/imagens/perfil/imgperfil.png" alt="Clique para mudar a imagem" />
+          <%
+          arquivo = { imagem: "/imagens/perfil/imgperfil.png" };
+         if (autenticado.imagem != null) {
+             arquivo.imagem = imagem;
+         } 
+     %>
+     <input type="file" id="inputArquivo" style="display: none;" accept="image/*" />
+     <img id="imagem" src="<%= arquivo.imagem %>" alt="Clique para mudar a imagem" />
+
           <script>
             const inputArquivo = document.getElementById('inputArquivo');
             const imagem = document.getElementById('imagem');
