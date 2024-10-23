@@ -94,13 +94,7 @@
             } else if (senha !== confSenha) {
                 errorMessage.style.display = 'block'; // Exibe a mensagem de erro se as senhas não coincidirem
                 event.preventDefault();
-            } else {
-                event.preventDefault(); // Impede o envio padrão para simulação
-                // Simulando o envio do formulário com sucesso
-                setTimeout(() => {
-                    window.location.href = '/'; // Redireciona para a home
-                }, 1000); // 1 segundo de delay para simular o processamento
-            }
+            } 
         });
 
         // Funções para mostrar e esconder a mensagem de senha

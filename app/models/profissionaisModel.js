@@ -4,7 +4,7 @@ const profissionaisModel = {
     // Buscar profissionais por ID
     findById: async (id) => {
         try {
-            const [linhas] = await pool.query('SELECT * FROM PROFISSIONAL WHERE ID_PROF = ?', [id]);
+            const [linhas] = await pool.query('SELECT * FROM PROFISSIONAIS WHERE ID_PROF = ?', [id]);
             return linhas.length > 0 ? linhas[0] : null; // Retorna o profissionais ou null se não encontrado
         } catch (error) {
             console.error('Erro ao buscar profissionais por ID:', error);
@@ -15,7 +15,7 @@ const profissionaisModel = {
     // Buscar profissionais por email
     findByEmail: async (email) => {
         try {
-            const [linhas] = await pool.query('SELECT * FROM PROFISSIONAL WHERE EMAIL_PROF = ?', [email]);
+            const [linhas] = await pool.query('SELECT * FROM PROFISSIONAIS WHERE EMAIL_PROF = ?', [email]);
             return linhas.length > 0 ? linhas[0] : null; // Retorna o profissionais ou null se não encontrado
         } catch (error) {
             console.error('Erro ao buscar profissionais por email:', error);
@@ -25,7 +25,7 @@ const profissionaisModel = {
     
     findfindByEmailTot: async (email) => {
         try {
-            const [linhas] = await pool.query('SELECT count(*) as tot FROM PROFISSIONAL WHERE EMAIL_PROF = ?', [email]);
+            const [linhas] = await pool.query('SELECT count(*) as tot FROM PROFISSIONAIS WHERE EMAIL_PROF = ?', [email]);
             return linhas.length > 0 ? linhas[0] : null; // Retorna o profissionais ou null se não encontrado
         } catch (error) {
             console.error('Erro ao buscar profissionais por email:', error);

@@ -13,7 +13,7 @@ const admModel = {
 
     findByEmail: async (id) => {
         try {
-            const [linhas] = await pool.query('SELECT * FROM adm WHERE EMAIL_ADM = ?', [id]);
+            const [linhas] = await pool.query('SELECT * FROM ADM WHERE EMAIL_ADM = ?', [id]);
             return linhas;
         } catch (error) {
             console.error('Erro ao buscar adm por ID:', error);
@@ -51,7 +51,7 @@ const admModel = {
 
     delete: async (id) => {
         try {
-            const result = await pool.query('DELETE FROM adm WHERE ID_adm = ?', [id]);
+            const result = await pool.query('DELETE FROM ADM WHERE ID_ADM = ?', [id]);
             return result; // Retorna o resultado da exclusão
         } catch (error) {
             console.error('Erro ao deletar adm:', error);

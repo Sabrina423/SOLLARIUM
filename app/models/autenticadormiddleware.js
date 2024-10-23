@@ -37,9 +37,10 @@ const gravarClienteAutenticado = async (req, res, next) => {
     
     try {
       const clienteExistente = await cliente.findByEmail(dadosForm.nome_cliente);
+      var totalCliente = Object.keys(clienteExistente).length;
       console.log(clienteExistente);
       
-      if (clienteExistente && bcrypt.compareSync(dadosForm.senha_cliente, clienteExistente[0].SENHA_CLIENTE)) {
+      if (totalCliente == 1 && bcrypt.compareSync(dadosForm.senha_cliente, clienteExistente[0].SENHA_CLIENTE)) {
         console.log("validou a senha 1");
         
         autenticado = {
@@ -51,9 +52,10 @@ const gravarClienteAutenticado = async (req, res, next) => {
       } else {
         // Valida profissional
         const profissionalExistente = await profissional.findByEmail(dadosForm.nome_cliente);
+        var totalProf = Object.keys(profissionalExistente).length;
         console.log(profissionalExistente);
         
-        if (profissionalExistente && bcrypt.compareSync(dadosForm.senha_cliente, profissionalExistente[0].SENHA_PROF)) {
+        if (totalProf == 1 && bcrypt.compareSync(dadosForm.senha_cliente, profissionalExistente[0].SENHA_PROF)) {
           console.log("validou a senha 2");
 
           autenticado = {
@@ -65,9 +67,10 @@ const gravarClienteAutenticado = async (req, res, next) => {
         } else {
           // Valida administrador
           const admExistente = await adm.findByEmail(dadosForm.nome_cliente);
+          var totalAdm = Object.keys(admExistente).length;
           console.log(admExistente);
           
-          if (admExistente && bcrypt.compareSync(dadosForm.senha_cliente, admExistente[0].SENHA_ADM)) {
+          if (totalAdm == 1 && bcrypt.compareSync(dadosForm.senha_cliente, admExistente[0].SENHA_ADM)) {
             console.log("validou a senha 3");
 
             autenticado = {

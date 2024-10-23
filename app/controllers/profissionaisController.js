@@ -2,7 +2,10 @@ const prof = require("../models/profissionaisModel");
 const { body, validationResult } = require("express-validator");
 const bcrypt = require("bcryptjs");
 const salt = bcrypt.genSaltSync(12);
+const fetch = require('node-fetch');
+const jwt = require('jsonwebtoken');
 const { removeImg } = require("../util/removeImg");
+const https = require('https');
 const verificarProfAutorizado = require('../models/verificarProfAutorizado'); // Corrigido o caminho para o middleware
 
 const profController = {
@@ -20,19 +23,14 @@ regrasValidacaoFormCad: [
     body('nome_prof').isLength({ min: 3, max: 45 }).withMessage('Nome deve ter entre 3 e 45 caracteres.'),
     body('cep_prof')
     .isLength({ min: 9, max: 9 }).withMessage('O cep deve ter entre 9 caracteres'),
-    // Sanitizar o CPF antes de validar
+    
     body('cpf_prof')
-        .isLength({ min: 11, max: 14 }).withMessage('CPF deve ter 11 dígitos.')
-        .customSanitizer(value => value.replace(/[^\d]/g, '')) // Remove pontos e traços
-        .isNumeric().withMessage('CPF deve conter apenas números.'),
+        .isLength({ min: 11, max: 14 }).withMessage('CPF deve ter 11 dígitos.'),
     body('email_prof').isEmail().withMessage('Digite um e-mail válido.'),
 
     
     body('contato_prof')
-        .isLength({ min: 10, max: 15 }).withMessage('Telefone deve ter entre 10 e 11 dígitos.')
-        .customSanitizer(value => value.replace(/[^\d]/g, '')) // Remove caracteres não numéricos
-        .isNumeric().withMessage('Telefone deve conter apenas números.'),
-
+        .isLength({ min: 10, max: 15 }).withMessage('Telefone deve ter entre 10 e 11 dígitos.'),
     // Validação de senha mais forte
     body('senha_prof').custom(value => {
         const senhaValida = /^(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z]).{8,}$/.test(value);
@@ -67,21 +65,20 @@ regrasValidacaoFormCad: [
             .isLength({ min: 12, max: 13 }).withMessage("Digite um telefone válido!"),
     ],
      
-    // Função de login
+
     logar: (req, res) => {
         const erros = validationResult(req);
         if (!erros.isEmpty()) {
             return res.render("pages/entrar", { listaErros: erros.array(), dadosNotificacao: null });
         }
 
-        if (req.session.autenticado) {
-            res.redirect("/");
+        if (req.session.autenticado && req.session.autenticado.autenticado != null) {
+            res.render('pages/home', { autenticado: req.session.autenticado, carrinho: null, login: req.session.logado });
         } else {
             res.render("pages/entrar", { listaErros: null, dadosNotificacao: { titulo: "Falha ao logar!", mensagem: "Usuário e/ou senha inválidos!", tipo: "error" } });
         }
     },
 
-    // Função de cadastro
     cadastrar: async (req, res) => {
         const erros = validationResult(req);
         if (!erros.isEmpty()) {
@@ -95,14 +92,14 @@ regrasValidacaoFormCad: [
             email_prof: req.body.email_prof,
             cpf_prof: req.body.cpf_prof,
             cep_prof: req.body.cep_prof,
-            area_prof: req.body.area_prof, // Se tiver esse campo no form
+            area_prof: req.body.area_prof, 
             senha_prof: bcrypt.hashSync(req.body.senha_prof, salt)
         };
 
         try {
-            await prof.create(dadosForm); // Método de criação
+            await prof.create(dadosForm); 
             res.render("pages/home", {
-                listaErros: null,
+                listaErros: null,autenticado: req.session.autenticado, 
                 dadosNotificacao: {
                     titulo: "Cadastro realizado!",
                     mensagem: "Novo usuário criado com sucesso!",
@@ -113,7 +110,7 @@ regrasValidacaoFormCad: [
         } catch (e) {
             console.error('Erro ao cadastrar:', e);
             res.render("pages/cadastroprof", {
-                listaErros: null, // Não use 'erros' aqui, pois já capturamos os erros anteriormente
+                listaErros: null,autenticado: req.session.autenticado, 
                 dadosNotificacao: {
                     titulo: "Erro ao cadastrar!",
                     mensagem: "Verifique os valores digitados!",
@@ -124,10 +121,10 @@ regrasValidacaoFormCad: [
         }
     },
 
-    // Mostrar perfil
+    
     mostrarPerfil: async (req, res) => {
         try {
-            const results = await prof.findById(req.session.profissionalId); // Obter ID do profissional da sessão
+            const results = await prof.findById(req.session.profissionalId); 
             if (!results[0].cep_prof != null) {
                 const httpsAgent = new https.Agent({
                     rejectUnauthorized: false,
@@ -144,7 +141,7 @@ regrasValidacaoFormCad: [
                 nome_prof: results.nome_prof,
                 numero: results.numero_prof,
                 complemento: results.complemento_prof,
-                logradouro: results.logradouro, // Verifique se a variável está correta
+                logradouro: results.logradouro, 
                 bairro: results.bairro,
                 localidade: results.localidade,
                 uf: results.uf,
