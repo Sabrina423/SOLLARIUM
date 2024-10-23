@@ -13,13 +13,12 @@ const profissional = require("../models/profissionaisModel");
 const admModel = require("../models/admModel");
 const uploadFile = require("../util/uploader.js")("./app/public/imagens/imgperfil");
 const orcamentoController = require('../controllers/orcamentoController.js');
-function validateEmail(email) {
-    const errors = [];
-    if (!email) {
-        errors.push({ path: "email_cliente", msg: "O e-mail é obrigatório." });
-    }
-    return errors.length > 0 ? { errors } : {};
-}
+
+
+const projetosreController = require("../controllers/projetosreController.js");
+
+const verificarProfAutorizado = require("../models/verificarProfAutorizado.js");
+
 
 const {
     verificarClienteAutenticado,
@@ -33,11 +32,11 @@ const { MercadoPagoConfig, Preference } = require('mercadopago');
 const { PedidoController } = require("../controllers/PedidoController");
 
 
+
 // credenciais
-const MercadoPagoCliente = new MercadoPagoConfig({
+const mercadoPagoCliente = new MercadoPagoConfig({
     accessToken: process.env.acessToken
 });
-
 
 require('dotenv').config(); // Carregar variáveis de ambiente
 
@@ -46,16 +45,7 @@ console.log("Chave Secreta:", process.env.JWT_SECRET); // Debug
 const secretKey = process.env.JWT_SECRET || 'site'; // Usar chave padrão
 
 
-// middleware de Autenticação
-const authenticateToken = (req, res, next) => {
-    const token = req.session.token;
-    if (!token) return res.redirect('/');
-    jwt.verify(token, secretKey, (err, user) => {
-        if (err) return res.redirect('/');
-        req.user = user;
-        next();
-    });
-};
+
 
 // Rotas
 router.get('/', verificarClienteAutenticado, (req, res) => {
@@ -67,36 +57,36 @@ router.get('/entrar', (req, res) => {
 });
 
 router.get('/cadastrocliente', verificarClienteAutenticado, (req, res) => {
-    res.render('pages/cadastrocliente' , { autenticado: req.session.autenticado });
+    res.render('pages/cadastrocliente', { autenticado: req.session.autenticado });
 });
 
-router.get('/cadastroinicial',  (req, res) => {
+router.get('/cadastroinicial', (req, res) => {
     res.render('pages/cadastroinicial');
 });
 
-router.get('/projetosre',  (req, res) => {
+router.get('/projetosre', (req, res) => {
     res.render('pages/projetosre');
 });
 
 
 router.get("/excluir", function (req, res) {
     projetosreController.excluirprojeto(req, res);
-  });
-  
-  router.get("/finalizar", function (req, res) {
-    projetosreController.finalizarprojeto(req, res);
-  });
+});
 
-router.get('/pagamentosre',  (req, res) => {
+router.get("/finalizar", function (req, res) {
+    projetosreController.finalizarprojeto(req, res);
+});
+
+router.get('/pagamentosre', (req, res) => {
     res.render('pages/pagamentosre');
 });
 
-router.get('/comissaore',  (req, res) => {
+router.get('/comissaore', (req, res) => {
     res.render('pages/comissaore');
 });
 
 
-router.get('/cadastrocartao',  (req, res) => {
+router.get('/cadastrocartao', (req, res) => {
     res.render('pages/cadastrocartao');
 });
 
@@ -114,16 +104,16 @@ router.get('/cadastroprof', (req, res) => {
     res.render('pages/cadastroprof');
 });
 
-router.get('/orcamento', verificarClienteAutorizado([1],'pages/entrar'), (req, res) => {
+router.get('/orcamento', verificarClienteAutorizado([1], 'pages/entrar'), (req, res) => {
     res.render('pages/orcamento');
 });
 
 router.get('/recsenha', (req, res) => {
-    res.render('pages/recsenha', {listaErros: null,dadosNotificacao: null, msgErro: null});
+    res.render('pages/recsenha', { listaErros: null, dadosNotificacao: null, msgErro: null });
 });
 
 router.get('/resetarsenha', (req, res) => {
-    res.render('pages/resetarsenha', {listaErros: null,dadosNotificacao: null, msgErro: null});
+    res.render('pages/resetarsenha', { listaErros: null, dadosNotificacao: null, msgErro: null });
 });
 
 router.get('/perfilprof', (req, res) => {
@@ -132,19 +122,16 @@ router.get('/perfilprof', (req, res) => {
 });
 
 
-router.get('/feedback',  (req, res) => {
+router.get('/feedback', (req, res) => {
     res.render('pages/feedback');
 });
 
-router.get('/adm',  (req, res) => {
+router.get('/adm', (req, res) => {
     res.render('pages/adm');
 });
 
 
-// credenciais
-const mercadoPagoCliente = new MercadoPagoConfig({
-    accessToken: process.env.acessToken
-});
+
 
 router.post("/createpreference", function (req, res) {
     const preference = new Preference(mercadoPagoCliente);
@@ -160,10 +147,10 @@ router.post("/createpreference", function (req, res) {
             auto_return: "approved",
         }
     })
-    .then((value) => {
-        res.json(value);
-    })
-    .catch(console.log);
+        .then((value) => {
+            res.json(value);
+        })
+        .catch(console.log);
 });
 
 router.get("/feedback", function (req, res) {
@@ -171,31 +158,28 @@ router.get("/feedback", function (req, res) {
 });
 
 
-const projetosreController = require("../controllers/projetosreController.js");
+router.get("/recuperar-senha", verificarClienteAutenticado, function (req, res) {
+    res.render("pages/recsenha", { listaErros: null, dadosNotificacao: null });
+});
 
-const verificarProfAutorizado = require("../models/verificarProfAutorizado.js");
-
-router.get("/recuperar-senha", verificarClienteAutenticado, function(req, res){
-    res.render("pages/recsenha",{ listaErros: null, dadosNotificacao: null });
-  });
-  
-  router.post("/recuperar-senha",
+router.post("/recuperar-senha",
     verificarClienteAutenticado,
-    clienteController.regrasValidacaoFormRecSenha, 
-    function(req, res){
-      clienteController.recuperarSenha(req, res);
-  });
-  
-  
-  router.get("/resetarsenha", 
-    function(req, res){
-      clienteController.validarTokenNovaSenha(req, res);
+    clienteController.regrasValidacaoFormRecSenha,
+    function (req, res) {
+        clienteController.recuperarSenha(req, res);
+    });
 
-  router.post("/resetarenha", 
-      clienteController.regrasValidacaoFormNovaSenha,
-    function(req, res){
-      clienteController.resetarSenha(req, res);
-  });
+
+router.get("/resetarsenha",
+    function (req, res) {
+        clienteController.validarTokenNovaSenha(req, res);
+    });
+
+router.post("/resetarenha",
+    clienteController.regrasValidacaoFormNovaSenha,
+    function (req, res) {
+        clienteController.resetarSenha(req, res);
+    });
 
 
 
@@ -210,22 +194,22 @@ router.post('/logout', (req, res) => {
 
 
 //Rota de registro cliente
-router.post (
+router.post(
     "/perfilcliente",
     uploadFile("imagem-perfil_cliente"),
     clienteController.regrasValidacaoPerfil,
-    verificarClienteAutorizado( [1, 2, 3], "pages/cadastrocliente"),
+    verificarClienteAutorizado([1, 2, 3], "pages/cadastrocliente"),
     async function (req, res) {
         clienteController.gravarPerfil(req, res);
     });
 
-router.get (
+router.get(
     "/perfilcliente",
-    verificarClienteAutorizado( [1, 2, 3], "pages/cadastrocliente"),
+    verificarClienteAutorizado([1, 2, 3], "pages/cadastrocliente"),
     async function (req, res) {
         clienteController.mostrarPerfil(req, res);
     }
-)        
+)
 
 router.post("/cadastrocliente", clienteController.regrasValidacaoFormCad, async (req, res) => {
     clienteController.cadastrar(req, res);
@@ -244,32 +228,33 @@ router.post("/adm", admController.regrasValidacaoFormCad, async (req, res) => {
 // Rota de Login
 router.post("/entrar", clienteController.regrasValidacaoFormLogin, gravarClienteAutenticado, (req, res) => {
     // Presumindo que o login foi bem-sucedido e as informações do usuário estão na req.user
-  clienteController.logar(req,res)
+    clienteController.logar(req, res)
 });
 
 router.post("/orcamento", orcamentoController.regrasValidacaoFormOrcamento, (req, res) => {
     // Presumindo que o login foi bem-sucedido e as informações do usuário estão na req.user
-  orcamentoController.cadastrarOrcamento(req,res)
+    orcamentoController.cadastrarOrcamento(req, res)
 
-  
+
 });
 
-router.post (
+router.post(
     "/perfilprof",
     uploadFile("imagem-perfil_prof"),
     profissionaisController.regrasValidacaoPerfil,
-    verificarProfAutorizado( [1, 2, 3], "pages/cadastroprof"),
+    verificarProfAutorizado([1, 2, 3], "pages/cadastroprof"),
     async function (req, res) {
         profissionaisController.gravarPerfil(req, res);
     });
-router.get (
+
+router.get(
     "/perfilprof",
-    verificarProfAutorizado( [1, 2, 3], "pages/cadastroprof"),
+    verificarProfAutorizado([1, 2, 3], "pages/cadastroprof"),
     async function (req, res) {
         profissionaisController.mostrarPerfil(req, res);
     }
-)        
-    });
+);
+
 // Exportando o router
 
 module.exports = router;
