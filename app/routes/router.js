@@ -10,12 +10,9 @@ const profissionaisController = require('../controllers/profissionaisController.
 const admController = require('../controllers/admController.js');
 const cliente = require("../models/clienteModel");
 const profissional = require("../models/profissionaisModel");
-const adm = require("../models/admModel");
-const relatorioController = require("../controllers/relatorioController");
+const admModel = require("../models/admModel");
 const uploadFile = require("../util/uploader.js")("./app/public/imagens/imgperfil");
-const feedbackController = require('../controllers/feedbackController');
 const orcamentoController = require('../controllers/orcamentoController.js');
-
 function validateEmail(email) {
     const errors = [];
     if (!email) {
@@ -82,6 +79,14 @@ router.get('/projetosre',  (req, res) => {
 });
 
 
+router.get("/excluir", function (req, res) {
+    projetosreController.excluirprojeto(req, res);
+  });
+  
+  router.get("/finalizar", function (req, res) {
+    projetosreController.finalizarprojeto(req, res);
+  });
+
 router.get('/pagamentosre',  (req, res) => {
     res.render('pages/pagamentosre');
 });
@@ -125,9 +130,6 @@ router.get('/perfilprof', (req, res) => {
     res.render('pages/perfilprof');
 });
 
-router.get('/relatorio',  (req, res) => {
-    res.render('pages/relatorio');
-});
 
 router.get('/feedback',  (req, res) => {
     res.render('pages/feedback');
@@ -168,6 +170,7 @@ router.get("/feedback", function (req, res) {
 });
 
 const pool = require('/workspaces/SOLLARIUM/config/pool_conexoes');
+const projetosreController = require("../controllers/projetosreController.js");
 
 router.post('/recsenha', async (req, res) => {
     const email = req.body.email;

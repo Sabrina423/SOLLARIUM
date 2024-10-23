@@ -1,66 +1,109 @@
-var pool = require("../../config/pool_conexoes");
+const projetosreModel = require("../models/projetosreModel");
+const moment = require("moment");
+const { body, validationResult } = require("express-validator");
+const projetosreController = {
+  regrasValidacao: [
+    body("tarefa")
+      .isLength({ min: 5, max: 45 })
+      .withMessage("Nome da Tarefa deve conter de 5 a 45 letras!"),
+    body("prazo").isISO8601(),
+    body("situacao").isNumeric(),
+  ],
 
-const projetosModel = {
-    findAll: async () => {
-        try {
-            const [linhas] = await pool.query('SELECT * FROM tarefas WHERE status_tarefa = 1')
-            return linhas;
-        } catch (error) {
-            return error;
-        }
-    },
-
-    findId: async (id) => {
-        try {
-            const [linhas,campos] = await pool.query('SELECT * FROM tarefas WHERE status_tarefa = 1 and id_tarefa = ?',[id] )
-            return linhas;
-        } catch (error) {
-            return error;
-        }
-    },
-
-   
-
-    create: async (dadosForm) => {
-        try {
-            const [linhas, campos] = await pool.query('INSERT INTO tarefas SET ?', [dadosForm])
-            console.log(linhas);
-            console.log(campos);
-            return linhas;
-        } catch (error) {
-            console.log(error);
-            return null;
-        }  
-    },
-
-    update: async (dadosForm, id) => {
-        try {
-            const [linhas] = await pool.query('UPDATE tarefas SET ? WHERE id_tarefa = ?', [dadosForm, id])
-            return linhas;
-        } catch (error) {
-            return error;
-        }  
-    },
-
-    delete: async (id) => {
-        try {
-            const [linhas] = await pool.query('UPDATE tarefas SET status_tarefa = 0  WHERE id_tarefa = ?', [id])
-            return linhas;
-        } catch (error) {
-            return error;
-        }  
-    },
-
-    sistuacaoTarefa: async (situacao, id) => {
-        try {
-            const [linhas] = await pool.query('UPDATE tarefas SET situacao_tarefa = ? WHERE id_tarefa = ?', [situacao, id])
-            return linhas;
-        } catch (error) {
-            return error;
-        }  
+  listarprojetosrePaginadas: async (req, res) => {
+    res.locals.moment = moment;a
+    try {
+      results = await projetosreModel.findAll();
+      res.render("pages/index", { projetosre: results });
+    } catch (e) {
+      console.log(e); // exibir os erros no console do vs code
+      res.json({ erro: "Falha ao acessar dados" });
     }
-  
-};
-    
+  },
 
-module.exports = projetosModel;
+  adicionarTarefa: async (req, res) => {
+    res.locals.moment = moment;
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      console.log(errors);
+      return res.render("pages/adicionar", {
+        dados: req.body,
+        listaErros: errors,
+      });
+    }
+    var dadosForm = {
+      nome_tarefa: req.body.tarefa,
+      prazo_tarefa: req.body.prazo,
+      situacao_tarefa: req.body.situacao,
+    };
+    let id_tarefa = req.body.id_tarefa;
+    try {
+        if(id_tarefa==""){
+            results = await projetosreModel.create(dadosForm);
+        }else{
+            results = await projetosreModel.update(dadosForm,id_tarefa);
+        }
+      res.redirect("/");
+    } catch (e) {
+      console.log(e);
+      res.json({ erro: "Falha ao acessar dados" });
+    }
+  },
+
+  excluirTarefa: async (req, res) => {
+    let { id } = req.query;
+    try {
+      results = await projetosreModel.delete(id);
+      res.redirect("/");
+    } catch (e) {
+      console.log(e);
+      res.json({ erro: "Falha ao acessar dados" });
+    }
+  },
+
+  finalizarTarefa: async (req, res) => {
+    let { id } = req.query;
+    try {
+      results = await projetosreModel.sistuacaoTarefa(2, id);
+      res.redirect("/");
+    } catch (e) {
+      console.log(e);
+      res.json({ erro: "Falha ao acessar dados" });
+    }
+  },
+
+  exibirTarefaId: async (req, res) => {
+    res.locals.moment = moment;
+    let { id } = req.query;
+    console.log(id);
+    try {
+      let tarefa = await projetosreModel.findId(id);
+      res.render("pages/adicionar", {
+        dados: {
+          ID_PEDIDOS: id,
+          CLIENTE_ID_CLIENTE: id,
+          DATA_PEDIDO: tarefa[0].nome_tarefa,
+          VALOR_TOTAL_PEDIDO: tarefa[0].prazo_tarefa,
+          situacao: tarefa[0].situacao_tarefa,
+        },
+        listaErros: null,
+      });
+    } catch (e) {
+      console.log(e);
+      res.json({ erro: "Falha ao acessar dados" });
+    }
+  },
+
+  iniciarTarefa: async (req, res) => {
+    let { id } = req.query;
+    try {
+      results = await projetosreModel.sistuacaoTarefa(1, id);
+      res.redirect("/");
+    } catch (e) {
+      console.log(e);
+      res.json({ erro: "Falha ao acessar dados" });
+    }
+  },
+};
+
+module.exports = projetosreController;
