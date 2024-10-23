@@ -9,13 +9,15 @@
 </head>
 <body>
     <% 
+    // Inicializa avisoErro e msgErro
     let avisoErro = { "email_cliente": "" };
     let msgErro = "";
 
     // Verifica se listaErros foi passada; se não, inicializa como um objeto vazio
-    let listaErros = typeof listaErros !== 'undefined' ? listaErros : { errors: [] };
+    //let listaErros = typeof listaErros !== 'undefined' ? listaErros : { errors: [] };
+if(listaErros){
 
-    // Verifica se há erros e processa a mensagem de erro
+
     if (listaErros.errors.length > 0) {
         listaErros.errors.forEach(function(itemErro) {
             if (itemErro.path === "email_cliente") {
@@ -23,7 +25,7 @@
                 msgErro += `* ${itemErro.msg} <br>`;
             }
         });
-
+    
         if (msgErro !== "") { %>
             <script>
                 let msgErro = "<%= msgErro %>";
@@ -33,9 +35,8 @@
             </script>
         <% }
     }
-
-    // Verifica dadosNotificacao e exibe notificação se necessário
-    if (typeof dadosNotificacao !== 'undefined') { %>
+}
+    if (dadosNotificacao) { %>
         <script>
             notify("<%= dadosNotificacao.titulo %>", "<%= dadosNotificacao.mensagem %>", "<%= dadosNotificacao.tipo %>", "center");
             if ("<%= dadosNotificacao.tipo %>" === "success") {
@@ -49,7 +50,7 @@
             keyboard_backspace
         </a>
         <form id="card-form" action="/recsenha" method="post">
-            <p>Insira seu E-mail e enviaremos um link de recuperação de senha</p>
+            <p> Insira seu E-mail e enviaremos um link de recuperação de senha</p>
             <input type="email" name="email" required placeholder="Seu e-mail">
             <button type="submit">Enviar E-mail</button>
         </form>

@@ -13,7 +13,7 @@
 <body>
     <nav class="container">
         <nav class="hero">
-                <a href="/" class="material-symbols-outlined">
+                <a href="/cadastroinicial" class="material-symbols-outlined">
                     keyboard_backspace
                 <a>
             <h2>Bem-Vindo de volta!</h2>
@@ -99,49 +99,3 @@
 
     
     
-    
-    
-    
-    
-    
-    <script>
-        document.getElementById('loginForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-
-            // Limpar mensagens de erro e estilos
-            const inputs = document.querySelectorAll('input');
-            inputs.forEach(input => {
-                input.classList.remove('error');
-                input.nextElementSibling.style.display = 'none';
-            });
-
-            let isValid = true;
-
-            const emailInput = document.getElementById('email');
-            const senhaInput = document.getElementById('senha');
-
-            // Validação do e-mail (mínimo de 8 caracteres)
-            if (emailInput.value.length < 8 || emailInput.value.length > 45) {
-                isValid = false;
-                emailInput.classList.add('error');
-                emailInput.nextElementSibling.textContent = "O e-mail deve ter de 8 a 45 caracteres";
-                emailInput.nextElementSibling.style.display = 'block';
-            }
-
-            // Validação da senha
-            const senhaPattern = /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
-            if (!senhaPattern.test(senhaInput.value)) {
-                isValid = false;
-                senhaInput.classList.add('error');
-                senhaInput.nextElementSibling.textContent = "senha incorreta";
-                senhaInput.nextElementSibling.style.display = 'block';
-            }
-
-            if (isValid) {
-                // Se tudo estiver válido, envie o formulário
-                //alert('Formulário válido! Enviando...');
-                document.getElementById('loginForm').submit(); // Descomente para enviar o formulário
-            }
-        });
-    </script>
-

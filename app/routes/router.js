@@ -119,11 +119,11 @@ router.get('/orcamento', verificarClienteAutorizado([1],'pages/entrar'), (req, r
 });
 
 router.get('/recsenha', (req, res) => {
-    res.render('pages/recsenha');
+    res.render('pages/recsenha', {listaErros: null,dadosNotificacao: null, msgErro: null});
 });
 
 router.get('/resetarsenha', (req, res) => {
-    res.render('pages/resetarsenha');
+    res.render('pages/resetarsenha', {listaErros: null,dadosNotificacao: null, msgErro: null});
 });
 
 router.get('/perfilprof', (req, res) => {
@@ -178,10 +178,11 @@ router.post('/recsenha', async (req, res) => {
     // Validação do e-mail
     const listaErros = validateEmail(email);
     if (listaErros.errors) {
+        console.log(listaErros);
         return res.render('pages/recsenha', {
             listaErros: listaErros,
             dadosNotificacao: null // ou qualquer outra variável necessária
-        });
+        }); 
     }
 
     // Verifica se o e-mail está cadastrado no banco de dados
@@ -190,9 +191,11 @@ router.post('/recsenha', async (req, res) => {
             console.error('Erro ao consultar o banco de dados:', err);
             return res.status(500).send('Erro ao consultar o banco de dados.');
         }
-
+        
         // Se não encontrar resultados, retorna um erro
         if (results.length === 0) {
+            
+            console.error('E-mail não cadastrado');
             return res.status(404).send('E-mail não cadastrado.');
         }
 
@@ -203,14 +206,18 @@ router.post('/recsenha', async (req, res) => {
             from: process.env.EMAIL_USER,
             to: email,
             subject: 'Recuperação de Senha',
-            html: `Clique no link para redefinir sua senha: https://seusite.com/resetarsenha/${token}`
-        };
+            html: `Clique no link para redefinir sua senha: https://congenial-barnacle-5gx456xjgv7w249gr-3000.app.github.dev/resetarsenha${token}`
+        }
 
         const transporter = nodemailer.createTransport({
             service: 'gmail',
             auth: {
                 user: process.env.EMAIL_USER,
                 pass: process.env.EMAIL_PASS
+            },  tls: {
+                secure: false,
+                ignoreTLS: true,
+                rejectUnauthorized: false, // ignorar certificado digital - APENAS EM DESENVOLVIMENTO
             }
         });
 
@@ -218,13 +225,18 @@ router.post('/recsenha', async (req, res) => {
         try {
             await transporter.sendMail(mailOptions);
             console.log('Email enviado com sucesso para:', email);
-            res.send('Email de recuperação enviado.');
+            // res.send('Email de recuperação enviado.');
+            console.log("enviou")
         } catch (error) {
             console.error('Erro ao enviar email:', error);
-            return res.status(500).send('Erro ao enviar o email.');
+            // return res.status(500).send('Erro ao enviar o email.');
+            console.log("não enviou")
+        
         }
     });
-});
+       
+    });
+
 
 router.post('/logout', (req, res) => {
     req.session.destroy(err => {

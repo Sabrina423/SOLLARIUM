@@ -132,12 +132,6 @@
             }
             input.value = cep;
         }
-<<<<<<< HEAD
-=======
-        input.value = cep; // Atualiza o valor do input
-    }
- 
->>>>>>> 673862d (comit)
 
         // Funções para abrir e fechar o pop-up
         document.getElementById('openPopup').addEventListener('click', function() {
@@ -165,7 +159,6 @@
                 this.value = applyCPFMask(this.value);
             });
 
-<<<<<<< HEAD
             // Verificação das senhas durante o input
             document.getElementById('confimasenha_prof').addEventListener('input', function() {
                 const senha = document.getElementById('senha_prof').value;
@@ -178,31 +171,8 @@
                 } else {
                     errorMessage.style.display = 'none'; // Oculta a mensagem de erro
                 }
-=======
-            document.getElementById('telefone_prof').addEventListener('input', function() {
-                this.value = applyPhoneMask(this.value);
-
-
->>>>>>> 673862d (comit)
             });
         });
-        function mascaraCep(input) {
-        let cep = input.value.replace(/\D/g, ""); // Remove tudo que não é número
-        if (cep.length > 5) {
-            cep = cep.replace(/^(\d{5})(\d)/, "$1-$2"); // Aplica a máscara 00000-000
-        }
-        input.value = cep; // Atualiza o valor do input
-    }
-
-
-        function applyCPFMask(value) {
-            return value
-                .replace(/\D/g, '') // Remove tudo que não é dígito
-                .replace(/(\d{3})(\d)/, '$1.$2')
-                .replace(/(\d{3})(\d)/, '$1.$2')
-                .replace(/(\d{3})(\d{1,2})$/, '$1-$2');
-                
-        }
     </script>
 </body>
 </html>
