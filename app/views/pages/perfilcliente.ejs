@@ -33,6 +33,8 @@
                         <h1 id="user-name">Nome do Usuário</h1>
                         <p id="user-state">Estado</p>
                         <nav class="photo-actions">
+                        <input name="cep" type="text" id="cep" value="<%= valores.cep %> placeholder="CEP" class="<%= avisoErro.cep %>"
+                        onblur="pesquisacep(this.value);" onkeyup="mascaraCEP(event)"/><b>>*</b>
                             <%
                                 let arquivo = { imagem: "/imagens/perfil/imgperfil.png" };
                                 if (autenticado.imagem != null) {
