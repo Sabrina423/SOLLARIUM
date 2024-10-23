@@ -31,23 +31,7 @@ const projetosreController = {
         listaErros: errors,
       });
     }
-    var dadosForm = {
-      nome_tarefa: req.body.tarefa,
-      prazo_tarefa: req.body.prazo,
-      situacao_tarefa: req.body.situacao,
-    };
-    let id_tarefa = req.body.id_tarefa;
-    try {
-        if(id_tarefa==""){
-            results = await projetosreModel.create(dadosForm);
-        }else{
-            results = await projetosreModel.update(dadosForm,id_tarefa);
-        }
-      res.redirect("/");
-    } catch (e) {
-      console.log(e);
-      res.json({ erro: "Falha ao acessar dados" });
-    }
+     
   },
 
   excluirTarefa: async (req, res) => {
@@ -81,10 +65,9 @@ const projetosreController = {
       res.render("pages/adicionar", {
         dados: {
           ID_PEDIDOS: id,
-          CLIENTE_ID_CLIENTE: id,
-          DATA_PEDIDO: tarefa[0].nome_tarefa,
-          VALOR_TOTAL_PEDIDO: tarefa[0].prazo_tarefa,
-          situacao: tarefa[0].situacao_tarefa,
+          CLIENTE_ID_CLIENTE: nome_projetos,
+          DATA_PEDIDO: tarefa[0].data_projetos,
+          VALOR_TOTAL_PEDIDO: tarefa[0].valor_projetos,
         },
         listaErros: null,
       });

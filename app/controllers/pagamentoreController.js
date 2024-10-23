@@ -80,10 +80,12 @@ const tarefasController = {
       let tarefa = await tarefasModel.findId(id);
       res.render("pages/adicionar", {
         dados: {
-          id_tarefa: id,
-          tarefa: tarefa[0].nome_tarefa,
-          prazo: tarefa[0].prazo_tarefa,
-          situacao: tarefa[0].situacao_tarefa,
+          ID_PAGAMENTO: id,
+          ID_PROF: prof_nome,
+          ID_CLIENTE: id,
+          VALOR_PAGAMENTO: projetosre[0].valor_comiss,
+          DATA_PAGAMENTO: projrtosre[0].nome_tarefa,
+          DESCRICAO_PAGAMENTO: projetosre[0].nome_tarefa,
         },
         listaErros: null,
       });
