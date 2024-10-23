@@ -126,9 +126,8 @@ router.get('/resetarsenha', (req, res) => {
     res.render('pages/resetarsenha', {listaErros: null,dadosNotificacao: null, msgErro: null});
 });
 
-router.get('/perfilprof', verificarProfAutorizado, (req, res) => {
+router.get('/perfilprof', verificarClienteAutorizado, (req, res) => {
     res.render('pages/perfilprof');
-    profissionaisController.mostrarPerfil(req, res);
 });
 
 
@@ -172,7 +171,6 @@ router.get("/feedback", function (req, res) {
 
 const pool = require('/workspaces/SOLLARIUM/config/pool_conexoes');
 const projetosreController = require("../controllers/projetosreController.js");
-const verificarProfAutorizado = require("../models/verificarProfAutorizado.js");
 
 router.post('/recsenha', async (req, res) => {
     const email = req.body.email;
@@ -298,14 +296,14 @@ router.post("/orcamento", orcamentoController.regrasValidacaoFormOrcamento, (req
 router.post (
     "/perfilprof",
     uploadFile("imagem-perfil_prof"),
-    profissionaisControllerController.regrasValidacaoPerfil,
-    verificarProfAutorizado( [1, 2, 3], "pages/cadastroprof"),
+    profissionaisController.regrasValidacaoPerfil,
+    verificarClienteAutorizado( [1, 2, 3], "pages/cadastroprof"),
     async function (req, res) {
         profissionaisController.gravarPerfil(req, res);
     });
 router.get (
     "/perfilprof",
-    verificarProfAutorizado( [1, 2, 3], "pages/cadastroprof"),
+    verificarClienteAutorizado( [1, 2, 3], "pages/cadastroprof"),
     async function (req, res) {
         profissionaisController.mostrarPerfil(req, res);
     }

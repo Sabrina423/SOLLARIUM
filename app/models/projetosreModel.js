@@ -36,21 +36,13 @@ const projetosModel = {
 
     delete: async (id) => {
         try {
-            const [linhas] = await pool.query('UPDATE projetosre SET ? WHERE id_tarefa = ?', [id])
+            const [linhas] = await pool.query('UPDATE projetosre SET ? WHERE  ID_PEDIDOS = ?', [id])
             return linhas;
         } catch (error) {
             return error;
         }  
     },
 
-    sistuacaoTarefa: async (situacao, id) => {
-        try {
-            const [linhas] = await pool.query('UPDATE projetosre SET situacao_tarefa = ? WHERE id_tarefa = ?', [situacao, id])
-            return linhas;
-        } catch (error) {
-            return error;
-        }  
-    }
   
 };
     

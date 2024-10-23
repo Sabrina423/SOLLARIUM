@@ -17,7 +17,7 @@ const comissaoreController = {
     }
   },
 
-  adicionarTarefa: async (req, res) => {
+  adicionarcomissaore: async (req, res) => {
     res.locals.moment = moment;
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -28,26 +28,10 @@ const comissaoreController = {
       });
     }
     
-    var dadosForm = {
-      nome_tarefa: req.body.tarefa,
-      prazo_tarefa: req.body.prazo,
-      situacao_tarefa: req.body.situacao,
-    };
-    let id_tarefa = req.body.id_tarefa;
-    try {
-        if(id_tarefa==""){
-            results = await comissaoreModel.create(dadosForm);
-        }else{
-            results = await comissaoreModel.update(dadosForm,id_tarefa);
-        }
-      res.redirect("/");
-    } catch (e) {
-      console.log(e);
-      res.json({ erro: "Falha ao acessar dados" });
-    }
+  
   },
 
-  excluirTarefa: async (req, res) => {
+  excluircomissaore: async (req, res) => {
     let { id } = req.query;
     try {
       results = await comissaoreModel.delete(id);
@@ -58,10 +42,10 @@ const comissaoreController = {
     }
   },
 
-  finalizarTarefa: async (req, res) => {
+  finalizarcomissaore: async (req, res) => {
     let { id } = req.query;
     try {
-      results = await comissaoreModel.sistuacaoTarefa(2, id);
+      results = await comissaoreModel.sistuacaocomissaore(2, id);
       res.redirect("/");
     } catch (e) {
       console.log(e);
@@ -69,18 +53,18 @@ const comissaoreController = {
     }
   },
 
-  exibirTarefaId: async (req, res) => {
+  exibircomissaoreId: async (req, res) => {
     res.locals.moment = moment;
     let { id } = req.query;
     console.log(id);
     try {
-      let tarefa = await comissaoreModel.findId(id);
+      let comissaore = await comissaoreModel.findId(id);
       res.render("pages/adicionar", {
         dados: {
-          id_tarefa: id,
-          tarefa: tarefa[0].nome_tarefa,
-          prazo: tarefa[0].prazo_tarefa,
-          situacao: tarefa[0].situacao_tarefa,
+            ID_PROF: id,
+          VALOR_PAGAMENTO: comissaore[0].prof_nome,
+          COMISSÃO: comissaore[0].valor_comiss,
+          situacao: comissaore[0].comissão ,        
         },
         listaErros: null,
       });
@@ -90,10 +74,10 @@ const comissaoreController = {
     }
   },
 
-  iniciarTarefa: async (req, res) => {
+  iniciarcomissaore: async (req, res) => {
     let { id } = req.query;
     try {
-      results = await comissaoreModel.sistuacaoTarefa(1, id);
+      results = await comissaoreModel.sistuacaocomissaore(1, id);
       res.redirect("/");
     } catch (e) {
       console.log(e);
