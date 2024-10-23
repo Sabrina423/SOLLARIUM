@@ -36,7 +36,7 @@
                         <input name="cep" type="text" id="cep" value="<%= valores.cep %> placeholder="CEP" class="<%= avisoErro.cep %>"
                         onblur="pesquisacep(this.value);" onkeyup="mascaraCEP(event)"/><b>>*</b>
                             <%
-                                let arquivo = { imagem: "/imagens/perfil/imgperfil.png" };
+                                 arquivo = { imagem: "/imagens/perfil/imgperfil.png" };
                                 if (autenticado.imagem != null) {
                                     arquivo.imagem = imagem;
                                 } 

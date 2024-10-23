@@ -29,19 +29,13 @@ const clienteController = {
         body('cep_cliente')
             .isLength({ min: 9, max: 9 }).withMessage('O cep deve ter entre 9 caracteres'),
         body('contato_cliente')
-            .isLength({ min: 10, max: 15 }).withMessage('O contato deve ser válido com até 15 caracteres')
-            .custom(async value => {
-                const clienteExistente = await cliente.findById(value);
-                if (clienteExistente) {
-                    throw new Error('Nome de usuário em uso!');
-                }
-            }),
-
+            .isLength({ min: 10, max: 15 }).withMessage('O contato deve ser válido com até 15 caracteres'),
         body("email_cliente")
             .isEmail().withMessage("Digite um e-mail válido!")
             .custom(async value => {
-                const clienteExistente = await cliente.findById(value);
-                if (clienteExistente) {
+                const clienteExistente = await cliente.findByEmail(value);
+                console.log(clienteExistente.lengtht)
+                if (clienteExistente.lenght != undefined) {
                     throw new Error('E-mail em uso!');
                 }
             }),
@@ -137,10 +131,7 @@ const clienteController = {
                 nome_cliente: results[0].NOME_CLIENTE,
                 numero: null,
                 complemento: null  ,
-                logradouro: viaCep.logradouro,
-                bairro: viaCep.bairro,
-                localidade: viaCep.localidade,
-                uf: viaCep.uf,
+                bairro: viaCep.bairro, localidade: viaCep.localidade, uf: viaCep.uf,
                 img_perfil_banco: results[0].IMAGEM_PERFIL_CLIENTE != null 
                     ? `data:image/jpeg;base64,${results[0].IMAGEM_PERFIL_CLIENTE.toString('base64')}`
                     : null,

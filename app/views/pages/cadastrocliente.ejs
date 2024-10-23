@@ -27,12 +27,20 @@
             <form action="/cadastrocliente" method="POST" id="cadastroForm">
                 <nav class="logo"></nav>
                 <nav class="input-group">
+<<<<<<< HEAD
                     <input type="hidden" name="tipo_usuario" value="1"> <!-- 1 para cliente -->
+=======
+                    <input type="hidden" name="tipo_usuario" value="1">
+>>>>>>> 09d3a44 (atualização perfil cliente)
                     <input type="text" name="nome_cliente" placeholder="Nome Completo" required>
                     <input type="text" name="cpf_cliente" id="cpf_cliente" size="30" maxlength="14" placeholder="CPF" required>
                 </nav>
                 <nav class="input-group">
+<<<<<<< HEAD
                     <input type="text" name="cep_cliente" placeholder="CEP" maxlength="9" oninput="mascaraCep(this)" required>
+=======
+                    <input type="text" name="cep_cliente" id="cep_cliente" maxlength="9" placeholder="CEP" required>
+>>>>>>> 09d3a44 (atualização perfil cliente)
                 </nav>
                 <nav class="input-group">
                     <input type="email" name="email_cliente" placeholder="E-mail" required>
@@ -40,20 +48,25 @@
                 </nav>
                 <nav class="input-group">
                     <nav class="password-container">
+<<<<<<< HEAD
                         <input type="password" id="password" placeholder="Senha" onfocus="showMessage()" onblur="hideMessage()" oninput="validatePassword()" oncopy="return false;" onpaste="return false;">
+=======
+                        <input type="password" id="password" placeholder="Senha" onfocus="showMessage()" onblur="hideMessage()" oninput="validatePassword()" required>
+>>>>>>> 09d3a44 (atualização perfil cliente)
                         <nav id="message" class="invalid">A senha deve ter pelo menos 8 caracteres, uma letra maiúscula e um caractere especial.</nav>
-                    </nav>                    
+                    </nav>
                     <nav class="password-container">
                         <input type="password" id="senha_cliente" name="senha_cliente" placeholder="Confirme sua senha" required oncopy="return false;" onpaste="return false;">
                         <div id="error-message" class="error-message">As senhas não coincidem.</div>
                     </nav>
-                </nav>                
+                </nav>
                 <button type="submit">Criar Conta</button>
             </form>
         </main>
     </nav>
 
     <script>
+<<<<<<< HEAD
         document.getElementById('cadastroForm').addEventListener('submit', function(event) {
             const password = document.getElementById('senha_cliente').value;
             const confirmPassword = document.getElementById('password').value;
@@ -91,14 +104,17 @@
 =======
         // Validação de senha (mantida)
 >>>>>>> 4854f3d (atualizar)
+=======
+        // Validação de senha
+>>>>>>> 09d3a44 (atualização perfil cliente)
         function showMessage() {
             document.getElementById('message').style.display = 'block';
         }
-    
+
         function hideMessage() {
             document.getElementById('message').style.display = 'none';
         }
-    
+
         function validatePassword() {
             const password = document.getElementById('password').value;
             const message = document.getElementById('message');
@@ -106,14 +122,14 @@
             message.className = isValid ? 'valid' : 'invalid';
             message.innerText = isValid ? 'Senha válida' : 'A senha deve ter pelo menos 8 caracteres, uma letra maiúscula e um caractere especial.';
         }
-    
+
         function validatePasswordCriteria(password) {
             const lengthCriteria = password.length >= 8;
             const upperCaseCriteria = /[A-Z]/.test(password);
             const specialCharCriteria = /[!@#$%^&*(),.?":{}|<>]/.test(password);
             return lengthCriteria && upperCaseCriteria && specialCharCriteria;
         }
-    
+
         // Máscara para telefone
         function applyPhoneMask(value) {
             return value
@@ -123,6 +139,7 @@
                 .replace(/(\d{5})(\d{1,4})$/, '$1-$2');
         }
 
+<<<<<<< HEAD
         document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('cpf_cliente').addEventListener('input', function() {
                 this.value = applyCPFMask(this.value);
@@ -150,6 +167,9 @@
 >>>>>>> 673862d (comit)
         }
 
+=======
+        // Máscara para CPF
+>>>>>>> 09d3a44 (atualização perfil cliente)
         function applyCPFMask(value) {
             return value
                 .replace(/\D/g, '') // Remove tudo que não é dígito
@@ -157,8 +177,66 @@
                 .replace(/(\d{3})(\d)/, '$1.$2')
                 .replace(/(\d{3})(\d{1,2})$/, '$1-$2');
         }
+<<<<<<< HEAD
+=======
+
+        // Máscara para CEP
+        function mascaraCep(input) {
+            let cep = input.value.replace(/\D/g, ""); // Remove tudo que não é número
+            if (cep.length > 5) {
+                cep = cep.replace(/^(\d{5})(\d)/, "$1-$2"); // Aplica a máscara 00000-000
+            }
+            input.value = cep; // Atualiza o valor do input
+        }
+
+        // Validação dos campos ao enviar o formulário
+        function validateForm(event) {
+            const cpf = document.getElementById('cpf_cliente');
+            const contato = document.getElementById('contato_cliente');
+            const cep = document.getElementById('cep_cliente');
+            let valid = true;
+
+            if (!cpf.value.match(/^\d{3}\.\d{3}\.\d{3}-\d{2}$/)) {
+                alert("CPF inválido.");
+                valid = false;
+            }
+
+            if (!contato.value.match(/^\(\d{2}\) \d{5}-\d{4}$/)) {
+                alert("Contato inválido.");
+                valid = false;
+            }
+
+            if (!cep.value.match(/^\d{5}-\d{3}$/)) {
+                alert("CEP inválido.");
+                valid = false;
+            }
+
+            if (valid) {
+                document.getElementById('cadastroForm').submit();
+            } else {
+                event.preventDefault();
+            }
+        }
+
+        // Aplicando máscaras e validação ao carregar a página
+        document.addEventListener('DOMContentLoaded', function () {
+            document.getElementById('cpf_cliente').addEventListener('input', function () {
+                this.value = applyCPFMask(this.value);
+            });
+
+            document.getElementById('contato_cliente').addEventListener('input', function () {
+                this.value = applyPhoneMask(this.value);
+            });
+
+            document.getElementById('cep_cliente').addEventListener('input', function () {
+                mascaraCep(this);
+            });
+
+            document.getElementById('cadastroForm').addEventListener('submit', validateForm);
+        });
+>>>>>>> 09d3a44 (atualização perfil cliente)
     </script>
-    
+
     <style>
         .error {
             border-color: red;
@@ -168,15 +246,15 @@
             color: red;
             font-size: 12px;
         }
-    
+
         .valid {
             color: green;
         }
-    
+
         .invalid {
             color: red;
         }
     </style>
-    
+
 </body>
 </html>

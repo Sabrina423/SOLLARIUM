@@ -100,8 +100,8 @@ router.get('/sobre', (req, res) => {
     res.render('pages/sobre');
 });
 
-router.get('/perfilcliente',  (req, res) => {
-    res.render('pages/perfilcliente');
+router.get('/perfilcliente', verificarClienteAutenticado, (req, res) => {
+
     clienteController.mostrarPerfil(req, res);
 });
 
