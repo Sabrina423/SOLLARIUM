@@ -271,6 +271,7 @@ router.get (
 )        
 
 router.post("/cadastrocliente", clienteController.regrasValidacaoFormCad, async (req, res) => {
+    console.log('erro')
     clienteController.cadastrar(req, res);
 });
 

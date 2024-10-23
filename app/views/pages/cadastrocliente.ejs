@@ -87,8 +87,13 @@
                 errorMessage.style.display = 'none'; // Oculta a mensagem de erro
             }
         });
+<<<<<<< HEAD
 
         // Validação de senha
+=======
+        // Validação de senha
+
+>>>>>>> 0acc9e2 (vazio)
         function showMessage() {
             document.getElementById('message').style.display = 'block';
         }
@@ -121,6 +126,10 @@
                 .replace(/(\d{5})(\d{1,4})$/, '$1-$2');
         }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 0acc9e2 (vazio)
         document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('cpf_cliente').addEventListener('input', function() {
                 this.value = applyCPFMask(this.value);
@@ -153,6 +162,11 @@
             input.value = cep; // Atualiza o valor do input
         }
 
+<<<<<<< HEAD
+=======
+
+        // Máscara para CPF
+>>>>>>> 0acc9e2 (vazio)
         function applyCPFMask(value) {
             return value
                 .replace(/\D/g, '') // Remove tudo que não é dígito

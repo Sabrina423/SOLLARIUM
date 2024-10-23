@@ -34,8 +34,8 @@ const clienteController = {
             .isEmail().withMessage("Digite um e-mail válido!")
             .custom(async value => {
                 const clienteExistente = await cliente.findByEmail(value);
-                console.log(clienteExistente.lengtht)
-                if (clienteExistente.lenght != undefined) {
+                console.log(clienteExistente.length)
+                if (clienteExistente.length != undefined) {
                     throw new Error('E-mail em uso!');
                 }
             }),
@@ -70,6 +70,7 @@ const clienteController = {
 
     cadastrar: async (req, res) => {
         const erros = validationResult(req);
+        console.log(req.body);
         if (!erros.isEmpty()) {
             console.log(erros);
             return res.render("pages/cadastrocliente", { listaErros: erros, dadosNotificacao: null, valores: req.body, autenticado: req.session.autenticado });
@@ -87,7 +88,8 @@ const clienteController = {
         };
 
         try {
-            await cliente.create(dadosForm);
+            let cliente = await cliente.create(dadosForm);
+            console.log(cliente)
             res.render("pages/home", {
                 listaErros: null, carrinho: null, autenticado: req.session.autenticado, dadosNotificacao: {
                     titulo: "Cadastro realizado!", mensagem: "Novo usuário criado com sucesso!", tipo: "success"
