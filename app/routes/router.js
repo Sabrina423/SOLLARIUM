@@ -126,12 +126,11 @@ router.get('/resetarsenha', (req, res) => {
     res.render('pages/resetarsenha', {listaErros: null,dadosNotificacao: null, msgErro: null});
 });
 
-<<<<<<< HEAD
+
 router.get('/perfilprof', verificarClienteAutorizado, (req, res) => {
     res.render('pages/perfilprof');
 });
-=======
->>>>>>> 7d7a44d (cimm)
+
 
 
 router.get('/feedback',  (req, res) => {
@@ -300,11 +299,10 @@ router.post (
     "/perfilprof",
     uploadFile("imagem-perfil_prof"),
     profissionaisController.regrasValidacaoPerfil,
-<<<<<<< HEAD
+
     verificarClienteAutorizado( [1, 2, 3], "pages/cadastroprof"),
-=======
     verificarProfAutorizado( [1, 2, 3], "pages/cadastroprof"),
->>>>>>> 7d7a44d (cimm)
+
     async function (req, res) {
         profissionaisController.gravarPerfil(req, res);
     });
