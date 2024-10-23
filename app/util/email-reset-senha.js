@@ -8,18 +8,18 @@ module.exports = (url, token)=>{
     <title>Recuperação de Senha</title>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
+    <nav class="container">
+        <nav class="header">
             <h1>Recuperação de Senha</h1>
-        </div>
-        <div class="content">
+        </nav>
+        <nav class="content">
             <p>Recebemos uma solicitação para redefinir sua senha. Clique no botão abaixo para redefinir sua senha:</p>
           <a href="$("pages/resetarsenha")/resetarsenha?$(token)" class="button">Enviar link de recuperação </a>
-        </div>
-        <div class="footer">
+        </nav>
+        <nav class="footer">
             <p>Se você não solicitou esta alteração, por favor ignore este email.</p>
-        </div>
-    </div>
+        </nav>
+    </nav>
 </body>
 </html>`
     

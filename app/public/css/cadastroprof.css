@@ -20,7 +20,7 @@ body {
 
 .error-message {
     color: red;
-    font-size: 12px;
+  font-size: 12px;
     margin-top: 0.2em;
 }
 
@@ -147,7 +147,7 @@ form {
 }
 
 .password-container input {
-    width: 500px;
+    width: 100%;
     padding-right: 30px;
 }
 /* Estilo do botão de submit */
