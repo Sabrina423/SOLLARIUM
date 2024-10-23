@@ -1,12 +1,14 @@
 require('dotenv').config(); // Carregar variáveis de ambiente
+
 const express = require('express');
 const session = require('express-session');
-const pool = require('./config/pool_conexoes'); // Certifique-se de que este caminho está correto
-const rotas = require('./app/routes/router'); // Certifique-se de que este caminho está correto
+const pool = require('./config/pool_conexoes'); // cerifique-se de que o caminho está correto
+const rotas = require('./app/routes/router'); // cerifique-se de que este caminho está correto
 
 const app = express();
 const port = process.env.APP_PORT || 3000;
 
+// Configuração do middleware
 app.use(express.static("app/public/"));
 app.set('view engine', 'ejs');
 app.set('views', "./app/views");
@@ -14,19 +16,18 @@ app.set('views', "./app/views");
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+// Configuração da sessão
 app.use(session({ 
-  secret: process.env.SESSION_SECRET, 
-  resave: false, 
+  secret: process.env.SESSION_SECRET || 'default_secret', // Defina um valor padrão se a variável não estiver definida
+  resave: false,
   saveUninitialized: true 
 }));
 
+// Configuração das rotas
 app.use('/', rotas);
 
-
-
-
-        
-
+// Iniciar o servidor
 app.listen(port, () => {
-    console.log(`Servidor rodando na porta ${port}\nhttp://localhost:${port}`);
+  console.log(`Servidor rodando na porta ${port}\nhttp://localhost:${port}`);
 });
+
