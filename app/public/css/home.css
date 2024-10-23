@@ -20,11 +20,23 @@ svg {
     width: 25px;
 }
 
+<<<<<<< HEAD
 a {
     text-decoration: none;
     font-size: 1rem;
     color: #eee;
 }
+=======
+header {     
+    height: 70px;     
+    width: 100%;      
+    max-width: none;      
+    margin: 0;      
+    display: flex;     
+    position: relative;     
+    z-index: 100; 
+}  
+>>>>>>> 673862d (comit)
 
 header {
     height: 70px;
