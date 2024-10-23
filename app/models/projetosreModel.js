@@ -13,7 +13,7 @@ const projetosModel = {
 
    
 
-    create: async  => {
+    create: async (id) => {
         try {
             const [linhas, campos] = await pool.query('INSERT INTO projetosre SET ?')
             console.log(linhas);
