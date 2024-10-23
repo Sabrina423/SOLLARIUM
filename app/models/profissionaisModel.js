@@ -25,8 +25,8 @@ const profissionaisModel = {
     
     findfindByEmailTot: async (email) => {
         try {
-            const [linhas] = await pool.query('SELECT count(*) as tot FROM PROFISSIONAIS WHERE EMAIL_PROF = ?', [email]);
-            return linhas.length > 0 ? linhas[0] : null; // Retorna o profissionais ou null se não encontrado
+            const [linhas] = await pool.query('SELECT *, count(*) as tot FROM PROFISSIONAIS WHERE EMAIL_PROF = ?', [email]);
+            return linhas; 
         } catch (error) {
             console.error('Erro ao buscar profissionais por email:', error);
             throw error;

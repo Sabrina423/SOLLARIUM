@@ -23,7 +23,7 @@ const ClienteModel = {
 
     findByEmailTot: async (id) => {
         try {
-            const [linhas] = await pool.query('SELECT count(*) as tot FROM CLIENTE WHERE EMAIL_CLIENTE = ?', [id]);
+            const [linhas] = await pool.query('SELECT *, count(*) as tot FROM CLIENTE WHERE EMAIL_CLIENTE = ?', [id]);
             return linhas;
         } catch (error) {
             console.error('Erro ao buscar cliente por ID:', error);
