@@ -129,10 +129,18 @@ regrasValidacaoFormCad: [
     mostrarPerfil: async (req, res) => {
         try {
             const results = await prof.findById(req.session.profissionalId); // Obter ID do profissional da sessão
-            if (!results) {
-                return res.status(404).render("pages/404", { dadosNotificacao: { titulo: "Perfil não encontrado", mensagem: "Profissional não encontrado.", tipo: "error" } });
-            }
-
+            if (!results[0].cep_prof != null) {
+                const httpsAgent = new https.Agent({
+                    rejectUnauthorized: false,
+                });
+                const response = await prof.findid(`https://viacep.com.br/ws/${results[0].CEP_CLIENTE}/json/`, {
+                    method: 'GET',
+                    agent: httpsAgent});
+                var viaCep = await response.json();
+                }else{
+                    var viaCep = {logradouro:"", bairro:"", localidade:"", uf:""}
+                }
+            
             let campos = {
                 nome_prof: results.nome_prof,
                 numero: results.numero_prof,
@@ -148,10 +156,18 @@ regrasValidacaoFormCad: [
                 senha_prof: ""
             };
 
-            res.render("pages/perfilprof", { listaErros: null, dadosNotificacao: null, valores: campos });
-        } catch (error) {
-            console.error('Erro ao mostrar perfil:', error);
-            res.status(500).render("pages/error", { dadosNotificacao: { titulo: "Erro Interno", mensagem: "Ocorreu um erro ao carregar o perfil.", tipo: "error" } });
+            res.render("pages/perfilprof", { listaErros: null, dadosNotificacao: null, valores: campos })
+        } catch (e) {
+            console.log(e);
+            res.render("pages/perfilprof", {
+                 listaErros: null, dadosNotificacao: null, valores: {
+                    img_perfilprof_banco:"", img_perfilprof_pasta:"", nome_prof:"", email_prof:"",
+                    nomeprof_prof: "", fone_prof:"", senha_prof:"", cep:"", numero:"", complemento:"",
+                    logradouro:"", bairro:"", localidade:"", uf:""
+                 }
+                     
+            })
+    
         }
     },
 

@@ -18,31 +18,31 @@
     <nav class="cols__container">
       <nav class="left__col">
         <nav class="img__container">
-          <%
-          arquivo = { imagem: "/imagens/perfil/imgperfil.png" };
-         if (autenticado.imagem != null) {
-             arquivo.imagem = imagem;
-         } 
-     %>
-     <input type="file" id="inputArquivo" style="display: none;" accept="image/*" />
-     <img id="imagem" src="<%= arquivo.imagem %>" alt="Clique para mudar a imagem" />
+          <form action="/perfilprof" method="post" enctype="multipart/form-data">
+            <% arquivo={ imagem: "/imagens/perfil/imgperfil.png" }; if (autenticado.imagem !=null) {
+              arquivo.imagem=imagem; } %>
+              <input type="file" id="inputArquivo" style="display: none;" accept="image/*" />
+              <img id="imagem" src="<%= arquivo.imagem %>" alt="Clique para mudar a imagem" />
+              <input name="cep" type="text" id="cep" value="<%= valores.cep %> placeholder=" CEP"
+                class="<%= avisoErro.cep %>" onblur="pesquisacep(this.value);" onkeyup="mascaraCEP(event)" /><b>>*</b>
+          </form>
 
           <script>
             const inputArquivo = document.getElementById('inputArquivo');
             const imagem = document.getElementById('imagem');
-        
+
             imagem.addEventListener('click', () => {
-                inputArquivo.click();
+              inputArquivo.click();
             });
-        
+
             inputArquivo.addEventListener('change', (event) => {
-                const arquivo = event.target.files[0];
-                if (arquivo) {
-                    const url = URL.createObjectURL(arquivo);
-                    imagem.src = url;
-                }
+              const arquivo = event.target.files[0];
+              if (arquivo) {
+                const url = URL.createObjectURL(arquivo);
+                imagem.src = url;
+              }
             });
-        </script>
+          </script>
           <span></span>
         </nav>
         <h2>Dwight Schrute</h2>
@@ -63,71 +63,72 @@
             O mais perto de Deus
           </p>
 
-            <ul>
-              <li><i class="fa-brands fa-x-twitter"></i></li>
-              <i class="fa-brands fa-whatsapp"></i>
-              <i class="fa-brands fa-instagram"></i>
-              <i class="fa-brands fa-facebook"></i>
-            </ul>
-          </nav>
+          <ul>
+            <li><i class="fa-brands fa-x-twitter"></i></li>
+            <i class="fa-brands fa-whatsapp"></i>
+            <i class="fa-brands fa-instagram"></i>
+            <i class="fa-brands fa-facebook"></i>
+          </ul>
         </nav>
-        <nav class="right__col">
-          <nav>
-            <ul>
-              <li><a href="">Editar perfil</a></li>
-              <li><a href="/orcamento">Orçamento</a></li>
-            </ul>
-            <nav class="bell"><i class="fa-solid fa-bell"></i></nav>
-            <button>Voltar ao Início</button>
-          </nav>
+      </nav>
+      <nav class="right__col">
+        <nav>
+          <ul>
+            <li><a href="">Editar perfil</a></li>
+            <li><a href="/orcamento">Orçamento</a></li>
+          </ul>
+          <nav class="bell"><i class="fa-solid fa-bell"></i></nav>
+          <button>Voltar ao Início</button>
+        </nav>
 
-          <nav class="photos">
-            <img src="/imagens/perfil/imgperfil.png" alt="Photo" />
-            <img src="/imagens/perfil/imgperfil.png" alt="Photo" />
-            <img src="/imagens/perfil/imgperfil.png" alt="Photo" />
-            <img src="/imagens/perfil/imgperfil.png" alt="Photo" />
-            <img src="/imagens/perfil/imgperfil.png" alt="Photo" />
-            
-          </nav>
+        <nav class="photos">
+          <img src="/imagens/perfil/imgperfil.png" alt="Photo" />
+          <img src="/imagens/perfil/imgperfil.png" alt="Photo" />
+          <img src="/imagens/perfil/imgperfil.png" alt="Photo" />
+          <img src="/imagens/perfil/imgperfil.png" alt="Photo" />
+          <img src="/imagens/perfil/imgperfil.png" alt="Photo" />
+
         </nav>
       </nav>
     </nav>
-    <footer>
-      <section class="footer">
-          <nav class="footer-content">
-              <h2>Sollarium</h2>
-              <p>Sua plataforma de serviços solares em suas mãos.</p>
-              <nav class="icons">
-                  <a href=""><i class='bx bxl-facebook-circle'></i></a>
-                  <a href=""><i class='bx bxl-twitter'></i></a>
-                  <a href=""><i class='bx bxl-instagram-alt'></i></a>
-                  <a href=""><i class='bx bxl-youtube'></i></a>
-              </nav>
-          </nav>
-          
-          <nav class="footer-content">
-              <h4>Serviços</h4>
-              <li><a href="">Instalação</a></li>
-              <li><a href="">Vistoria</a></li>
-              <li><a href="">Manutenção</a></li>
-              <li><a href="">Consultoria</a></li>
-              <li><a href="">Limpeza</a></li>
-          </nav>
-  
-          <nav class="footer-content">
-              <h4>Menu</h4>
-              <li><a href="">Orçamento</a></li>
-              <li><a href="">Sobre Nós</a></li>
-              <li><a href="">Início</a></li>
-              <li><a href="">Consultoria</a></li>
-          </nav>
-  
-          <nav class="footer-content">
-              <h4>Ajuda</h4>
-              <li><a href="">Contato email</a></li>
-              <li><a href="">Contato telefone</a></li>
-          </nav>
-      </section>
+  </nav>
+  <footer>
+    <section class="footer">
+      <nav class="footer-content">
+        <h2>Sollarium</h2>
+        <p>Sua plataforma de serviços solares em suas mãos.</p>
+        <nav class="icons">
+          <a href=""><i class='bx bxl-facebook-circle'></i></a>
+          <a href=""><i class='bx bxl-twitter'></i></a>
+          <a href=""><i class='bx bxl-instagram-alt'></i></a>
+          <a href=""><i class='bx bxl-youtube'></i></a>
+        </nav>
+      </nav>
+
+      <nav class="footer-content">
+        <h4>Serviços</h4>
+        <li><a href="">Instalação</a></li>
+        <li><a href="">Vistoria</a></li>
+        <li><a href="">Manutenção</a></li>
+        <li><a href="">Consultoria</a></li>
+        <li><a href="">Limpeza</a></li>
+      </nav>
+
+      <nav class="footer-content">
+        <h4>Menu</h4>
+        <li><a href="">Orçamento</a></li>
+        <li><a href="">Sobre Nós</a></li>
+        <li><a href="">Início</a></li>
+        <li><a href="">Consultoria</a></li>
+      </nav>
+
+      <nav class="footer-content">
+        <h4>Ajuda</h4>
+        <li><a href="">Contato email</a></li>
+        <li><a href="">Contato telefone</a></li>
+      </nav>
+    </section>
   </footer>
-  </body>
+</body>
+
 </html>
