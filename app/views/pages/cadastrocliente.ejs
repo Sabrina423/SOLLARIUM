@@ -48,6 +48,7 @@
         </main>
     </nav>
     <script>
+<<<<<<< HEAD
         function togglePassword() {
     const passwordInput = document.getElementById('password');
     const passwordType = passwordInput.type === 'password' ? 'text' : 'password';
@@ -57,14 +58,17 @@
     toggleIcon.innerText = passwordType === 'password' ? 'visibility' : 'visibility_off';
 }
 
+=======
+        // Validação de senha (mantida)
+>>>>>>> 4854f3d (atualizar)
         function showMessage() {
             document.getElementById('message').style.display = 'block';
         }
-
+    
         function hideMessage() {
             document.getElementById('message').style.display = 'none';
         }
-
+    
         function validatePassword() {
             const password = document.getElementById('password').value;
             const message = document.getElementById('message');
@@ -72,14 +76,15 @@
             message.className = isValid ? 'valid' : 'invalid';
             message.innerText = isValid ? 'Senha válida' : 'A senha deve ter pelo menos 8 caracteres, uma letra maiúscula e um caractere especial.';
         }
-
+    
         function validatePasswordCriteria(password) {
             const lengthCriteria = password.length >= 8;
             const upperCaseCriteria = /[A-Z]/.test(password);
             const specialCharCriteria = /[!@#$%^&*(),.?":{}|<>]/.test(password);
             return lengthCriteria && upperCaseCriteria && specialCharCriteria;
         }
-
+    
+        // Máscara para telefone
         function applyPhoneMask(value) {
             return value
                 .replace(/\D/g, '') // Remove tudo que não é dígito
@@ -87,37 +92,91 @@
                 .replace(/(\d{5})(\d)/, '$1-$2')
                 .replace(/(\d{5})(\d{1,4})$/, '$1-$2');
         }
-
-        document.addEventListener('DOMContentLoaded', function() {
-            document.getElementById('cpf_cliente').addEventListener('input', function() {
-                this.value = applyCPFMask(this.value);
-            });
-
-            document.getElementById('contato_cliente').addEventListener('input', function() {
-                this.value = applyPhoneMask(this.value);
-            });
-        });
-
-
-    function mascaraCep(input) {
-        let cep = input.value.replace(/\D/g, ""); // Remove tudo que não é número
-        if (cep.length > 5) {
-            cep = cep.replace(/^(\d{5})(\d)/, "$1-$2"); // Aplica a máscara 00000-000
-        }
-        input.value = cep; // Atualiza o valor do input
-    }
-
-
+    
+        // Máscara para CPF
         function applyCPFMask(value) {
             return value
                 .replace(/\D/g, '') // Remove tudo que não é dígito
                 .replace(/(\d{3})(\d)/, '$1.$2')
                 .replace(/(\d{3})(\d)/, '$1.$2')
                 .replace(/(\d{3})(\d{1,2})$/, '$1-$2');
-                
         }
-
-        
+    
+        // Máscara para CEP
+        function mascaraCep(input) {
+            let cep = input.value.replace(/\D/g, ""); // Remove tudo que não é número
+            if (cep.length > 5) {
+                cep = cep.replace(/^(\d{5})(\d)/, "$1-$2"); // Aplica a máscara 00000-000
+            }
+            input.value = cep; // Atualiza o valor do input
+        }
+    
+        // Função para validar os campos e exibir mensagem de erro
+        function validateField(field, message) {
+            if (field.value === '') {
+                field.classList.add('error'); // Adiciona a classe de erro (vermelho)
+                field.nextElementSibling.innerText = message; // Mostra a mensagem de erro
+                return false;
+            } else {
+                field.classList.remove('error'); // Remove a classe de erro
+                field.nextElementSibling.innerText = ''; // Remove a mensagem de erro
+                return true;
+            }
+        }
+    
+        // Validação dos campos ao enviar o formulário
+        function validateForm(event) {
+            event.preventDefault(); // Impede o envio do formulário
+            const cpf = document.getElementById('cpf_cliente');
+            const contato = document.getElementById('contato_cliente');
+            const cep = document.getElementById('cep_cliente');
+    
+            let validCpf = validateField(cpf, 'CPF inválido.');
+            let validContato = validateField(contato, 'Contato inválido.');
+            let validCep = validateField(cep, 'CEP inválido.');
+    
+            // Se todos os campos estiverem válidos, o formulário é enviado
+            if (validCpf && validContato && validCep) {
+                alert('Formulário enviado com sucesso!');
+            }
+        }
+    
+        // Aplicando máscaras e validação ao carregar a página
+        document.addEventListener('DOMContentLoaded', function () {
+            document.getElementById('cpf_cliente').addEventListener('input', function () {
+                this.value = applyCPFMask(this.value);
+            });
+    
+            document.getElementById('contato_cliente').addEventListener('input', function () {
+                this.value = applyPhoneMask(this.value);
+            });
+    
+            document.getElementById('cep_cliente').addEventListener('input', function () {
+                mascaraCep(this);
+            });
+    
+            document.getElementById('form').addEventListener('submit', validateForm);
+        });
     </script>
+    
+    <style>
+        .error {
+            border-color: red;
+        }
+        
+        .error + span {
+            color: red;
+            font-size: 12px;
+        }
+    
+        .valid {
+            color: green;
+        }
+    
+        .invalid {
+            color: red;
+        }
+    </style>
+    
 </body>
 </html>

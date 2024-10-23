@@ -14,7 +14,13 @@ const orcamentoController = {
         body('descricao_orcamento')
             .isString({ min: 10 }).withMessage('A descrição deve conter no mínimo 10 caracteres.'),
             body('valor_orcamento')
-            .matches(/^R?\$?\s?\d{1,3}(\.\d{3})*(\,\d{2})?$/).withMessage('Digite um valor válido em reais, por exemplo: 1.000,00'),
+            .isCurrency({
+                allow_negatives: false, // Não permite valores negativos
+                allow_blank: false,      // Não permite campos em branco
+                decimal_separator: '.',   // Separa decimais com vírgula
+                symbol: 'R$',            // Define o símbolo da moeda
+                // Se quiser adicionar mais opções, faça aqui
+            }).withMessage('O preço deve estar no formato R$ 0.00.'),
         body('data_orcamento')
             .isISO8601().withMessage('A data para execução do serviço deve ser válida.')
     ],

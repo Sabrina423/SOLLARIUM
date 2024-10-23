@@ -40,7 +40,7 @@
 
                 <nav class="form-group">
                     <label for="valor">Valor esperado:</label>
-                    <input type="text" id="valor_orcamento" name="valor_orcamento" placeholder="R$ 0,00"  onkeyup="formatarMoeda(this)" required>
+                    <input type="text" id="valor_orcamento" name="valor_orcamento" placeholder="R$ 0.00">
                 </nav>
 
                 <nav class="form-group">
@@ -117,12 +117,40 @@
                 alert('Por favor, preencha todos os campos.');
             }
         });
+        
         document.getElementById('valor_orcamento').addEventListener('input', function (e) {
     let valor = this.value;
-    valor = valor.replace(/[^\d,]/g, '') // Remove caracteres não numéricos
-                 .replace(/(\d)(?=(\d{3})+\,)/g, '$1.'); // Formata com ponto e vírgula
-    this.value = valor;
+
+    
+    valor = valor.replace(/[^\d.]/g, '');
+
+    
+    if (valor.length > 0) {
+        this.value = 'R$ ' + valor;
+    } else {
+        this.value = ''; 
+    }
+
+    
+    if (valor.includes('.')) {
+        let [inteira, decimal] = valor.split('.');
+        decimal = decimal.substring(0, 2); 
+        this.value = 'R$ ' + inteira + '.' + decimal;
+    }
 });
+
+document.getElementById('formOrcamento').addEventListener('submit', function (e) {
+    let valorOrcamento = document.getElementById('valor_orcamento').value;
+
+    
+    const regex = /^R\$\s\d+(\.\d{2})?$/;
+    if (!regex.test(valorOrcamento)) {
+        alert('O preço deve estar no formato R$ 0.00.');
+        e.preventDefault(); 
+    }
+});
+
+
 
     </script>
 </body>
