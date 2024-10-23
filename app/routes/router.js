@@ -77,6 +77,20 @@ router.get('/cadastroinicial',  (req, res) => {
     res.render('pages/cadastroinicial');
 });
 
+router.get('/projetosre',  (req, res) => {
+    res.render('pages/projetosre');
+});
+
+
+router.get('/pagamentosre',  (req, res) => {
+    res.render('pages/pagamentosre');
+});
+
+router.get('/comissaore',  (req, res) => {
+    res.render('pages/comissaore');
+});
+
+
 router.get('/cadastrocartao',  (req, res) => {
     res.render('pages/cadastrocartao');
 });
