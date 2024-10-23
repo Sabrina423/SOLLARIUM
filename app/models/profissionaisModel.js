@@ -22,7 +22,16 @@ const profissionaisModel = {
             throw error;
         }
     },
-
+    
+    findfindByEmailTot: async (email) => {
+        try {
+            const [linhas] = await pool.query('SELECT count(*) as tot FROM PROFISSIONAL WHERE EMAIL_PROF = ?', [email]);
+            return linhas.length > 0 ? linhas[0] : null; // Retorna o profissionais ou null se não encontrado
+        } catch (error) {
+            console.error('Erro ao buscar profissionais por email:', error);
+            throw error;
+        }
+    },
     // Criar um novo profissionais
     create: async (profissionais) => {
         try {

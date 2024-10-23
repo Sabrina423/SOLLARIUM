@@ -103,52 +103,52 @@
             navLinks.classList.toggle('active');
         });
 
-        document.getElementById('orcamento-form').addEventListener('submit', function(event) {
-            event.preventDefault(); 
+//         document.getElementById('orcamento-form').addEventListener('submit', function(event) {
+//             event.preventDefault(); 
 
-            const name = document.getElementById('name').value;
-            const text = document.getElementById('text').value;
-            const valor = document.getElementById('valor').value;
-            const data = document.getElementById('data').value;
+//             const name = document.getElementById('name').value;
+//             const text = document.getElementById('text').value;
+//             const valor = document.getElementById('valor').value;
+//             const data = document.getElementById('data').value;
 
-            if (name && text && valor && data) {
-                document.getElementById('success-message').style.display = 'block';
-            } else {
-                alert('Por favor, preencha todos os campos.');
-            }
-        });
+//             if (name && text && valor && data) {
+//                 document.getElementById('success-message').style.display = 'block';
+//             } else {
+//                 alert('Por favor, preencha todos os campos.');
+//             }
+//         });
         
-        document.getElementById('valor_orcamento').addEventListener('input', function (e) {
-    let valor = this.value;
+//         document.getElementById('valor_orcamento').addEventListener('input', function (e) {
+//     let valor = this.value;
 
     
-    valor = valor.replace(/[^\d.]/g, '');
+//     valor = valor.replace(/[^\d.]/g, '');
 
     
-    if (valor.length > 0) {
-        this.value = 'R$ ' + valor;
-    } else {
-        this.value = ''; 
-    }
+//     if (valor.length > 0) {
+//         this.value = 'R$ ' + valor;
+//     } else {
+//         this.value = ''; 
+//     }
 
     
-    if (valor.includes('.')) {
-        let [inteira, decimal] = valor.split('.');
-        decimal = decimal.substring(0, 2); 
-        this.value = 'R$ ' + inteira + '.' + decimal;
-    }
-});
+//     if (valor.includes('.')) {
+//         let [inteira, decimal] = valor.split('.');
+//         decimal = decimal.substring(0, 2); 
+//         this.value = 'R$ ' + inteira + '.' + decimal;
+//     }
+// });
 
-document.getElementById('formOrcamento').addEventListener('submit', function (e) {
-    let valorOrcamento = document.getElementById('valor_orcamento').value;
+// document.getElementById('formOrcamento').addEventListener('submit', function (e) {
+//     let valorOrcamento = document.getElementById('valor_orcamento').value;
 
     
-    const regex = /^R\$\s\d+(\.\d{2})?$/;
-    if (!regex.test(valorOrcamento)) {
-        alert('O preço deve estar no formato R$ 0.00.');
-        e.preventDefault(); 
-    }
-});
+//     const regex = /^R\$\s\d+(\.\d{2})?$/;
+//     if (!regex.test(valorOrcamento)) {
+//         alert('O preço deve estar no formato R$ 0.00.');
+//         e.preventDefault(); 
+//     }
+// });
 
 
 

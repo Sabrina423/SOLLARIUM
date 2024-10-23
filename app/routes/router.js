@@ -10,7 +10,7 @@ const profissionaisController = require('../controllers/profissionaisController.
 const admController = require('../controllers/admController.js');
 const cliente = require("../models/clienteModel");
 const profissional = require("../models/profissionaisModel");
-const admModel = require("../models/admModel");
+const adm = require("../models/admModel");
 const uploadFile = require("../util/uploader.js")("./app/public/imagens/imgperfil");
 const orcamentoController = require('../controllers/orcamentoController.js');
 function validateEmail(email) {
@@ -23,9 +23,10 @@ function validateEmail(email) {
 
 const {
     verificarClienteAutenticado,
+    limparSessao,
+    gravarClienteAutenticado,
     verificarClienteAutorizado,
-    gravarClienteAutenticado
-} = require("../models/autenticadormiddleware.js");
+  } = require("../models/autenticadormiddleware.js");
 
 const router = express.Router();
 // Mercado Pago
@@ -126,9 +127,14 @@ router.get('/resetarsenha', (req, res) => {
     res.render('pages/resetarsenha', {listaErros: null,dadosNotificacao: null, msgErro: null});
 });
 
+<<<<<<< HEAD
 
 router.get('/perfilprof', verificarClienteAutorizado, (req, res) => {
     res.render('pages/perfilprof');
+=======
+router.get('/perfilprof', verificarClienteAutenticado, (req, res) => {
+    profissionaisController.mostrarPerfil(req, res);
+>>>>>>> 4c451d7 (por favor nao mexam)
 });
 
 
@@ -299,10 +305,14 @@ router.post (
     "/perfilprof",
     uploadFile("imagem-perfil_prof"),
     profissionaisController.regrasValidacaoPerfil,
+<<<<<<< HEAD
 
     verificarClienteAutorizado( [1, 2, 3], "pages/cadastroprof"),
     
 
+=======
+    verificarClienteAutorizado( [1, 2, 3], "pages/cadastroprof"),
+>>>>>>> 4c451d7 (por favor nao mexam)
     async function (req, res) {
         profissionaisController.gravarPerfil(req, res);
     });

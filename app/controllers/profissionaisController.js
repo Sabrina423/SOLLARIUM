@@ -2,6 +2,7 @@ const prof = require("../models/profissionaisModel");
 const { body, validationResult } = require("express-validator");
 const bcrypt = require("bcryptjs");
 const salt = bcrypt.genSaltSync(12);
+const { removeImg } = require("../util/removeImg");
 const verificarProfAutorizado = require('../models/verificarProfAutorizado'); // Corrigido o caminho para o middleware
 
 const profController = {
@@ -15,8 +16,6 @@ const profController = {
             .withMessage("A senha deve ter no mínimo 8 caracteres")
     ],
 
-    // Regras de validação para cadastro
-    // Regras de validação para cadastro
 regrasValidacaoFormCad: [
     body('nome_prof').isLength({ min: 3, max: 45 }).withMessage('Nome deve ter entre 3 e 45 caracteres.'),
     body('cep_prof')

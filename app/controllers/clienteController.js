@@ -1,4 +1,4 @@
-const cliente = require("../models/clienteModel");
+const clienteModel = require("../models/clienteModel");
 const { body, validationResult } = require("express-validator");
 const bcrypt = require("bcryptjs");
 var salt = bcrypt.genSaltSync(12);
@@ -25,7 +25,7 @@ const clienteController = {
         body("senha_cliente")
             .isLength({ min: 8 }).withMessage('A senha deve conter pelo menos 8 caracteres'),
         body('cpf_cliente')
-            .isLength({ min: 14, max: 14 }).withMessage('Campo obrigatório'),
+            .isLength({ min: 11, max: 14 }).withMessage('Campo obrigatório'),
         body('cep_cliente')
             .isLength({ min: 9, max: 9 }).withMessage('O cep deve ter entre 9 caracteres'),
         body('contato_cliente')
@@ -33,9 +33,10 @@ const clienteController = {
         body("email_cliente")
             .isEmail().withMessage("Digite um e-mail válido!")
             .custom(async value => {
-                const clienteExistente = await cliente.findByEmail(value);
-                console.log(clienteExistente.length)
-                if (clienteExistente.length != undefined) {
+                const clienteExistente = await clienteModel.findByEmailTot(value);
+                console.log('clienteExistente tot')
+                console.log(clienteExistente[0].tot)
+                if (clienteExistente[0].tot !=0) {
                     throw new Error('E-mail em uso!');
                 }
             }),
@@ -88,7 +89,7 @@ const clienteController = {
         };
 
         try {
-            let cliente = await cliente.create(dadosForm);
+            let cliente = await clienteModel.create(dadosForm);
             console.log(cliente)
             res.render("pages/home", {
                 listaErros: null, carrinho: null, autenticado: req.session.autenticado, dadosNotificacao: {
@@ -109,7 +110,7 @@ const clienteController = {
 
     mostrarPerfil: async (req, res) => {
         try {
-            let results = await cliente.findById(req.session.autenticado.id);
+            let results = await clienteModel.findById(req.session.autenticado.id);
            
             let viaCep = { logradouro: "", bairro: "", localidade: "", uf: "" };
             let cep = null;
@@ -186,7 +187,7 @@ const clienteController = {
         }
         try {
           //logica do token
-          user = await cliente.findUserCustom({
+          user = await clienteModel.findUserCustom({
             email_cliente: req.body.email_cliente,
           });
           const token = jwt.sign(
@@ -249,7 +250,7 @@ const clienteController = {
         try {
           //gravar nova senha
           senha = bcrypt.hashSync(req.body.senha_cliente);
-          const resetar = await cliente.update({ senha_cliente: senha }, req.body.id_cliente);
+          const resetar = await clienteModel.update({ senha_cliente: senha }, req.body.id_cliente);
           console.log(resetar);
           res.render("pages/entrar", {
             listaErros: null,
@@ -299,10 +300,10 @@ const clienteController = {
                 dadosForm.img_perfil_pasta = caminhoArquivo;
                 dadosForm.img_perfil_banco = null;
             }
-            let resultUpdate = await cliente.update(dadosForm, req.session.autenticado.id);
+            let resultUpdate = await clienteModel.update(dadosForm, req.session.autenticado.id);
             if (!resultUpdate.isEmpty) {
                 if (resultUpdate.changedRows == 1) {
-                    var result = await cliente.findId(req.session.autenticado.id);
+                    var result = await clienteModel.findId(req.session.autenticado.id);
                     var autenticado = {
                         autenticado: result[0].nome_cliente,
                         id: result[0].id_cliente,
