@@ -31,6 +31,33 @@ const ClienteModel = {
         }
     },
 
+
+    findCampoCustom: async (criterioWhere) => {
+        try {
+            const [resultados] = await pool.query(
+                "SELECT count(*) totalReg FROM CLIENTE WHERE ?",
+                [criterioWhere]
+            )
+            return resultados[0].totalReg;
+        } catch (error) {
+            console.log(error);
+            return error;
+        }
+    },
+
+    findUserCustom: async (criterioWhere) => {
+        try {
+            const [resultados] = await pool.query(
+                "SELECT *  FROM CLIENTE WHERE ?",
+                [criterioWhere]
+            )
+            return resultados;
+        } catch (error) {
+            console.log(error);
+            return error;
+        }
+    },
+
     create: async (cliente) => {
         try {
             const { cpf_cliente, cep_cliente, nome_cliente, contato_cliente, email_cliente, senha_cliente, imagem_perfil_cliente } = cliente;

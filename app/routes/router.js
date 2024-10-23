@@ -218,6 +218,7 @@ router.post (
     async function (req, res) {
         clienteController.gravarPerfil(req, res);
     });
+
 router.get (
     "/perfilcliente",
     verificarClienteAutorizado( [1, 2, 3], "pages/cadastrocliente"),

@@ -1,4 +1,5 @@
 const clienteModel = require("../models/clienteModel");
+const profissionaisModel = require("../models/profissionaisModel");
 const { body, validationResult } = require("express-validator");
 const bcrypt = require("bcryptjs");
 var salt = bcrypt.genSaltSync(12);
@@ -54,6 +55,12 @@ const clienteController = {
             .isEmail().withMessage("Digite um e-mail válido!"),
         body("fone_cliente")
             .isLength({ min: 12, max: 13 }).withMessage("Digite um telefone válido!"),
+    ],
+    regrasValidacaoFormRecSenha: [
+
+        body("email")
+            .isEmail().withMessage("Digite um e-mail válido!"),
+
     ],
 
     logar: (req, res) => {
@@ -188,6 +195,15 @@ const clienteController = {
           user = await clienteModel.findUserCustom({
             email_cliente: req.body.email_cliente,
           });
+
+          console.log(user)
+
+        //   prof = await profissionaisModel.findUserCustom({
+        //     email_prof: req.body.email_cliente,
+        //   });
+
+          
+
           const token = jwt.sign(
             { userId: user[0].id_cliente, expiresIn: "40m" },
             process.env.SECRET_KEY
@@ -205,7 +221,7 @@ const clienteController = {
               },
             });
           });
-    
+        
         } catch (e) {
           console.log(e);
         }
