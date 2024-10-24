@@ -146,6 +146,7 @@ nav.main-nav img {
   outline: none;
 }
 
+
 .profile-right button {
   width: 100%;
   padding: 12px;
@@ -193,6 +194,8 @@ nav.main-nav img {
   display: flex;
   gap: 15px;
   transition: transform 0.5s ease;
+  justify-content: center;
+  margin-left: 100px;
 }
 
 .professional-card {
