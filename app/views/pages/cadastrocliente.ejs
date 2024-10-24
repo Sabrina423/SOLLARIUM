@@ -10,6 +10,13 @@
         .error-message {
             color: red;
             display: none; /* Inicialmente oculta */
+            font-size: 12px;
+        }
+        .valid {
+            color: green;
+        }
+        .invalid {
+            color: red;
         }
     </style>
 </head>
@@ -30,6 +37,7 @@
                     <input type="hidden" name="tipo_usuario" value="1"> <!-- 1 para cliente -->
                     <input type="text" name="nome_cliente" placeholder="Nome Completo" required>
                     <input type="text" name="cpf_cliente" id="cpf_cliente" size="30" maxlength="14" placeholder="CPF" required>
+                    <div id="cpf-error" class="error-message">CPF inválido. Verifique e tente novamente.</div>
                 </nav>
                 <nav class="input-group">
                     <input type="text" name="cep_cliente" placeholder="CEP" maxlength="9" oninput="mascaraCep(this)" required>
@@ -60,17 +68,23 @@
             const confirmPassword = document.getElementById('password').value;
             const errorMessage = document.getElementById('error-message');
             const emailError = document.getElementById('email-error');
+            const cpfError = document.getElementById('cpf-error');
             const emailInput = document.getElementById('email_cliente').value;
+            const cpfInput = document.getElementById('cpf_cliente').value;
 
             // Reseta as mensagens de erro
             errorMessage.style.display = 'none';
             emailError.style.display = 'none';
+            cpfError.style.display = 'none';
 
             // Lógica simulada para verificar se o e-mail já está em uso
             const existingEmails = ["teste@example.com", "user@example.com"]; // Exemplo de e-mails existentes
 
             if (existingEmails.includes(emailInput)) {
                 emailError.style.display = 'block'; // Exibe mensagem se o e-mail já estiver em uso
+                event.preventDefault(); // Impede o envio do formulário
+            } else if (!validarCPF(cpfInput)) {
+                cpfError.style.display = 'block'; // Exibe a mensagem de erro para CPF
                 event.preventDefault(); // Impede o envio do formulário
             } else if (password !== confirmPassword) {
                 errorMessage.style.display = 'block'; // Exibe a mensagem de erro
@@ -83,6 +97,41 @@
                 }, 1000); // 1 segundo de delay para simular o processamento
             }
         });
+
+        // Função para validar o CPF
+        function validarCPF(cpf) {
+            cpf = cpf.replace(/\D/g, ''); // Remove caracteres não numéricos
+
+            if (cpf.length !== 11 || /^(.)\1{10}$/.test(cpf)) {
+                return false; // CPF deve ter 11 dígitos e não pode ser todos iguais
+            }
+
+            let soma = 0;
+            let resto;
+
+            // Validação do primeiro dígito verificador
+            for (let i = 1; i <= 9; i++) {
+                soma += parseInt(cpf[i - 1]) * (11 - i);
+            }
+            resto = (soma * 10) % 11;
+            if (resto === 10 || resto === 11) {
+                resto = 0;
+            }
+            if (resto !== parseInt(cpf[9])) {
+                return false; // Primeiro dígito verificador inválido
+            }
+
+            soma = 0;
+            // Validação do segundo dígito verificador
+            for (let i = 1; i <= 10; i++) {
+                soma += parseInt(cpf[i - 1]) * (12 - i);
+            }
+            resto = (soma * 10) % 11;
+            if (resto === 10 || resto === 11) {
+                resto = 0;
+            }
+            return resto === parseInt(cpf[10]); // Retorna se o segundo dígito verificador é válido
+        }
 
         document.getElementById('senha_cliente').addEventListener('input', function() {
             const password = this.value; // Valor do campo de confirmar senha
@@ -156,25 +205,5 @@
                 .replace(/(\d{3})(\d{1,2})$/, '$1-$2');
         }
     </script>
-    
-    <style>
-        .error {
-            border-color: red;
-        }
-        
-        .error + span {
-            color: red;
-            font-size: 12px;
-        }
-    
-        .valid {
-            color: green;
-        }
-    
-        .invalid {
-            color: red;
-        }
-    </style>
-    
 </body>
 </html>

@@ -30,7 +30,7 @@ body {
     top: 60px;
     display: flex;
     flex-direction: row;
-    width: 70%;
+    width: 100%;
     max-width: 900px;
     border-radius: 10px;
     background-color: #0a0a0a;
@@ -61,11 +61,6 @@ a{
     font-family: sans-serif;
 }
 
-.hero img {
-    width: 300px;
-    height: auto;
-    border-radius: 10px;
-}
 
 hr {
     border: 0;
@@ -118,9 +113,17 @@ hr {
     color: rgb(255, 255, 255);
 }
 
+
+.popup-content h2 {
+    margin-bottom: 50px; /* Espaçamento abaixo do título */
+}
+
+.popup-content p {
+    margin-top: 0; /* Remove margem superior do parágrafo */
+}
 /* Estilo para o formulário */
 form {
-    width: 100%;
+    width: ;
 
 }
 

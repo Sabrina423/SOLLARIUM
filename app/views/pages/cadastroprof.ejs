@@ -26,7 +26,7 @@
             <nav class="termos1">
                 <button type="button" id="openPopup">Quero saber!</button>
                 <nav class="checkbox-label">
-                    <input type="checkbox" id="termos" name="termos" required>
+                    <input type="checkbox" id="termos" name="termos" required disabled>
                     <label for="termos">Li e aceito os termos de taxação e assinatura!</label>
                 </nav>                
             </nav>
@@ -39,11 +39,10 @@
                 <nav class="input-group">
                     <input type="text" name="nome_prof" id="nome_prof" placeholder="Nome Completo" required>
                     <input type="text" name="cpf_prof" id="cpf_prof" placeholder="CPF" required>
+                    <div id="cpf-error" class="error-message">CPF inválido. Verifique e tente novamente.</div>
                 </nav>
                 <nav class="input-group">
                     <input type="text" name="cep_prof" placeholder="CEP" maxlength="9" oninput="mascaraCep(this)" required>
-
-                    <b>onblur="pesquisacep(this.value);" onkeyup="mascaraCEP(event)"/><b>
                 </nav>
                 <nav class="input-group">
                     <input type="email" name="email_prof" id="email_prof" placeholder="E-mail" required>
@@ -75,7 +74,25 @@
             <span class="popup-close" id="closePopup">&times;</span>
             <h2>Termos de Taxação e Assinatura</h2>
             <p>Por favor, leia atentamente os termos e condições antes de aceitar.</p>
-            <p>Procedimento de Cadastro e Política de Comissionamento de Profissionais...</p>
+            <p>Procedimento de Cadastro e Política de Comissionamento de Profissionais</p>
+            <p>1. Introdução</p>
+            <p>A nossa empresa se dedica a proporcionar um ambiente estruturado e eficiente para a colaboração de profissionais especializados em diversas áreas. Com o objetivo de garantir uma gestão transparente e justa das contribuições e recompensas de nossos parceiros, estabelecemos um processo detalhado para o cadastro de profissionais, bem como uma política de comissionamento baseada na remuneração obtida através de serviços realizados por meio de nossa plataforma.</p>
+            <p>2. Cadastro de Profissionais</p>
+            <p>O processo de cadastro de um profissional na nossa empresa é estruturado para assegurar a integridade e a qualidade dos serviços oferecidos. Os principais passos do processo são os seguintes:</p>
+            <p>Solicitação de Cadastro: O interessado deve preencher um formulário de solicitação de cadastro disponível em nossa plataforma online. Este formulário inclui informações pessoais, detalhes profissionais, qualificações e experiência relevante.</p>
+            <p>Documentação e Verificação: Após o envio do formulário, o candidato deve fornecer documentos comprobatórios, como certificados de qualificação, registro profissional e identificações pessoais. A equipe responsável realiza uma análise minuciosa da documentação para verificar a conformidade com os requisitos da empresa.</p>
+            <p>Entrevista e Avaliação: Em alguns casos, poderá ser solicitada uma entrevista ou uma avaliação prática para garantir que o profissional atende aos padrões de qualidade e competência estabelecidos pela empresa.</p>
+            <p>Aprovação e Contrato: Após a conclusão das etapas anteriores, e uma vez aprovado, o profissional receberá um contrato formalizando sua parceria com a empresa. Este contrato detalha as responsabilidades, direitos e obrigações de ambas as partes.</p>
+            <p>Integração e Treinamento: O profissional passará por um processo de integração, que pode incluir treinamentos específicos sobre a utilização da plataforma e os procedimentos operacionais da empresa.</p>
+            <p>3. Política de Comissionamento</p>
+            <p>A política de comissionamento estabelecida visa alinhar os interesses da empresa e dos profissionais cadastrados, promovendo uma relação de parceria justa e transparente. As diretrizes são as seguintes:</p>
+            <p>Comissão sobre Lucros: A empresa retém uma comissão equivalente a 15% do lucro líquido obtido pelo profissional em serviços fechados e realizados através da nossa plataforma. O lucro líquido é calculado com base no valor total cobrado ao cliente, descontadas quaisquer despesas ou custos associados ao serviço.</p>
+            <p>Apuração de Lucros: Mensalmente, a empresa realiza uma apuração detalhada dos serviços prestados e dos valores recebidos por cada profissional. O cálculo da comissão é efetuado sobre o total dos lucros registrados no período, conforme demonstrado nas faturas e relatórios financeiros.</p>
+            <p>Pagamentos e Relatórios: Os profissionais recebem um relatório detalhado sobre os serviços prestados e a respectiva comissão retida. O pagamento da comissão líquida, ou seja, o valor restante após a dedução da comissão da empresa, é efetuado ao profissional conforme o calendário de pagamentos estabelecido no contrato.</p>
+            <p>Transparência e Ajustes: A empresa mantém total transparência nos processos de cálculo e apuração dos lucros. Quaisquer discrepâncias ou dúvidas podem ser discutidas diretamente com a equipe financeira, que está disponível para esclarecer e ajustar eventuais erros.</p>
+            <p>4. Conclusão</p>
+            <p>O cadastro e a política de comissionamento visam estabelecer um ambiente de trabalho colaborativo e mutuamente benéfico, garantindo que tanto a empresa quanto os profissionais estejam alinhados em seus objetivos e expectativas. Para qualquer dúvida adicional ou necessidade de esclarecimento, os profissionais são encorajados a entrar em contato com o suporte da empresa, que está sempre disponível para fornecer assistência e suporte contínuos.</p>
+            <p>Sollarium, Departamento de Recursos Humanos / Cadastro de Profissionais.</p>
             <button id="acceptTerms">Entendi</button>
         </nav>
     </nav>
@@ -104,21 +121,62 @@
         document.getElementById('cadastroFormprof').addEventListener('submit', function(event) {
             const termosCheckbox = document.getElementById('termos');
             const errorMessage = document.getElementById('error-message');
+            const cpfError = document.getElementById('cpf-error');
             const senha = document.getElementById('senha_prof').value;
             const confSenha = document.getElementById('confimasenha_prof').value;
             const emailError = document.getElementById('email-error');
+            const cpfInput = document.getElementById('cpf_prof').value;
 
             errorMessage.style.display = 'none'; // Reseta a mensagem de erro
             emailError.style.display = 'none'; // Reseta a mensagem de erro do e-mail
+            cpfError.style.display = 'none'; // Reseta a mensagem de erro do CPF
 
             if (!termosCheckbox.checked) {
                 alert('Você deve concordar com os termos para prosseguir.');
+                event.preventDefault();
+            } else if (!validarCPF(cpfInput)) {
+                cpfError.style.display = 'block'; // Exibe a mensagem de erro para CPF
                 event.preventDefault();
             } else if (senha !== confSenha) {
                 errorMessage.style.display = 'block'; // Exibe a mensagem de erro se as senhas não coincidirem
                 event.preventDefault();
             } 
         });
+
+        // Função para validar o CPF
+        function validarCPF(cpf) {
+            cpf = cpf.replace(/\D/g, ''); // Remove caracteres não numéricos
+
+            if (cpf.length !== 11 || /^(.)\1{10}$/.test(cpf)) {
+                return false; // CPF deve ter 11 dígitos e não pode ser todos iguais
+            }
+
+            let soma = 0;
+            let resto;
+
+            // Validação do primeiro dígito verificador
+            for (let i = 1; i <= 9; i++) {
+                soma += parseInt(cpf[i - 1]) * (11 - i);
+            }
+            resto = (soma * 10) % 11;
+            if (resto === 10 || resto === 11) {
+                resto = 0;
+            }
+            if (resto !== parseInt(cpf[9])) {
+                return false; // Primeiro dígito verificador inválido
+            }
+
+            soma = 0;
+            // Validação do segundo dígito verificador
+            for (let i = 1; i <= 10; i++) {
+                soma += parseInt(cpf[i - 1]) * (12 - i);
+            }
+            resto = (soma * 10) % 11;
+            if (resto === 10 || resto === 11) {
+                resto = 0;
+            }
+            return resto === parseInt(cpf[10]); // Retorna se o segundo dígito verificador é válido
+        }
 
         // Funções para mostrar e esconder a mensagem de senha
         function showMessage() {
@@ -163,6 +221,7 @@
 
         document.getElementById('acceptTerms').addEventListener('click', function() {
             document.getElementById('popup').style.display = 'none';
+            document.getElementById('termos').disabled = false; // Habilita a checkbox após aceitar os termos
         });
 
         document.addEventListener('DOMContentLoaded', function() {
