@@ -120,12 +120,10 @@ const clienteController = {
             let viaCep = { logradouro: "", bairro: "", localidade: "", uf: "" };
             let cep = null;
 
-            if (results[0].CEP_CLIENTE != null) {
-                const httpsAgent = new https.Agent({ rejectUnauthorized: false });
+            if (results[0].cep_cliente != null) {
+                const httpsAgent = new https.Agent({ rejectUnauthorized: false, });
                 const response = await fetch(`https://viacep.com.br/ws/${results[0].CEP_CLIENTE}/json/`, {
-                    method: 'GET',
-                    agent: httpsAgent
-                });
+                    method: 'GET', headers: null, body: null, agent: httpsAgent });
 
                 if (!response.ok) {
                     throw new Error(`Failed to fetch CEP data: ${response.statusText}`);
