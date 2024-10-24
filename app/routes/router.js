@@ -65,11 +65,13 @@ router.get('/cadastroinicial', (req, res) => {
     res.render('pages/cadastroinicial');
 });
 
-router.get('/projetosre', (req, res) => {
-    res.render('pages/projetosre');
+router.get('/dashboard', (req, res) => {
+    const tarefas = [
+        { nome_projetos: 'Projeto A', data_projetos: '2024-10-23', valor_projetos: 1500 },
+        { nome_projetos: 'Projeto B', data_projetos: '2024-10-22', valor_projetos: 2000 }
+    ];
+    res.render('pages/dashboard', { tarefas });
 });
-
-
 router.get("/excluir", function (req, res) {
     projetosreController.excluirprojeto(req, res);
 });
