@@ -122,13 +122,7 @@ const clienteController = {
             if (results[0].cep_cliente != null) {
                 const httpsAgent = new https.Agent({ rejectUnauthorized: false, });
                 const response = await fetch(`https://viacep.com.br/ws/${results[0].CEP_CLIENTE}/json/`, {
-<<<<<<< HEAD
                     method: 'GET', headers: null, body: null, agent: httpsAgent });
-=======
-                    method: 'GET', headers:null, bodynull,
-                    agent: httpsAgent
-                });
->>>>>>> 35c93ed (atualização)
 
                 if (!response.ok) {
                     throw new Error(`Failed to fetch CEP data: ${response.statusText}`);
