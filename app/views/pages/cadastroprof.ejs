@@ -9,28 +9,31 @@
     <style>
         .error-message {
             color: red;
-            display: none; /* Inicialmente oculta */
+            display: none;
+            font-size: 12px;
+            font-family: sans-serif;
         }
-        .valid {
+        .valid, .valid-message {
             color: green;
+            font-size: 12px;
+            font-family: sans-serif;
         }
-        .invalid {
+        .invalid, .invalid-message, .invalid-criteria {
             color: red;
+            font-size: 12px;
+            font-family: sans-serif;
         }
         .valid-criteria {
             color: green;
-        }
-        .invalid-criteria {
-            color: red;
+            font-size: 12px;
+            font-family: sans-serif;
         }
     </style>
 </head>
 <body>
     <nav class="container">
         <nav class="hero">
-            <a href="/cadastroinicial" class="material-symbols-outlined">
-                keyboard_backspace
-            </a>
+            <a href="/cadastroinicial" class="material-symbols-outlined">keyboard_backspace</a>
             <nav class="toggle_btn">
                 <i class="fa-solid fa-bars-staggered"></i>
             </nav>
@@ -50,8 +53,8 @@
                 <nav class="logo"></nav>
                 <nav class="input-group">
                     <input type="text" name="nome_prof" id="nome_prof" placeholder="Nome Completo" required>
-                    <input type="text" name="cpf_prof" id="cpf_prof" placeholder="CPF" required>
-                    <div id="cpf-error" class="error-message">CPF inválido. Verifique e tente novamente.</div>
+                    <input type="text" name="cpf_prof" id="cpf_prof" placeholder="CPF" required maxlength="14">
+                    <span id="cpf-validity-message" class="error-message"></span>
                 </nav>
                 <nav class="input-group">
                     <input type="text" name="cep_prof" placeholder="CEP" maxlength="9" oninput="mascaraCep(this)" required>
@@ -87,11 +90,72 @@
             <span class="popup-close" id="closePopup">&times;</span>
             <h2>Termos de Taxação e Assinatura</h2>
             <p>Por favor, leia atentamente os termos e condições antes de aceitar.</p>
+            <p>Procedimento de Cadastro e Política de Comissionamento de Profissionais</p>
+            <p>1. Introdução</p>
+            <p>A nossa empresa se dedica a proporcionar um ambiente estruturado e eficiente para a colaboração de profissionais especializados em diversas áreas. Com o objetivo de garantir uma gestão transparente e justa das contribuições e recompensas de nossos parceiros, estabelecemos um processo detalhado para o cadastro de profissionais, bem como uma política de comissionamento baseada na remuneração obtida através de serviços realizados por meio de nossa plataforma.</p>
+            <p>2. Cadastro de Profissionais</p>
+            <p>O processo de cadastro de um profissional na nossa empresa é estruturado para assegurar a integridade e a qualidade dos serviços oferecidos. Os principais passos do processo são os seguintes:</p>
+            <p>Solicitação de Cadastro: O interessado deve preencher um formulário de solicitação de cadastro disponível em nossa plataforma online. Este formulário inclui informações pessoais, detalhes profissionais, qualificações e experiência relevante.</p>
+            <p>Documentação e Verificação: Após o envio do formulário, o candidato deve fornecer documentos comprobatórios, como certificados de qualificação, registro profissional e identificações pessoais. A equipe responsável realiza uma análise minuciosa da documentação para verificar a conformidade com os requisitos da empresa.</p>
+            <p>Entrevista e Avaliação: Em alguns casos, poderá ser solicitada uma entrevista ou uma avaliação prática para garantir que o profissional atende aos padrões de qualidade e competência estabelecidos pela empresa.</p>
+            <p>Aprovação e Contrato: Após a conclusão das etapas anteriores, e uma vez aprovado, o profissional receberá um contrato formalizando sua parceria com a empresa. Este contrato detalha as responsabilidades, direitos e obrigações de ambas as partes.</p>
+            <p>Integração e Treinamento: O profissional passará por um processo de integração, que pode incluir treinamentos específicos sobre a utilização da plataforma e os procedimentos operacionais da empresa.</p>
+            <p>3. Política de Comissionamento</p>
+            <p>A política de comissionamento estabelecida visa alinhar os interesses da empresa e dos profissionais cadastrados, promovendo uma relação de parceria justa e transparente. As diretrizes são as seguintes:</p>
+            <p>Comissão sobre Lucros: A empresa retém uma comissão equivalente a 15% do lucro líquido obtido pelo profissional em serviços fechados e realizados através da nossa plataforma. O lucro líquido é calculado com base no valor total cobrado ao cliente, descontadas quaisquer despesas ou custos associados ao serviço.</p>
+            <p>Apuração de Lucros: Mensalmente, a empresa realiza uma apuração detalhada dos serviços prestados e dos valores recebidos por cada profissional. O cálculo da comissão é efetuado sobre o total dos lucros registrados no período, conforme demonstrado nas faturas e relatórios financeiros.</p>
+            <p>Pagamentos e Relatórios: Os profissionais recebem um relatório detalhado sobre os serviços prestados e a respectiva comissão retida. O pagamento da comissão líquida, ou seja, o valor restante após a dedução da comissão da empresa, é efetuado ao profissional conforme o calendário de pagamentos estabelecido no contrato.</p>
+            <p>Transparência e Ajustes: A empresa mantém total transparência nos processos de cálculo e apuração dos lucros. Quaisquer discrepâncias ou dúvidas podem ser discutidas diretamente com a equipe financeira, que está disponível para esclarecer e ajustar eventuais erros.</p>
+            <p>4. Conclusão</p>
+            <p>O cadastro e a política de comissionamento visam estabelecer um ambiente de trabalho colaborativo e mutuamente benéfico, garantindo que tanto a empresa quanto os profissionais estejam alinhados em seus objetivos e expectativas. Para qualquer dúvida adicional ou necessidade de esclarecimento, os profissionais são encorajados a entrar em contato com o suporte da empresa, que está sempre disponível para fornecer assistência e suporte contínuos.</p>
+            <p>Sollarium, Departamento de Recursos Humanos / Cadastro de Profissionais.</p>
             <button id="acceptTerms">Entendi</button>
         </nav>
     </nav>
 
     <script>
+        // Validação em tempo real para CPF
+        document.getElementById('cpf_prof').addEventListener('input', function() {
+            this.value = applyCPFMask(this.value);
+            const cpfInput = this.value.replace(/\D/g, '');
+            const cpfValidityMessage = document.getElementById('cpf-validity-message');
+
+            if (cpfInput.length > 11) {
+                this.value = cpfInput.substring(0, 11);
+            }
+
+            if (cpfInput.length === 11) {
+                if (validarCPF(cpfInput)) {
+                    cpfValidityMessage.textContent = 'CPF válido!';
+                    cpfValidityMessage.className = 'valid-message';
+                    cpfValidityMessage.style.display = 'block';
+                } else {
+                    cpfValidityMessage.textContent = 'CPF inválido. Verifique e tente novamente.';
+                    cpfValidityMessage.className = 'invalid-message';
+                    cpfValidityMessage.style.display = 'block';
+                }
+            } else {
+                cpfValidityMessage.style.display = 'none';
+            }
+        });
+
+        // Validação em tempo real para telefone
+        document.getElementById('contato_prof').addEventListener('input', function() {
+            let telefoneInput = this.value.replace(/\D/g, '');
+            const telefoneError = document.getElementById('telefone-error');
+
+            if (telefoneInput.length >= 10) {
+                if (validarTelefone(telefoneInput)) {
+                    telefoneError.style.display = 'none';
+                } else {
+                    telefoneError.style.display = 'block';
+                }
+            } else {
+                telefoneError.style.display = 'none';
+            }
+        });
+
+        // Verificação de e-mail
         document.getElementById('email_prof').addEventListener('input', function() {
             const email = this.value;
             const emailError = document.getElementById('email-error');
@@ -111,15 +175,16 @@
             }
         });
 
+        // Submissão do formulário
         document.getElementById('cadastroFormprof').addEventListener('submit', function(event) {
             const termosCheckbox = document.getElementById('termos');
             const errorMessage = document.getElementById('error-message');
-            const cpfError = document.getElementById('cpf-error');
+            const cpfError = document.getElementById('cpf-validity-message');
             const telefoneError = document.getElementById('telefone-error');
             const senha = document.getElementById('senha_prof').value;
             const confSenha = document.getElementById('confimasenha_prof').value;
             const emailError = document.getElementById('email-error');
-            const cpfInput = document.getElementById('cpf_prof').value;
+            const cpfInput = document.getElementById('cpf_prof').value.replace(/\D/g, '');
             const telefoneInput = document.getElementById('contato_prof').value.replace(/\D/g, '');
 
             errorMessage.style.display = 'none';
@@ -139,19 +204,36 @@
             } else if (senha !== confSenha) {
                 errorMessage.style.display = 'block';
                 event.preventDefault();
-            } 
+            } else {
+                fetch('/cadastroprof', {
+                    method: 'POST',
+                    body: new FormData(this),
+                })
+                .then(response => {
+                    if (response.ok) {
+                        localStorage.setItem('cadastroSucesso', 'Cadastro realizado com sucesso!'); // Armazenar mensagem
+                        setTimeout(() => {
+                            window.location.href = '/'; // Redireciona para a home
+                        }, 2000);
+                    } else {
+                        alert('Erro ao cadastrar. Tente novamente.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Erro ao cadastrar:', error);
+                });
+                event.preventDefault();
+            }
         });
 
         function validarCPF(cpf) {
             cpf = cpf.replace(/\D/g, '');
-
             if (cpf.length !== 11 || /^(.)\1{10}$/.test(cpf)) {
                 return false;
             }
 
             let soma = 0;
             let resto;
-
             for (let i = 1; i <= 9; i++) {
                 soma += parseInt(cpf[i - 1]) * (11 - i);
             }
@@ -174,21 +256,14 @@
             return resto === parseInt(cpf[10]);
         }
 
-        function validarTelefone(telefone) {
-            const regex = /^(9|8)\d{7,8}$/; // Começa com 8 ou 9, seguido por 7 ou 8 dígitos
-            const numerosRepetidos = /^(.)\1{6,}$/; // Verifica se todos os números são repetidos
-            return regex.test(telefone) && !numerosRepetidos.test(telefone);
-        }
-
         function mascaraTelefone(input) {
-            let value = input.value.replace(/\D/g, ''); // Remove caracteres não numéricos
-
+            let value = input.value.replace(/\D/g, '');
             if (value.length <= 2) {
-                input.value = value; // Mantém os dois primeiros dígitos
+                input.value = value;
             } else if (value.length <= 9) {
-                input.value = `(${value.slice(0, 2)}) ${value.slice(2)}`; // Formatação (XX) XXXXXXX
+                input.value = `(${value.slice(0, 2)}) ${value.slice(2)}`;
             } else {
-                input.value = `(${value.slice(0, 2)}) ${value.slice(2, 7)}-${value.slice(7, 11)}`; // Formatação (XX) XXXXX-XXXX
+                input.value = `(${value.slice(0, 2)}) ${value.slice(2, 7)}-${value.slice(7, 11)}`;
             }
         }
 
@@ -227,8 +302,6 @@
             }
 
             message.innerHTML = feedback + criteriaElements.join(', ');
-
-            // Limpa a classe de mensagem
             message.className = criteria.length && criteria.upperCase && criteria.specialChar ? 'valid' : 'invalid';
         }
 
@@ -236,7 +309,6 @@
             const lengthCriteria = senha_prof.length >= 8;
             const upperCaseCriteria = /[A-Z]/.test(senha_prof);
             const specialCharCriteria = /[!@#$%^&*(),.?":{}|<>]/.test(senha_prof);
-
             return {
                 length: lengthCriteria,
                 upperCase: upperCaseCriteria,
@@ -252,13 +324,6 @@
             input.value = cep;
         }
 
-        document.getElementById('cpf_prof').addEventListener('input', function() {
-            if (this.value.replace(/\D/g, '').length > 11) {
-                this.value = this.value.slice(0, 14);
-            }
-            this.value = applyCPFMask(this.value);
-        });
-
         function applyCPFMask(value) {
             return value
                 .replace(/\D/g, '')
@@ -273,11 +338,10 @@
             const confSenha = this.value;
             const errorMessage = document.getElementById('error-message');
 
-            // Mostra a mensagem se as senhas não coincidirem
             if (confSenha && confSenha !== senha) {
-                errorMessage.style.display = 'block'; // Exibe a mensagem de erro
+                errorMessage.style.display = 'block';
             } else {
-                errorMessage.style.display = 'none'; // Oculta a mensagem de erro
+                errorMessage.style.display = 'none';
             }
         });
 
@@ -295,5 +359,8 @@
             document.getElementById('popup').style.display = 'none';
         };
     </script>
+    
+    <!-- Notificação de sucesso -->
+    <div id="notification" style="display: none; color: green; font-size: 12px; font-family: sans-serif;">Cadastro realizado com sucesso!</div>
 </body>
 </html>

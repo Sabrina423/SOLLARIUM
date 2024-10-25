@@ -202,6 +202,13 @@
     </footer>
 
     <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const mensagemSucesso = localStorage.getItem('cadastroSucesso');
+        if (mensagemSucesso) {
+            alert(mensagemSucesso); // Ou use outro método para exibir a mensagem
+            localStorage.removeItem('cadastroSucesso'); // Limpar a mensagem após exibir
+        }
+
         document.getElementById('logout').addEventListener('click', function(event) {
     event.preventDefault(); // Evita o comportamento padrão do link
 
@@ -267,7 +274,7 @@ function login() {
     }
     
 }
-
+    });
 // Exemplo de uso: chamar a função login quando o usuário se autenticar com sucesso
 
     </script>
