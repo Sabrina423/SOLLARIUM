@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -10,37 +9,26 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
   <link rel="stylesheet" href="/css/perfilprof.css" />
 </head>
-
 <body>
   <nav class="header__wrapper">
     <header></header>
-
     <nav class="cols__container">
       <nav class="left__col">
         <nav class="img__container">
           <form action="/perfilprof" method="post" enctype="multipart/form-data">
-            <% arquivo={ imagem: "/imagens/perfil/imgperfil.png" }; if (autenticado.imagem !=null) {
-              arquivo.imagem=imagem; } %>
-              <input type="file" id="inputArquivo" style="display: none;" accept="image/*" />
-              <img id="imagem" src="<%= arquivo.imagem %>" alt="Clique para mudar a imagem" />
-              <input name="cep" type="text" id="cep" value="<%= valores.cep %> placeholder=" CEP"
-                class="<%= avisoErro.cep %>" onblur="pesquisacep(this.value);" onkeyup="mascaraCEP(event)" /><b>>*</b>
+            <% const arquivo = { imagem: "/imagens/perfil/imgperfil.png" }; %>
+            <% if (typeof autenticado !== 'undefined' && autenticado.imagem != null) { arquivo.imagem = autenticado.imagem; } %>
+            <input type="file" id="inputArquivo" style="display: none;" accept="image/*" />
+            <img id="imagem" src="<%= arquivo.imagem %>" alt="Clique para mudar a imagem" />
+            <input name="cep" type="text" id="cep" value="<%= valores.cep %>" placeholder="CEP" class="<%= avisoErro.cep %>" onblur="pesquisacep(this.value);" onkeyup="mascaraCEP(event)" /><b>*</b>
           </form>
-
           <script>
             const inputArquivo = document.getElementById('inputArquivo');
             const imagem = document.getElementById('imagem');
-
-            imagem.addEventListener('click', () => {
-              inputArquivo.click();
-            });
-
+            imagem.addEventListener('click', () => { inputArquivo.click(); });
             inputArquivo.addEventListener('change', (event) => {
               const arquivo = event.target.files[0];
-              if (arquivo) {
-                const url = URL.createObjectURL(arquivo);
-                imagem.src = url;
-              }
+              if (arquivo) { const url = URL.createObjectURL(arquivo); imagem.src = url; }
             });
           </script>
           <span></span>
@@ -49,17 +37,20 @@
         <p></p>
         <p></p>
 
+        <h2>Dwight Schrute</h2>
+        <p>Assistente do Gerente Regional</p>
+        <p>DwAss@example.com</p>
         <ul class="about">
           <li><span>4,073</span>Trabalhos</li>
           <li><span>3 anos e 9m</span>Na Plataforma</li>
           <li><span>180</span>Finalizados</li>
         </ul>
-
         <nav class="content">
           <p>
             Instalador profissional, no mercados há mais de dez anos.
           </p>
 
+          <p>Melhor funcionario do mundo. Inimigo mortal de Jim Halpert. Melhor amigo e funcionario de Michael Scott. Dominante em artes marciais e disparo de armas, além de caçador nas horas vagas. O mais perto de Deus</p>
           <ul>
             <li><i class="fa-brands fa-x-twitter"></i></li>
             <i class="fa-brands fa-whatsapp"></i>
@@ -78,14 +69,12 @@
           <nav class="bell"><i class="fa-solid fa-bell"></i></nav>
           <button>Voltar ao Início</button>
         </nav>
-
         <nav class="photos">
           <img src="/imagens/perfil/imgperfil.png" alt="Photo" />
           <img src="/imagens/perfil/imgperfil.png" alt="Photo" />
           <img src="/imagens/perfil/imgperfil.png" alt="Photo" />
           <img src="/imagens/perfil/imgperfil.png" alt="Photo" />
           <img src="/imagens/perfil/imgperfil.png" alt="Photo" />
-
         </nav>
       </nav>
     </nav>
@@ -102,7 +91,6 @@
           <a href=""><i class='bx bxl-youtube'></i></a>
         </nav>
       </nav>
-
       <nav class="footer-content">
         <h4>Serviços</h4>
         <li><a href="">Instalação</a></li>
@@ -111,7 +99,6 @@
         <li><a href="">Consultoria</a></li>
         <li><a href="">Limpeza</a></li>
       </nav>
-
       <nav class="footer-content">
         <h4>Menu</h4>
         <li><a href="">Orçamento</a></li>
@@ -119,7 +106,6 @@
         <li><a href="">Início</a></li>
         <li><a href="">Consultoria</a></li>
       </nav>
-
       <nav class="footer-content">
         <h4>Ajuda</h4>
         <li><a href="">Contato email</a></li>
@@ -128,5 +114,4 @@
     </section>
   </footer>
 </body>
-
 </html>
