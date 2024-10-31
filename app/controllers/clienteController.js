@@ -29,8 +29,6 @@ const clienteController = {
             .isLength({ min: 8 }).withMessage('A senha deve conter pelo menos 8 caracteres'),
         body('cpf_cliente')
             .isLength({ min: 11, max: 14 }).withMessage('Campo obrigatório'),
-        body('cep_cliente')
-            .isLength({ min: 9, max: 9 }).withMessage('O cep deve ter entre 9 caracteres'),
         body('contato_cliente')
             .isLength({ min: 10, max: 15 }).withMessage('O contato deve ser válido com até 15 caracteres'),
         body("email_cliente")
@@ -45,8 +43,13 @@ const clienteController = {
 
         body("senha_cliente")
             .isStrongPassword()
-            .withMessage("A senha deve ter no mínimo 8 caracteres")
+            .withMessage("A senha deve ter no mínimo 8 caracteres"),
+            body("confirmarsenha_cliente")
+            .custom((value, { req }) => value === req.body.senha_cliente)
+            .withMessage("As senhas não coincidem")
+        
     ],
+    
 
     regrasValidacaoPerfil: [
         body("nome_cliente")
@@ -55,6 +58,8 @@ const clienteController = {
             .isLength({ min: 8, max: 45 }).withMessage("Nome de usuário deve ter de 8 a 45 caracteres!"),
         body("email_cliente")
             .isEmail().withMessage("Digite um e-mail válido!"),
+            body('cep_cliente')
+            .isLength({ min: 9, max: 9 }).withMessage('O cep deve ter entre 9 caracteres'),
         body("fone_cliente")
             .isLength({ min: 12, max: 13 }).withMessage("Digite um telefone válido!"),
     ],
@@ -91,7 +96,6 @@ const clienteController = {
             nome_cliente: req.body.nome_cliente,
             email_cliente: req.body.email_cliente,
             estado_cliente: req.body.estado_cliente,
-            cep_cliente: req.body.cep_cliente,
             contato_cliente: req.body.contato_cliente,
             cpf_cliente: req.body.cpf_cliente
         };
@@ -133,6 +137,7 @@ const clienteController = {
             let campos = {
                 nome_cliente: results[0].NOME_CLIENTE,
                 numero: null,
+                cep_cliente: req.body.cep_cliente,
                 complemento: null  ,
                 bairro: viaCep.bairro, localidade: viaCep.localidade, uf: viaCep.uf,
                 img_perfil_pasta: results[0].img_perfil_pasta,
@@ -329,6 +334,7 @@ const clienteController = {
                         img_perfil_banco: result[0].img_perfil_banco,
                         nomeCliente_cliente: result[0].user_cliente,
                         fone_cliente: result[0].fone_cliente,
+                        cep_cliente: result[0].cep_cliente,
                         senha_cliente: ""
                     }
                     res.render("pages/perfilcliente", { listaErros: null, dadosNotificacao: { titulo: "Perfil atualizado com sucesso", mensagem: "Alterações gravadas", tipo: "success" }, valores: campos });

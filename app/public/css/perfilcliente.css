@@ -35,7 +35,7 @@ header.site-header {
 .logo {
   font-size: 22px;
   font-weight: bold;
-  color: #ff9f1c; /* Laranja neutro para logo */
+  color: white; /* Laranja neutro para logo */
 }
 
 nav.main-nav {
@@ -56,7 +56,7 @@ nav.main-nav img {
 
 .menu-toggle {
   display: none;
-  color: #ff9f1c;
+  color: black;
 }
 
 /* Container do perfil */

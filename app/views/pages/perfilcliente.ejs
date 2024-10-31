@@ -13,12 +13,6 @@
     <header class="site-header">
         <section class="header-container">
             <section class="logo">SOLLARIUM</section>
-            <nav class="main-nav">
-                <a href="#home">Home</a>
-                <a href="#orcamento">Orçamentos</a>
-                <a href="#configuracoes">
-                  Configurações
-                </a>
             </nav>
             <button class="menu-toggle" aria-label="Toggle menu">&#9776;</button>
         </section>
@@ -57,6 +51,14 @@
                                         imagem.src = url;
                                     }
                                 });
+
+                                function mascaraCep(input) {
+            let cep = input.value.replace(/\D/g, "");
+            if (cep.length > 5) {
+                cep = cep.replace(/(\d{5})(\d)/, "$1-$2");
+            }
+            input.value = cep;
+        }
                             </script>
                         </nav>
                     </section>
@@ -68,6 +70,7 @@
                     <h2>Informações do Perfil</h2>
                     <input type="text" id="full-name" placeholder="Nome Completo">
                     <input type="text" id="email" placeholder="Email">
+                    <input type="text" name="cep_cliente" placeholder="CEP" maxlength="9" oninput="mascaraCep(this)" required>
                     <input type="text" id="phone" placeholder="Telefone">
                     <button type="submit">Salvar</button>
                 </nav>
