@@ -13,7 +13,7 @@ const cliente = require("../models/clienteModel");
 const profissional = require("../models/profissionaisModel");
 const admModel = require("../models/admModel");
 
-const uploadFile = require("../util/uploader.js")("./app/public/imagens/imgperfil");
+const uploadFile = require("../util/uploader.js")("./app/public/imagens/perfil/");
 // const uploadfile = require("../util/uploader")();
 const orcamentoController = require('../controllers/orcamentoController.js');
 
@@ -101,10 +101,6 @@ router.get('/sobre', (req, res) => {
     res.render('pages/sobre');
 });
 
-router.get('/perfilcliente', verificarClienteAutenticado, (req, res) => {
-
-    clienteController.mostrarPerfil(req, res);
-});
 
 router.get('/cadastroprof', (req, res) => {
     res.render('pages/cadastroprof');
