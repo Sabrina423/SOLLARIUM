@@ -4,7 +4,7 @@ const { body, validationResult } = require("express-validator");
 const bcrypt = require("bcryptjs");
 var salt = bcrypt.genSaltSync(12);
 const { removeImg } = require("../util/removeImg");
-const fetch = require('node-fetch');
+const fetch = (...args) => import('node-fetch').then(({ default: fetch }) => fetch(...args));
 const verificarClienteAutorizado = require('../models/verificarClienteAutorizado');
 const jwt = require('jsonwebtoken');
 const https = require('https');
@@ -44,12 +44,12 @@ const clienteController = {
         body("senha_cliente")
             .isStrongPassword()
             .withMessage("A senha deve ter no mínimo 8 caracteres"),
-            body("confirmarsenha_cliente")
+        body("confirmarsenha_cliente")
             .custom((value, { req }) => value === req.body.senha_cliente)
             .withMessage("As senhas não coincidem")
-        
+
     ],
-    
+
 
     regrasValidacaoPerfil: [
         body("nome_cliente")
@@ -58,7 +58,7 @@ const clienteController = {
             .isLength({ min: 8, max: 45 }).withMessage("Nome de usuário deve ter de 8 a 45 caracteres!"),
         body("email_cliente")
             .isEmail().withMessage("Digite um e-mail válido!"),
-            body('cep_cliente')
+        body('cep_cliente')
             .isLength({ min: 9, max: 9 }).withMessage('O cep deve ter entre 9 caracteres'),
         body("fone_cliente")
             .isLength({ min: 12, max: 13 }).withMessage("Digite um telefone válido!"),
@@ -121,34 +121,34 @@ const clienteController = {
 
     mostrarPerfil: async (req, res) => {
         try {
-            let results = await clienteModel.findById(req.session.autenticado.id);
+            let results = await cliente.findId(req.session.autenticado.id);
             if (results[0].cep_cliente != null) {
                 const httpsAgent = new https.Agent({ rejectUnauthorized: false, });
-
                 const response = await fetch(`https://viacep.com.br/ws/${results[0].CEP_CLIENTE}/json/`, {
-                    method: 'GET', headers: null, body: null, agent: httpsAgent });
-                viaCep = await response.json();
-                cep = results[0].CEP_CLIENTE.slice(0, 5) + "-" + results[0].CEP_CLIENTE.slice(5);
-                }else{
-                    var viaCep = {logradouro:"", bairro:"", localidade:"", uf:"",}
-                    var cep = null;
-                }
+                    method: 'GET', headers: null, body: null, agent: httpsAgent,
+                });
+                var viaCep = await response.json();
+                var cep = results[0].CEP_CLIENTE.slice(0, 5) + "-" + results[0].CEP_CLIENTE.slice(5);
+            } else {
+                var viaCep = { logradouro: "", bairro: "", localidade: "", uf: "", }
+                var cep = null;
+            }
 
             let campos = {
                 nome_cliente: results[0].NOME_CLIENTE,
                 numero: null,
                 cep_cliente: req.body.cep_cliente,
-                complemento: null  ,
+                complemento: null,
                 bairro: viaCep.bairro, localidade: viaCep.localidade, uf: viaCep.uf,
                 img_perfil_pasta: results[0].img_perfil_pasta,
-                img_perfil_banco: results[0].img_perfil_banco != null 
+                img_perfil_banco: results[0].img_perfil_banco != null
                     ? `data:image/jpeg;base64,${results[0].img_perfil_banco.toString('base64')}` : null,
                 fone_cliente: results[0].CONTATO_CLIENTE,
                 senha_cliente: ""
             }
 
-            res.render("pages/perfilcliente", { autenticado: gravarClienteAutenticado});
-             ({  listaErros: null, dadosNotificacao: null, valores: campos  })
+            res.render("pages/perfilcliente", { autenticado: gravarClienteAutenticado });
+            ({ listaErros: null, dadosNotificacao: null, valores: campos })
         } catch (e) {
             console.log(e);
             res.render("pages/perfilcliente", {
@@ -177,101 +177,101 @@ const clienteController = {
         const erros = validationResult(req);
         console.log(erros);
         if (!erros.isEmpty()) {
-          return res.render("pages/recsenha", {
-            listaErros: erros,
-            dadosNotificacao: null,
-            valores: req.body,
-          });
+            return res.render("pages/recsenha", {
+                listaErros: erros,
+                dadosNotificacao: null,
+                valores: req.body,
+            });
         }
         try {
-          //logica do token
-          user = await clienteModel.findUserCustom({
-            email_cliente: req.body.email_cliente,
-          });
-
-          console.log(user)
-
-        //   prof = await profissionaisModel.findUserCustom({
-        //     email_prof: req.body.email_cliente,
-        //   });
-
-          
-
-          const token = jwt.sign(
-            { userId: user[0].id_cliente, expiresIn: "40m" },
-            process.env.SECRET_KEY
-          );
-          //enviar e-mail com link usando o token
-          html = require("../util/email-reset-senha")(process.env.URL_BASE, token)
-          enviarEmail(req.body.email_cliente, "Pedido de recuperação de senha", null, html, ()=>{
-            return res.render("/", {
-              listaErros: null,
-              autenticado: req.session.autenticado,
-              dadosNotificacao: {
-                titulo: "Recuperação de senha",
-                mensagem: "Enviamos um e-mail com instruções para resetar sua senha",
-                tipo: "success",
-              },
+            //logica do token
+            user = await clienteModel.findUserCustom({
+                email_cliente: req.body.email_cliente,
             });
-          });
-        
+
+            console.log(user)
+
+            //   prof = await profissionaisModel.findUserCustom({
+            //     email_prof: req.body.email_cliente,
+            //   });
+
+
+
+            const token = jwt.sign(
+                { userId: user[0].id_cliente, expiresIn: "40m" },
+                process.env.SECRET_KEY
+            );
+            //enviar e-mail com link usando o token
+            html = require("../util/email-reset-senha")(process.env.URL_BASE, token)
+            enviarEmail(req.body.email_cliente, "Pedido de recuperação de senha", null, html, () => {
+                return res.render("/", {
+                    listaErros: null,
+                    autenticado: req.session.autenticado,
+                    dadosNotificacao: {
+                        titulo: "Recuperação de senha",
+                        mensagem: "Enviamos um e-mail com instruções para resetar sua senha",
+                        tipo: "success",
+                    },
+                });
+            });
+
         } catch (e) {
-          console.log(e);
+            console.log(e);
         }
-      },
-    
-      validarTokenNovaSenha: async (req, res) => {
-    
+    },
+
+    validarTokenNovaSenha: async (req, res) => {
+
         const token = req.query.token;
         console.log(token);
         //validar token
         jwt.verify(token, process.env.SECRET_KEY, (err, decoded) => {
-          if (err) {
-            res.render("pages/recsenha", {
-              listaErros: null,
-              dadosNotificacao: { titulo: "Link expirado!", mensagem: "Insira seu e-mail para iniciar o reset de senha.", tipo: "error", },
-              valores: req.body
-            });
-          } else {
-            res.render("pages/resetarsenha", {
-              listaErros: null,
-              autenticado: req.session.autenticado,
-              id_cliente: decoded.userId,
-              dadosNotificacao: null
-            });
-          }
+            if (err) {
+                res.render("pages/recsenha", {
+                    listaErros: null,
+                    dadosNotificacao: { titulo: "Link expirado!", mensagem: "Insira seu e-mail para iniciar o reset de senha.", tipo: "error", },
+                    valores: req.body
+                });
+            } else {
+                res.render("pages/resetarsenha", {
+                    listaErros: null,
+                    autenticado: req.session.autenticado,
+                    id_cliente: decoded.userId,
+                    dadosNotificacao: null
+                });
+            }
         });
-      },
-    
-      resetarSenha: async (req, res) => {
+    },
+
+    resetarSenha: async (req, res) => {
         const erros = validationResult(req);
         console.log(erros);
         if (!erros.isEmpty()) {
-          return res.render("pages/resetarsenha", {
-            listaErros: erros,
-            dadosNotificacao: null,
-            valores: req.body,
-          });
+            return res.render("pages/resetarsenha", {
+                listaErros: erros,
+                dadosNotificacao: null,
+                valores: req.body,
+            });
         }
         try {
-          //gravar nova senha
-          senha = bcrypt.hashSync(req.body.senha_cliente);
-          const resetar = await clienteModel.update({ senha_cliente: senha }, req.body.id_cliente);
-          console.log(resetar);
-          res.render("pages/entrar", {
-            listaErros: null,
-            dadosNotificacao: {
-              titulo: "Perfil alterado",
-              mensagem: "Nova senha registrada",
-              tipo: "success",
-            },
-          });
+            //gravar nova senha
+            senha = bcrypt.hashSync(req.body.senha_cliente);
+            const resetar = await clienteModel.update({ senha_cliente: senha }, req.body.id_cliente);
+            console.log(resetar);
+            res.render("pages/entrar", {
+                listaErros: null,
+                dadosNotificacao: {
+                    titulo: "Perfil alterado",
+                    mensagem: "Nova senha registrada",
+                    tipo: "success",
+                },
+            });
         } catch (e) {
-          console.log(e);
+            console.log(e);
         }
-      },
+    },
 
-    gravarPerfil: async (req, res) => { 
+    gravarPerfil: async (req, res) => {
 
         const erros = validationResult(req);
         const erroMulter = req.session.erroMulter;

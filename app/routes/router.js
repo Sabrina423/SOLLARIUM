@@ -6,23 +6,24 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const nodemailer = require('nodemailer'); // Importar o nodemailer
 require('dotenv').config(); // Carregar variáveis de ambiente
-const clienteController = require('../controllers/clienteController.js');
-const profissionaisController = require('../controllers/profissionaisController.js');
-const admController = require('../controllers/admController.js');
+const clienteController = require('../controllers/clienteController');
+const profissionaisController = require('../controllers/profissionaisController');
+const admController = require('../controllers/admController');
 const cliente = require("../models/clienteModel");
 const profissional = require("../models/profissionaisModel");
 const admModel = require("../models/admModel");
 
-const uploadFile = require("../util/uploader.js")("./app/public/imagens/perfil/");
+const uploadFile = require("../util/uploader")("./app/public/imagens/perfil/");
 // const uploadfile = require("../util/uploader")();
-const orcamentoController = require('../controllers/orcamentoController.js');
+
+const orcamentoController = require('../controllers/orcamentoController');
 
 const {
 } = require("../models/autenticadormiddleware.js");
 
-const projetosreController = require("../controllers/projetosreController.js");
+const projetosreController = require("../controllers/projetosreController");
 
-const verificarProfAutorizado = require("../models/verificarProfAutorizado.js");
+const verificarProfAutorizado = require("../models/verificarProfAutorizado");
 
 
 const {
@@ -200,7 +201,7 @@ router.post(
     "/perfilcliente",
     uploadFile("imagem-perfil_cliente"),
     clienteController.regrasValidacaoPerfil,
-    verificarClienteAutorizado([1, 2, 3], "pages/cadastrocliente"),
+    verificarClienteAutorizado([1, 2, 3], "pages/registro"),
     async function (req, res) {
         clienteController.gravarPerfil(req, res);
     }
@@ -209,7 +210,7 @@ router.post(
 
 router.get(
     "/perfilcliente",
-    verificarClienteAutorizado([1, 2, 3], "pages/cadastrocliente"),
+    verificarClienteAutorizado([1, 2, 3], "pages/registro"),
     async function (req, res) {
         clienteController.mostrarPerfil(req, res);
     }
