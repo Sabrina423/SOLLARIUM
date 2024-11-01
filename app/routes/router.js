@@ -201,7 +201,7 @@ router.post(
     "/perfilcliente",
     uploadFile("imagem-perfil_cliente"),
     clienteController.regrasValidacaoPerfil,
-    verificarClienteAutorizado([1, 2, 3], "pages/registro"),
+    verificarClienteAutorizado([1, 2, 3], "pages/cadastrocliente"),
     async function (req, res) {
         clienteController.gravarPerfil(req, res);
     }
@@ -210,7 +210,7 @@ router.post(
 
 router.get(
     "/perfilcliente",
-    verificarClienteAutorizado([1, 2, 3], "pages/registro"),
+    verificarClienteAutorizado([1, 2, 3], "pages/cadastrocliente"),
     async function (req, res) {
         clienteController.mostrarPerfil(req, res);
     }
