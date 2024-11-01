@@ -13,9 +13,8 @@
 </head>
 <body>
     <header>
-                <nav class="logo"><a href="/">Sollarium</a></nav>
-
- </header>
+        <nav class="logo"><a href="/">Sollarium</a></nav>
+    </header>
     <nav class="grid">
         <section class="texto">
             <h1>Você sabia?</h1>
@@ -25,9 +24,9 @@
             <h2>Os sistemas solares têm longa durabilidade e requerem pouca manutenção.</h2>
         </section>
         
-          <section id="contact" class="contact-section">
+        <section id="contact" class="contact-section">
             <form id="orcamento-form" method="post" action="/orcamento">
-            <h2>Solicite seu Orçamento</h2>
+                <h2>Solicite seu Orçamento</h2>
                 <nav class="form-group">
                     <label for="name">Nome:</label>
                     <input type="text" id="name" name="nome_cliente" placeholder="Nome completo" required>
@@ -35,7 +34,7 @@
 
                 <nav class="form-group">
                     <label for="text">Serviço:</label>
-                    <input type="text" id="descricao_orcamento" name="descricao_orcamento" rows="4" placeholder="Descreva o serviço desejado" required>
+                    <input type="text" id="descricao_orcamento" name="descricao_orcamento" placeholder="Descreva o serviço desejado" required>
                 </nav>
 
                 <nav class="form-group">
@@ -49,109 +48,94 @@
                 </nav>
 
                 <button type="submit">Enviar Solicitação</button>
-                <nav id="success-message" style="display: none; color: green; margin-top: 1rem;">
+                <div id="success-message" style="display: none; color: green; margin-top: 1rem;">
                     Sua solicitação foi enviada com sucesso! Logo um profissional será encontrado para a realização do serviço.
-            </section>
-                </nav>
+                </div>
+                <div id="error-message" style="display: none; color: red; margin-top: 1rem;">
+                    Ocorreu um erro ao enviar sua solicitação. Por favor, tente novamente.
+                </div>
             </form>
         </section>
     </nav>
 
     <footer>
-            <section class="footer">
-                <nav class="footer-content">
-                    <h2>Sollarium</h2>
-                    <p>Sua plataforma de serviços solares em suas mãos.</p>
-                    <nav class="icons">
-                        <a href=""><i class='bx bxl-facebook-circle'></i></a>
-                        <a href=""><i class='bx bxl-twitter'></i></a>
-                        <a href=""><i class='bx bxl-instagram-alt'></i></a>
-                        <a href=""><i class='bx bxl-youtube'></i></a>
-                    </nav>
+        <section class="footer">
+            <nav class="footer-content">
+                <h2>Sollarium</h2>
+                <p>Sua plataforma de serviços solares em suas mãos.</p>
+                <nav class="icons">
+                    <a href=""><i class='bx bxl-facebook-circle'></i></a>
+                    <a href=""><i class='bx bxl-twitter'></i></a>
+                    <a href=""><i class='bx bxl-instagram-alt'></i></a>
+                    <a href=""><i class='bx bxl-youtube'></i></a>
                 </nav>
-                
-                <nav class="footer-content">
-                    <h4>Serviços</h4>
-                    <li><a href="">Instalação</a></li>
-                    <li><a href="">Vistoria</a></li>
-                    <li><a href="">Manutenção</a></li>
-                    <li><a href="">Consultoria</a></li>
-                    <li><a href="">Limpeza</a></li>
-                </nav>
-    
-                <nav class="footer-content">
-                    <h4>Menu</h4>
-                    <li><a href="">Orçamento</a></li>
-                    <li><a href="">Sobre Nós</a></li>
-                    <li><a href="">Início</a></li>
-                    <li><a href="">Consultoria</a></li>
-                </nav>
-    
-                <nav class="footer-content">
-                    <h4>Ajuda</h4>
-                    <li><a href="">Contato email</a></li>
-                    <li><a href="">Contato telefone</a></li>
-                </nav>
-                <p>&copy; 2024 Sollarium. Todos os direitos reservados.</p>
-            </section>
+            </nav>
+            
+            <nav class="footer-content">
+                <h4>Serviços</h4>
+                <li><a href="">Instalação</a></li>
+                <li><a href="">Vistoria</a></li>
+                <li><a href="">Manutenção</a></li>
+                <li><a href="">Consultoria</a></li>
+                <li><a href="">Limpeza</a></li>
+            </nav>
 
+            <nav class="footer-content">
+                <h4>Menu</h4>
+                <li><a href="">Orçamento</a></li>
+                <li><a href="">Sobre Nós</a></li>
+                <li><a href="">Início</a></li>
+                <li><a href="">Consultoria</a></li>
+            </nav>
+
+            <nav class="footer-content">
+                <h4>Ajuda</h4>
+                <li><a href="">Contato email</a></li>
+                <li><a href="">Contato telefone</a></li>
+            </nav>
+            <p>&copy; 2024 Sollarium. Todos os direitos reservados.</p>
+        </section>
     </footer>
 
     <script>
-        document.getElementById('menu-toggle').addEventListener('click', function() {
-            const navLinks = document.querySelector('.nav-links');
-            navLinks.classList.toggle('active');
+        document.getElementById('orcamento-form').addEventListener('submit', function(event) {
+            event.preventDefault(); 
+
+            const name = document.getElementById('name').value;
+            const text = document.getElementById('descricao_orcamento').value;
+            const valor = document.getElementById('valor_orcamento').value;
+            const data = document.getElementById('data_orcamento').value;
+
+            if (name && text && valor && data) {
+                // Simulação de envio bem-sucedido
+                document.getElementById('success-message').style.display = 'block';
+                document.getElementById('error-message').style.display = 'none';
+                
+                // Resetar o formulário
+                this.reset();
+            } else {
+                // Simulação de erro
+                document.getElementById('error-message').style.display = 'block';
+                document.getElementById('success-message').style.display = 'none';
+            }
         });
 
-//         document.getElementById('orcamento-form').addEventListener('submit', function(event) {
-//             event.preventDefault(); 
+        document.getElementById('valor_orcamento').addEventListener('input', function (e) {
+            let valor = this.value;
+            valor = valor.replace(/[^\d.]/g, '');
 
-//             const name = document.getElementById('name').value;
-//             const text = document.getElementById('text').value;
-//             const valor = document.getElementById('valor').value;
-//             const data = document.getElementById('data').value;
+            if (valor.length > 0) {
+                this.value = 'R$ ' + valor;
+            } else {
+                this.value = ''; 
+            }
 
-//             if (name && text && valor && data) {
-//                 document.getElementById('success-message').style.display = 'block';
-//             } else {
-//                 alert('Por favor, preencha todos os campos.');
-//             }
-//         });
-        
-//         document.getElementById('valor_orcamento').addEventListener('input', function (e) {
-//     let valor = this.value;
-
-    
-//     valor = valor.replace(/[^\d.]/g, '');
-
-    
-//     if (valor.length > 0) {
-//         this.value = 'R$ ' + valor;
-//     } else {
-//         this.value = ''; 
-//     }
-
-    
-//     if (valor.includes('.')) {
-//         let [inteira, decimal] = valor.split('.');
-//         decimal = decimal.substring(0, 2); 
-//         this.value = 'R$ ' + inteira + '.' + decimal;
-//     }
-// });
-
-// document.getElementById('formOrcamento').addEventListener('submit', function (e) {
-//     let valorOrcamento = document.getElementById('valor_orcamento').value;
-
-    
-//     const regex = /^R\$\s\d+(\.\d{2})?$/;
-//     if (!regex.test(valorOrcamento)) {
-//         alert('O preço deve estar no formato R$ 0.00.');
-//         e.preventDefault(); 
-//     }
-// });
-
-
-
+            if (valor.includes('.')) {
+                let [inteira, decimal] = valor.split('.');
+                decimal = decimal.substring(0, 2); 
+                this.value = 'R$ ' + inteira + '.' + decimal;
+            }
+        });
     </script>
 </body>
 </html>

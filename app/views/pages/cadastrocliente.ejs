@@ -250,7 +250,6 @@
         function hideMessage() {
             document.getElementById('message').style.display = 'none';
         }
-
         function validatePassword() {
             const senha_cliente = document.getElementById('senha_cliente').value;
             const message = document.getElementById('message');
@@ -301,7 +300,18 @@
                 .replace(/(\d{3})(\d)/, '$1.$2')
                 .replace(/(\d{3})(\d{1,2})$/, '$1-$2');
         };
+  // Verificação das senhas durante o input
+  document.getElementById('confimasenha_cliente').addEventListener('input', function() {
+            const senha = document.getElementById('senha_cliente').value;
+            const confSenha = this.value;
+            const errorMessage = document.getElementById('error-message');
 
+            if (confSenha && confSenha !== senha) {
+                errorMessage.style.display = 'block';
+            } else {
+                errorMessage.style.display = 'none';
+            }
+        });
     </script>
 </body>
 

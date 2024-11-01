@@ -6,15 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="/images/favicon.ico">
     <link rel="stylesheet" href="/css/perfilcliente.css">
-    <title>Perfil do Usuário</title>
+    <title>Perfil do Cliente</title>
 </head>
 
 <body>
     <header class="site-header">
         <section class="header-container">
             <section class="logo">SOLLARIUM</section>
+            <nav class="main-nav">
+                <a href="/">Home</a>
+                <a href="/orcamento">Orçamentos</a>
             </nav>
-            <button class="menu-toggle" aria-label="Toggle menu">&#9776;</button>
         </section>
     </header>
 
@@ -60,8 +62,26 @@
             input.value = cep;
         }
                             </script>
+                    <img id="profile-pic" src="default-profile.jpg">
+                    <div>
+                        <section>
+                            <h1 id="user-name">Nome do Usuário</h1>
+                            <p id="user-state">Estado</p>
+                        </section>
+                    </div>
+                    <nav class="edit-photo-button">
+                        <button type="button" id="edit-photo-button" onclick="togglePhotoMenu()">Editar Foto</button>
+                    </nav>
+                    <div id="photo-menu" class="photo-menu" style="display: none;">
+                        <nav class="close-menu">
+                            <button type="button" onclick="togglePhotoMenu(event)">×</button>
                         </nav>
-                    </section>
+                        <input type="file" id="file-input" accept="image/*" style="display: none;">
+                        <nav class="options">
+                            <button type="button" onclick="document.getElementById('file-input').click()">Alterar Foto</button>
+                            <button type="button" onclick="removePhoto()">Excluir Foto</button>
+                        </nav>
+                    </div>
                 </section>
             </section>
 
@@ -70,41 +90,177 @@
                     <h2>Informações do Perfil</h2>
                     <input type="text" id="full-name" placeholder="Nome Completo">
                     <input type="text" id="email" placeholder="Email">
-                    <input type="text" name="cep_cliente" placeholder="CEP" maxlength="9" oninput="mascaraCep(this)" required>
-                    <input type="text" id="phone" placeholder="Telefone">
+                    <input type="number" id="cep" placeholder="CEP">
+                    <input type="tel" id="phone" placeholder="Telefone" maxlength="15" oninput="validatePhone(this.value)">
+                    <span id="phone-error" style="color: red; display: none; font-family: sans-serif; padding: 10px;"></span>
+                    <span id="phone-success" style="color: green; display: none; font-family: sans-serif; padding: 10px;">Telefone válido!</span>
                     <button type="submit">Salvar</button>
                 </nav>
             </section>
         </section>
     </form>
 
-    <section class="professionals-carousel">
+    <section class="cliente-carousel">
         <h2>Profissionais contratados</h2>
         <nav class="carousel-wrapper">
             <nav class="carousel-container">
-                <nav class="professional-card">
-                    <img src="/imagens/perfil/imgperfil.png" alt="Profissional 1">
+                <nav class="cliente-card">
+                    <img src="/imagens/perfil/imgperfil.png" alt="cliente 1">
                     <h3>João Silva</h3>
-                    <p>Especialização: Instalador de Painéis Solares</p>
                 </nav>
-                <nav class="professional-card">
-                    <img src="/imagens/perfil/imgperfil.png" alt="Profissional 2">
+                <nav class="cliente-card">
+                    <img src="/imagens/perfil/imgperfil.png" alt="cliente 2">
                     <h3>Maria Oliveira</h3>
-                    <p>Especialização: Consultora de Energia Solar</p>
                 </nav>
-                <nav class="professional-card">
-                    <img src="/imagens/perfil/imgperfil.png" alt="Profissional 3">
+                <nav class="cliente-card">
+                    <img src="/imagens/perfil/imgperfil.png" alt="cliente 3">
                     <h3>Pedro Santos</h3>
-                    <p>Especialização: Projetista de Sistemas Solares</p>
                 </nav>
-                <!-- Adicione mais cartões conforme necessário -->
             </nav>
         </nav>
         <button class="carousel-button carousel-prev" onclick="prevSlide()">&#10094;</button>
         <button class="carousel-button carousel-next" onclick="nextSlide()">&#10095;</button>
     </section>
 
-    <script src="/js/perfilcliente.js"></script>
+    <script>
+        let photoMenuVisible = false;
+        let currentIndex = 0;
 
+        function togglePhotoMenu(event) {
+            if (event) {
+                event.preventDefault(); // Previne o comportamento padrão
+            }
+            const menu = document.getElementById('photo-menu');
+            photoMenuVisible = !photoMenuVisible;
+            menu.style.display = photoMenuVisible ? 'block' : 'none';
+        }
+
+        function removePhoto() {
+            document.getElementById('profile-pic').src = 'default-profile.jpg';
+            document.getElementById('file-input').value = '';
+            togglePhotoMenu(); // Esconde o menu após remover foto
+        }
+
+        document.getElementById('file-input').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('profile-pic').src = e.target.result;
+                    togglePhotoMenu(); // Esconde o menu após selecionar a foto
+                }
+                reader.readAsDataURL(file);
+            }
+        });
+
+        function validatePhone(value) {
+            // Aplicar máscara
+            value = value.replace(/\D/g, ''); // Remove caracteres não numéricos
+            if (value.length > 11) {
+                value = value.slice(0, 11); // Limita a 11 dígitos
+            }
+            const formattedValue = value.replace(/(\d{2})(\d{5})(\d{4})/, '($1)$2-$3');
+            document.getElementById('phone').value = formattedValue;
+
+            // Validação
+            const phoneError = document.getElementById('phone-error');
+            const phoneSuccess = document.getElementById('phone-success');
+            phoneError.style.display = 'none';
+            phoneSuccess.style.display = 'none';
+
+            if (value.length === 11) {
+                const firstDigit = value[2];
+                const allSame = value.split('').every(num => num === value[0]);
+
+                if (firstDigit !== '9' && firstDigit !== '8') {
+                    phoneError.innerText = 'O telefone deve começar com 9 ou 8.';
+                    phoneError.style.display = 'block';
+                } else if (allSame) {
+                    phoneError.innerText = 'Todos os números não podem ser iguais.';
+                    phoneError.style.display = 'block';
+                } else {
+                    phoneSuccess.style.display = 'block';
+                }
+            }
+        }
+
+        function showSlide(index) {
+            const container = document.querySelector('.carousel-container');
+            const totalSlides = container.children.length;
+            currentIndex = (index + totalSlides) % totalSlides; // Permitir loop
+            container.style.transform = `translateX(-${currentIndex * 100}%)`;
+        }
+
+        function nextSlide() {
+            showSlide(currentIndex + 1);
+        }
+
+        function prevSlide() {
+            showSlide(currentIndex - 1);
+        }
+
+        // Inicializar o carrossel
+        showSlide(currentIndex);
+    </script>
+
+    <style>
+        .edit-photo-button button {
+            background-color: #e5890b;
+            border: none;
+            font-family: sans-serif;
+            color: white;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 5px;
+            width: 200px;
+        }
+        .profile-header {
+            position: relative; /* Permite que o menu use a posição relativa do cabeçalho */
+        }
+
+        .photo-menu {
+            width: 250px;
+            position: absolute;
+            background: rgb(17, 17, 17); /* Muda o fundo do menu para preto */
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            z-index: 10;
+            display: flex;
+            flex-direction: column; /* Alinha opções em coluna */
+            left: 49%; /* Centraliza o menu em relação ao botão */
+            transform: translateX(-50%); /* Ajusta a posição do menu */
+            margin-top: 5px; /* Espaço acima do menu */
+        }
+
+        .close-menu {
+            background: none; /* Fundo transparente */
+            border: none;
+            font-size: 20px;
+            align-self: flex-end; /* Alinha o botão de fechar à direita */
+            cursor: pointer;
+            color: white; /* Texto branco */
+        }
+
+        .close-menu button {
+            background: none; /* Remove o fundo */
+            color: white; /* Mantém o texto branco */
+            border: none; /* Remove a borda, se houver */
+            cursor: pointer; /* Muda o cursor para indicar que é clicável */
+            font-size: 20px;
+        }
+
+        .options button {
+            font-family: sans-serif;
+            background-color: #e5890b;
+            margin: 5px 0; /* Espaçamento entre os botões */
+            width: 100%; /* Para ocupar toda a largura do menu */
+            height: 30px;
+            border: none;
+            border-radius: 5px;
+            color: #ffffff; /* Texto do botão branco */
+        }
+    </style>
 </body>
 </html>
