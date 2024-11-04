@@ -6,24 +6,24 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const nodemailer = require('nodemailer'); // Importar o nodemailer
 require('dotenv').config(); // Carregar variáveis de ambiente
-const clienteController = require('../controllers/clienteController');
-const profissionaisController = require('../controllers/profissionaisController');
-const admController = require('../controllers/admController');
-const cliente = require("../models/clienteModel");
-const profissional = require("../models/profissionaisModel");
-const admModel = require("../models/admModel");
+const clienteController = require('../controllers/clienteController.js');
+const profissionaisController = require('../controllers/profissionaisController.js');
+const admController = require('../controllers/admController.js');
+const cliente = require("../models/clienteModel.js");
+const profissional = require("../models/profissionaisModel.js");
+const admModel = require("../models/admModel.js");
 
-const uploadFile = require("../util/uploader")("./app/public/imagens/perfil/");
+const uploadFile = require("../util/uploader.js")("./app/public/imagens/imgperfil/");
 // const uploadfile = require("../util/uploader")();
 
-const orcamentoController = require('../controllers/orcamentoController');
+const orcamentoController = require('../controllers/orcamentoController.js');
 
 const {
 } = require("../models/autenticadormiddleware.js");
 
-const projetosreController = require("../controllers/projetosreController");
+const projetosreController = require("../controllers/projetosreController.js");
 
-const verificarProfAutorizado = require("../models/verificarProfAutorizado");
+const verificarProfAutorizado = require("../models/verificarProfAutorizado.js");
 
 
 const {
