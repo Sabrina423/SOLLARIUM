@@ -121,35 +121,69 @@ const clienteController = {
 
     mostrarPerfil: async (req, res) => {
         try {
-            let results = await clienteModel.findById(req.session.autenticado.id);
-            if (results[0].cep_cliente != null) {
+            if (req.session.autenticado.tipo == 1) {
+                var results = await clienteModel.findById(req.session.autenticado.id);
+
+                if (results[0].cep_cliente != null) {
+                    const httpsAgent = new https.Agent({ rejectUnauthorized: false, });
+    
+                    const response = await fetch(`https://viacep.com.br/ws/${results[0].CEP_CLIENTE}/json/`, {
+                        method: 'GET', headers: null, body: null, agent: httpsAgent
+                    });
+                    viaCep = await response.json();
+                    cep = results[0].CEP_CLIENTE.slice(0, 5) + "-" + results[0].CEP_CLIENTE.slice(5);
+                } else {
+                    var viaCep = { logradouro: "", bairro: "", localidade: "", uf: "", }
+                    var cep = null;
+                }
+    
+                var campos = {
+                    nome_cliente: results[0].NOME_CLIENTE,
+                    numero_casa: results[0].NUMERO_CASA_CLIENTE,
+                    cep_cliente: cep,
+                    complemento: results[0].COMPLEMENTO_CLIENTE,
+                    bairro: viaCep.bairro, localidade: viaCep.localidade, uf: viaCep.uf,
+                    img_perfil_banco: results[0].IMAGEM_PERFIL_CLIENTE != null
+                        ? `data:image/jpeg;base64,${results[0].IMAGEM_PERFIL_CLIENTE.toString('base64')}` : null,
+                    fone_cliente: results[0].CONTATO_CLIENTE,
+                    email: results[0].EMAIL_CLIENTE
+    
+                }
+
+            }else if (req.session.autenticado.tipo == 2) {
+                var results = await profissionaisModel.findById(req.session.autenticado.id);
+                  if (results[0].cep_prof != null) {
                 const httpsAgent = new https.Agent({ rejectUnauthorized: false, });
 
-                const response = await fetch(`https://viacep.com.br/ws/${results[0].CEP_CLIENTE}/json/`, {
+                const response = await fetch(`https://viacep.com.br/ws/${results[0].CEP_PROF}/json/`, {
                     method: 'GET', headers: null, body: null, agent: httpsAgent
                 });
                 viaCep = await response.json();
-                cep = results[0].CEP_CLIENTE.slice(0, 5) + "-" + results[0].CEP_CLIENTE.slice(5);
+                cep = results[0].CEP_PROF.slice(0, 5) + "-" + results[0].CEP_PROF.slice(5);
             } else {
                 var viaCep = { logradouro: "", bairro: "", localidade: "", uf: "", }
                 var cep = null;
             }
 
-            let campos = {
-                nome_cliente: results[0].NOME_CLIENTE,
-                numero: null,
-                cep_cliente: req.body.cep_cliente,
-                complemento: null,
+            var campos = {
+                nome_prof: results[0].NOME_PROF,
+                numero_casa: results[0].NUMERO_CASA_PROF,
+                cep_cliente: cep,
+                complemento: results[0].COMPLEMENTO_PROF,
                 bairro: viaCep.bairro, localidade: viaCep.localidade, uf: viaCep.uf,
-                img_perfil_pasta: results[0].img_perfil_pasta,
-                img_perfil_banco: results[0].img_perfil_banco != null
-                    ? `data:image/jpeg;base64,${results[0].img_perfil_banco.toString('base64')}` : null,
-                fone_cliente: results[0].CONTATO_CLIENTE,
-                senha_cliente: ""
-            }
+                img_perfil_banco: results[0].IMAGEM_PERFIL_CLIENTE != null
+                    ? `data:image/jpeg;base64,${results[0].IMAGEM_PERFIL_CLIENTE.toString('base64')}` : null,
+                fone_prof: results[0].CONTATO_PROF,
+                email: results[0].EMAIL_PROF
 
-            res.render("pages/perfilcliente", { autenticado: gravarClienteAutenticado });
-            ({ listaErros: null, dadosNotificacao: null, valores: campos })
+
+            }
+            }else if (req.session.autenticado.tipo == 3) {
+                var results = await eModel.findById(req.session.autenticado.id);
+            }
+          
+            console.log(campos)
+            res.render("pages/perfilcliente", { autenticado: req.session.autenticado, listaErros: null, dadosNotificacao: null, valores: campos })
         } catch (e) {
             console.log(e);
             res.render("pages/perfilcliente", {

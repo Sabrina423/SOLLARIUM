@@ -15,7 +15,7 @@
             <section class="logo">SOLLARIUM</section>
             <nav class="main-nav">
                 <a href="/">Home</a>
-                <a href="/orcamento">Orçamentos</a>
+                <a href="/dashboard">Dashboard</a>
             </nav>
         </section>
     </header>
@@ -63,12 +63,6 @@
         }
                             </script>
                     <img id="profile-pic" src="default-profile.jpg">
-                    <div>
-                        <section>
-                            <h1 id="user-name">Nome do Usuário</h1>
-                            <p id="user-state">Estado</p>
-                        </section>
-                    </div>
                     <nav class="edit-photo-button">
                         <button type="button" id="edit-photo-button" onclick="togglePhotoMenu()">Editar Foto</button>
                     </nav>
@@ -88,10 +82,12 @@
             <section class="profile-right">
                 <nav class="profile-details">
                     <h2>Informações do Perfil</h2>
-                    <input type="text" id="full-name" placeholder="Nome Completo">
-                    <input type="text" id="email" placeholder="Email">
-                    <input type="number" id="cep" placeholder="CEP">
-                    <input type="tel" id="phone" placeholder="Telefone" maxlength="15" oninput="validatePhone(this.value)">
+                    <input type="text" id="full-name" name="nome" placeholder="Nome Completo" value="<%= valores.nome_cliente %> ">
+                    <input type="text" id="email" name="email" placeholder="Email" value="<%= valores.email %> ">
+                    <input type="number" id="cep" name="cep" placeholder="CEP" value="<%= valores.cep_cliente %> ">
+                    <input type="text" id="complemento" name="complemento" placeholder="complemento" value="<%= valores.complemento%> ">
+                    <input type="text" id="numero" name="numero" placeholder="Número da residência" value="<%= valores.numero_casa %> ">
+                    <input type="tel" id="phone" name="tel" placeholder="Telefone" value="<%= valores.fone %> " maxlength="15" oninput="validatePhone(this.value)">
                     <span id="phone-error" style="color: red; display: none; font-family: sans-serif; padding: 10px;"></span>
                     <span id="phone-success" style="color: green; display: none; font-family: sans-serif; padding: 10px;">Telefone válido!</span>
                     <button type="submit">Salvar</button>

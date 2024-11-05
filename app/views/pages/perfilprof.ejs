@@ -13,7 +13,7 @@
             <section class="logo">SOLLARIUM</section>
             <nav class="main-nav">
                 <a href="/">Home</a>
-                <a href="/dashboard">Orçamentos</a>
+                <a href="/dashboard">Dashboard</a>
             </nav>
         </section>
     </header>
@@ -25,7 +25,7 @@
                     <img id="profile-pic" src="default-profile.jpg">
                     <div>
                         <section>
-                            <h1 id="user-name">Nome do Usuário</h1>
+                            <h1 id="user-name" name="nome_prof" value="<%= valores.nome_prof %> ">Nome do Usuário</h1>
                             <p id="user-state">Estado</p>
                         </section>
                     </div>
@@ -48,10 +48,12 @@
             <section class="profile-right">
                 <nav class="profile-details">
                     <h2>Informações do Perfil</h2>
-                    <input type="text" id="full-name" placeholder="Nome Completo">
-                    <input type="text" id="email" placeholder="Email">
-                    <input type="number" id="cep" placeholder="CEP">
-                    <input type="tel" id="phone" placeholder="Telefone" maxlength="15" oninput="validatePhone(this.value)">
+                    <input type="text" id="full-name" name="nome" placeholder="Nome Completo" value="<%= valores.nome_prof %> ">
+                    <input type="text" id="email" name="email" placeholder="Email" value="<%= valores.email_prof %> ">
+                    <input type="number" id="cep" name="cep" placeholder="CEP" value="<%= valores.cep_prof %> ">
+                    <input type="number" id="numero" name="numero" placeholder="Número da residência"value="<%= valores.numero_casa_prof %> " >
+                    <input type="text" id="complemento" name="complemento" placeholder="Complemento"value="<%= valores.cpmplemento_prof %> " >
+                    <input type="tel" id="phone" name="contato" placeholder="Telefone" value="<%= valores.contato_prof %> " maxlength="15" oninput="validatePhone(this.value)">
                     <span id="phone-error" style="color: red; display: none; font-family: sans-serif; padding: 10px;"></span>
                     <span id="phone-success" style="color: green; display: none; font-family: sans-serif; padding: 10px;">Telefone válido!</span>
                     <button type="submit">Salvar</button>

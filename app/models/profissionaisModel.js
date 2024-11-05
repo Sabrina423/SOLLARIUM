@@ -45,7 +45,7 @@ const profissionaisModel = {
                     profissionais.cep_prof,
                     profissionais.area_prof,
                     profissionais.senha_prof,
-                    profissionais.imagem_prof
+                   
                 ]
             );
             return result[0]; // Retorna o resultado da inserção
@@ -63,25 +63,21 @@ const profissionaisModel = {
                 contato_prof, 
                 email_prof, 
                 cep_prof, 
-                cpf_prof, 
-                data_prof, 
-                senha_prof, 
-                estado_prof, 
-                documento_prof 
+                complemento_prof,
+                numero_casa_prof
+                
+                
             } = prof;
 
             const result = await pool.query(
-                'UPDATE PROFISSIONAIS SET CPF_PROF = ?, NOME_PROF = ?, CONTATO_PROF = ?, EMAIL_PROF = ?, SENHA_PROF = ?, ESTADO_PROF = ?, DOCUMENTO_PROF = ?, DATA_NASC = ?, CEP_PROF = ? WHERE ID_PROF = ?'
+                'UPDATE PROFISSIONAIS SET CPF_PROF = ?, NOME_PROF = ?, CONTATO_PROF = ?, EMAIL_PROF = ?, COMPLEMENTO_PROF=?, NUMERO_CASA_PROF=?  , CEP_PROF = ? WHERE ID_PROF = ?'
                 [
-                    cpf_prof,
                     nome_prof,
                     contato_prof,
                     email_prof,
-                    senha_prof,
-                    estado_prof,
-                    documento_prof,
-                    data_prof,
                     cep_prof,
+                    complemento_prof,
+                    numero_casa_prof,
                     id
                 ]
             );

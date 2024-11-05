@@ -97,14 +97,21 @@ body {
 }
 
 .texto h1{
-    font-size: 2.5rem;
-    color: #f8bd3f;
+    font-size: 2.0rem;
+    color: #f5ae14;
     font-family: sans-serif;
     margin-bottom: 30px;
     margin-top:35px ;
 }
 
-.texto h2{
+.texto p{
+    font-size: 1.25rem;
+    font-family:sans-serif;
+    line-height: 30px;
+    font-weight: 500;
+}
+
+.texto1 p{
     font-size: 1.25rem;
     font-family:sans-serif;
     line-height: 30px;
