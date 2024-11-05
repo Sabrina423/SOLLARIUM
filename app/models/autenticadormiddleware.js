@@ -33,8 +33,8 @@ const gravarClienteAutenticado = async (req, res, next) => {
       senha_cliente: req.body.password,
     };
 
-    console.log(dadosForm);
-
+    console.log(dadosForm); 
+  
     try {
       const clienteExistente = await cliente.findByEmailTot(dadosForm.nome_cliente);
       var totalCliente = Object.keys(clienteExistente).length;
