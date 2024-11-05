@@ -138,21 +138,23 @@ const clienteController = {
                 }
     
                 var campos = {
-                    nome_cliente: results[0].NOME_CLIENTE,
-                    numero_casa: results[0].NUMERO_CASA_CLIENTE,
-                    cep_cliente: cep,
+                    nome: results[0].NOME_CLIENTE,
+                    numero: results[0].NUMERO_CASA_CLIENTE,
+                    cep: cep,
                     complemento: results[0].COMPLEMENTO_CLIENTE,
                     bairro: viaCep.bairro, localidade: viaCep.localidade, uf: viaCep.uf,
                     img_perfil_banco: results[0].IMAGEM_PERFIL_CLIENTE != null
                         ? `data:image/jpeg;base64,${results[0].IMAGEM_PERFIL_CLIENTE.toString('base64')}` : null,
-                    fone_cliente: results[0].CONTATO_CLIENTE,
+                    fone: results[0].CONTATO_CLIENTE,
                     email: results[0].EMAIL_CLIENTE
     
                 }
-
+                console.log(campos)
+                res.render("pages/perfilcliente", { autenticado: req.session.autenticado, listaErros: null, dadosNotificacao: null, valores: campos })
             }else if (req.session.autenticado.tipo == 2) {
                 var results = await profissionaisModel.findById(req.session.autenticado.id);
-                  if (results[0].cep_prof != null) {
+                console.log(results)
+                  if (results[0].CEP_PROF != null) {
                 const httpsAgent = new https.Agent({ rejectUnauthorized: false, });
 
                 const response = await fetch(`https://viacep.com.br/ws/${results[0].CEP_PROF}/json/`, {
@@ -166,32 +168,31 @@ const clienteController = {
             }
 
             var campos = {
-                nome_prof: results[0].NOME_PROF,
-                numero_casa: results[0].NUMERO_CASA_PROF,
-                cep_cliente: cep,
+                nome: results[0].NOME_PROF,
+                numero: results[0].NUMERO_CASA_PROF,
+                cep: cep,
                 complemento: results[0].COMPLEMENTO_PROF,
                 bairro: viaCep.bairro, localidade: viaCep.localidade, uf: viaCep.uf,
                 img_perfil_banco: results[0].IMAGEM_PERFIL_CLIENTE != null
                     ? `data:image/jpeg;base64,${results[0].IMAGEM_PERFIL_CLIENTE.toString('base64')}` : null,
-                fone_prof: results[0].CONTATO_PROF,
+                fone: results[0].CONTATO_PROF,
                 email: results[0].EMAIL_PROF
 
 
             }
-            }else if (req.session.autenticado.tipo == 3) {
-                var results = await eModel.findById(req.session.autenticado.id);
+            console.log(campos)
+            res.render("pages/perfilprof", { autenticado: req.session.autenticado, listaErros: null, dadosNotificacao: null, valores: campos })
             }
           
-            console.log(campos)
-            res.render("pages/perfilcliente", { autenticado: req.session.autenticado, listaErros: null, dadosNotificacao: null, valores: campos })
+            
         } catch (e) {
             console.log(e);
             res.render("pages/perfilcliente", {
-                listaErros: null,
-                dadosNotificacao: null,
+                listaErros: null, 
+                 autenticado: req.session.autenticado,
+                 dadosNotificacao: null,
                 valores: {
                     img_perfil_banco: "",
-                    img_perfil_pasta: "",
                     nome_cliente: "",
                     email_cliente: "",
                     nomeCliente_cliente: "",

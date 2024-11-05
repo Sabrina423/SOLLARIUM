@@ -7,6 +7,7 @@ const jwt = require('jsonwebtoken');
 const { removeImg } = require("../util/removeImg");
 const https = require('https');
 const verificarProfAutorizado = require('../models/verificarProfAutorizado'); // Corrigido o caminho para o middleware
+const profissionaisModel = require("../models/profissionaisModel");
 
 const profController = {
     // Regras de validação para login
@@ -55,14 +56,18 @@ regrasValidacaoFormCad: [
 
     // Regras de validação para perfil
     regrasValidacaoPerfil: [
-        body("nome_prof")
+        body("nome")
             .isLength({ min: 3, max: 45 }).withMessage("Mínimo de 3 letras e máximo de 45!"),
-        body("nome_prof")
-            .isLength({ min: 8, max: 45 }).withMessage("Nome de usuário deve ter de 8 a 45 caracteres!"),
-        body("email_prof")
+        body("complemento")
+            .isLength().withMessage(""),
+        body("email")
             .isEmail().withMessage("Digite um e-mail válido!"),
-        body("contato_prof")
-            .isLength({ min: 12, max: 13 }).withMessage("Digite um telefone válido!"),
+        body("numero")
+        .isLength().withMessage("O campo está vazio"),
+        body("contato")
+            .isLength({ min: 12, max: 14 }).withMessage("Digite um telefone válido!"),
+            body('cep_prof')
+            .isLength({ min: 9, max: 9 }).withMessage('O cep deve ter entre 9 caracteres'),
     ],
      
 
@@ -122,51 +127,7 @@ regrasValidacaoFormCad: [
     },
 
     
-    mostrarPerfil: async (req, res) => {
-        try {
-            const results = await prof.findById(req.session.profissionalId); 
-            if (!results[0].cep_prof != null) {
-                const httpsAgent = new https.Agent({
-                    rejectUnauthorized: false,
-                });
-                const response = await prof.findid(`https://viacep.com.br/ws/${results[0].CEP_CLIENTE}/json/`, {
-                    method: 'GET',
-                    agent: httpsAgent});
-                var viaCep = await response.json();
-                }else{
-                    var viaCep = {logradouro:"", bairro:"", localidade:"", uf:""}
-                }
-            
-            let campos = {
-                nome_prof: results.nome_prof,
-                numero: results.numero_prof,
-                complemento: results.complemento_prof,
-                logradouro: results.logradouro, 
-                bairro: results.bairro,
-                localidade: results.localidade,
-                uf: results.uf,
-                img_perfil_pasta: results.img_perfil_pasta,
-                img_perfil_banco: results.img_perfil_banco != null ? `data:image/jpeg;base64,${results.img_perfil_banco.toString('base64')}` : null,
-                nomeprof_prof: results.user_prof,
-                fone_prof: results.fone_prof,
-                senha_prof: ""
-            };
-
-            res.render("pages/perfilprof", { listaErros: null, dadosNotificacao: null, valores: campos })
-        } catch (e) {
-            console.log(e);
-            res.render("pages/perfilprof", {
-                 listaErros: null, dadosNotificacao: null, valores: {
-                    img_perfilprof_banco:"", img_perfilprof_pasta:"", nome_prof:"", email_prof:"",
-                    nomeprof_prof: "", fone_prof:"", senha_prof:"", cep:"", numero:"", complemento:"",
-                    logradouro:"", bairro:"", localidade:"", uf:""
-                 }
-                     
-            })
     
-        }
-    },
-
     gravarPerfil: async (req, res) => {
         const erros = validationResult(req);
         const erroMulter = req.session.erroMulter;
@@ -175,11 +136,12 @@ regrasValidacaoFormCad: [
             if (erroMulter != null) {
                 lista.errors.push(erroMulter);
             }
+            console.log(lista)
             return res.render("pages/perfilprof", { listaErros: lista, dadosNotificacao: null, valores: req.body });
         }
         try {
             var dadosForm = {
-                user_prof: req.body.nomeprof_prof,
+                user_prof: req.body.nome_prof,
                 nome_prof: req.body.nome_prof,
                 email_prof: req.body.email_prof,
                 fone_prof: req.body.fone_prof,

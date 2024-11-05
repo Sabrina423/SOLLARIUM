@@ -5,7 +5,7 @@ const profissionaisModel = {
     findById: async (id) => {
         try {
             const [linhas] = await pool.query('SELECT * FROM PROFISSIONAIS WHERE ID_PROF = ?', [id]);
-            return linhas.length > 0 ? linhas[0] : null; // Retorna o profissionais ou null se não encontrado
+            return linhas // Retorna o profissionais ou null se não encontrado
         } catch (error) {
             console.error('Erro ao buscar profissionais por ID:', error);
             throw error;
@@ -16,7 +16,7 @@ const profissionaisModel = {
     findByEmail: async (email) => {
         try {
             const [linhas] = await pool.query('SELECT * FROM PROFISSIONAIS WHERE EMAIL_PROF = ?', [email]);
-            return linhas.length > 0 ? linhas[0] : null; // Retorna o profissionais ou null se não encontrado
+            return linhas; // Retorna o profissionais ou null se não encontrado
         } catch (error) {
             console.error('Erro ao buscar profissionais por email:', error);
             throw error;
@@ -48,7 +48,7 @@ const profissionaisModel = {
                    
                 ]
             );
-            return result[0]; // Retorna o resultado da inserção
+            return result; // Retorna o resultado da inserção
         } catch (error) {
             console.error('Erro ao criar profissionais:', error);
             throw error;
@@ -81,7 +81,7 @@ const profissionaisModel = {
                     id
                 ]
             );
-            return result[0]; // Retorna o resultado da atualização
+            return result; // Retorna o resultado da atualização
         } catch (error) {
             console.error('Erro ao atualizar profissionais:', error);
             throw error;
@@ -92,7 +92,7 @@ const profissionaisModel = {
     delete: async (id) => {
         try {
             const result = await pool.query('DELETE FROM PROFISSIONAIS WHERE ID_PROF = ?', [id]);
-            return result[0]; // Retorna o resultado da exclusão
+            return result; // Retorna o resultado da exclusão
         } catch (error) {
             console.error('Erro ao deletar profissionais:', error);
             throw error;

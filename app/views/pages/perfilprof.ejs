@@ -48,12 +48,12 @@
             <section class="profile-right">
                 <nav class="profile-details">
                     <h2>Informações do Perfil</h2>
-                    <input type="text" id="full-name" name="nome" placeholder="Nome Completo" value="<%= valores.nome_prof %> ">
-                    <input type="text" id="email" name="email" placeholder="Email" value="<%= valores.email_prof %> ">
-                    <input type="number" id="cep" name="cep" placeholder="CEP" value="<%= valores.cep_prof %> ">
-                    <input type="number" id="numero" name="numero" placeholder="Número da residência"value="<%= valores.numero_casa_prof %> " >
-                    <input type="text" id="complemento" name="complemento" placeholder="Complemento"value="<%= valores.cpmplemento_prof %> " >
-                    <input type="tel" id="phone" name="contato" placeholder="Telefone" value="<%= valores.contato_prof %> " maxlength="15" oninput="validatePhone(this.value)">
+                    <input type="text" id="full-name" name="nome" placeholder="Nome Completo" value="<%= valores.nome%> ">
+                    <input type="text" id="email" name="email" placeholder="Email" value="<%= valores.email%> ">
+                    <input type="text" id="cep" name="cep" placeholder="CEP" value="<%= valores.cep%> ">
+                    <input type="text" id="numero" name="numero" placeholder="Número da residência"value="<%= valores.numero %> " >
+                    <input type="text" id="complemento" name="complemento" placeholder="Complemento"value="<%= valores.complemento %> " >
+                    <input type="tel" id="phone" name="contato" placeholder="Telefone" value="<%= valores.fone%> " maxlength="15" oninput="validatePhone(this.value)">
                     <span id="phone-error" style="color: red; display: none; font-family: sans-serif; padding: 10px;"></span>
                     <span id="phone-success" style="color: green; display: none; font-family: sans-serif; padding: 10px;">Telefone válido!</span>
                     <button type="submit">Salvar</button>
