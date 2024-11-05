@@ -199,22 +199,35 @@ router.post('/logout', (req, res) => {
 //Rota de registro cliente
 router.post(
     "/perfilcliente",
-    uploadFile("imagem-perfil_cliente"),
-    clienteController.regrasValidacaoPerfil,
-    verificarClienteAutorizado([1, 2, 3], "pages/cadastrocliente"),
-    async function (req, res) {
-        clienteController.gravarPerfil(req, res);
+    uploadFile("imagem-perfil_cliente"), // Middleware para upload de imagem
+    clienteController.regrasValidacaoPerfil, // Validação dos campos do perfil
+    verificarClienteAutorizado([1, 2, 3], "pages/cadastrocliente"), // Verificação de autorização
+    async (req, res) => {
+        try {
+            // Chama o controlador para gravar o perfil após passar pelos middlewares
+            await clienteController.gravarPerfil(req, res); 
+        } catch (err) {
+            console.error("Erro ao gravar perfil:", err);
+            res.status(500).send("Erro ao gravar perfil.");
+        }
     }
 );
 
 
 router.get(
     "/perfilcliente",
-    verificarClienteAutorizado([1, 2, 3], "pages/cadastrocliente"),
-    async function (req, res) {
-        clienteController.mostrarPerfil(req, res);
+    verificarClienteAutorizado([1, 2, 3], "pages/cadastrocliente"), // Verificação de autorização
+    async (req, res) => {
+        try {
+            // Chama o controlador para exibir o perfil do cliente
+            await clienteController.mostrarPerfil(req, res);
+        } catch (err) {
+            console.error("Erro ao exibir perfil:", err);
+            res.status(500).send("Erro ao exibir perfil.");
+        }
     }
 );
+
 
 router.post("/cadastrocliente", clienteController.regrasValidacaoFormCad, async (req, res) => {
     clienteController.cadastrar(req, res);

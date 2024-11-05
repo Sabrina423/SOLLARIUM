@@ -44,12 +44,12 @@ const clienteController = {
         body("senha_cliente")
             .isStrongPassword()
             .withMessage("A senha deve ter no mínimo 8 caracteres"),
-            body("confirmarsenha_cliente")
+        body("confirmarsenha_cliente")
             .custom((value, { req }) => value === req.body.senha_cliente)
             .withMessage("As senhas não coincidem")
-        
+
     ],
-    
+
 
     regrasValidacaoPerfil: [
         body("nome_cliente")
@@ -58,7 +58,7 @@ const clienteController = {
             .isLength({ min: 8, max: 45 }).withMessage("Nome de usuário deve ter de 8 a 45 caracteres!"),
         body("email_cliente")
             .isEmail().withMessage("Digite um e-mail válido!"),
-            body('cep_cliente')
+        body('cep_cliente')
             .isLength({ min: 9, max: 9 }).withMessage('O cep deve ter entre 9 caracteres'),
         body("fone_cliente")
             .isLength({ min: 12, max: 13 }).withMessage("Digite um telefone válido!"),
@@ -126,29 +126,30 @@ const clienteController = {
                 const httpsAgent = new https.Agent({ rejectUnauthorized: false, });
 
                 const response = await fetch(`https://viacep.com.br/ws/${results[0].CEP_CLIENTE}/json/`, {
-                    method: 'GET', headers: null, body: null, agent: httpsAgent });
+                    method: 'GET', headers: null, body: null, agent: httpsAgent
+                });
                 viaCep = await response.json();
                 cep = results[0].CEP_CLIENTE.slice(0, 5) + "-" + results[0].CEP_CLIENTE.slice(5);
-                }else{
-                    var viaCep = {logradouro:"", bairro:"", localidade:"", uf:"",}
-                    var cep = null;
-                }
+            } else {
+                var viaCep = { logradouro: "", bairro: "", localidade: "", uf: "", }
+                var cep = null;
+            }
 
             let campos = {
                 nome_cliente: results[0].NOME_CLIENTE,
                 numero: null,
                 cep_cliente: req.body.cep_cliente,
-                complemento: null  ,
+                complemento: null,
                 bairro: viaCep.bairro, localidade: viaCep.localidade, uf: viaCep.uf,
                 img_perfil_pasta: results[0].img_perfil_pasta,
-                img_perfil_banco: results[0].img_perfil_banco != null 
+                img_perfil_banco: results[0].img_perfil_banco != null
                     ? `data:image/jpeg;base64,${results[0].img_perfil_banco.toString('base64')}` : null,
                 fone_cliente: results[0].CONTATO_CLIENTE,
                 senha_cliente: ""
             }
 
-            res.render("pages/perfilcliente", { autenticado: gravarClienteAutenticado});
-             ({  listaErros: null, dadosNotificacao: null, valores: campos  })
+            res.render("pages/perfilcliente", { autenticado: gravarClienteAutenticado });
+            ({ listaErros: null, dadosNotificacao: null, valores: campos })
         } catch (e) {
             console.log(e);
             res.render("pages/perfilcliente", {
@@ -177,113 +178,122 @@ const clienteController = {
         const erros = validationResult(req);
         console.log(erros);
         if (!erros.isEmpty()) {
-          return res.render("pages/recsenha", {
-            listaErros: erros,
-            dadosNotificacao: null,
-            valores: req.body,
-          });
+            return res.render("pages/recsenha", {
+                listaErros: erros,
+                dadosNotificacao: null,
+                valores: req.body,
+            });
         }
         try {
-          //logica do token
-          user = await clienteModel.findUserCustom({
-            email_cliente: req.body.email_cliente,
-          });
-
-          console.log(user)
-
-        //   prof = await profissionaisModel.findUserCustom({
-        //     email_prof: req.body.email_cliente,
-        //   });
-
-          
-
-          const token = jwt.sign(
-            { userId: user[0].id_cliente, expiresIn: "40m" },
-            process.env.SECRET_KEY
-          );
-          //enviar e-mail com link usando o token
-          html = require("../util/email-reset-senha")(process.env.URL_BASE, token)
-          enviarEmail(req.body.email_cliente, "Pedido de recuperação de senha", null, html, ()=>{
-            return res.render("/", {
-              listaErros: null,
-              autenticado: req.session.autenticado,
-              dadosNotificacao: {
-                titulo: "Recuperação de senha",
-                mensagem: "Enviamos um e-mail com instruções para resetar sua senha",
-                tipo: "success",
-              },
+            //logica do token
+            user = await clienteModel.findUserCustom({
+                email_cliente: req.body.email_cliente,
             });
-          });
-        
+
+            console.log(user)
+
+            //   prof = await profissionaisModel.findUserCustom({
+            //     email_prof: req.body.email_cliente,
+            //   });
+
+
+
+            const token = jwt.sign(
+                { userId: user[0].id_cliente, expiresIn: "40m" },
+                process.env.SECRET_KEY
+            );
+            //enviar e-mail com link usando o token
+            html = require("../util/email-reset-senha")(process.env.URL_BASE, token)
+            enviarEmail(req.body.email_cliente, "Pedido de recuperação de senha", null, html, () => {
+                return res.render("/", {
+                    listaErros: null,
+                    autenticado: req.session.autenticado,
+                    dadosNotificacao: {
+                        titulo: "Recuperação de senha",
+                        mensagem: "Enviamos um e-mail com instruções para resetar sua senha",
+                        tipo: "success",
+                    },
+                });
+            });
+
         } catch (e) {
-          console.log(e);
+            console.log(e);
         }
-      },
-    
-      validarTokenNovaSenha: async (req, res) => {
-    
+    },
+
+    validarTokenNovaSenha: async (req, res) => {
+
         const token = req.query.token;
         console.log(token);
         //validar token
         jwt.verify(token, process.env.SECRET_KEY, (err, decoded) => {
-          if (err) {
-            res.render("pages/recsenha", {
-              listaErros: null,
-              dadosNotificacao: { titulo: "Link expirado!", mensagem: "Insira seu e-mail para iniciar o reset de senha.", tipo: "error", },
-              valores: req.body
-            });
-          } else {
-            res.render("pages/resetarsenha", {
-              listaErros: null,
-              autenticado: req.session.autenticado,
-              id_cliente: decoded.userId,
-              dadosNotificacao: null
-            });
-          }
+            if (err) {
+                res.render("pages/recsenha", {
+                    listaErros: null,
+                    dadosNotificacao: { titulo: "Link expirado!", mensagem: "Insira seu e-mail para iniciar o reset de senha.", tipo: "error", },
+                    valores: req.body
+                });
+            } else {
+                res.render("pages/resetarsenha", {
+                    listaErros: null,
+                    autenticado: req.session.autenticado,
+                    id_cliente: decoded.userId,
+                    dadosNotificacao: null
+                });
+            }
         });
-      },
-    
-      resetarSenha: async (req, res) => {
+    },
+
+    resetarSenha: async (req, res) => {
         const erros = validationResult(req);
         console.log(erros);
         if (!erros.isEmpty()) {
-          return res.render("pages/resetarsenha", {
-            listaErros: erros,
-            dadosNotificacao: null,
-            valores: req.body,
-          });
+            return res.render("pages/resetarsenha", {
+                listaErros: erros,
+                dadosNotificacao: null,
+                valores: req.body,
+            });
         }
         try {
-          //gravar nova senha
-          senha = bcrypt.hashSync(req.body.senha_cliente);
-          const resetar = await clienteModel.update({ senha_cliente: senha }, req.body.id_cliente);
-          console.log(resetar);
-          res.render("pages/entrar", {
-            listaErros: null,
-            dadosNotificacao: {
-              titulo: "Perfil alterado",
-              mensagem: "Nova senha registrada",
-              tipo: "success",
-            },
-          });
+            //gravar nova senha
+            senha = bcrypt.hashSync(req.body.senha_cliente);
+            const resetar = await clienteModel.update({ senha_cliente: senha }, req.body.id_cliente);
+            console.log(resetar);
+            res.render("pages/entrar", {
+                listaErros: null,
+                dadosNotificacao: {
+                    titulo: "Perfil alterado",
+                    mensagem: "Nova senha registrada",
+                    tipo: "success",
+                },
+            });
         } catch (e) {
-          console.log(e);
+            console.log(e);
         }
-      },
-
-    gravarPerfil: async (req, res) => { 
-
+    },
+    // Lógica para gravar o perfil
+    gravarPerfil: async (req, res) => {
         const erros = validationResult(req);
         const erroMulter = req.session.erroMulter;
+
         if (!erros.isEmpty() || erroMulter != null) {
             const lista = !erros.isEmpty() ? erros : { formatter: null, errors: [] };
             if (erroMulter != null) {
                 lista.errors.push(erroMulter);
             }
-            return res.render("pages/perfilcliente", { listaErros: lista, dadosNotificacao: null, valores: req.body });
+
+            let autenticado = req.session.autenticado || {};
+            return res.render("pages/perfilcliente", {
+                autenticado,
+                listaErros: lista,
+                dadosNotificacao: null,
+                valores: req.body
+            });
         }
+
         try {
-            var dadosForm = {
+            // Preparando os dados do formulário para atualizar o perfil
+            const dadosForm = {
                 user_cliente: req.body.nomeCliente_cliente,
                 nome_cliente: req.body.nome_cliente,
                 email_cliente: req.body.email_cliente,
@@ -294,59 +304,97 @@ const clienteController = {
                 img_perfil_banco: req.session.autenticado.img_perfil_banco,
                 img_perfil_pasta: req.session.autenticado.img_perfil_pasta,
             };
+
+            // Atualizando a senha se houver alteração
             if (req.body.senha_cliente != "") {
                 dadosForm.senha_cliente = bcrypt.hashSync(req.body.senha_cliente, salt);
             }
-            if (!req.file) {
-                console.log("falha no carregamento");
-            } else {
-                //Armazena o caminho do arquivo salvo na pasta do projeto
-                const caminhoArquivo = "imagem/perfilcliente/" + req.file.filename;
-                //se houve alteração de imagem de perfil apaga a imagem anterior
-                if (dadosForm.img_perfil_pasta != caminhoArquivo) {
-                    removeImg(dadosForm.img_perfil_pasta);
-                }
-                dadosForm.img_perfil_pasta = caminhoArquivo;
-                dadosForm.img_perfil_banco = null;
 
-                // //Armazenando o buffer de dados bínarios do arquivo
-                //dadosForm.img_perfil_banco = req.file.buffer;
-                // //Apagando a imagem armazenada na pasta
-                // removeImg(dadosForm.img_perfil_pasta)
-                //dadosForm.img_perfil_pasta = null;
-            }
-            let resultUpdate = await clienteModel.update(dadosForm, req.session.autenticado.id);
-            if (!resultUpdate.isEmpty) {
-                if (resultUpdate.changedRows == 1) {
-                    var result = await clienteModel.findId(req.session.autenticado.id);
-                    var autenticado = {
-                        autenticado: result[0].nome_cliente,
-                        id: result[0].id_cliente,
-                        tipo: result[0].id_tipo_cliente,
-                        img_perfil_banco: result[0].img_perfil_banco != null ? `data:image/jpeg;base64,${result[0].img_perfil_banco.toString('base64')}` : null,
-                        img_perfil_pasta: result[0].img_perfil_pasta
-                    };
-                    req.session.autenticado = autenticado;
-                    var campos = {
-                        nome_cliente: result[0].nome_cliente,
-                        email_cliente: result[0].email_cliente,
-                        img_perfil_pasta: result[0].img_perfil_pasta,
-                        img_perfil_banco: result[0].img_perfil_banco,
-                        nomeCliente_cliente: result[0].user_cliente,
-                        fone_cliente: result[0].fone_cliente,
-                        cep_cliente: result[0].cep_cliente,
-                        senha_cliente: ""
-                    }
-                    res.render("pages/perfilcliente", { listaErros: null, dadosNotificacao: { titulo: "Perfil atualizado com sucesso", mensagem: "Alterações gravadas", tipo: "success" }, valores: campos });
-                } else {
-                    res.render("pages/perfilcliente", { listaErros: null, dadosNotificacao: { titulo: "Perfil atualizado com sucesso", mensagem: "Sem alterações", tipo: "success" }, valores: dadosForm });
+            // Verificando se o arquivo de imagem foi enviado
+            if (!req.file) {
+                return res.render("pages/perfilcliente", {
+                    listaErros: [{ msg: "Falha no carregamento da imagem." }],
+                    dadosNotificacao: null,
+                    valores: req.body
+                });
+            } else {
+                const caminhoArquivo = "imagem/perfilcliente/" + req.file.filename;
+
+                // Se houver uma imagem de perfil anterior, removemos
+                if (dadosForm.img_perfil_pasta != caminhoArquivo) {
+                    removeImg(dadosForm.img_perfil_pasta); // Remover imagem antiga se necessário
                 }
+
+                dadosForm.img_perfil_pasta = caminhoArquivo;
+                dadosForm.img_perfil_banco = null; // Se você estiver usando caminho, limpa o campo `img_perfil_banco`
+            }
+
+            // Atualizando no banco de dados
+            const resultUpdate = await clienteModel.update(dadosForm, req.session.autenticado.id);
+
+            if (resultUpdate && resultUpdate.changedRows > 0) {
+                const result = await clienteModel.findId(req.session.autenticado.id);
+
+                // Atualizando a sessão com os novos dados
+                const novoAutenticado = {
+                    autenticado: result[0].nome_cliente,
+                    id: result[0].id_cliente,
+                    tipo: result[0].id_tipo_cliente,
+                    img_perfil_banco: result[0].img_perfil_banco ? `data:image/jpeg;base64,${result[0].img_perfil_banco.toString('base64')}` : null,
+                    img_perfil_pasta: result[0].img_perfil_pasta
+                };
+                req.session.autenticado = novoAutenticado;
+
+                // Renderizando a página com sucesso
+                const campos = {
+                    nome_cliente: result[0].nome_cliente,
+                    email_cliente: result[0].email_cliente,
+                    img_perfil_pasta: result[0].img_perfil_pasta,
+                    img_perfil_banco: result[0].img_perfil_banco,
+                    nomeCliente_cliente: result[0].user_cliente,
+                    fone_cliente: result[0].fone_cliente,
+                    cep_cliente: result[0].cep_cliente,
+                    senha_cliente: ""
+                };
+
+                res.render("pages/perfilcliente", {
+                    listaErros: null,
+                    dadosNotificacao: {
+                        titulo: "Perfil atualizado com sucesso",
+                        mensagem: "Alterações gravadas",
+                        tipo: "success"
+                    },
+                    valores: campos,
+                    autenticado: novoAutenticado
+                });
+            } else {
+                // Caso não tenha ocorrido nenhuma alteração
+                res.render("pages/perfilcliente", {
+                    listaErros: null,
+                    dadosNotificacao: {
+                        titulo: "Perfil atualizado com sucesso",
+                        mensagem: "Sem alterações",
+                        tipo: "success"
+                    },
+                    valores: dadosForm,
+                    autenticado: req.session.autenticado
+                });
             }
         } catch (e) {
-            console.log(e);
-            res.render("pages/perfilcliente", { listaErros: erros, dadosNotificacao: { titulo: "Erro ao atualizar o perfil!", mensagem: "Verifique os valores digitados!", tipo: "error" }, valores: req.body });
+            console.error("Erro ao atualizar o perfil:", e);
+            res.render("pages/perfilcliente", {
+                listaErros: erros,
+                dadosNotificacao: {
+                    titulo: "Erro ao atualizar o perfil!",
+                    mensagem: "Verifique os valores digitados!",
+                    tipo: "error"
+                },
+                valores: req.body,
+                autenticado: req.session.autenticado
+            });
         }
     }
+
 };
 
 module.exports = clienteController;
