@@ -53,16 +53,20 @@ const clienteController = {
 
 
     regrasValidacaoPerfil: [
-        body("nome_cliente")
+        body("nome")
             .isLength({ min: 3, max: 45 }).withMessage("Mínimo de 3 letras e máximo de 45!"),
-        body("nomeusu_cliente")
-            .isLength({ min: 8, max: 45 }).withMessage("Nome de usuário deve ter de 8 a 45 caracteres!"),
-        body("email_cliente")
+        body("email")
             .isEmail().withMessage("Digite um e-mail válido!"),
-        body('cep_cliente')
+        body('cep')
             .isLength({ min: 9, max: 9 }).withMessage('O cep deve ter entre 9 caracteres'),
-        body("fone_cliente")
-            .isLength({ min: 12, max: 13 }).withMessage("Digite um telefone válido!"),
+        body("fone")
+            .isLength({ min: 12, max: 15 }).withMessage("Digite um telefone válido!"),
+        body("complemento")
+            .isLength().withMessage("Digite um complemento!"),
+        body("numero")
+            .isLength().withMessage("Digite o numero de sua residência!"),
+        
+
     ],
     regrasValidacaoFormRecSenha: [
 
@@ -318,10 +322,9 @@ const clienteController = {
             if (erroMulter != null) {
                 lista.errors.push(erroMulter);
             }
-
-            let autenticado = req.session.autenticado || {};
+console.log(lista)
             return res.render("pages/perfilcliente", {
-                autenticado,
+                autenticado: req.session.autenticado,
                 listaErros: lista,
                 dadosNotificacao: null,
                 valores: req.body
@@ -332,43 +335,44 @@ const clienteController = {
             // Preparando os dados do formulário para atualizar o perfil
             const dadosForm = {
                 user_cliente: req.body.nomeCliente_cliente,
-                nome_cliente: req.body.nome_cliente,
-                email_cliente: req.body.email_cliente,
-                fone_cliente: req.body.fone_cliente,
+                nome_cliente: req.body.nome,
+                email_cliente: req.body.email,
+                contato_cliente: req.body.fone,
                 cep_cliente: req.body.cep.replace("-", ""),
-                numero_cliente: req.body.numero,
+                numero_casa_cliente: req.body.numero,
                 complemento_cliente: req.body.complemento,
-                img_perfil_banco: req.session.autenticado.img_perfil_banco,
-                img_perfil_pasta: req.session.autenticado.img_perfil_pasta,
+                img_perfil_cliente: req.session.autenticado.imagem,
             };
 
-            // Atualizando a senha se houver alteração
-            if (req.body.senha_cliente != "") {
-                dadosForm.senha_cliente = bcrypt.hashSync(req.body.senha_cliente, salt);
-            }
+            // // Atualizando a senha se houver alteração
+            // if (req.body.senha_cliente != "") {
+            //     dadosForm.senha_cliente = bcrypt.hashSync(req.body.senha, salt);
+            // }
 
             // Verificando se o arquivo de imagem foi enviado
             if (!req.file) {
-                return res.render("pages/perfilcliente", {
-                    listaErros: [{ msg: "Falha no carregamento da imagem." }],
-                    dadosNotificacao: null,
-                    valores: req.body
-                });
-            } else {
-                const caminhoArquivo = "imagem/perfilcliente/" + req.file.filename;
+                //se não tem arquivo
+                
+                
+               
+                } else {
+                //se tem arquivo
 
-                // Se houver uma imagem de perfil anterior, removemos
-                if (dadosForm.img_perfil_pasta != caminhoArquivo) {
-                    removeImg(dadosForm.img_perfil_pasta); // Remover imagem antiga se necessário
-                }
+                // const caminhoArquivo = "imagem/perfilcliente/" + req.file.filename;
 
-                dadosForm.img_perfil_pasta = caminhoArquivo;
-                dadosForm.img_perfil_banco = null; // Se você estiver usando caminho, limpa o campo `img_perfil_banco`
+                // // Se houver uma imagem de perfil anterior, removemos
+                // if (dadosForm.img_perfil_pasta != caminhoArquivo) {
+                //     removeImg(dadosForm.img_perfil_pasta); // Remover imagem antiga se necessário
+                // }
+
+                // dadosForm.img_perfil_pasta = caminhoArquivo;
+                // dadosForm.img_perfil_banco = null; // Se você estiver usando caminho, limpa o campo `img_perfil_banco`
             }
 
             // Atualizando no banco de dados
-            const resultUpdate = await clienteModel.update(dadosForm, req.session.autenticado.id);
+            const resultUpdate = await clienteModel.update( req.session.autenticado.id, dadosForm);
 
+            console.log(resultUpdate)
             if (resultUpdate && resultUpdate.changedRows > 0) {
                 const result = await clienteModel.findId(req.session.autenticado.id);
 
@@ -384,14 +388,15 @@ const clienteController = {
 
                 // Renderizando a página com sucesso
                 const campos = {
-                    nome_cliente: result[0].nome_cliente,
-                    email_cliente: result[0].email_cliente,
+                    nome: result[0].nome_cliente,
+                    email: result[0].email_cliente,
                     img_perfil_pasta: result[0].img_perfil_pasta,
                     img_perfil_banco: result[0].img_perfil_banco,
                     nomeCliente_cliente: result[0].user_cliente,
-                    fone_cliente: result[0].fone_cliente,
-                    cep_cliente: result[0].cep_cliente,
-                    senha_cliente: ""
+                    fone: result[0].contato_cliente,
+                    cep: result[0].cep_cliente,
+                    complemento:result[0].complemento_cliente,
+                    numero:result[0].numero_casa_cliente_cliente,
                 };
 
                 res.render("pages/perfilcliente", {
@@ -413,7 +418,7 @@ const clienteController = {
                         mensagem: "Sem alterações",
                         tipo: "success"
                     },
-                    valores: dadosForm,
+                    valores: req.body,
                     autenticado: req.session.autenticado
                 });
             }

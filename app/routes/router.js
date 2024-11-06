@@ -13,7 +13,15 @@ const profissional = require("../models/profissionaisModel.js");
 const admModel = require("../models/admModel.js");
 const feedbackModel = require("../models/feedbackModel.js")
 
+<<<<<<< HEAD
 const uploadFile = require("../util/uploader.js")("./app/public/imagens/imgperfil/");
+=======
+ const uploadFile = require("../util/uploader.js")();
+// const cliente = require("../models/clienteModel");
+// const profissional = require("../models/profissionaisModel");
+// const admModel = require("../models/admModel");
+// const uploadFile = require("../util/uploader.js")("./app/public/imagens/imgperfil");
+>>>>>>> ffe3cb9 (perfis)
 // const uploadfile = require("../util/uploader")();
 
 const orcamentoController = require('../controllers/orcamentoController.js');
@@ -198,7 +206,7 @@ router.post('/logout', (req, res) => {
 //Rota de registro cliente
 router.post(
     "/perfilcliente",
-    uploadFile("imagem-perfil_cliente"), // Middleware para upload de imagem
+    uploadFile("file-input"), // Middleware para upload de imagem
     clienteController.regrasValidacaoPerfil, // Validação dos campos do perfil
     verificarClienteAutorizado([1, 2, 3], "pages/cadastrocliente"), // Verificação de autorização
     async (req, res) => {
@@ -212,12 +220,21 @@ router.post(
     }
 );
 
+<<<<<<< HEAD
     uploadFile("imagem-perfil_cliente"),
     clienteController.regrasValidacaoPerfil,
     verificarClienteAutorizado([1, 2, 3], "pages/cadastrocliente"),
     async function (req, res) {
         clienteController.gravarPerfil(req, res);
     },
+=======
+    // uploadFile("imagem-perfil_cliente" ),(
+    // clienteController.regrasValidacaoPerfil,
+    // verificarClienteAutorizado([1, 2, 3], "pages/cadastrocliente"),
+    // async function (req, res) {
+    //     clienteController.gravarPerfil(req, res);
+    // });
+>>>>>>> ffe3cb9 (perfis)
 
 router.get(
     "/perfilcliente",
