@@ -1,9 +1,9 @@
 var pool = require("../../config/pool_conexoes");
 
-const pagamentosreModel = {
+const tarefasModel = {
     findAll: async () => {
         try {
-            const [linhas] = await pool.query('SELECT * FROM pagamentosre WHERE status_tarefa = 1')
+            const [linhas] = await pool.query('SELECT * FROM tarefas WHERE status_tarefa = 1')
             return linhas;
         } catch (error) {
             return error;
@@ -12,7 +12,7 @@ const pagamentosreModel = {
 
     findId: async (id) => {
         try {
-            const [linhas,campos] = await pool.query('SELECT * FROM pagamentosre WHERE status_tarefa = 1 and id_tarefa = ?',[id] )
+            const [linhas,campos] = await pool.query('SELECT * FROM tarefas WHERE status_tarefa = 1 and id_tarefa = ?',[id] )
             return linhas;
         } catch (error) {
             return error;
@@ -21,9 +21,9 @@ const pagamentosreModel = {
 
    
 
-    create: async (dadospagamentos) => {
+    create: async (dadosForm) => {
         try {
-            const [linhas, campos] = await pool.query('INSERT INTO pagamentosre SET ?', [dadospagamentos])
+            const [linhas, campos] = await pool.query('INSERT INTO tarefas SET ?', [dadosForm])
             console.log(linhas);
             console.log(campos);
             return linhas;
@@ -33,9 +33,9 @@ const pagamentosreModel = {
         }  
     },
 
-    update: async (dadospagamentos, id) => {
+    update: async (dadosForm, id) => {
         try {
-            const [linhas] = await pool.query('UPDATE pagamentosre SET ? WHERE ID_PROF AND ID_CLIENTE = ?', [dadospagamentos, id])
+            const [linhas] = await pool.query('UPDATE tarefas SET ? WHERE id_tarefa = ?', [dadosForm, id])
             return linhas;
         } catch (error) {
             return error;
@@ -44,7 +44,7 @@ const pagamentosreModel = {
 
     delete: async (id) => {
         try {
-            const [linhas] = await pool.query('UPDATE pagamentosre SET status_tarefa = 0  WHERE id_tarefa = ?', [id])
+            const [linhas] = await pool.query('UPDATE tarefas SET status_tarefa = 0  WHERE id_tarefa = ?', [id])
             return linhas;
         } catch (error) {
             return error;
@@ -53,7 +53,7 @@ const pagamentosreModel = {
 
     sistuacaoTarefa: async (situacao, id) => {
         try {
-            const [linhas] = await pool.query('UPDATE pagamentosre SET situacao_tarefa = ? WHERE id_tarefa = ?', [situacao, id])
+            const [linhas] = await pool.query('UPDATE tarefas SET situacao_tarefa = ? WHERE id_tarefa = ?', [situacao, id])
             return linhas;
         } catch (error) {
             return error;
@@ -63,4 +63,4 @@ const pagamentosreModel = {
 };
     
 
-module.exports = pagamentosreModel
+module.exports = tarefasModel
