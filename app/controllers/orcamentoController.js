@@ -124,8 +124,8 @@ const orcamentoController = {
                 dadosNotificacao: { titulo: "Sucesso!", mensagem: "Orçamento atualizado com sucesso.", tipo: "success" },
                 valores: dadosAtualizados
             });
-        } catch (e) {
-            console.log(e);
+        }catch (e){
+         console.log(e);
             res.render("pages/editarOrcamento", {
                 listaErros: [{ msg: 'Erro ao atualizar o orçamento.' }],
                 dadosNotificacao: null,

@@ -11,12 +11,22 @@ const feedbackController = {
     
     regrasValidacaoFormFeedback:[
         //Nome do id 
-        body("")
-        //o que colocar entre numeros de caracteres é mensagens de erros
-           .isString({min: , max: }).withMessage("")
-    ]
+        body("data")
+           .isISO8601().withMessage("A data deve//o que colocar entre numeros de caracteres é mensagens de erros ser válida"),
 
-    cadastradadosFeedback: async (req, res) => {
+        body('classificacao')
+           .isString().withMessage('Seleção inválida') // Verifica se o valor é uma string
+           .notEmpty().withMessage('Você deve selecionar uma opção'), // Verifica se não está vazio
+
+        body('comentario')
+           .isString().withMessage('Texto inválido') // Verifica se é uma string
+           .isLength({ min: 10, max: 300 }).withMessage('O texto deve ter entre 10 e 300 caracteres') // Verifica o comprimento
+           .trim() // Remove espaços extras antes e depois
+           .notEmpty().withMessage('Este campo não pode estar vazio'), // Verifica se não está vazio
+       
+    ],
+
+    cadastrarfeedback: async (req, res) => {
         const erros = validationResult(req);
         if (!erros.isEmpty()){
             console.log(erros);
@@ -25,6 +35,9 @@ const feedbackController = {
 
         const dadosFormFormu = {
             //nome do id : req.body. id 
+            data : req.body.data,
+            classificacao : req.body.classificacao,
+            comentario : req.body.comentario
             //Identificador da tabela exemplo idprofissional é id cliente: req.session.autenticado.id,
         };
 
@@ -51,10 +64,10 @@ const feedbackController = {
     
     visualizarFeedback: async (req, res) =>{
         try{
-            const idFeedback = req.params.idFeedback
-            const resultado = await feedback.findById(feedback);
+            const idfeedback = req.params.id;
+            const resultado = await feedback.findById(idfeedback);
 
-            (!resultado){
+           if (!resultado){
                 return res.render("pages/visualizarFeedback", {
                     listaErros: [{ msg: 'Feedback não encontrado.' }],
                     dadosNotificacao: null,
@@ -76,6 +89,7 @@ const feedbackController = {
             });
         }
     },
+    
     atualizarFeedback: async (req , res) =>{
         const erros =validationResult(req);
         if (!erros.isEmpty()) {
@@ -83,11 +97,15 @@ const feedbackController = {
                 listaErros: erros,
                 dadosNotificacao: null,
                 valores: req.body
-            }),
+            });
         }
+
         const dadosAtualizadosfed = {
             //nome do id : req.body. id 
             //Identificador da tabela exemplo idprofissional é id cliente: req.session.autenticado.id,
+            data : req.body.data,
+            classificacao : req.body.classificacao,
+            comentario : req.body.comentario
         };
         try {
             const resultado = await feedback.update(dadosAtualizadosfed, req.params.id);

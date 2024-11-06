@@ -3,101 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Feedback do Cliente</title>
-    <link rel="stylesheet" href="css/feedbackmobile.css">
+    <title>Feedback</title>
+    <link rel="stylesheet" href="chat.css">
 </head>
 <body>
-<main>
-    <section class="feedback-section" id="feedback-section">
-        <h2 id="feedback-title">Feedbacks</h2>
-        <section class="feedback" id="feedback-list">
-            <% feedbacks.forEach(feedback => { %>
-                <article class="feedback-item" id="feedback-<%= idFeedback %>" data-date="<%= feedback.date.toLocaleDateString() %>" data-quality="<%= feedback.quality %>" data-speed="<%= feedback.speed %>" data-results="<%= feedback.results %>">
-                    <header class="feedback-header">
-                        <span class="client-name" id="client-<%= idFeedback %>"><%= feedback.clientName %></span>
-                        <time class="feedback-date" datetime="<%= feedback.date.toISOString() %>"><%= feedback.date.toLocaleDateString() %></time>
-                    </header>
-                    <meta class="feedback-ratings">
-                        <meta class="rating">
-                            <span>Qualidade:</span>
-                            <meta class="stars"><%= '★'.repeat(feedback.quality) + '☆'.repeat(5 - feedback.quality) %></meta>
-                        </meta>
-                        <meta class="rating">
-                            <span>Rapidez:</span>
-                            <meta class="stars"><%= '★'.repeat(feedback.speed) + '☆'.repeat(5 - feedback.speed) %></meta>
-                        </meta>
-                        <meta class="rating">
-                            <span>Resultados:</span>
-                            <meta class="stars"><%= '★'.repeat(feedback.results) + '☆'.repeat(5 - feedback.results) %></meta>
-                        </meta>
-                        
-                    </meta>
-                </article>
-            <% }) %>
-        </section>
-    </section>
-</main>
 
-    <!-- JavaScript -->
-    <script>
-        document.getElementById('menu-toggle').addEventListener('click', function() {
-            var navMenu = document.getElementById('nav-menu');
-            var isActive = navMenu.classList.toggle('active');
-            this.setAttribute('aria-expanded', isActive);
-            navMenu.setAttribute('aria-hidden', !isActive);
-        });
+    <main>
+        <box-icon name='left-arrow-alt icone'><a href="voltar"></a></box-icon>
+        <form action="#" method="POST" class="formulario">
+            <fieldset>
+                <label for="data">Data do serviço:</label>
+                <input type="date" id="data" name="data" required>
 
-        document.querySelector('.select-selected').addEventListener('click', function() {
-            this.parentElement.classList.toggle('open');
-        });
+                <label for="email">Classifique o serviço:</label>
+                <select name="classificacao" id="classificacao" required>
+                    <option value="">Escolha uma opção</option>
+                    <option value="1">Muito Ruim</option>
+                    <option value="2">Ruim</option>
+                    <option value="3">Regular</option>
+                    <option value="4">Bom</option>
+                    <option value="5">Excelente</option>
+                </select>
 
-        document.querySelectorAll('.select-items meta').forEach(item => {
-            item.addEventListener('click', function() {
-                const selectedText = this.textContent;
-                this.parentElement.previousElementSibling.textContent = selectedText;
-                this.parentElement.classList.remove('open');
-                filterFeedbacks(this.dataset.filter);
-            });
-        });
+                <label for="comentario">Comentários:</label>
+                <textarea id="comentario" name="comentario" rows="4" placeholder="Compartilhe sua experiência e sugestões para melhorar" required></textarea>
 
-        // Close the dropdown if the user clicks outside of it
-        window.addEventListener('click', function(e) {
-            if (!e.target.matches('.select-selected')) {
-                document.querySelectorAll('.custom-select').forEach(select => {
-                    select.classList.remove('open');
-                });
-            }
-        });
-
-        function filterFeedbacks(filter) {
-            const feedbackItems = document.querySelectorAll('.feedback-item');
-            const feedbackArray = Array.from(feedbackItems);
-
-            switch (filter) {
-                case 'recent':
-                    feedbackArray.sort((a, b) => new Date(b.dataset.date) - new Date(a.dataset.date));
-                    break;
-                case 'oldest':
-                    feedbackArray.sort((a, b) => new Date(a.dataset.date) - new Date(b.dataset.date));
-                    break;
-                case 'lowest':
-                    feedbackArray.sort((a, b) => 
-                        (parseInt(a.dataset.quality) + parseInt(a.dataset.speed) + parseInt(a.dataset.results)) - 
-                        (parseInt(b.dataset.quality) + parseInt(b.dataset.speed) + parseInt(b.dataset.results))
-                    );
-                    break;
-                case 'highest':
-                    feedbackArray.sort((a, b) => 
-                        (parseInt(b.dataset.quality) + parseInt(b.dataset.speed) + parseInt(b.dataset.results)) - 
-                        (parseInt(a.dataset.quality) + parseInt(a.dataset.speed) + parseInt(a.dataset.results))
-                    );
-                    break;
-            }
-
-            const feedbackContainer = document.querySelector('.feedback');
-            feedbackContainer.innerHTML = '';
-            feedbackArray.forEach(item => feedbackContainer.appendChild(item));
-        }
-    </script>
+                <button type="submit">Enviar Feedback</button>
+            </fieldset>
+        </form>
+    </main>
 </body>
 </html>

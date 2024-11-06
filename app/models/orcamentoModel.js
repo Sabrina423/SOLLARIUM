@@ -1,6 +1,8 @@
 const pool = require('../../config/pool_conexoes');
 
 const orcamentoModel = {
+
+    
     findById: async (id) => {
         try {
             const [linhas] = await pool.query('SELECT * FROM ORCAMENTO WHERE ID_ORCAMENTO = ?', [id]);
