@@ -14,10 +14,6 @@ const admModel = require("../models/admModel.js");
 const feedbackModel = require("../models/feedbackModel.js")
 
 const uploadFile = require("../util/uploader.js")("./app/public/imagens/imgperfil/");
-const cliente = require("../models/clienteModel");
-const profissional = require("../models/profissionaisModel");
-const admModel = require("../models/admModel");
-const uploadFile = require("../util/uploader.js")("./app/public/imagens/imgperfil");
 // const uploadfile = require("../util/uploader")();
 
 const orcamentoController = require('../controllers/orcamentoController.js');
@@ -221,7 +217,7 @@ router.post(
     verificarClienteAutorizado([1, 2, 3], "pages/cadastrocliente"),
     async function (req, res) {
         clienteController.gravarPerfil(req, res);
-    });
+    },
 
 router.get(
     "/perfilcliente",

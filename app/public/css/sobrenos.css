@@ -43,6 +43,7 @@
 .image-section img {
     width: 100%;
     height: auto;
+    margin-bottom: 100px;
 }
 
 .content-section .title {
@@ -198,7 +199,6 @@
   }
   
   
-  .active,
   .accordion:hover {
     background-color: #f5ba4d;
   }
@@ -213,7 +213,7 @@
     margin-top: 20px;
     background-color: #202528;
     color: rgba(0, 0, 0, 0.7);
-    font-size: 1.2rem;
+    font-size: 1rem;
     line-height: 1.4;
     color: #edeffd;
   }

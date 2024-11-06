@@ -9,6 +9,7 @@ const verificarClienteAutorizado = require('../models/verificarClienteAutorizado
 const jwt = require('jsonwebtoken');
 const https = require('https');
 const tipoClienteModel = require("../models/tipoClienteModel");
+const {enviarEmail} = require("../util/email");
 
 const clienteController = {
     regrasValidacaoFormLogin: [
@@ -222,25 +223,25 @@ const clienteController = {
         }
         try {
             //logica do token
-            user = await clienteModel.findUserCustom({
-                email_cliente: req.body.email_cliente,
-            });
+           // user = await clienteModel.findUserCustom({
+            //    email_cliente: req.body.email,
+           // });
 
-            console.log(user)
+           // console.log(user)
 
-            //   prof = await profissionaisModel.findUserCustom({
-            //     email_prof: req.body.email_cliente,
-            //   });
+            user = await profissionaisModel.findUserCustom({
+                email_prof: req.body.email,
+          });
 
-
+          console.log(user)
 
             const token = jwt.sign(
-                { userId: user[0].id_cliente, expiresIn: "40m" },
+                { userId: user[0].ID_CLIENTE, expiresIn: "40m" },
                 process.env.SECRET_KEY
             );
             //enviar e-mail com link usando o token
             html = require("../util/email-reset-senha")(process.env.URL_BASE, token)
-            enviarEmail(req.body.email_cliente, "Pedido de recuperação de senha", null, html, () => {
+            enviarEmail(req.body.email, "Pedido de recuperação de senha", null, html, () => {
                 return res.render("/", {
                     listaErros: null,
                     autenticado: req.session.autenticado,

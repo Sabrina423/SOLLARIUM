@@ -25,6 +25,34 @@ let photoMenuVisible = false;
             }
         });
 
+
+        function togglePhotoMenu(event) {
+            if (event) {
+                event.preventDefault(); // Previne o comportamento padrão
+            }
+            const menu = document.getElementById('photo-menu');
+            photoMenuVisible = !photoMenuVisible;
+            menu.style.display = photoMenuVisible ? 'block' : 'none';
+        }
+
+        function removePhoto() {
+            document.getElementById('profile-pic').src = 'default-profile.jpg';
+            document.getElementById('file-input').value = '';
+            togglePhotoMenu(); // Esconde o menu após remover foto
+        }
+
+        document.getElementById('file-input').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('profile-pic').src = e.target.result;
+                    togglePhotoMenu(); // Esconde o menu após selecionar a foto
+                }
+                reader.readAsDataURL(file);
+            }
+        });
+
         document.addEventListener('click', function (event) {
             const menu = document.getElementById('photo-menu');
             const photoButton = document.querySelector('.photo-actions button');

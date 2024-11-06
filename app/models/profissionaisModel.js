@@ -32,6 +32,20 @@ const profissionaisModel = {
             throw error;
         }
     },
+
+    findUserCustom: async (criterioWhere) => {
+        try {
+            const [resultados] = await pool.query(
+                "SELECT *  FROM PROFISSIONAIS WHERE ?",
+                [criterioWhere]
+            )
+            return resultados;
+        } catch (error) {
+            console.log(error);
+            return error;
+        }
+    },
+
     // Criar um novo profissionais
     create: async (profissionais) => {
         try {
