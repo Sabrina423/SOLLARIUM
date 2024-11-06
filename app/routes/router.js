@@ -216,21 +216,12 @@ router.post(
     }
 );
 
-<<<<<<< HEAD
-    uploadFile("imagem-perfil_cliente"),
-    clienteController.regrasValidacaoPerfil,
-    verificarClienteAutorizado([1, 2, 3], "pages/cadastrocliente"),
-    async function (req, res) {
-        clienteController.gravarPerfil(req, res);
-    },
-=======
     // uploadFile("imagem-perfil_cliente" ),(
     // clienteController.regrasValidacaoPerfil,
     // verificarClienteAutorizado([1, 2, 3], "pages/cadastrocliente"),
     // async function (req, res) {
     //     clienteController.gravarPerfil(req, res);
     // });
->>>>>>> ffe3cb9 (perfis)
 
 router.get(
     "/perfilcliente",
@@ -269,7 +260,7 @@ router.post("/orcamento", orcamentoController.regrasValidacaoFormOrcamento, (req
 
 router.post(
     "/perfilprof",
-    uploadFile("imagem-perfil_prof"),
+    uploadFile("inputArquivo"),
     profissionaisController.regrasValidacaoPerfil,
     // verificarProfAutorizado([1, 2, 3], "pages/cadastroprof"),
     async function (req, res) {

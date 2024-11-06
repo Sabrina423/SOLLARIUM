@@ -30,23 +30,6 @@
                         <p id="user-state">Estado</p>
                         <nav class="photo-actions">
                         
-<<<<<<< HEAD
-                            <img id="profile-pic" src="default-profile.jpg">
-                    
-                            <nav class="edit-photo-button">
-                                <button type="button" id="edit-photo-button" onclick="togglePhotoMenu()">Editar Foto</button>
-                            </nav>
-                            <div id="photo-menu" class="photo-menu" style="display: none;">
-                                <nav class="close-menu">
-                                    <button type="button" onclick="togglePhotoMenu(event)">×</button>
-                                </nav>
-                                <input type="file" id="file-input" accept="image/*" style="display: none;">
-                                <nav class="options">
-                                    <button type="button" onclick="document.getElementById('file-input').click()">Alterar Foto</button>
-                                    <button type="button" onclick="removePhoto()">Excluir Foto</button>
-                                </nav>
-                            </div>
-=======
                             <%
                                  arquivo = { imagem: "/imagens/perfil/imgperfil.png" };
                                 if (autenticado.imagem != null) {
@@ -55,7 +38,6 @@
                             %>
                             <input type="file" id="inputArquivo" style="display: none;" accept="image/*" onchange="loadImg(event)" />
                             <img id="img-preview" src="<%= arquivo.imagem %>" alt="Clique para mudar a imagem" />
->>>>>>> ffe3cb9 (perfis)
 
                             <script>
                                 const inputArquivo = document.getElementById('inputArquivo');
@@ -81,10 +63,6 @@
             input.value = cep;
         }
                             </script>
-<<<<<<< HEAD
-    
-                    </section>
-=======
                     <img id="profile-pic" src="default-profile.jpg">
                     <nav class="edit-photo-button">
                         <button type="button" id="edit-photo-button" onclick="togglePhotoMenu()">Editar Foto</button>
@@ -99,28 +77,18 @@
                             <button type="button" onclick="removePhoto()">Excluir Foto</button>
                         </nav>
                     </div>
->>>>>>> ffe3cb9 (perfis)
                 </section>
             </section>
 
             <section class="profile-right">
                 <nav class="profile-details">
                     <h2>Informações do Perfil</h2>
-<<<<<<< HEAD
-                    <input type="text" id="full-name" name="nome" placeholder="Nome Completo" value="<%= valores.nome %> ">
-                    <input type="text" id="email" name="email" placeholder="Email" value="<%= valores.email %> ">
-                    <input type="number" id="cep" name="cep" placeholder="CEP" value="<%= valores.cep %> ">
-                    <input type="number" id="complemento" name="complemento" placeholder="complemento" value="<%= valores.complemento%> ">
-                    <input type="number" id="numero" name="numero" placeholder="Número da residência" value="<%= valores.numero %> ">
-                    <input type="tel" id="phone" name="tel" placeholder="Telefone" value="<%= valores.fone %> " maxlength="15" oninput="validatePhone(this.value)">
-=======
                     <input type="text" id="full-name" name="nome" placeholder="Nome Completo" value="<%= valores.nome %>">
                     <input type="text" id="email" name="email" placeholder="Email" value="<%= valores.email %>">
                     <input type="text" id="cep" name="cep" placeholder="CEP" value="<%= valores.cep %>">
                     <input type="text" id="complemento" name="complemento" placeholder="complemento" value="<%= valores.complemento%>">
                     <input type="text" id="numero" name="numero" placeholder="Número da residência" value="<%= valores.numero %>">
                     <input type="tel" id="phone" name="fone" placeholder="Telefone" value="<%= valores.fone %>" maxlength="15" oninput="validatePhone(this.value)">
->>>>>>> ffe3cb9 (perfis)
                     <span id="phone-error" style="color: red; display: none; font-family: sans-serif; padding: 10px;"></span>
                     <span id="phone-success" style="color: green; display: none; font-family: sans-serif; padding: 10px;">Telefone válido!</span>
                     <button type="submit">Salvar</button>
@@ -129,43 +97,24 @@
         </section>
     </form>
 
-<<<<<<< HEAD
     <section class="professionals-carousel">
-=======
-    <section class="cliente-carousel">
->>>>>>> ffe3cb9 (perfis)
         <h2>Profissionais contratados</h2>
         <nav class="carousel-wrapper">
             <button class="carousel-button carousel-prev" onclick="prevSlide()">&#10094;</button>
             <button class="carousel-button carousel-next" onclick="nextSlide()">&#10095;</button>
             <nav class="carousel-container">
-<<<<<<< HEAD
                 <nav class="professional-card">
                     <img src="/imagens/perfil/imgperfil.png" alt="Profissional 1">
-=======
-                <nav class="cliente-card">
-                    <img src="/imagens/perfil/imgperfil.png" alt="cliente 1">
->>>>>>> ffe3cb9 (perfis)
                     <h3>João Silva</h3>
                     <p>Especialização: Instalador de Painéis Solares</p>
                 </nav>
-<<<<<<< HEAD
                 <nav class="professional-card">
                     <img src="/imagens/perfil/imgperfil.png" alt="Profissional 2">
-=======
-                <nav class="cliente-card">
-                    <img src="/imagens/perfil/imgperfil.png" alt="cliente 2">
->>>>>>> ffe3cb9 (perfis)
                     <h3>Maria Oliveira</h3>
                     <p>Especialização: Consultora de Energia Solar</p>
                 </nav>
-<<<<<<< HEAD
                 <nav class="professional-card">
                     <img src="/imagens/perfil/imgperfil.png" alt="Profissional 3">
-=======
-                <nav class="cliente-card">
-                    <img src="/imagens/perfil/imgperfil.png" alt="cliente 3">
->>>>>>> ffe3cb9 (perfis)
                     <h3>Pedro Santos</h3>
                     <p>Especialização: Projetista de Sistemas Solares</p>
                 </nav>
@@ -235,6 +184,5 @@
             color: #ffffff; /* Texto do botão branco */
         }
     </style>
-</style>
 </body>
 </html>
