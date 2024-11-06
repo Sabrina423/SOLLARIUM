@@ -35,7 +35,7 @@ header.site-header {
 .logo {
   font-size: 22px;
   font-weight: bold;
-  color: white; /* Laranja neutro para logo */
+  color: #ff9f1c; /* Laranja neutro para logo */
 }
 
 nav.main-nav {
@@ -56,7 +56,7 @@ nav.main-nav img {
 
 .menu-toggle {
   display: none;
-  color: black;
+  color: #ff9f1c;
 }
 
 /* Container do perfil */
@@ -91,15 +91,8 @@ nav.main-nav img {
   width: 120px;
   height: 120px;
   border-radius: 50%;
-  object-fit: cover;
-  margin-bottom: 15px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
   cursor: pointer;
   transition: box-shadow 0.3s ease;
-}
-
-.profile-header img:hover {
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.8);
 }
 
 .profile-header h1 {
@@ -165,7 +158,7 @@ nav.main-nav img {
 }
 
 /* Carrossel de profissionais */
-.professionals-carousel {
+.Profissional-carousel {
   max-width: 1200px;
   margin: 40px auto;
   padding: 20px;
@@ -174,7 +167,7 @@ nav.main-nav img {
   border-radius: 10px;
 }
 
-.professionals-carousel h2 {
+.Profissional-carousel h2 {
   text-align: center;
   font-size: 22px;
   margin-bottom: 20px;
@@ -185,20 +178,21 @@ nav.main-nav img {
 .carousel-wrapper {
   display: flex;
   overflow: hidden;
-  gap: 20px;
   padding-bottom: 20px;
   position: relative;
+  margin-left: 200px;
 }
 
 .carousel-container {
   display: flex;
   gap: 15px;
   transition: transform 0.5s ease;
-  justify-content: center;
-  margin-left: 100px;
+  margin: 0; /* Remover margens para centralizar corretamente */
+  width: max-content; /* Ajusta a largura do contêiner com base no conteúdo */
 }
 
-.professional-card {
+
+.Profissional-card {
   flex: 0 0 250px;
   padding: 15px;
   background-color: #2b2b2b; /* Cartão de profissional em modo escuro */
@@ -208,11 +202,11 @@ nav.main-nav img {
   transition: transform 0.3s ease;
 }
 
-.professional-card:hover {
+.Profissional-card:hover {
   transform: translateY(-5px);
 }
 
-.professional-card img {
+.Profissional-card img {
   width: 80px;
   height: 80px;
   border-radius: 50%;
@@ -220,14 +214,14 @@ nav.main-nav img {
   margin-bottom: 10px;
 }
 
-.professional-card h3 {
+.Profissional-card h3 {
   font-size: 18px;
   color: #ff9f1c;
   margin-bottom: 5px;
   font-weight: 600;
 }
 
-.professional-card p {
+.Profissional-card p {
   color: #bdbdbd;
   font-size: 14px;
 }
@@ -284,7 +278,7 @@ nav.main-nav img {
       overflow-x: scroll;
   }
 
-  .professional-card {
+.Profissional-card {
       flex: 0 0 80%;
   }
 }
