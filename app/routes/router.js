@@ -1,11 +1,10 @@
-var express = require("express");
-var router = express.Router();
-
+const express = require("express");
 const { body, validationResult } = require('express-validator');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const nodemailer = require('nodemailer'); // Importar o nodemailer
 require('dotenv').config(); // Carregar variáveis de ambiente
+
 const clienteController = require('../controllers/clienteController.js');
 const profissionaisController = require('../controllers/profissionaisController.js');
 const admController = require('../controllers/admController.js');
@@ -14,12 +13,14 @@ const profissional = require("../models/profissionaisModel.js");
 const admModel = require("../models/admModel.js");
 
 const uploadFile = require("../util/uploader.js")("./app/public/imagens/imgperfil/");
+const cliente = require("../models/clienteModel");
+const profissional = require("../models/profissionaisModel");
+const admModel = require("../models/admModel");
+const uploadFile = require("../util/uploader.js")("./app/public/imagens/imgperfil");
 // const uploadfile = require("../util/uploader")();
 
 const orcamentoController = require('../controllers/orcamentoController.js');
 
-const {
-} = require("../models/autenticadormiddleware.js");
 
 const projetosreController = require("../controllers/projetosreController.js");
 
@@ -32,6 +33,7 @@ const {
     gravarClienteAutenticado
 } = require("../models/autenticadormiddleware.js");
 
+const router = express.Router();
 // Mercado Pago
 const { MercadoPagoConfig, Preference } = require('mercadopago');
 const { PedidoController } = require("../controllers/PedidoController");
@@ -213,21 +215,20 @@ router.post(
     }
 );
 
+    uploadFile("imagem-perfil_cliente"),
+    clienteController.regrasValidacaoPerfil,
+    verificarClienteAutorizado([1, 2, 3], "pages/cadastrocliente"),
+    async function (req, res) {
+        clienteController.gravarPerfil(req, res);
+    });
 
 router.get(
     "/perfilcliente",
-    verificarClienteAutorizado([1, 2, 3], "pages/cadastrocliente"), // Verificação de autorização
-    async (req, res) => {
-        try {
-            // Chama o controlador para exibir o perfil do cliente
-            await clienteController.mostrarPerfil(req, res);
-        } catch (err) {
-            console.error("Erro ao exibir perfil:", err);
-            res.status(500).send("Erro ao exibir perfil.");
-        }
+    verificarClienteAutorizado([1, 2, 3], "pages/cadastrocliente"),
+    async function (req, res) {
+        clienteController.mostrarPerfil(req, res);
     }
-);
-
+)
 
 router.post("/cadastrocliente", clienteController.regrasValidacaoFormCad, async (req, res) => {
     clienteController.cadastrar(req, res);

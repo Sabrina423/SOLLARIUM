@@ -9,10 +9,8 @@ const verificarClienteAutorizado = require('../models/verificarClienteAutorizado
 const jwt = require('jsonwebtoken');
 const https = require('https');
 const tipoClienteModel = require("../models/tipoClienteModel");
-const { gravarClienteAutenticado } = require("../models/autenticadormiddleware");
 
 const clienteController = {
-
     regrasValidacaoFormLogin: [
         body("email")
             .isLength({ min: 8, max: 100 })
@@ -29,6 +27,8 @@ const clienteController = {
             .isLength({ min: 8 }).withMessage('A senha deve conter pelo menos 8 caracteres'),
         body('cpf_cliente')
             .isLength({ min: 11, max: 14 }).withMessage('Campo obrigatório'),
+        body('cep_cliente')
+            .isLength({ min: 9, max: 9 }).withMessage('O cep deve ter entre 9 caracteres'),
         body('contato_cliente')
             .isLength({ min: 10, max: 15 }).withMessage('O contato deve ser válido com até 15 caracteres'),
         body("email_cliente")
@@ -96,6 +96,7 @@ const clienteController = {
             nome_cliente: req.body.nome_cliente,
             email_cliente: req.body.email_cliente,
             estado_cliente: req.body.estado_cliente,
+            cep_cliente: req.body.cep_cliente,
             contato_cliente: req.body.contato_cliente,
             cpf_cliente: req.body.cpf_cliente
         };
@@ -205,7 +206,7 @@ const clienteController = {
                     localidade: "",
                     uf: ""
                 }
-            })
+            });
         }
     },
 
