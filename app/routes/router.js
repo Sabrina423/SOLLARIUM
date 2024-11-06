@@ -11,6 +11,7 @@ const admController = require('../controllers/admController.js');
 const cliente = require("../models/clienteModel.js");
 const profissional = require("../models/profissionaisModel.js");
 const admModel = require("../models/admModel.js");
+const feedbackModel = require("../models/feedbackModel.js")
 
 const uploadFile = require("../util/uploader.js")("./app/public/imagens/imgperfil/");
 const cliente = require("../models/clienteModel");
