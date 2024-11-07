@@ -76,7 +76,7 @@ const ClienteModel = {
         try {
             const { cep_cliente, nome_cliente, contato_cliente, email_cliente, imagem_perfil_cliente,complemento_cliente, numero_casa_cliente} = cliente;
             const result = await pool.query(
-                'UPDATE CLIENTE SET  CEP_CLIENTE = ?, NOME_CLIENTE = ?, CONTATO_CLIENTE = ?, EMAIL_CLIENTE = ?, IMAGEM_PERFIL_CLIENTE=?,COMPLEMENTO_CLIENTE=?, NUMERO_CASA_CLIENTE=?  WHERE ID_CLIENTE = ?',
+                'UPDATE CLIENTE SET  CEP_CLIENTE = ?, NOME_CLIENTE = ?, CONTATO_CLIENTE = ?, EMAIL_CLIENTE = ?, IMAGEM_PERFIL_CLIENTE= ?, COMPLEMENTO_CLIENTE=?, NUMERO_CASA_CLIENTE=?  WHERE ID_CLIENTE = ?',
                 [ cep_cliente, nome_cliente, contato_cliente, email_cliente, imagem_perfil_cliente, complemento_cliente, numero_casa_cliente,  id]
             );
             return result; // Retorna o resultado da atualização
