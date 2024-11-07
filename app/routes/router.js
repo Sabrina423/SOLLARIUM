@@ -12,7 +12,7 @@ const admController = require('../controllers/admController.js');
 const cliente = require("../models/clienteModel.js");
 const profissional = require("../models/profissionaisModel.js");
 const admModel = require("../models/admModel.js");
-<<<<<<< HEAD
+
 const feedbackModel = require("../models/feedbackModel.js")
 
  const uploadFile = require("../util/uploader.js")();
@@ -20,9 +20,7 @@ const feedbackModel = require("../models/feedbackModel.js")
 // const profissional = require("../models/profissionaisModel");
 // const admModel = require("../models/admModel");
 // const uploadFile = require("../util/uploader.js")("./app/public/imagens/imgperfil");
-=======
 const uploadFile = require("../util/uploader.js")("./app/public/imagens/imgperfil/");
->>>>>>> fa11410 (Feedback concluido)
 // const uploadfile = require("../util/uploader")();
 
 const orcamentoController = require('../controllers/orcamentoController.js');
@@ -221,16 +219,13 @@ router.post(
         }
     }
 );
-
-<<<<<<< HEAD
     // uploadFile("imagem-perfil_cliente" ),(
     // clienteController.regrasValidacaoPerfil,
     // verificarClienteAutorizado([1, 2, 3], "pages/cadastrocliente"),
     // async function (req, res) {
     //     clienteController.gravarPerfil(req, res);
     // });
-=======
->>>>>>> fa11410 (Feedback concluido)
+
 
 router.get(
     "/perfilcliente",
@@ -291,6 +286,5 @@ router.get(
     }
 );
 
-// Exportando o router
 
 module.exports = router;

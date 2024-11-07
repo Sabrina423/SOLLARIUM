@@ -9,7 +9,7 @@ const verificarClienteAutorizado = require('../models/verificarClienteAutorizado
 const jwt = require('jsonwebtoken');
 const https = require('https');
 const tipoClienteModel = require("../models/tipoClienteModel");
-const {enviarEmail} = require("../util/email");
+const { enviarEmail } = require("../util/email");
 
 const clienteController = {
     regrasValidacaoFormLogin: [
@@ -65,7 +65,7 @@ const clienteController = {
             .isLength().withMessage("Digite um complemento!"),
         body("numero")
             .isLength().withMessage("Digite o numero de sua residência!"),
-        
+
 
     ],
     regrasValidacaoFormRecSenha: [
@@ -132,7 +132,7 @@ const clienteController = {
 
                 if (results[0].cep_cliente != null) {
                     const httpsAgent = new https.Agent({ rejectUnauthorized: false, });
-    
+
                     const response = await fetch(`https://viacep.com.br/ws/${results[0].CEP_CLIENTE}/json/`, {
                         method: 'GET', headers: null, body: null, agent: httpsAgent
                     });
@@ -142,7 +142,7 @@ const clienteController = {
                     var viaCep = { logradouro: "", bairro: "", localidade: "", uf: "", }
                     var cep = null;
                 }
-    
+
                 var campos = {
                     nome: results[0].NOME_CLIENTE,
                     numero: results[0].NUMERO_CASA_CLIENTE,
@@ -153,50 +153,50 @@ const clienteController = {
                         ? `data:image/jpeg;base64,${results[0].IMAGEM_PERFIL_CLIENTE.toString('base64')}` : null,
                     fone: results[0].CONTATO_CLIENTE,
                     email: results[0].EMAIL_CLIENTE
-    
+
                 }
                 console.log(campos)
                 res.render("pages/perfilcliente", { autenticado: req.session.autenticado, listaErros: null, dadosNotificacao: null, valores: campos })
-            }else if (req.session.autenticado.tipo == 2) {
+            } else if (req.session.autenticado.tipo == 2) {
                 var results = await profissionaisModel.findById(req.session.autenticado.id);
                 console.log(results)
-                  if (results[0].CEP_PROF != null) {
-                const httpsAgent = new https.Agent({ rejectUnauthorized: false, });
+                if (results[0].CEP_PROF != null) {
+                    const httpsAgent = new https.Agent({ rejectUnauthorized: false, });
 
-                const response = await fetch(`https://viacep.com.br/ws/${results[0].CEP_PROF}/json/`, {
-                    method: 'GET', headers: null, body: null, agent: httpsAgent
-                });
-                viaCep = await response.json();
-                cep = results[0].CEP_PROF.slice(0, 5) + "-" + results[0].CEP_PROF.slice(5);
-            } else {
-                var viaCep = { logradouro: "", bairro: "", localidade: "", uf: "", }
-                var cep = null;
+                    const response = await fetch(`https://viacep.com.br/ws/${results[0].CEP_PROF}/json/`, {
+                        method: 'GET', headers: null, body: null, agent: httpsAgent
+                    });
+                    viaCep = await response.json();
+                    cep = results[0].CEP_PROF.slice(0, 5) + "-" + results[0].CEP_PROF.slice(5);
+                } else {
+                    var viaCep = { logradouro: "", bairro: "", localidade: "", uf: "", }
+                    var cep = null;
+                }
+
+                var campos = {
+                    nome: results[0].NOME_PROF,
+                    numero: results[0].NUMERO_CASA_PROF,
+                    cep: cep,
+                    complemento: results[0].COMPLEMENTO_PROF,
+                    bairro: viaCep.bairro, localidade: viaCep.localidade, uf: viaCep.uf,
+                    img_perfil_banco: results[0].IMAGEM_PERFIL_CLIENTE != null
+                        ? `data:image/jpeg;base64,${results[0].IMAGEM_PERFIL_CLIENTE.toString('base64')}` : null,
+                    fone: results[0].CONTATO_PROF,
+                    email: results[0].EMAIL_PROF
+
+
+                }
+                console.log(campos)
+                res.render("pages/perfilprof", { autenticado: req.session.autenticado, listaErros: null, dadosNotificacao: null, valores: campos })
             }
 
-            var campos = {
-                nome: results[0].NOME_PROF,
-                numero: results[0].NUMERO_CASA_PROF,
-                cep: cep,
-                complemento: results[0].COMPLEMENTO_PROF,
-                bairro: viaCep.bairro, localidade: viaCep.localidade, uf: viaCep.uf,
-                img_perfil_banco: results[0].IMAGEM_PERFIL_CLIENTE != null
-                    ? `data:image/jpeg;base64,${results[0].IMAGEM_PERFIL_CLIENTE.toString('base64')}` : null,
-                fone: results[0].CONTATO_PROF,
-                email: results[0].EMAIL_PROF
 
-
-            }
-            console.log(campos)
-            res.render("pages/perfilprof", { autenticado: req.session.autenticado, listaErros: null, dadosNotificacao: null, valores: campos })
-            }
-          
-            
         } catch (e) {
             console.log(e);
             res.render("pages/perfilcliente", {
-                listaErros: null, 
-                 autenticado: req.session.autenticado,
-                 dadosNotificacao: null,
+                listaErros: null,
+                autenticado: req.session.autenticado,
+                dadosNotificacao: null,
                 valores: {
                     img_perfil_banco: "",
                     nome_cliente: "",
@@ -227,17 +227,17 @@ const clienteController = {
         }
         try {
             //logica do token
-           // user = await clienteModel.findUserCustom({
+            // user = await clienteModel.findUserCustom({
             //    email_cliente: req.body.email,
-           // });
+            // });
 
-           // console.log(user)
+            // console.log(user)
 
             user = await profissionaisModel.findUserCustom({
                 email_prof: req.body.email,
-          });
+            });
 
-          console.log(user)
+            console.log(user)
 
             const token = jwt.sign(
                 { userId: user[0].ID_CLIENTE, expiresIn: "40m" },
@@ -322,7 +322,7 @@ const clienteController = {
             if (erroMulter != null) {
                 lista.errors.push(erroMulter);
             }
-console.log(lista)
+            console.log(lista)
             return res.render("pages/perfilcliente", {
                 autenticado: req.session.autenticado,
                 listaErros: lista,
@@ -344,99 +344,92 @@ console.log(lista)
                 img_perfil_cliente: req.session.autenticado.imagem,
             };
 
-            // // Atualizando a senha se houver alteração
-            // if (req.body.senha_cliente != "") {
-            //     dadosForm.senha_cliente = bcrypt.hashSync(req.body.senha, salt);
-            // }
-
-            // Verificando se o arquivo de imagem foi enviado
-            if (!req.file) {
-                //se não tem arquivo
-                
-                
-               
-                } else {
-                //se tem arquivo
-
-                // const caminhoArquivo = "imagem/perfilcliente/" + req.file.filename;
-
-                // // Se houver uma imagem de perfil anterior, removemos
-                // if (dadosForm.img_perfil_pasta != caminhoArquivo) {
-                //     removeImg(dadosForm.img_perfil_pasta); // Remover imagem antiga se necessário
-                // }
-
-                // dadosForm.img_perfil_pasta = caminhoArquivo;
-                // dadosForm.img_perfil_banco = null; // Se você estiver usando caminho, limpa o campo `img_perfil_banco`
+            if (req.body.senha_cliente != "") {
+                dadosForm.senha_cliente = bcrypt.hashSync(req.body.senha, salt);
             }
 
-            // Atualizando no banco de dados
-            const resultUpdate = await clienteModel.update( req.session.autenticado.id, dadosForm);
-
-            console.log(resultUpdate)
-            if (resultUpdate && resultUpdate.changedRows > 0) {
-                const result = await clienteModel.findId(req.session.autenticado.id);
-
-                // Atualizando a sessão com os novos dados
-                const novoAutenticado = {
-                    autenticado: result[0].nome_cliente,
-                    id: result[0].id_cliente,
-                    tipo: result[0].id_tipo_cliente,
-                    img_perfil_banco: result[0].img_perfil_banco ? `data:image/jpeg;base64,${result[0].img_perfil_banco.toString('base64')}` : null,
-                    img_perfil_pasta: result[0].img_perfil_pasta
-                };
-                req.session.autenticado = novoAutenticado;
-
-                // Renderizando a página com sucesso
-                const campos = {
-                    nome: result[0].nome_cliente,
-                    email: result[0].email_cliente,
-                    img_perfil_pasta: result[0].img_perfil_pasta,
-                    img_perfil_banco: result[0].img_perfil_banco,
-                    nomeCliente_cliente: result[0].user_cliente,
-                    fone: result[0].contato_cliente,
-                    cep: result[0].cep_cliente,
-                    complemento:result[0].complemento_cliente,
-                    numero:result[0].numero_casa_cliente_cliente,
-                };
-
-                res.render("pages/perfilcliente", {
-                    listaErros: null,
-                    dadosNotificacao: {
-                        titulo: "Perfil atualizado com sucesso",
-                        mensagem: "Alterações gravadas",
-                        tipo: "success"
-                    },
-                    valores: campos,
-                    autenticado: novoAutenticado
-                });
+            if (!req.file) {
+                console.log("Falha no carregamento");
             } else {
-                // Caso não tenha ocorrido nenhuma alteração
+                //Armazenando o caminho do arquivo salvo na pasta do projeto
+                caminhoArquivo = "imagem/perfil/" + req.file.filename;
+                //Se houve alteração de imagem de perfil apaga a imagem anterior
+                if (dadosForm.img_perfil_pasta != caminhoArquivo) {
+                    removeImg(dadosForm.img_perfil_pasta);
+                }
+                dadosForm.img_perfil_pasta = caminhoArquivo;
+                dadosForm.img_perfil_banco = null;
+
+                // //Armazenando o buffer de dados binários do arquivo
+                // dadosForm.img_perfil_banco = req.file.buffer;
+                // //Apagando a imagem armazenada na pasta
+                // removeImg(dadosForm.img_perfil_pasta)
+                // dadosForm.img_perfil_pasta = null;
+            }
+            let resultUpdate = await cliente.update(dadosForm, req.session.autenticado.id);
+            if (!resultUpdate.isEmpty) {
+                if (resultUpdate.changedRows == 1) {
+                    var result = await cliente.findId(req.session.autenticado.id);
+                    var Autenticado = {
+                        autenticado: result[0].nome_cliente,
+                        id: result[0].id_cliente,
+                        tipo: result[0].id_tipo_cliente,
+                        img_perfil_banco: result[0].img_perfil_banco ? `data:image/jpeg;base64,${result[0].img_perfil_banco.toString('base64')}` : null,
+                        img_perfil_pasta: result[0].img_perfil_pasta
+                    };
+                }
+            
+                    req.session.autenticado = Autenticado;
+
+                    var campos = {
+                        nome: result[0].nome_cliente,
+                        email: result[0].email_cliente,
+                        img_perfil_pasta: result[0].img_perfil_pasta,
+                        img_perfil_banco: result[0].img_perfil_banco,
+                        nomeCliente_cliente: result[0].user_cliente,
+                        fone: result[0].contato_cliente,
+                        cep: result[0].cep_cliente,
+                        complemento: result[0].complemento_cliente,
+                        numero: result[0].numero_casa_cliente_cliente,
+                    };
+
+                    res.render("pages/perfilcliente", {
+                        listaErros: null,
+                        dadosNotificacao: {
+                            titulo: "Perfil atualizado com sucesso",
+                            mensagem: "Alterações gravadas",
+                            tipo: "success"
+                        },
+                        valores: campos,
+                        autenticado: Autenticado
+                    });
+                } else {
+                    res.render("pages/perfilcliente", {
+                        listaErros: null,
+                        dadosNotificacao: {
+                            titulo: "Perfil atualizado com sucesso",
+                            mensagem: "Sem alterações",
+                            tipo: "success"
+                        },
+                        valores: req.body,
+                        autenticado: req.session.autenticado
+                    });
+                }
+            } catch (e) {
+                console.error("Erro ao atualizar o perfil:", e);
                 res.render("pages/perfilcliente", {
-                    listaErros: null,
+                    listaErros: erros,
                     dadosNotificacao: {
-                        titulo: "Perfil atualizado com sucesso",
-                        mensagem: "Sem alterações",
-                        tipo: "success"
+                        titulo: "Erro ao atualizar o perfil!",
+                        mensagem: "Verifique os valores digitados!",
+                        tipo: "error"
                     },
                     valores: req.body,
                     autenticado: req.session.autenticado
                 });
             }
-        } catch (e) {
-            console.error("Erro ao atualizar o perfil:", e);
-            res.render("pages/perfilcliente", {
-                listaErros: erros,
-                dadosNotificacao: {
-                    titulo: "Erro ao atualizar o perfil!",
-                    mensagem: "Verifique os valores digitados!",
-                    tipo: "error"
-                },
-                valores: req.body,
-                autenticado: req.session.autenticado
-            });
         }
-    }
 
 };
 
-module.exports = clienteController;
+    module.exports = clienteController;
