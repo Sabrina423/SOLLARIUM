@@ -14,11 +14,8 @@ const profissional = require("../models/profissionaisModel.js");
 const admModel = require("../models/admModel.js");
 
 const feedbackModel = require("../models/feedbackModel.js")
-<<<<<<< HEAD
-=======
 
 
->>>>>>> fec5336 (comii)
 // const cliente = require("../models/clienteModel");
 // const profissional = require("../models/profissionaisModel");
 // const admModel = require("../models/admModel");
@@ -264,7 +261,7 @@ router.post("/entrar", clienteController.regrasValidacaoFormLogin, gravarCliente
     // Presumindo que o login foi bem-sucedido e as informações do usuário estão na req.user
     clienteController.logar(req, res)
 });
-
+                    
 router.post("/orcamento", orcamentoController.regrasValidacaoFormOrcamento, (req, res) => {
     // Presumindo que o login foi bem-sucedido e as informações do usuário estão na req.user
     orcamentoController.cadastrarOrcamento(req, res)

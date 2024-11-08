@@ -41,7 +41,7 @@
 
                 <nav class="form-group">
                     <label for="valor">Valor esperado:</label>
-                    <input type="text" id="valor_orcamento" name="valor_orcamento" placeholder="R$ 0.00">
+                    <input type="text" id="valor_orcamento" name="valor_orcamento" placeholder="ex:300">
                 </nav>
 
                 <nav class="form-group">
@@ -99,45 +99,5 @@
         </section>
     </footer>
 
-    <script>
-        document.getElementById('orcamento-form').addEventListener('submit', function(event) {
-            event.preventDefault(); 
-
-            const name = document.getElementById('name').value;
-            const text = document.getElementById('descricao_orcamento').value;
-            const valor = document.getElementById('valor_orcamento').value;
-            const data = document.getElementById('data_orcamento').value;
-
-            if (name && text && valor && data) {
-                // Simulação de envio bem-sucedido
-                document.getElementById('success-message').style.display = 'block';
-                document.getElementById('error-message').style.display = 'none';
-                
-                // Resetar o formulário
-                this.reset();
-            } else {
-                // Simulação de erro
-                document.getElementById('error-message').style.display = 'block';
-                document.getElementById('success-message').style.display = 'none';
-            }
-        });
-
-        document.getElementById('valor_orcamento').addEventListener('input', function (e) {
-            let valor = this.value;
-            valor = valor.replace(/[^\d.]/g, '');
-
-            if (valor.length > 0) {
-                this.value = 'R$ ' + valor;
-            } else {
-                this.value = ''; 
-            }
-
-            if (valor.includes('.')) {
-                let [inteira, decimal] = valor.split('.');
-                decimal = decimal.substring(0, 2); 
-                this.value = 'R$ ' + inteira + '.' + decimal;
-            }
-        });
-    </script>
 </body>
 </html>

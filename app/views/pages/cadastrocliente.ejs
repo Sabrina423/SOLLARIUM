@@ -61,9 +61,11 @@
                     <input type="email" name="email_cliente" id="email_cliente" placeholder="E-mail" required>
                     <input type="tel" id="contato_cliente" name="contato_cliente" placeholder="Contato (XX) XXXXX-XXXX"
                         required oninput="mascaraTelefone(this)">
-                    <div id="telefone-error" class="error-message">Telefone inválido. Deve começar com 8 ou 9, ter 7 ou
-                        8 dígitos e não pode ter todos os números iguais.</div>
+                    <nav id="telefone-error" class="error-message">Telefone inválido. Deve começar com 8 ou 9, ter 7 ou
+                        8 dígitos e não pode ter todos os números iguais.</nav>
+                        <input type="text" id="cep_cliente" name="cep_cliente" placeholder="Cep XXXXX-XXX" required oninput="mascaraCep(this)"> 
                 </nav>
+                
                 <nav class="input-group">
                     <nav class="password-container">
                         <input type="password" id="senha_cliente" name="senha_cliente" placeholder="Senha"
@@ -238,6 +240,33 @@
                 input.value = `(${value.slice(0, 2)}) ${value.slice(2, 7)}-${value.slice(7, 11)}`;
             }
         }
+
+        function mascaraCep(input) {
+    let cep = input.value;
+
+    // Remove caracteres não numéricos
+    cep = cep.replace(/\D/g, '');
+
+    // Formata o CEP no padrão XXXXX-XXX
+    if (cep.length > 5) {
+        cep = cep.slice(0, 5) + '-' + cep.slice(5, 8);
+    }
+
+    input.value = cep;
+
+    // Validação do formato do CEP
+    if (cep.length === 9) {
+        const cepPattern = /^[0-9]{5}-[0-9]{3}$/;
+        if (!cepPattern.test(cep)) {
+            alert('Formato de CEP inválido. Use o formato XXXXX-XXX.');
+            input.style.borderColor = 'red';
+        } else {
+            input.style.borderColor = 'green';
+        }
+    } else {
+        input.style.borderColor = '';
+    }
+}
 
         function showMessage() {
             document.getElementById('message').style.display = 'block';

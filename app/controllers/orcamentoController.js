@@ -24,9 +24,10 @@ const orcamentoController = {
         body('data_orcamento')
             .isISO8601().withMessage('A data para execução do serviço deve ser válida.')
     ],
-
+      
     cadastrarOrcamento: async (req, res) => {
         const erros = validationResult(req);
+       
         if (!erros.isEmpty()) {
             console.log(erros);
             return res.render("pages/orcamento", { listaErros: erros, dadosNotificacao: null, valores: req.body, autenticado: req.session.autenticado });
@@ -41,7 +42,8 @@ const orcamentoController = {
         };
 
         try {
-            await orcamento.create(dadosForm);
+        var results =  await orcamento.create(dadosForm);
+        console.log(results);
             res.render("pages/home", {
                 listaErros: null, carrinho: null, autenticado: req.session.autenticado, dadosNotificacao: {
                     titulo: "Orçamento realizado!",

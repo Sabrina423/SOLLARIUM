@@ -28,14 +28,14 @@ const clienteController = {
             .isLength({ min: 8 }).withMessage('A senha deve conter pelo menos 8 caracteres'),
         body('cpf_cliente')
             .isLength({ min: 11, max: 14 }).withMessage('Campo obrigatório'),
-        body('cep_cliente')
+            body('cep_cliente')
             .isLength({ min: 9, max: 9 }).withMessage('O cep deve ter entre 9 caracteres'),
         body('contato_cliente')
             .isLength({ min: 10, max: 15 }).withMessage('O contato deve ser válido com até 15 caracteres'),
         body("email_cliente")
             .isEmail().withMessage("Digite um e-mail válido!")
             .custom(async value => {
-                const clienteExistente = await cliente.findByEmail(value);
+                const clienteExistente = await clienteModel.findByEmail(value);
                 console.log(clienteExistente.lengtht)
                 if (clienteExistente.lenght != undefined) {
                     throw new Error('E-mail em uso!');
@@ -100,14 +100,14 @@ const clienteController = {
             senha_cliente: bcrypt.hashSync(req.body.senha_cliente, salt),
             nome_cliente: req.body.nome_cliente,
             email_cliente: req.body.email_cliente,
+            cep_cliente:req.body.cep_cliente,
             estado_cliente: req.body.estado_cliente,
-            cep_cliente: req.body.cep_cliente,
             contato_cliente: req.body.contato_cliente,
             cpf_cliente: req.body.cpf_cliente
         };
 
         try {
-            await cliente.create(dadosForm);
+            await clienteModel.create(dadosForm);
             res.render("pages/home", {
                 listaErros: null, carrinho: null, autenticado: req.session.autenticado, dadosNotificacao: {
                     titulo: "Cadastro realizado!", mensagem: "Novo usuário criado com sucesso!", tipo: "success"
