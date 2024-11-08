@@ -1,4 +1,5 @@
 const pool = require("../../config/pool_conexoes");
+const { create } = require("./orcamentoModel");
 
 const projetosreModel = {
   // Buscar todos os projetos (pedidos)
@@ -42,7 +43,11 @@ const projetosreModel = {
     }
   },
 
+ 
   // Outras funções como criar, atualizar, excluir, etc. seguem o mesmo formato
+
 };
+
+
 
 module.exports = projetosreModel;
