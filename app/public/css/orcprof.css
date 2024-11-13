@@ -1,0 +1,62 @@
+:root {
+    --color-primary: #f5ba4d;
+    --color-danger: #f5ba4d;
+    --color-success: #f5ba4d;
+    --color-warning: #F7D060;
+    --color-white: #202528;
+    --color-info-dark: #edeffd;
+    --color-dark: #edeffd;
+    --color-light: rgba(0, 0, 0, 0.4);
+    --color-dark-variant: #a3bdcc;
+    --color-background: #181a1e;
+    --card-border-radius: 2rem;
+    --border-radius-1: 0.4rem;
+    --border-radius-2: 1.2rem;
+    --card-padding: 1.8rem;
+    --padding-1: 1.2rem;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--color-background);
+    color: var(--color-dark);
+    margin: 0;
+    padding: 2rem;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: var(--color-white);
+    border-radius: var(--border-radius-2);
+    overflow: hidden;
+}
+
+th, td {
+    padding: 1rem;
+    text-align: left;
+    color: var(--color-dark);
+}
+
+th {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+}
+
+tr:nth-child(even) {
+    background-color: var(--color-info-dark);
+}
+
+.btn-accept {
+    background-color: var(--color-success);
+    color: var(--color-white);
+    padding: 0.5rem 1rem;
+    border-radius: var(--border-radius-1);
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.3s;
+}
+
+.btn-accept:hover {
+    background-color: var(--color-warning);
+}

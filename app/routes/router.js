@@ -84,6 +84,10 @@ router.get('/dashboard', (req, res) => {
     ];
     res.render('pages/dashboard', { tarefas });
 });
+
+router.get('/orcprof', (req, res) => {
+    res.render('pages/orcprof');
+});
 router.get("/excluir", function (req, res) {
     projetosreController.excluirprojeto(req, res);
 });
@@ -91,6 +95,11 @@ router.get("/excluir", function (req, res) {
 router.get("/finalizar", function (req, res) {
     projetosreController.finalizarprojeto(req, res);
 });
+
+router.get('/updateorc', (req, res) => {
+    res.render('pages/updateorc');
+});
+
 
 router.get('/pagamentosre', (req, res) => {
     res.render('pages/pagamentosre');

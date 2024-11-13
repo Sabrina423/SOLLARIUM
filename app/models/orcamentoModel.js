@@ -43,13 +43,12 @@ const orcamentoModel = {
 
     update: async (dadosForm, id) => {
         try {
-            const [linhas] = await pool.query('UPDATE orcamento SET ? WHERE id_orcamento = ?', [dadosForm, id])
+            const [linhas] = await pool.query('UPDATE tarefas SET ? WHERE id_tarefa = ?', [dadosForm, id])
             return linhas;
         } catch (error) {
             return error;
         }  
     },
-
     
     delete: async (id) => {
         try {

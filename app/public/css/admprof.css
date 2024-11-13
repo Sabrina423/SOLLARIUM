@@ -70,7 +70,6 @@ img{
 
 h1{
     font-weight: 800;
-    margin-bottom: 10px;
     font-size: 1.8rem;
 }
 
@@ -81,7 +80,6 @@ h2{
 
 h3{
     font-weight: 500;
-    margin-bottom: 10px;
     font-size: 0.87rem;
 }
 
@@ -259,29 +257,12 @@ main .analyse h3{
     font-size: 1rem;
 }
 
-main .analyse .progresss1{
+main .analyse .progresss{
     position: relative;
     width: 92px;
     height: 92px;
     border-radius: 50%;
 }
-
-main .analyse .progresss2{
-    position: relative;
-    width: 92px;
-    height: 92px;
-    border-radius: 50%;
-    margin-left: 15px;
-}
-
-main .analyse .progresss3{
-    position: relative;
-    width: 92px;
-    height: 92px;
-    border-radius: 50%;
-    margin-left: 45px;
-}
-
 
 main .analyse svg{
     width: 7rem;
