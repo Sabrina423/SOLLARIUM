@@ -42,6 +42,7 @@ const {
 // Mercado Pago
 const { MercadoPagoConfig, Preference } = require('mercadopago');
 const { PedidoController } = require("../controllers/PedidoController");
+const pool_conexoes = require("../../config/pool_conexoes.js");
 
 
 
@@ -114,8 +115,8 @@ router.get('/cadastroprof', (req, res) => {
     res.render('pages/cadastroprof');
 });
 
-router.get('/orcamento', verificarClienteAutorizado([1], 'pages/entrar'), (req, res) => {
-    res.render('pages/orcamento');
+router.get('/orcamento', verificarClienteAutorizado([1],'pages/entrar'), (req, res) => {
+    orcamentoController.solicitarOrcamento(req, res);
 });
 
 router.get('/recsenha', (req, res) => {

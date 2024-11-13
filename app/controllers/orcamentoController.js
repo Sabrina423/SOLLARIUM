@@ -1,4 +1,5 @@
 const orcamento = require("../models/orcamentoModel");
+const servicoModel = require("../models/servicosModel");
 const { body, validationResult } = require("express-validator");
 const bcrypt = require("bcryptjs");
 const { removeImg } = require("../util/removeImg");
@@ -11,8 +12,6 @@ const orcamentoController = {
     regrasValidacaoFormOrcamento: [
         body("nome_cliente")
             .isString({ min: 3, max: 45 }).withMessage("O nome do cliente é obrigatório."),
-        body('descricao_orcamento')
-            .isString({ min: 10 }).withMessage('A descrição deve conter no mínimo 10 caracteres.'),
             body('valor_orcamento')
             .isCurrency({
                 allow_negatives: false, // Não permite valores negativos
@@ -24,7 +23,22 @@ const orcamentoController = {
         body('data_orcamento')
             .isISO8601().withMessage('A data para execução do serviço deve ser válida.')
     ],
-      
+    
+    
+    solicitarOrcamento: async (req, res)=>{
+        try{
+        // usar o model para listar os serviços
+        const results = await servicoModel.findAll();
+          
+
+        res.render('pages/orcamento',{listaServicos:results});
+        }catch(e){
+            console.log(e);
+
+        }
+},
+
+
     cadastrarOrcamento: async (req, res) => {
         const erros = validationResult(req);
        
@@ -35,8 +49,8 @@ const orcamentoController = {
 
         const dadosForm = {
             nome_cliente: req.body.nome_cliente,
-            descricao_orcamento: req.body.descricao_orcamento,
             valor_orcamento: req.body.valor_orcamento,
+            servicos_prof_id_servico: req.body.id_servico,
             data_orcamento: req.body.data_orcamento,
             id_cliente: req.session.autenticado.id, // Atribui o ID do cliente autenticado
         };
@@ -53,7 +67,7 @@ const orcamentoController = {
             });
         } catch (e) {
             console.log(e);
-            res.render("pages/cadastroOrcamento", {
+            res.render("pages/orcamento", {
                 listaErros: null, autenticado: req.session.autenticado, dadosNotificacao: {
                     titulo: "Erro ao cadastrar!",
                     mensagem: "Verifique os valores digitados!",
@@ -63,27 +77,27 @@ const orcamentoController = {
         }
     },
 
-    visualizarOrcamento: async (req, res) => {
+    orcamento: async (req, res) => {
         try {
             const idOrcamento = req.params.id;
             const resultado = await orcamento.findById(idOrcamento);
 
             if (!resultado) {
-                return res.render("pages/visualizarOrcamento", {
+                return res.render("pages/orcamento", {
                     listaErros: [{ msg: 'Orçamento não encontrado.' }],
                     dadosNotificacao: null,
                     valores: {}
                 });
             }
 
-            res.render("pages/visualizarOrcamento", {
+            res.render("pages/orcamento", {
                 listaErros: null,
                 dadosNotificacao: null,
                 valores: resultado
             });
         } catch (e) {
             console.error(e);
-            res.render("pages/visualizarOrcamento", {
+            res.render("pages/orcamento", {
                 listaErros: [{ msg: 'Erro ao buscar o orçamento.' }],
                 dadosNotificacao: null,
                 valores: {}
@@ -105,7 +119,6 @@ const orcamentoController = {
         const dadosAtualizados = {
             nome_cliente: req.body.nome_cliente,
             servico: req.body.servico,
-            descricao: req.body.descricao,
             valor_estimado: req.body.valor_estimado,
             prazo_execucao: req.body.prazo_execucao
         };
@@ -121,7 +134,7 @@ const orcamentoController = {
                 });
             }
 
-            res.render("pages/visualizarOrcamento", {
+            res.render("pages/orcamento", {
                 listaErros: null,
                 dadosNotificacao: { titulo: "Sucesso!", mensagem: "Orçamento atualizado com sucesso.", tipo: "success" },
                 valores: dadosAtualizados

@@ -35,9 +35,14 @@
                 </nav>
 
                 <nav class="form-group">
-                    <label for="text">Serviço:</label>
-                    <input type="text" id="descricao_orcamento" name="descricao_orcamento" placeholder="Descreva o serviço desejado" required>
-                </nav>
+                    <select name="id_servico" id="">
+                        <% 
+                        listaServicos.forEach(function(servico){ %>
+                                 <option value="<%=servico.ID_SERVICO%>"> <%=servico.TITULO_SERVICO%></option>
+                                
+                         <% }); %>
+                    </select>
+            </nav>
 
                 <nav class="form-group">
                     <label for="valor">Valor esperado:</label>

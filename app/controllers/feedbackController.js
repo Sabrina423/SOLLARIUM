@@ -5,7 +5,7 @@ const { removeImg } = require("../util/removeImg");
 const fetch = require('node-fetch');
 const https = require('https');
 const jwt = require('jsonwebtoken');
-const { visualizarfeedback } = require("./feedbackController");
+const { visualizarfeedback } = require("/feedbackController");
 
 const feedbackController = {
     

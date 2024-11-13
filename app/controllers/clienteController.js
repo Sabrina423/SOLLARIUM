@@ -186,6 +186,8 @@ const clienteController = {
 
 
                 }
+
+                
                 console.log(campos)
                 res.render("pages/perfilprof", { autenticado: req.session.autenticado, listaErros: null, dadosNotificacao: null, valores: campos })
             }
