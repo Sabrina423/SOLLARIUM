@@ -186,8 +186,12 @@ const clienteController = {
 
 
                 }
-
                 
+           
+                
+                
+           
+
                 console.log(campos)
                 res.render("pages/perfilprof", { autenticado: req.session.autenticado, listaErros: null, dadosNotificacao: null, valores: campos })
             }
@@ -216,6 +220,58 @@ const clienteController = {
             });
         }
     },
+
+    listaOrcamento : async (req, res) => {
+        res.locals.moment = moment;
+        try {
+          results = await orcamentoModel.findAll();
+          res.render("pages/orcamento", { orcamento: results });
+        } catch (e) {
+          console.log(e); // exibir os erros no console do vs code
+          res.json({ erro: "Falha ao acessar dados" });
+        }
+      },
+
+
+     aceitarOrcamento: async(req,res) => {
+        res.local.moment = moment;
+        const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      console.log(errors);
+      return res.render("pages/aceitar", {
+        dados: req.body,
+        listaErros: errors,
+      });
+     }
+     var dadosForm = {
+        valor_orcamento: req.body.valor_orcamento,
+        data_orcamento: req.body.data_orcamento,
+        
+      };
+      let id_orcamento = req.body.id_orcamento;
+      try {
+       
+
+            results = await orcamentoModel.update(dadosForm,id_orcamento);
+        
+      res.redirect("/");
+    } catch (e) {
+      console.log(e);
+      res.json({ erro: "Falha ao acessar dados" });
+    }
+},
+
+recusarOrcamento: async (req, res) => {
+    let { id } = req.query;
+    try {
+      results = await orcamentoModel.delete(id);
+      res.redirect("/");
+    } catch (e) {
+      console.log(e);
+      res.json({ erro: "Falha ao acessar dados" });
+    }
+  },
+ 
 
     recuperarSenha: async (req, res) => {
         const erros = validationResult(req);
