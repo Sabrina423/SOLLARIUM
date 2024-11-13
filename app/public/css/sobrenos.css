@@ -6,7 +6,6 @@
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
     color: #edeffd;
-    background-color: #181a1e;
 }
 
 .section {
@@ -195,7 +194,6 @@
   
   .accordion i {
     font-size: 1.6rem;
-    background-color: #202528;
   }
   
   
@@ -220,10 +218,11 @@
   
   .faq {
     
-    border: 1px solid rgba(0, 0, 0, 0.2);
+  border: none;
     margin: 10px 0;
   }
   .faq.active {
     border: none;
     
   }
+

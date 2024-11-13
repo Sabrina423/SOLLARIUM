@@ -1,59 +1,38 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-
-<head>
-    <title>Recuperar senha</title>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/recsenha.css">
-    <script src="js/script.js"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-notify@0.5.5/dist/simple-notify.min.css" />
-    <script src="https://cdn.jsdelivr.net/npm/simple-notify@0.5.5/dist/simple-notify.min.js"></script>
-</head>
-
-<body>
-    <main>
-        <% 
-            let avisoErro = {"email_cliente":""}
-            let msgErro = ""
-                if(listaErros){
-                    listaErros.errors.forEach(function(itemErro){
-                        if(itemErro.path == "email_cliente"){
-                            avisoErro.email_cliente = "erro";
-                            msgErro += `* ${itemErro.msg} <br>`
-                        }
-                    })
-                    if(msgErro != ""){
-                    %>
-                        <script>
-                            let msgErro ="<%= msgErro %>"
-                            notify("Erro(s) no preenchimento", 
-                                   "Verifique o(s) campo(s) <br> " + msgErro.replace(/&lt;/g,"<").replace(/&gt;/g,">"), 
-                                   "error", "center", 5000)                        
-                        </script>
-                    <%
-                    }
-                }
-                if (dadosNotificacao) { %>
-                    <script>
-                            notify("<%= dadosNotificacao.titulo%>","<%= dadosNotificacao.mensagem%>", "<%= dadosNotificacao.tipo%>", "center")
-                            if("<%= dadosNotificacao.tipo %>" == "success"){
-                                setTimeout(function(){window.location="/"}, 3000)
-                            }                        
-                    </script>
-                <% } %>              
-                <div class="login-page">
-                    <div class="form-cadastro">
-                        <h2>Recuperar a senha</h2>
-                        <form action="/recsenha" method="post">
-                            <input type="text" name="email_cliente" placeholder="e-mail" value=""
-                                class="<%= avisoErro.email_cliente %>" /><br>
-                           <button type="submit">Enviar</button><br>
-                        </form>
-                    </div>
-                </div>
-    </main>
-
-</body>
-
-</html>
+  <!-- Main content -->
+  <main>
+    <h1>Relatório de Projetos</h1>
+    
+    <section class="tabelas">
+        <h2>Solicitações Recebidas</h2>
+        <table id="projetotable">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Data</th>
+                    <th>Valor</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% tarefas.forEach(function(projeto) { %>
+                <tr>
+                    <td><%= projeto.nome_projetos %></td>
+                    <td><%= projeto.data_projetos %></td>
+                    <td><%= projeto.valor_projetos %></td>
+                    <td>
+                        <section class="boton">
+                            <button onclick="window.location='/aceitar?id=<%= projeto.id_projetos %>'" class="gosto">
+                                <i class='bx bx-check aceitar'></i>
+                            </button>
+                            <button onclick="window.location='/excluir?id=<%= projeto.id_projetos %>'" class="desgosto">
+                                <i class='bx bx-x recusar'></i>
+                            </button>
+                        </section>
+                    </td>
+                </tr>
+                <% }); %>
+            </tbody>
+        </table>
+    </section>
+</main>
+</nav>

@@ -19,15 +19,14 @@
             <nav class="logo"><a href="#">Sollarium</a></nav>
             <ul class="links">
                 <li><a href="/">Início</a></li>
-                <% if (!autenticado.autenticado) { %>
-                    <li><a href="/orcamento">Orçamento</a></li>
-                <% } %>
+                <li><a href="/orcamento">Orçamento</a></li>
                 <li><a href="/sobre">Sobre nós</a></li>
                 <% if (!autenticado.autenticado) { %>
                     <li><a href="/cadastroinicial" id="cadastre-se">Cadastre-se</a></li>
                 <% } %>
-            </ul>
+                
 
+            </ul>
             <% if (autenticado.autenticado != null) { 
                 let arquivo = { "imagem": "imagens/perfil/imgperfil.png" }; 
             %>
@@ -38,11 +37,12 @@
                          onerror="this.onerror=null; this.src='imagens/perfil/imgperfil.png';">
                 </a>
                 <p><a href="#" id="logout">sair</a></p>
+
             </nav>
+            
             <% } else { %>
                 <a href="/entrar" class="action_btn">Entrar</a>
-            <% } %>
-
+            <% } %>   
             <nav class="toggle_btn">
                 <i class="fa-solid fa-bars-staggered"></i>
             </nav>
@@ -61,17 +61,16 @@
                         <img src="<%= arquivo.imagem %>" alt="Imagem de perfil" style="max-width: 60px; max-height: 60px;" 
                              onerror="this.onerror=null; this.src='imagens/perfil/imgperfil.png';">
                     </a>
-                    <p><a href="/" id="logout">sair</a></p>
+                    <p><a href="/">sair</a></p>
                 </nav>                
             <% } else { %>
                 <a href="/entrar" class="action_btn">Entrar</a>
-            <% } %>
+            <% } %>   
         </nav>
     </header>    
-
+    
     <main>
         <nav class="sliderhome">
-            <!-- Carrossel -->
             <nav class="listhome">
                 <nav class="item active">
                     <img src="imagens/home1.jpg">
@@ -130,32 +129,40 @@
                 </nav>
             </nav>
             
-            <!-- Miniaturas para controle do carrossel -->
             <nav class="thumbnailhome">
                 <nav class="item active">
                     <img src="imagens/insalacao.png">
-                    <nav class="content">Instalação</nav>
+                    <nav class="content">
+                        Instalação
+                    </nav>
                 </nav>
                 <nav class="item">
                     <img src="imagens/vistoria.png">
-                    <nav class="content">Vistoria</nav>
+                    <nav class="content">
+                        Vistoria
+                    </nav>
                 </nav>
                 <nav class="item">
                     <img src="imagens/manutencao.png">
-                    <nav class="content">Manutenção</nav>
+                    <nav class="content">
+                        Manutenção
+                    </nav>
                 </nav>
                 <nav class="item">
                     <img src="imagens/consultoria.png">
-                    <nav class="content">Consultoria</nav>
+                    <nav class="content">
+                        Consultoria
+                    </nav>
                 </nav>
                 <nav class="item">
                     <img src="imagens/limpeza.png">
-                    <nav class="content">Limpeza</nav>
+                    <nav class="content">
+                        Limpeza
+                    </nav>
                 </nav>
             </nav>
         </nav>
     </main>
-
     <footer>
         <section class="footer">
             <nav class="footer-content">
@@ -203,22 +210,40 @@
         }
 
         document.getElementById('logout').addEventListener('click', function(event) {
-            event.preventDefault(); // Evita o comportamento padrão do link
-            // Realiza uma requisição para o endpoint de logout
-            fetch('/logout', { method: 'POST' })
-                .then(response => {
-                    if (response.ok) {
-                        // Redireciona para a página inicial ou de login
-                        window.location.href = '/';
-                    } else {
-                        alert('Erro ao fazer logout. Tente novamente.');
-                    }
-                })
-                .catch(error => {
-                    console.error('Erro ao fazer logout:', error);
-                    alert('Erro ao fazer logout. Tente novamente.');
-                });
+    event.preventDefault(); // Evita o comportamento padrão do link
+
+    // Realiza uma requisição para o endpoint de logout
+    fetch('/logout', { method: 'POST' })
+        .then(response => {
+            if (response.ok) {
+                // Redireciona para a página inicial ou de login
+                window.location.href = '/';
+            } else {
+                // Trate o erro de logout (opcional)
+                alert('Erro ao fazer logout. Tente novamente.');
+            }
+        })
+        .catch(error => {
+            console.error('Erro ao fazer logout:', error);
+            alert('Erro ao fazer logout. Tente novamente.');
         });
+});
+
+       function login() {
+    // Código de autenticação...
+
+    // Após o login, ocultar o botão "Cadastre-se"
+    const cadastroButton = document.getElementById('cadastre-se');
+    if (cadastroButton) {
+        cadastroButton.style.display = 'none'; // Esconde o botão
+    }
+
+    // Mostrar o profile-container, se necessário
+    const profileContainer = document.querySelector('.profile-container');
+    if (profileContainer) {
+        profileContainer.style.display = 'flex'; // Exibe o perfil
+    }
+}
 
         const toggleBtn = document.querySelector('.toggle_btn');
         const toggleBtnIcon = document.querySelector('.toggle_btn i');
@@ -227,11 +252,32 @@
         toggleBtn.onclick = function () {
             dropDownMenu.classList.toggle('open');
             const isOpen = dropDownMenu.classList.contains('open');
+
             toggleBtnIcon.classList = isOpen
                 ? 'fa-solid fa-xmark'
                 : 'fa-solid fa-bars-staggered';
         }
+        // Supondo que você tenha um evento de login
+function login() {
+    // Código de autenticação...
+
+    // Após o login, ocultar o botão "Cadastre-se"
+    const cadastroButton = document.getElementById('cadastre-se'); // ajuste o ID conforme necessário
+    if (cadastroButton) {
+        cadastroButton.style.display = 'none';
+    }
+
+    // Mostrar o profile-container, se necessário
+    const profileContainer = document.querySelector('.profile-container');
+    if (profileContainer) {
+        profileContainer.style.display = 'flex';
+    }
+    
+}
     });
+// Exemplo de uso: chamar a função login quando o usuário se autenticar com sucesso
+
     </script>
+    <script src="app.js"></script>
 </body>
 </html>

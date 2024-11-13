@@ -3,111 +3,128 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Relatório de Projetos</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <link rel="stylesheet" href="/css/reuniversal.css">
+    <title>Painel ADM</title>
 </head>
+
 <body>
-    <nav class="sidebar close">
-        <header>
-            <section class="image-text">
-                <span class="image">
-                    <img src="/imagens/LOGO_SOLLARIUM (8).png" alt="logotipo">
-                </span>
-                <section class="text header-text">
-                    <span class="name">Sollarium</span>
-                    <span class="profession">Relatório profissional</span>
-                </section>
-            </section>
-            <i class='bx bx-chevron-right toggle'></i>
-        </header>
-        <section class="menu-bar">
-            <section class="menu">
-                <li class="search-box">
-                    <i class='bx bx-search icon'></i>
-                    <input type="search" placeholder="Procurar...">
-                </li>
-                <ul class="menu-links">
-                    <li class="nav-links">
-                        <a href="/Projetosre">
-                            <i class='bx bx-message-alt icon'></i>
-                            <span class="text nav-text">Projetos</span>
-                        </a>
-                    </li>
-                    <li class="nav-links">
-                        <a href="/Pagamentosre">
-                            <i class='bx bx-wallet icon'></i>
-                            <span class="text nav-text">Pagamentos</span>
-                        </a>
-                    </li>
-                    <li class="nav-links">
-                        <a href="/Comissaore">
-                            <i class='bx bx-money-withdraw icon'></i>
-                            <span class="text nav-text">Comissão</span>
-                        </a>
-                    </li>
-                </ul>
-            </section>
-            <section class="bottom content"> 
-                <li class="nav-links">
-                    <a href="#">
-                        <i class='bx bx-log-out icon'></i>
-                        <span class="text nav-text">Voltar</span>
-                    </a>
-                </li>
-            </section>
-        </section>
-    </nav>
+    <main>
+    <nav class="container">
+        <aside>
+            <nav class="toggle">
+                <nav class="logo">
+                    <span class="danger">Orçamentos</span>
+                    <h2>Sollari<span class="danger">um</span></h2>
+                </nav>
+                <nav class="close" id="close-btn">
+                    <span class="material-icons-sharp">close</span>
+                </nav>
+            </nav>
 
-    <section class="home">
-        <section class="text">Relatório de Projetos</section>
-        <section class="tabelas">
-            <h2>Solicitações Recebidas</h2>
-            <table id="projetotable">
-                <thead>
-                    <tr>
-                        <th>Nome</th>
-                        <th>Data</th>
-                        <th>Valor</th>
-                        <th>Ações</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <% tarefas.forEach(function(projeto) { %>
-                    <tr>
-                        <td><%= projeto.nome_projetos %></td>
-                        <td><%= projeto.data_projetos %></td>
-                        <td><%= projeto.valor_projetos %></td>
-                        <td>
-                            <section class="boton">
-                                <button onclick="window.location='/aceitar?id=<%= projeto.id_projetos %>'" class="gosto">
-                                    <i class='bx bx-check aceitar'></i>
-                                </button>
-                                <button onclick="window.location='/excluir?id=<%= projeto.id_projetos %>'" class="desgosto">
-                                    <i class='bx bx-x recusar'></i>
-                                </button>
-                            </section>
-                        </td>
-                    </tr>
-                    <% }); %>
-                </tbody>
-            </table>
-        </section>
+            <nav class="sidebar">
+                <a href="#">
+                    <span class="material-icons-sharp">settings</span>
+                    <h3>Configurações</h3>
+                </a>
+                <a href="/adm" class="active">
+                    <span class="material-icons-sharp">insights</span>
+                    <h3>Análises</h3>
+                </a>
+             
+                <a href="/perfilprof">
+                    <span class="material-icons-sharp">keyboard_backspace</span>
+                    <h3>Voltar ao perfil</h3>
+                </a>
+        
+                <a href="#" id="logout">
+                    <span class="material-icons-sharp">logout</span>
+                    <h3>Sair</h3>
+                </a>
+            </nav>
+        </aside>
+  <!-- Main content -->
+  <main>
+    <h1>Relatório de Projetos</h1>
+    
+    <section class="tabelas">
+        <h2>Solicitações Recebidas</h2>
+        <table id="projetotable">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Data</th>
+                    <th>Valor</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% tarefas.forEach(function(projeto) { %>
+                <tr>
+                    <td><%= projeto.nome_projetos %></td>
+                    <td><%= projeto.data_projetos %></td>
+                    <td><%= projeto.valor_projetos %></td>
+                    <td>
+                        <section class="boton">
+                            <button onclick="window.location='/aceitar?id=<%= projeto.id_projetos %>'" class="gosto">
+                                <i class='bx bx-check aceitar'></i>
+                            </button>
+                            <button onclick="window.location='/excluir?id=<%= projeto.id_projetos %>'" class="desgosto">
+                                <i class='bx bx-x recusar'></i>
+                            </button>
+                        </section>
+                    </td>
+                </tr>
+                <% }); %>
+            </tbody>
+        </table>
     </section>
-
-    <main></main>
-
+</main>
+</nav>
+    
     <script>
-        const body = document.querySelector("body"),
-            sidebar = body.querySelector(".sidebar"),
-            toggle = body.querySelector(".toggle"),
-            searchBtn = body.querySelector(".search-box"),
-            modeSwitch = body.querySelector(".toggle-switch"),
-            modeText = body.querySelector(".mode.text");
+        document.getElementById('logout').addEventListener('click', function(event) {
+            event.preventDefault(); // Impede o link de navegar
+            fetch('/logout', { method: 'POST' })
+                .then(response => {
+                    if (response.ok) {
+                        window.location.href = '/'; // Redireciona para a página inicial após logout
+                    } else {
+                        alert('Erro ao fazer logout. Tente novamente.'); // Exibe mensagem de erro
+                    }
+                })
+                .catch(error => {
+                    console.error('Erro ao fazer logout:', error);
+                    alert('Erro ao fazer logout. Tente novamente.');
+                });
+        });
 
-        toggle.addEventListener("click", () => {
-            sidebar.classList.toggle("close");
+        const showMoreButton = document.getElementById('showMore');
+        const modal = document.getElementById('userModal');
+        const closeModalButton = document.getElementById('closeModal');
+
+        // Abre o modal quando o botão "Mostrar mais" for clicado
+        showMoreButton.addEventListener('click', function(event) {
+            event.preventDefault(); // Impede o link de navegar
+            modal.style.display = 'block'; // Exibe o modal
+        });
+
+        // Fecha o modal quando o "X" for clicado
+        closeModalButton.addEventListener('click', function() {
+            modal.style.display = 'none'; // Fecha o modal
+        });
+
+        // Fecha o modal se o usuário clicar fora do conteúdo do modal
+        window.addEventListener('click', function(event) {
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
         });
     </script>
+
+    <script src="/js/orders.js"></script>
+    <script src="/js/adm.js"></script>
 </body>
 </html>

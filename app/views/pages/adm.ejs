@@ -4,12 +4,91 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
-    <link rel="stylesheet" href="/css/admprof.css">
-    <title>Painel adm</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="/css/adm.css">
+    <title>Painel ADM</title>
 </head>
+<style>
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+    padding-top: 60px;
+}
+
+.modal-content {
+    background-color: rgb(14, 14, 14);
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    border-radius: 10px;
+    margin-top: 240px;
+    width: 80%;
+    max-width: 780px;
+    position: relative;
+    left: -82px;
+}
+
+.close {
+    color: #aaa;
+    font-size: 28px;
+    font-weight: bold;
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+}
+
+.user {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.user img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.user h2 {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: normal;
+}
+
+.user p {
+    font-size: 0.8rem;
+    color: #555;
+    margin-left: 8px;
+}
+
+.user-list {
+    margin-bottom: 20px;
+}
+
+.user a {
+    font-size: 0.8rem;
+    color: #555;
+    margin-left: 0px;
+}
+
+</style>
 
 <body>
-
     <nav class="container">
         <aside>
             <nav class="toggle">
@@ -18,74 +97,36 @@
                     <h2>Sollari<span class="danger">um</span></h2>
                 </nav>
                 <nav class="close" id="close-btn">
-                    <span class="material-icons-sharp">
-                        close
-                    </span>
+                    <span class="material-icons-sharp">close</span>
                 </nav>
             </nav>
 
             <nav class="sidebar">
-                <a href="#">
-                    <span class="material-icons-sharp">
-                        dashboard
-                    </span>
-                    <h3>Painel</h3>
-                </a>
-                <a href="/clientes">
-                    <span class="material-icons-sharp">
-                        person_outline
-                    </span>
-                    <h3>Clientes</h3>
-                </a>
                 <a href="/dashboard">
-                    <span class="material-icons-sharp">
-                        receipt_long
-                    </span>
+                    <span class="material-icons-sharp">receipt_long</span>
                     <h3>Orçamentos</h3>
-                    <span class="message-count">200</span>
+                    <span class="message-count">2</span>
                 </a>
                 <a href="#" class="active">
-                    <span class="material-icons-sharp">
-                        insights
-                    </span>
+                    <span class="material-icons-sharp">insights</span>
                     <h3>Análises</h3>
                 </a>
-                <a href="/feedback">
-                    <span class="material-icons-sharp">
-                        mail_outline
-                    </span>
-                    <h3>Feedbacks</h3>
-                    <span class="message-count">02</span>
-                </a>
-                
-                <a href="/commissao">
-                    <span class="material-icons-sharp">
-                        report_gmailerrorred
-                    </span>
-                    <h3>Comissões</h3>
-                    <span class="message-count">11</span>
-                </a>
                 <a href="#">
-                    <span class="material-icons-sharp">
-                        settings
-                    </span>
+                    <span class="material-icons-sharp">settings</span>
                     <h3>Configurações</h3>
                 </a>
-                <a href="#">
-                    <span class="material-icons-sharp">
-                        add
-                    </span>
-                    <h3>Novos Clientes</h3>
+             
+                <a href="/perfilprof">
+                    <span class="material-icons-sharp">keyboard_backspace</span>
+                    <h3>Voltar ao perfil</h3>
                 </a>
-                <a href="#">
-                    <span class="material-icons-sharp">
-                        logout
-                    </span>
-                    <h3>Desconectar</h3>
+        
+                <a href="#" id="logout">
+                    <span class="material-icons-sharp">logout</span>
+                    <h3>Sair</h3>
                 </a>
             </nav>
         </aside>
-        
 
         <main>
             <h1>Análises</h1>
@@ -95,9 +136,9 @@
                     <nav class="status">
                         <nav class="info">
                             <h3>Ganhos</h3>
-                            <h1>$31,702</h1>
+                            <h1>$31,70</h1>
                         </nav>
-                        <nav class="progresss">
+                        <nav class="progresss1">
                             <svg>
                                 <circle cx="38" cy="38" r="36"></circle>
                             </svg>
@@ -110,11 +151,10 @@
                 <nav class="visits">
                     <nav class="status">
                         <nav class="info">
-                            <h3>Feedbacks Mensais</h3>
-                            <h1>18,209</h1>
+                            <h3>Visitas Mensais</h3>
+                            <h1>18 visitas</h1>
                         </nav>
-                        
-                        <nav class="progresss">
+                        <nav class="progresss2">
                             <svg>
                                 <circle cx="38" cy="38" r="36"></circle>
                             </svg>
@@ -128,9 +168,9 @@
                     <nav class="status">
                         <nav class="info">
                             <h3>Orçamentos Semanais</h3>
-                            <h1>7,943</h1>
+                            <h1>7 orçamentos</h1>
                         </nav>
-                        <nav class="progresss">
+                        <nav class="progresss3">
                             <svg>
                                 <circle cx="38" cy="38" r="36"></circle>
                             </svg>
@@ -141,119 +181,136 @@
                     </nav>
                 </nav>
             </nav>
-            
+
             <nav class="new-users">
+                <h2>Novos Clientes</h2>
                 <h2>Novos Clientes</h2>
                 <nav class="user-list">
                     <nav class="user">
-                        <img src="images/jim.jpeg">
+                        <img src="imagens/perfil/imgperfil.png" alt="Perfil">
                         <h2>Jim Halpert</h2>
                         <p>2 Horas atrás</p>
                     </nav>
-                    
                     <nav class="user">
-                        <img src="images/scott.jpg">
+                        <img src="imagens/perfil/imgperfil.png" alt="Perfil">
                         <h2>Michael Scott</h2>
                         <p>6 Horas atrás</p>
                     </nav>
                     <nav class="user">
-                        <img src="images/plus.png">
+                        <img src="imagens/perfil/imgperfil.png" alt="Perfil">
                         <h2>Mais</h2>
-                        <p>Mostrar mais</p>
+                        <a href="#" id="showMore">Mostrar mais</a>
                     </nav>
                 </nav>
             </nav>
-            
+
             <nav class="recent-orders">
                 <h2>Últimos Pedidos</h2>
                 <table>
                     <thead>
                         <tr>
-                            <th>Ordens</th>
-                            <th>Pazo</th>
-                            <th>Responsável</th>
-                            <th>Status</th>
-                            <th></th>
+                            <th>Nenhuma atualização nova :(</th>
                         </tr>
                     </thead>
                     <tbody></tbody>
                 </table>
-                
             </nav>
         </main>
-       
+
         <nav class="right-section">
             <nav class="nav">
                 <button id="menu-btn">
-                    <span class="material-icons-sharp">
-                        menu
-                    </span>
+                    <span class="material-icons-sharp">menu</span>
                 </button>
                 <nav class="dark-mode">
-                    <span class="material-icons-sharp active">
-                        
-                    </span>
-                    <span class="material-icons-sharp">
-                        
-                    </span>
+                    <span class="material-icons-sharp active"></span>
+                    <span class="material-icons-sharp"></span>
                 </nav>
-
                 <nav class="profile">
-                    <nav class="info">
+                    <nav class="info-adm">
                         <b>Dwight Schrute</b>
                         <small class="text-muted">Prof</small>
                     </nav>
-                    <nav class="profile-photo">
-                        <img src="images/dwight.jpg">
-                    </nav>
                 </nav>
-
             </nav>
-            
 
             <nav class="reminders">
                 <nav class="header">
-                    <h2>Trabalhos</h2>
-                    
+                    <h2>Orçamentos</h2>
                 </nav>
-
                 <nav class="notification">
-                   
                     <nav class="content">
-                        <nav class="info">
-                            <h3>Modificações na Equipe1</h3>
-                            <small class="text_muted">
-                                 04/11/24 - 08:15 AM - 10:00 AM
-                            </small>
+                        <nav class="info-adm">
+                            <h3>Julia</h3>
+                            <small class="text_muted">04/11/24 - 08:15 AM - Rua girassol, Jardim Margarida, SP</small>
                         </nav>
-                        <span class="material-icons-sharp">
-                            more_vert
-                        </span>
+                        <span class="material-icons-sharp">more_vert</span>
                     </nav>
                 </nav>
-                
-
-                
-
-                <nav class="notification add-reminder">
-                    <nav>
-                        <span class="material-icons-sharp">
-                            add
-                        </span>
-                        <h3>Add Reunião</h3>
-                    </nav>
-                </nav>
-                
-
             </nav>
-
         </nav>
-
-
     </nav>
+    
+    <div id="userModal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="closeModal">&times;</span>
+            <div class="user-list">
+                <div class="user">
+                    <img src="imagens/perfil/imgperfil.png" alt="Perfil">
+                    <h2>Dwight Schrute</h2>
+                    <p>2 semanas atrás</p>
+                </div>
+                <div class="user">
+                    <img src="imagens/perfil/imgperfil.png" alt="Perfil">
+                    <h2>Angela Martin</h2>
+                    <p>3 semanas atrás</p>
+                </div>
+            </div>
+            <p>Não há novos clientes.</p>
+        </div>
+    </div>
+    
+    <script>
+        document.getElementById('logout').addEventListener('click', function(event) {
+            event.preventDefault(); // Impede o link de navegar
+            fetch('/logout', { method: 'POST' })
+                .then(response => {
+                    if (response.ok) {
+                        window.location.href = '/'; // Redireciona para a página inicial após logout
+                    } else {
+                        alert('Erro ao fazer logout. Tente novamente.'); // Exibe mensagem de erro
+                    }
+                })
+                .catch(error => {
+                    console.error('Erro ao fazer logout:', error);
+                    alert('Erro ao fazer logout. Tente novamente.');
+                });
+        });
+
+        const showMoreButton = document.getElementById('showMore');
+        const modal = document.getElementById('userModal');
+        const closeModalButton = document.getElementById('closeModal');
+
+        // Abre o modal quando o botão "Mostrar mais" for clicado
+        showMoreButton.addEventListener('click', function(event) {
+            event.preventDefault(); // Impede o link de navegar
+            modal.style.display = 'block'; // Exibe o modal
+        });
+
+        // Fecha o modal quando o "X" for clicado
+        closeModalButton.addEventListener('click', function() {
+            modal.style.display = 'none'; // Fecha o modal
+        });
+
+        // Fecha o modal se o usuário clicar fora do conteúdo do modal
+        window.addEventListener('click', function(event) {
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+    </script>
 
     <script src="/js/orders.js"></script>
     <script src="/js/adm.js"></script>
 </body>
-    
 </html>
