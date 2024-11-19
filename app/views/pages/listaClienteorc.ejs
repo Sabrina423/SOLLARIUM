@@ -14,7 +14,7 @@
     <table>
         <thead>
             <tr>
-                <th>Nome do Cliente</th>
+                <th>Nome do Profissional</th>
                 <th>Data do Serviço</th>
                 <th>Valor do Serviço</th>
                 <th>Status</th>
@@ -25,16 +25,15 @@
             <% 
             listaOrcamentos.forEach(function(orcamento){ %>
             <tr>
-                <td><%=orcamento.NOME_CLIENTE%></td>
+                <td><%=orcamento.NOME_PROF%></td>
                 <td><%=orcamento.DATA_ORCAMENTO%> </td>
                 <td><%=orcamento.VALOR_ORCAMENTO%></td>
                 <td><%=orcamento.STATUS_ORCAMENTO%></td>
-                <td><button class="btn-accept" onclick="window.location='/updateorc?id_orcamento=<%=orcamento.ID_ORCAMENTO%>'">Aceitar</button></td>
+                <td><button class="btn-accept" onclick="window.location='/verdetalhe?id_orcamento=<%=orcamento.ID_ORCAMENTO%>'">Aceitar</button></td>
+                <td><button class="btn-accept" onclick="window.location='/verdetalhe?id_orcamento=<%=orcamento.ID_ORCAMENTO%>'">Excluir</button></td>
             </tr>
             <% }); %>
     
 
         </tbody>
     </table>
-</body>
-</html>

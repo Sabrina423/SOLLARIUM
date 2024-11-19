@@ -352,6 +352,26 @@ header {
     inset: auto 10px 10px 10px;
 }
 
+.erro{
+    background-color: rgb(251, 223, 223);
+    border: 2px solid red;
+    border-radius: 30PX;
+  }
+  
+  body{
+  font-family: Arial, Helvetica, sans-serif;
+  }
+  
+  input, button{
+  margin: 10px 0px;
+  }
+  
+  .icone-perfil, .img-perfil{
+  width: 50px;
+  }
+  
+  
+
 @media screen and (max-width: 678px) {
     .thumbnail {
         justify-content: start;

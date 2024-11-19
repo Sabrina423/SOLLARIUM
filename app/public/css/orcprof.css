@@ -1,10 +1,10 @@
 :root {
-    --color-primary: #f5ba4d;
+    --color-primary: #f5ba4d; /* cor laranja */
     --color-danger: #f5ba4d;
     --color-success: #f5ba4d;
     --color-warning: #F7D060;
     --color-white: #202528;
-    --color-info-dark: #edeffd;
+    --color-info-dark: #202528; /* fundo escuro para as linhas */
     --color-dark: #edeffd;
     --color-light: rgba(0, 0, 0, 0.4);
     --color-dark-variant: #a3bdcc;
@@ -27,7 +27,7 @@ body {
 table {
     width: 100%;
     border-collapse: collapse;
-    background-color: var(--color-white);
+    background-color: var(--color-info-dark); /* fundo escuro para todas as linhas */
     border-radius: var(--border-radius-2);
     overflow: hidden;
 }
@@ -39,12 +39,16 @@ th, td {
 }
 
 th {
-    background-color: var(--color-primary);
-    color: var(--color-white);
+    background-color: var(--color-primary); /* cor laranja */
+    color: var(--color-dark);
+}
+
+tr {
+    background-color: var(--color-info-dark); /* fundo escuro */
 }
 
 tr:nth-child(even) {
-    background-color: var(--color-info-dark);
+    background-color: var(--color-info-dark); /* remove a cor diferente para linhas pares */
 }
 
 .btn-accept {

@@ -10,8 +10,9 @@
 
     <main>
         <box-icon name='left-arrow-alt icone'><a href="voltar"></a></box-icon>
-        <form action="#" method="POST" class="formulario">
+        <form action="/updateorc" method="POST" class="formulario">
             <fieldset>
+                <input type="hidden" name="id_orcamento" value="<%=campos.id_orcamento%>">
                 <label for="data">Data do serviço:</label>
                 <input type="datetime-local" id="data" name="data" required>
                 <label for="text">Definição do valor do orçamento ex:400</label>

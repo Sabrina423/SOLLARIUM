@@ -3,128 +3,174 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Relatório de Comissão</title>
-    <link rel="stylesheet" href="/css/reuniversal.css">
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <title>Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/admprof.css">
 </head>
 <body>
-    <nav class="sidebar close">
-        <header>
-            <section class="image-text">
-                <span class="image">
-                    <img src="./img/Design sem nome (3).png" alt="logotipo">
-                </span>
-                 <section class="text header-text">
-                     <span class="name">Sollarium</span>
-                     <span class="profession">Relatorio profissional</span>
-                 </section>
+    <div class="container">
+        <!-- Sidebar -->
+        <aside>
+            <div class="toggle">
+                <div class="logo">
+                   
+                    <h2>Dashboard</h2>
+                </div>
+                <button class="close">X</button>
+            </div>
+
+            <div class="sidebar">
+                <a href="#" class="active">
+                    <span>Início</span>
+                </a>
+                <a href="#">
+                    <span>Serviços</span>
+                </a>
+                <a href="#">
+                    <span>Pedidos</span>
+                </a>
+                <a href="#">
+                    <span>Relatórios</span>
+                </a>
+                <a href="#" class="active">
+                    <span>Configurações</span>
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main>
+            <section class="analyse">
+                <div class="sales">
+                    <div class="status">
+                        <h3>Vendas</h3>
+                        <div class="progresss">
+                            <svg>
+                                <circle cx="50" cy="50" r="40"></circle>
+                            </svg>
+                            <div class="percentage">
+                                <span>80%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="visits">
+                    <div class="status">
+                        <h3>Visitas</h3>
+                        <div class="progresss">
+                            <svg>
+                                <circle cx="50" cy="50" r="40"></circle>
+                            </svg>
+                            <div class="percentage">
+                                <span>60%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="searches">
+                    <div class="status">
+                        <h3>Pesquisas</h3>
+                        <div class="progresss">
+                            <svg>
+                                <circle cx="50" cy="50" r="40"></circle>
+                            </svg>
+                            <div class="percentage">
+                                <span>90%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </section>
 
-            <i class='bx bx-chevron-right toggle'></i>
-        </header>
-        <section class="menu-bar">
-            <section class="menu">
-                <li class="search-box">
-                    <i class='bx bx-search icon'></i>
-                        <input type="search"  placeholder="search...">
-                </li>
-                <ul class="menu-links">
-                    <li class="nav-links">
-                        <a href="/Projetos.html">
-                            <i class='bx bx-message-alt icon' ></i>
-                            <span class="text nav-text">Projetos</span>
-                        </a>
-                    </li>
-                    <li class="nav-links">
-                        <a href="/Pagamentos.html">
-                            <i class='bx bx-wallet icon'></i>
-                            <span class="text nav-text">Pagamentos</span>
-                        </a>
-                    </li>
-                    <li class="nav-links">
-                        <a href="/Comissao.html">
-                            <i class='bx bx-money-withdraw icon' ></i>
-                            <span class="text nav-text">Comissão</span>
-                        </a>
-                    </li>
-                </ul>
+            <section class="new-users">
+                <div class="user-list">
+                    <div class="user">
+                        <img src="user1.jpg" alt="User 1">
+                        <h3>João</h3>
+                    </div>
+                    <div class="user">
+                        <img src="user2.jpg" alt="User 2">
+                        <h3>Ana</h3>
+                    </div>
+                    <div class="user">
+                        <img src="user3.jpg" alt="User 3">
+                        <h3>Lucas</h3>
+                    </div>
+                </div>
             </section>
-            <section class="bottom content"> 
-                <li class="nav-links">
-                    <a href="#">
-                        <i class='bx bx-log-out icon'></i>
-                        <span class="text nav-text">Voltar</span>
-                    </a>
-                </li>
-                <li class="mode">
-                  <section class="moon-sun">
-                    <i class='bx bx-moon icon moon'></i>
-                    <i class='bx bx-sun icon sun' ></i>
-                  </section>
-                  <span class="mode text text">
-                    Dark Mode
-                  </span>
 
-                  <section class="toggle-switch">
-                    <span class="switch"></span>
-                  </section>
-                </li>
+            <section class="recent-orders">
+                <h2>Pedidos Recentes</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Cliente</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>001</td>
+                            <td>João</td>
+                            <td><span class="status completed">Concluído</span></td>
+                        </tr>
+                        <tr>
+                            <td>002</td>
+                            <td>Ana</td>
+                            <td><span class="status pending">Pendente</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <a href="#">Ver mais</a>
             </section>
-        </section>
-    </nav>
+        </main>
 
-    <section class="home">
-        <section class="text">Relatório de Comissão</section>
-            <section class="tabelas">
-        <h2>Comissões Recebidas</h2>
-        <table id="comissaotable">
-            <thead>
-                <tr>
-                    <th>Nome do Profissional</th>
-                    <th>Valor da Comissão</th>
-                    <th>Ações</th>
-                </tr>
-            </thead>
-            <tbody>
-                <% let situacoes=["prof_nome","valor_comiss"] comissao.forEach(function(comissao){%>
-            <tr>
-                <td>
-                    <%= comissao.prof_nome %>
-                </td>
-                <td>
-                    <%= comissao.valor_comiss %>
-                </td>
-                <td>
-                    <%= upload_comissão %>
-                </td>
-                <% }); %>
-            </tbody>
-        </table>
-    </section>
-    </section>
- 
-    <script>
-        const body= document.querySelector("body"),
-            sidebar= body.querySelector(".sidebar"),
-            toggle= body.querySelector(".toggle"),
-            searchBtn= body.querySelector(".search-box"),
-            modeSwtich= body.querySelector(".toggle-switch"),
-            modeText= body.querySelector(".mode.text");
+        <!-- Right Section -->
+        <div class="right-section">
+            <div class="nav">
+                <div class="profile">
+                    <div class="profile-photo">
+                        <img src="profile.jpg" alt="Profile">
+                    </div>
+                    <div class="profile-info">
+                        <h3>Administrador</h3>
+                        <small>Online</small>
+                    </div>
+                </div>
+            </div>
 
-            toggle.addEventListener("click", () =>{
-             sidebar.classList.toggle("close");
-            });
+            <div class="user-profile">
+                <img src="profile.jpg" alt="User Profile">
+                <h2>Olá, João!</h2>
+                <p>Seja bem-vindo ao painel de controle.</p>
+            </div>
 
-            modeSwtich.addEventListener("click", () =>{
-               body.classList.toggle("dark");
+            <div class="reminders">
+                <div class="header">
+                    <h3>Lembretes</h3>
+                    <span>Adicionar</span>
+                </div>
+                <div class="notification">
+                    <div class="icon">
+                        <span>!</span>
+                    </div>
+                    <div class="content">
+                        <p>Você tem 3 novos pedidos.</p>
+                        <span>5 min</span>
+                    </div>
+                </div>
+                <div class="add-reminder">
+                    <div>
+                        <span>+</span>
+                        <p>Adicionar novo lembrete</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-            if(body.classList.contains("dark")){
-               modeText.innerText = "Light Mode"
-            }else{
-                modeText.innerText = "Dark Mode"
-            }
-            });
-
-   </script>
 </body>
 </html>

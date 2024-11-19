@@ -86,18 +86,25 @@ router.get('/dashboard', (req, res) => {
 });
 
 router.get('/orcprof', (req, res) => {
-    res.render('pages/orcprof');
-});
-router.get("/excluir", function (req, res) {
-    projetosreController.excluirprojeto(req, res);
+    orcamentoController.listaOrcamentoProf(req,res)
 });
 
-router.get("/finalizar", function (req, res) {
-    projetosreController.finalizarprojeto(req, res);
+router.get('/listaClienteorc', (req, res) => {
+    orcamentoController.listaOrcamentoCliente(req,res)
 });
+
+
+// router.get("/excluir", function (req, res) {
+//     projetosreController.excluirprojeto(req, res);
+// });
+
+// router.get("/finalizar", function (req, res) {
+//     projetosreController.finalizarprojeto(req, res);
+// });
 
 router.get('/updateorc', (req, res) => {
-    res.render('pages/updateorc');
+    let id=req.query.id_orcamento
+   res.render('pages/updateorc', {campos:{id_orcamento:id}}) 
 });
 
 
@@ -105,8 +112,8 @@ router.get('/pagamentosre', (req, res) => {
     res.render('pages/pagamentosre');
 });
 
-router.get('/comissaore', (req, res) => {
-    res.render('pages/comissaore');
+router.get('/comissao', (req, res) => {
+    res.render('pages/comissao');
 });
 
 
@@ -150,8 +157,36 @@ router.get('/adm', (req, res) => {
     res.render('pages/adm');
 });
 
+router.get('/orcamento/:id', (req, res) => {
+    const idOrcamento = req.params.id;
 
+    // Aqui, você deve pegar o orçamento do banco de dados
+    // Exemplo de consulta (com pool ou qualquer método que você use):
+    pool.query('SELECT * FROM orcamentos WHERE ID_ORCAMENTO = ?', [idOrcamento], (err, results) => {
+        if (err) {
+            return res.status(500).send('Erro ao buscar orçamento');
+        }
+        // Supondo que você tenha um único orçamento
+        const orcamento = results[0];
+        res.render('detalhesOrcamento', { orcamento });
+    });
+});
 
+router.get('/verdetalhe', async (req, res) => {
+    const { id_orcamento } = req.query;
+
+    try {
+        const orcamento = await orcamentoController.buscarOrcamentoPorId(id_orcamento);
+        res.render('verdetalhe', { orcamento });  // Passa os dados para o template
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Erro ao buscar orçamento');
+    }
+});
+
+router.get('/detalheProfissional', (req, res) => {
+    res.render('pages/detalheProfissional');
+});
 
 router.post("/createpreference", function (req, res) {
     const preference = new Preference(mercadoPagoCliente);
@@ -277,6 +312,10 @@ router.post("/orcamento", orcamentoController.regrasValidacaoFormOrcamento, (req
     orcamentoController.cadastrarOrcamento(req, res)
 
 
+});
+
+router.post("/updateorc", (req,res)=>{
+    orcamentoController.atualizarOrcamento(req,res)
 });
 
 router.post(

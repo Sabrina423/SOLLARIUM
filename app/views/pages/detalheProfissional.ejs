@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalhes do Profissional</title>
+    <link rel="stylesheet" href="/css/detalheProf.css"> <!-- Adapte o caminho para o seu arquivo CSS -->
+</head>
+<body>
+    <header>
+        <h1>Detalhes do Orçamento</h1>
+    </header>
+
+    <main>
+        <% if (orcamento) { %> <!-- Acessando a variável 'orcamento' -->
+            <section>
+                <h2>ID do Orçamento: <%= orcamento.ID_ORCAMENTO %></h2>
+                <p>Descrição: <%= orcamento.DESCRICAO %></p>
+                <p>Valor: <%= orcamento.VALOR %></p>
+                
+            </section>
+        <% } else { %>
+            <p>Detalhes não disponíveis. Verifique se o ID do orçamento foi fornecido corretamente.</p>
+        <% } %>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Sua Empresa. Todos os direitos reservados.</p>
+    </footer>
+</body>
+</html>

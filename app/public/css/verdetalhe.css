@@ -1,0 +1,44 @@
+.detalhes-container {
+    background-color: var(--color-white);
+    padding: 2rem;
+    border-radius: var(--card-border-radius);
+    color: var(--color-dark);
+    margin: 2rem auto;
+    max-width: 800px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.detalhes-header {
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    color: var(--color-primary);
+}
+.detalhes-item {
+    margin-bottom: 1rem;
+    padding: 1rem;
+    background-color: var(--color-info-dark);
+    border-radius: var(--border-radius-1);
+}
+
+.detalhes-label {
+    font-weight: 600;
+}
+.detalhes-valor {
+    display: block;
+    margin-top: 0.5rem;
+}
+.btn-voltar {
+    display: inline-block;
+    margin-top: 1.5rem;
+    padding: 0.5rem 1rem;
+    background-color: var(--color-primary);
+    color: var(--color-dark);
+    border: none;
+    border-radius: var(--border-radius-1);
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+.btn-voltar:hover {
+    background-color: var(--color-warning);
+}

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalhes do Profissional</title>
+    <link rel="stylesheet" href="/css/verdetalhe.css">
+    <body>
+
+        <div class="detalhes-container">
+            <h2>Detalhes do Orçamento</h2>
+            <div class="detalhes-item">
+                <span class="detalhes-label">Nome do Profissional:</span>
+                <span class="detalhes-valor"><%= orcamento.NOME_PROF %></span>
+            </div>
+            <div class="detalhes-item">
+                <span class="detalhes-label">Data do Serviço:</span>
+                <span class="detalhes-valor"><%= orcamento.DATA_ORCAMENTO %></span>
+            </div>
+            <div class="detalhes-item">
+                <span class="detalhes-label">Valor do Serviço:</span>
+                <span class="detalhes-valor">R$ <%= orcamento.VALOR_ORCAMENTO %></span>
+            </div>
+            <div class="detalhes-item">
+                <span class="detalhes-label">Status:</span>
+                <span class="detalhes-valor"><%= orcamento.STATUS_ORCAMENTO %></span>
+            </div>
+            <a href="/listaClienteorc" class="btn-voltar">Voltar</a>
+        </div>
+        
+    </body>
+    </html>

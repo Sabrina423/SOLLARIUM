@@ -15,7 +15,13 @@
             <section class="logo">SOLLARIUM</section>
             <nav class="main-nav">
                 <a href="/">Home</a>
-                <a href="/orcamento">Orçamentos</a>
+                <a href="/listaClienteorc">
+                    <span class="material-icons-sharp">
+                        receipt_long
+                    </span>
+                    <h3>Orçamentos</h3>
+                    <span class="message-count">1</span>
+                </a>
             </nav>
             <button class="menu-toggle" aria-label="Toggle menu">&#9776;</button>
         </section>
@@ -73,11 +79,20 @@
                         </nav>
                         <input type="file" id="file-input" accept="image/*" style="display: none;">
                         <nav class="options">
-                            <button type="button" onclick="document.getElementById('file-input').click()">Alterar Foto</button>
                             <button type="button" onclick="removePhoto()">Excluir Foto</button>
+                        </nav>
+                        <nav>
+                            <button type="button" id="edit-photo-button" onclick="togglePhotoMenu()">Editar Foto</button>
                         </nav>
                     </div>
                 </section>
+            </section>
+
+            <section>
+                <nav>
+                    <button type="button" class="btn-accept" onclick="window.location='/listaClienteorc?id_cliente=<%=autenticado.ID_CLIENTE%> '">Orçamentos</button>
+                </nav>
+
             </section>
 
             <section class="profile-right">
