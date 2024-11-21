@@ -32,34 +32,9 @@
             <section class="profile-left">
                 <section class="profile-header">
                     <section>
-                        <h1 id="user-name">Nome do Usuário</h1>
-                        <p id="user-state">Estado</p>
                         <nav class="photo-actions">
-                        
-                            <%
-                                 arquivo = { imagem: "/imagens/perfil/imgperfil.png" };
-                                if (autenticado.imagem != null) {
-                                    arquivo.imagem = imagem;
-                                } 
-                            %>
-                            <input type="file" id="inputArquivo" style="display: none;" accept="image/*" onchange="loadImg(event)" />
-                            <img id="img-preview" src="<%= arquivo.imagem %>" alt="Clique para mudar a imagem" />
-
+                     
                             <script>
-                                const inputArquivo = document.getElementById('inputArquivo');
-                                const imagem = document.getElementById('imagem');
-
-                                imagem.addEventListener('click', () => {
-                                    inputArquivo.click();
-                                });
-
-                                inputArquivo.addEventListener('change', (event) => {
-                                    const arquivo = event.target.files[0];
-                                    if (arquivo) {
-                                        const url = URL.createObjectURL(arquivo);
-                                        imagem.src = url;
-                                    }
-                                });
 
                                 function mascaraCep(input) {
             let cep = input.value.replace(/\D/g, "");
@@ -67,9 +42,26 @@
                 cep = cep.replace(/(\d{5})(\d)/, "$1-$2");
             }
             input.value = cep;
+           router.get('/perfilcliente/imagem/:id', (req, res) => {
+    const idCliente = req.params.id;
+
+    const query = 'SELECT img_perfil_banco FROM CLIENTE WHERE ID_CLIENTE = ?';
+    db.query(query, [idCliente], (err, results) => {
+        if (err) {
+            console.error('Erro ao buscar a imagem:', err);
+            res.status(500).send('Erro ao buscar a imagem.');
+        } else if (results.length > 0 && results[0].img_perfil_banco) {
+            const img = results[0].img_perfil_banco;
+            res.set('Content-Type', 'image/jpeg'); // Ajuste conforme o tipo real da imagem
+            res.send(img);
+        } else {
+            res.status(404).send('Imagem não encontrada.');
+        }
+    });
+});
         }
                             </script>
-                    <img id="profile-pic" src="default-profile.jpg">
+                <img id="profile-pic"alt="Foto do perfil">
                     <nav class="edit-photo-button">
                         <button type="button" id="edit-photo-button" onclick="togglePhotoMenu()">Editar Foto</button>
                     </nav>

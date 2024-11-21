@@ -1,22 +1,35 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
 
 :root{
-    --body-color: #E4E9F7;
-    --sidebar-color:#FFF;
-    --primary-color:#f8ae3f;
-    --primary-color-light:#F6F5FF;
-    --toggle-color:#DDD;
-    --text-color:#636262;
-    --table-color:#333333dd;
+    --color-primary: #f5ba4d;
+    --color-danger: #f5ba4d;
+    --color-success: #f5ba4d;
+    --color-warning: #F7D060;
+    --color-white: #202528;
+    --color-info-dark: #edeffd;
+    --color-dark: #edeffd;
+    --color-light: rgba(0, 0, 0, 0.4);
+    --color-dark-variant: #a3bdcc;
+    --color-background: #181a1e;
 
-    --tran-02: all 0.2s sease;
-    --tran-03: all 0.3s sease;
-    --tran-04: all 0.4s sease;
-    --tran-05: all 0.5s sease;
+    --card-border-radius: 2rem;
+    --border-radius-1: 0.4rem;
+    --border-radius-2: 1.2rem;
+
+    --card-padding: 1.8rem;
+    --padding-1: 1.2rem;
+}
+
+.dark-mode-variables{
+    --color-background: #181a1e;
+    --color-white: #202528;
+    --color-dark: #edeffd;
+    --color-dark-variant: #a3bdcc;
+    --color-light: rgba(0, 0, 0, 0.4);
+    --box-shadow: 0 2rem 3rem var(--color-light);
 }
 
 *{
-    font-family: "Open Sans", sans-serif;
     margin: 0;
     padding: 0;
     outline: 0;
@@ -26,149 +39,115 @@
     box-sizing: border-box;
 }
 
-html {
+html{
     font-size: 14px;
 }
 
-body {
+body{
     width: 100vw;
     height: 100vh;
-    background: var(--body-color);
-    transition: var(--tran-05);
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.88rem;
+    user-select: none;
+    overflow-x: hidden;
+    color: var(--color-dark);
+    background-color: var(--color-background);
 }
 
-body.dark{
-    --logo-color:#e4e4e4;
-    --body-color: #272624;
-    --sidebar-color:#242526;
-    --primary-color:#d19437;
-    --primary-color-light:#44424d;
-    --toggle-color:#fff;
-    --text-color:#ece9e9;
+a{
+    color: var(--color-dark);
 }
 
-.sidebar{
-    position:fixed;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 250px;
-    padding: 10px 14px;
-    background: var(--sidebar-color);
-    transition: var(--tran-05);
-    z-index: 100;
-}
-
-.sidebar.close{
-    width: 88px;
-}
-
-img {
+img{
     display: block;
     width: 100%;
     object-fit: cover;
 }
 
-h1 {
+h1{
     font-weight: 800;
     margin-bottom: 10px;
     font-size: 1.8rem;
 }
 
-h2 {
+h2{
     font-weight: 600;
     font-size: 1.4rem;
 }
 
-h3 {
+h3{
     font-weight: 500;
     margin-bottom: 10px;
     font-size: 0.87rem;
 }
 
-small {
+small{
     font-size: 0.76rem;
 }
 
-p {
+p{
     color: var(--color-dark-variant);
 }
 
-b {
+b{
     color: var(--color-dark);
 }
 
-.text-muted {
+.text-muted{
     color: var(--color-info-dark);
 }
 
-.header-text .profession{
-    margin-top: 2px;
+.primary{
+    color: var(--color-primary);
 }
 
-
-
-.sidebar header .toggle{
-    position: absolute;
-    top: 50%;
-    right: -25px;
-    transform: translateY(-50%) rotate(180deg);
-    height: 25px;
-    width: 25px;
-    background: var(--primary-color);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 50%;
-    color:var(--sidebar-color);
-    font-size: 22px;
-    transition: var(--tran-03);
+.danger{
+    color: var(--color-danger);
 }
 
-.success {
+.success{
     color: var(--color-success);
 }
 
-.warning {
+.warning{
     color: var(--color-warning);
 }
 
-.search-box input{
-    height: 100%;
-    width: 100%;
-    outline: none;
-    border: none;
-    border-radius: 6px;
-    background: var(--primary-color-light);
+.container{
+    display: grid;
+    width: 96%;
+    margin: 0 auto;
+    gap: 1.8rem;
+    grid-template-columns: 12rem auto 23rem;
 }
 
+aside{
+    height: 100vh;
+}
 
-.sidebar li a{
-    text-decoration: none;
-    height: 100%;
-    width: 100%;
+aside .toggle{
     display: flex;
     align-items: center;
     justify-content: space-between;
     margin-top: 1.4rem;
 }
 
-aside .toggle .logo {
+aside .toggle .logo{
     display: flex;
     gap: 0.5rem;
 }
 
-.sidebar li a:hover .icon,
-.sidebar li a:hover .text{
-    color: var(--sidebar-color);
+aside .toggle .logo img{
+    width: 2rem;
+    height: 2rem;
 }
 
-aside .toggle .close {
+aside .toggle .close{
     padding-right: 1rem;
     display: none;
 }
 
-aside .sidebar {
+aside .sidebar{
     display: flex;
     flex-direction: column;
     background-color: var(--color-white);
@@ -180,11 +159,11 @@ aside .sidebar {
     transition: all 0.3s ease;
 }
 
-aside .sidebar:hover {
+aside .sidebar:hover{
     box-shadow: none;
 }
 
-aside .sidebar a {
+aside .sidebar a{
     display: flex;
     align-items: center;
     color: var(--color-info-dark);
@@ -195,45 +174,45 @@ aside .sidebar a {
     transition: all 0.3s ease;
 }
 
-aside .sidebar a span {
+aside .sidebar a span{
     font-size: 1.6rem;
     transition: all 0.3s ease;
 }
 
-aside .sidebar a:last-child {
+aside .sidebar a:last-child{
     position: absolute;
     bottom: 2rem;
     width: 100%;
 }
 
-aside .sidebar a.active {
+aside .sidebar a.active{
     width: 100%;
     color: var(--color-primary);
     background-color: var(--color-light);
     margin-left: 0;
 }
 
-aside .sidebar a.active::before {
+aside .sidebar a.active::before{
     content: '';
     width: 6px;
     height: 18px;
     background-color: var(--color-primary);
 }
 
-aside .sidebar a.active span {
+aside .sidebar a.active span{
     color: var(--color-primary);
     margin-left: calc(1rem - 3px);
 }
 
-aside .sidebar a:hover {
+aside .sidebar a:hover{
     color: var(--color-primary);
 }
 
-aside .sidebar a:hover span {
+aside .sidebar a:hover span{
     margin-left: 0.6rem;
 }
 
-aside .sidebar .message-count {
+aside .sidebar .message-count{
     background-color: var(--color-danger);
     padding: 2px 6px;
     color: var(--color-white);
@@ -241,157 +220,264 @@ aside .sidebar .message-count {
     border-radius: var(--border-radius-1);
 }
 
-main {
+main{
     margin-top: 1.4rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    border-radius: 6px;
-    min-width: 60px;
-    background: var(--primary-color-light);
 }
 
-.toggle-switch .switch{
-    position: relative;
-    height: 22px;
-    width: 44px;
-    border-radius: 25px;
-    background: var(--toggle-color);
+main .analyse{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.6rem;
 }
 
-.switch::before{
-    content: '';
-    position: absolute;
-    border-radius: 50%;
-    top: 50%;
-    left: 5px;
-    transform: translateY(-50%);
+main .analyse > div{
+    background-color: var(--color-white);
+    padding: var(--card-padding);
+    border-radius: var(--card-border-radius);
+    margin-top: 1rem;
+    box-shadow: var(--box-shadow);
     cursor: pointer;
-    height: 15px;
-    width: 15px;
-    background: var(--sidebar-color);
-    transition: var(--tran-03);
+    transition: all 0.3s ease;
 }
 
-body.dark .switch::before{
-    left: 24px;
+main .analyse > div:hover{
+    box-shadow: none;
 }
 
-.home{
-    height: 100vh;
-    left: 250px;
+main .analyse > div .status{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+main .analyse h3{
+    margin-left: 0.6rem;
+    font-size: 1rem;
+}
+
+main .analyse .progresss1{
     position: relative;
-    width: calc(100% - 250px);
-    background: var(--body-color);
-    transition: var(--tran-05);
+    width: 92px;
+    height: 92px;
+    border-radius: 50%;
 }
-
-.home .text{
-    font-size: 30px;
-    font-weight: 500;
-    color: var(--text-color);
-    padding: 8px 40px;
-}
-
-.sidebar.close ~ .home{
-    left: 88px;
-    width: calc(100% - 88px);
-}
-.tabelas{
-    max-width: 800px;
-    margin: 20px auto;
-    background: var(--sidebar-color);
-    border-radius: 5px;
-
-}
-
-.home{
-    border-radius: 10vh;
-}
-
-table{
-    border-radius: 5vh;
-}
-
-.table td{
-color: #DDD;
-}
-
-.table {
-    background-color: #7f7f7f;
-}
-
-h2{
-    font-size: 35px;
-    font-weight: 600;
-    background-color: var(--body-color);
-}
-
 #projetotable {
     width: 100%;
-    border-collapse: collapse;
-    margin-top: 1.4rem;
-    text-align: left;
-    background-color: var(--color-white);
+    border-collapse: separate; /* Permite bordas separadas entre as células */
+    border-spacing: 0;
+    margin-top: 2rem;
+    background-color: var(--color-white); /* Fundo branco */
+    border-radius: 10px; /* Border-radius de 10px */
+    box-shadow: var(--box-shadow); /* Sombra suave */
+    border: 2px solid #fff; /* Borda branca */
+}
+
+
+#projetotable thead {
+    background-color: #f4f4f4; /* Cabeçalho cinza claro */
+    color: #333; /* Texto escuro */
+    font-weight: bold;
+    text-align: center; /* Centraliza os cabeçalhos */
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 #projetotable th, #projetotable td {
+    padding: 12px 16px;
+    text-align: left;
+    border-bottom: 1px solid #e0e0e0; /* Borda suave para as linhas */
+}
+
+#projetotable tbody tr:nth-child(even) {
+    background-color: #f9f9f9; /* Linhas alternadas com fundo cinza claro */
+}
+
+#projetotable tbody tr:hover {
+    background-color: #f1f1f1; /* Efeito de hover mais suave */
+}
+
+#projetotable tbody td {
+    color: #666; /* Texto cinza claro */
+    font-size: 14px;
+}
+
+/* Estilo dos Botões - sem fundo */
+.boton button {
+    background-color: transparent;
+    border: none; /* Remove a borda dos botões de ação */
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    display: inline-block;
+    margin: 0 0.5rem;
+}
+
+.boton button i {
+    font-size: 1.2rem;
+    color: #333; /* Ícones escuros */
+}
+
+.boton button:hover {
+    background-color: #f4f4f4; /* Efeito de hover no botão */
+    color: #007bff; /* Cor de texto quando hover */
+}
+
+/* Botão "Aceitar" */
+.boton button.gosto {
+    border-color: #28a745; /* Borda verde */
+}
+
+.boton button.gosto:hover {
+    border-color: #28a745;
+    color: #28a745; /* Cor verde no texto ao passar o mouse */
+}
+
+/* Botão "Recusar" */
+.boton button.desgosto {
+    border-color: #dc3545; /* Borda vermelha */
+}
+
+.boton button.desgosto:hover {
+    border-color: #dc3545;
+    color: #dc3545; /* Cor vermelha no texto ao passar o mouse */
+}
+
+main .analyse .progresss2{
+    position: relative;
+    width: 92px;
+    height: 92px;
+    border-radius: 50%;
+    margin-left: 15px;
+}
+
+main .analyse .progresss3{
+    position: relative;
+    width: 92px;
+    height: 92px;
+    border-radius: 50%;
+    margin-left: 45px;
+}
+
+
+main .analyse svg{
+    width: 7rem;
+    height: 7rem;
+}
+
+main .analyse svg circle{
+    fill: none;
+    stroke-width: 10;
+    stroke-linecap: round;
+    transform: translate(5px, 5px);
+}
+
+main .analyse .sales svg circle{
+    stroke: var(--color-success);
+    stroke-dashoffset: -20;
+    stroke-dasharray: 200;
+}
+
+main .analyse .visits svg circle{
+    stroke: var(--color-danger);
+    stroke-dashoffset: -1000;
+    stroke-dasharray: 200;
+}
+
+main .analyse .searches svg circle{
+    stroke: var(--color-primary);
+    stroke-dashoffset: -230;
+    stroke-dasharray: 200;
+}
+
+main .analyse .progresss .percentage{
+    position: absolute;
+    top: -3px;
+    left: -1px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+}
+
+main .analyse .progresss1 .percentage p{
+  margin-top: -68px;
+  margin-left: 24px;
+}
+
+main .analyse .progresss2 .percentage p{
+    margin-top: -68px;
+    margin-left: 24px;
+}
+  
+main .analyse .progresss3 .percentage p{
+    margin-top: -68px;
+    margin-left: 24px;
+}
+
+main .recent-orders h2{
+    margin-bottom: 0.8rem;
+}
+
+main .recent-orders table{
+    background-color: var(--color-white);
+    width: 100%;
+    padding: var(--card-padding);
+    text-align: center;
+    box-shadow: var(--box-shadow);
+    border-radius: var(--card-border-radius);
+    transition: all 0.3s ease;
+    border-spacing: 0;
+}
+
+main .recent-orders table:hover{
+    box-shadow: none;
+}
+
+main .recent-orders thead{
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    font-weight: 600;
+}
+
+main .recent-orders th,
+main .recent-orders td{
     padding: 1rem;
     border-bottom: 1px solid var(--color-light);
 }
 
-#projetotable th {
-    font-size: 1rem;
-    font-weight: 600;
-    background-color: var(--color-primary);
-    color: white;
-}
-
-#projetotable td {
-    font-size: 0.9rem;
+main table tbody td{
     color: var(--color-dark-variant);
+    font-size: 0.88rem;
 }
 
-#projetotable tr:nth-child(even) {
+main table tbody tr:last-child td{
+    border: none;
+}
+
+main .recent-orders table th{
+    text-transform: uppercase;
+}
+
+main .recent-orders table tbody tr:nth-child(even){
+    background-color: rgba(0, 0, 0, 0.03);
+}
+
+main .recent-orders table tbody tr:hover{
     background-color: var(--color-light);
 }
 
-#projetotable tr:hover {
-    background-color: var(--color-primary);
-    color: white;
+main .recent-orders a{
+    text-align: center;
+    display: block;
+    margin: 1rem auto;
+    color: var(--color-primary);
+    text-decoration: none;
+    font-weight: 500;
 }
 
-#projetotable button {
-    background: none;
-    border: none;
-    cursor: pointer;
+main .recent-orders a:hover{
+    color: var(--color-success);
 }
 
-#projetotable button .gosto,
-#projetotable button .desgosto {
-    font-size: 1.5rem;
-}
-
-#projetotable button:hover {
-    opacity: 0.7;
-}
-
-section.boton {
-    display: flex;
-    gap: 0.8rem;
-    justify-content: center;
-}
-.gosto{
-    background-color: rgb(2, 160, 2);
-    color: var(--sidebar-color);
-   border-radius: 50%;
-   font-size: 2em;
-}
-
-.desgosto{
-    background-color: red;
-    color: var(--sidebar-color);
-    font-size: 2em;
-    
-}
