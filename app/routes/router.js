@@ -1,9 +1,6 @@
 var express = require("express");
 var router = express.Router();
-const multer = require('multer');
-const mysql = require('mysql2');
-const bodyParser = require('body-parser');
-const path = require('path');
+
 const { body, validationResult } = require('express-validator');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
@@ -22,8 +19,8 @@ const feedbackModel = require("../models/feedbackModel.js")
 // const cliente = require("../models/clienteModel");
 // const profissional = require("../models/profissionaisModel");
 // const admModel = require("../models/admModel");
-// const uploadFile = require("../util/uploader.js")("./router/public/imagens/imgperfil");
-const uploadFile = require("../util/uploader.js")("./router/public/imagens/imgperfil/");
+// const uploadFile = require("../util/uploader.js")("./app/public/imagens/imgperfil");
+const uploadFile = require("../util/uploader.js")("./app/public/imagens/imgperfil/");
 // const uploadfile = require("../util/uploader")();
 
 const orcamentoController = require('../controllers/orcamentoController.js');
@@ -175,55 +172,21 @@ router.get('/orcamento/:id', (req, res) => {
     });
 });
 
-router.get('/verdetalhe', async (req, res) => {
-    const { id_orcamento } = req.query;
+// router.get('/verdetalhe', async (req, res) => {
+//     const { id_orcamento } = req.query;
 
-    try {
-        const orcamento = await orcamentoController.buscarOrcamentoPorId(id_orcamento);
-        res.render('verdetalhe', { orcamento });  // Passa os dados para o template
-    } catch (error) {
-        console.error(error);
-        res.status(500).send('Erro ao buscar orçamento');
-    }
-});
+//     try {
+//         const orcamento = await orcamentoController.buscarOrcamentoPorId(id_orcamento);
+//         res.render('verdetalhe', { orcamento });  // Passa os dados para o template
+//     } catch (error) {
+//         console.error(error);
+//         res.status(500).send('Erro ao buscar orçamento');
+//     }
+// });
 
 router.get('/detalheProfissional', (req, res) => {
     res.render('pages/detalheProfissional');
 });
-router.use(bodyParser.urlencoded({ extended: true }));
-router.use(bodyParser.json());
-router.use(express.static(path.join(__dirname, 'public')));
-
-// Rota para carregar a página do perfil
-router.get('/perfilcliente', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'perfilcliente.html'));
-});
-
-// Rota para salvar a imagem e dados do formulário
-router.post('/perfilcliente', upload.single('imagem'), (req, res) => {
-    const { nome, email, cep, complemento, numero, fone } = req.body;
-    const imagem = req.file ? req.file.buffer : null;
-
-    const query = `
-        UPDATE CLIENTE
-        SET 
-            NOME_CLIENTE = ?, EMAIL_CLIENTE = ?, CEP_CLIENTE = ?, 
-            COMPLEMENTO_CLIENTE = ?, NUMERO_CLIENTE = ?, TELEFONE_CLIENTE = ?, 
-            img_perfil_banco = ?
-        WHERE ID_CLIENTE = ?;`;
-
-    const idCliente = 1; 
-
-    db.query(query, [nome, email, cep, complemento, numero, fone, imagem, idCliente], (err, result) => {
-        if (err) {
-            console.error('Erro ao atualizar o cliente:', err);
-            res.status(500).send('Erro ao atualizar os dados do cliente.');
-        } else {
-            res.send('Perfil atualizado com sucesso!');
-        }
-    });
-});
-
 
 router.post("/createpreference", function (req, res) {
     const preference = new Preference(mercadoPagoCliente);
@@ -236,7 +199,7 @@ router.post("/createpreference", function (req, res) {
                 "failure": process.env.URL_BASE + "/feedback",
                 "pending": process.env.URL_BASE + "/feedback"
             },
-            auto_return: "routerroved",
+            auto_return: "approved",
         }
     })
         .then((value) => {
