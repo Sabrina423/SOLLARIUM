@@ -111,8 +111,8 @@ router.get('/updateorc', (req, res) => {
 });
 
 
-router.get('/pagamentosre', (req, res) => {
-    res.render('pages/pagamentosre');
+router.get('/pagamento', (req, res) => {
+    res.render('pages/pagamento');
 });
 
 router.get('/comissao', (req, res) => {

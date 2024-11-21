@@ -175,7 +175,7 @@ const orcamentoController = {
         const errors = validationResult(req);
     if (!errors.isEmpty()) {
       console.log(errors);
-      return res.render("pages/verdetalhe", {
+      return res.render("pages/", {
         dados: req.body,
         listaErros: errors,
       });
@@ -210,9 +210,8 @@ recusarOrcamento: async (req, res) => {
   },
  
 
-
-    // Excluir orçamento
-    excluirOrcamento: async (req, res) => {
+// Excluir orçamento
+excluirOrcamento: async (req, res) => {
         try {
             const resultado = await orcamento.delete(req.params.id);
 
@@ -239,39 +238,41 @@ recusarOrcamento: async (req, res) => {
         }
     },
 
-    buscarOrcamentoPorId: async (req, res) => {
-        const idOrcamento = req.params.id_orcamento;  // Usando o id do orçamento da URL
+    // buscarOrcamentoPorId: async (req, res) => {
+    //     console.log()
+    //     const idOrcamento = req.params.id_orcamento;  // Usando o id do orçamento da URL
 
-        try {
-            // Usando o modelo para buscar o orçamento pelo ID
-            const resultado = await orcamentoModel.findById(idOrcamento);
+    //     try {
+    //         // Usando o modelo para buscar o orçamento pelo ID
+    //         const resultado = await orcamentoModel.findById(idOrcamento);
 
-            // Verificando se o orçamento existe
-            if (!resultado) {
-                return res.render("pages/orcamento", {
-                    listaErros: [{ msg: 'Orçamento não encontrado.' }],
-                    dadosNotificacao: null,
-                    valores: {}
-                });
-            }
+    //         // Verificando se o orçamento existe
+    //         console.log(resultado)
+    //         if (!resultado) {
+    //             return res.render("pages/orcamento", {
+    //                 listaErros: [{ msg: 'Orçamento não encontrado.' }],
+    //                 dadosNotificacao: null,
+    //                 valores: {}
+    //             });
+    //         }
 
-            // Caso encontre o orçamento, renderiza com os dados
-            res.render("pages/orcamento", {
-                listaErros: null,
-                dadosNotificacao: null,
-                valores: resultado
-            });
+    //         // Caso encontre o orçamento, renderiza com os dados
+    //         res.render("pages/orcamento", {
+    //             listaErros: null,
+    //             dadosNotificacao: null,
+    //             valores: resultado
+    //         });
 
-        } catch (e) {
-            console.error(e);
-            // Caso ocorra erro na consulta ao banco, retorna erro
-            res.render("pages/orcamento", {
-                listaErros: [{ msg: 'Erro ao buscar o orçamento.' }],
-                dadosNotificacao: null,
-                valores: {}
-            });
-        }
-    }
+    //     } catch (e) {
+    //         console.error(e);
+    //         // Caso ocorra erro na consulta ao banco, retorna erro
+    //         res.render("pages/orcamento", {
+    //             listaErros: [{ msg: 'Erro ao buscar o orçamento.' }],
+    //             dadosNotificacao: null,
+    //             valores: {}
+    //         });
+    //     }
+    // }
 
     
 };

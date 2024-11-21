@@ -8,6 +8,69 @@
     color: #edeffd;
 }
 
+header {
+    height: 70px;
+    width: 100%;
+    display: grid;
+    position: relative;
+    z-index: 100;
+    background-color: transparent; /* Garantindo o fundo transparente */
+}
+
+.navbar {
+    width: 100%;
+    max-width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 10px;
+    background-color: rgba(0, 0, 0, 0.3); /* Cor escura com opacidade */
+    backdrop-filter: blur(10px); /* Desfoque sutil de fundo para melhorar visibilidade */
+}
+
+.navbar .logo a {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #fff; /* Logo em branco */
+}
+
+.navbar .links {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    flex-grow: 1;
+    flex-wrap: wrap;
+}
+
+.navbar .toggle_btn {
+    color: #ffffff07;
+    font-size: 1.5rem;
+    cursor: pointer;
+    display: none;    
+}
+
+.action_btn {
+    color: #fff;
+    padding: 0.3rem 2rem;
+    border: solid;
+    border-color: #eee;
+    border-width: 2.5px;
+    outline: none;
+    border-radius: 15px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: scale 0.2 ease;
+    margin-right: 30px;
+}
+
+.action_btn:hover {
+    scale: 1.05;
+}
+
+.action_btn:active {
+    scale: 0.95;
+}
+
 .section {
     width: 100%;
     min-height: 73vh;
