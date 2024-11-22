@@ -9,7 +9,7 @@ const { isObject } = require('util');
 
 
 const app = express();
-const port = process.env.APP_PORT || 3000;
+const port = process.env.APP_PORT || 5000;
 
 // Configuração do middleware
 app.use(express.static("app/public/"));
