@@ -4,6 +4,9 @@ const express = require('express');
 const session = require('express-session');
 const pool = require('./config/pool_conexoes'); // cerifique-se de que o caminho está correto
 const rotas = require('./app/routes/router'); // cerifique-se de que este caminho está correto
+const { isObject } = require('util');
+
+
 
 const app = express();
 const port = process.env.APP_PORT || 3000;
@@ -25,6 +28,8 @@ app.use(session({
 
 // Configuração das rotas
 app.use('/', rotas);
+
+
 
 // Iniciar o servidor
 app.listen(port, () => {
