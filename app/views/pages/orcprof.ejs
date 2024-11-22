@@ -26,7 +26,7 @@
             listaOrcamentos.forEach(function(orcamento){ %>
             <tr>
                 <td><%=orcamento.NOME_CLIENTE%></td>
-                <td><%=orcamento.DATA_ORCAMENTO%> </td>
+                <td><%= moment(orcamento.DATA_ORCAMENTO).format("DD/MM/YYYY HH:mm") %> </td>
                 <td><%=orcamento.VALOR_ORCAMENTO%></td>
                 <td><%=orcamento.STATUS_ORCAMENTO%></td>
                 <td><button class="btn-accept" onclick="window.location='/updateorc?id_orcamento=<%=orcamento.ID_ORCAMENTO%>'">Aceitar</button></td>
