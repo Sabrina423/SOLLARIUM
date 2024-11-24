@@ -9,12 +9,12 @@ const jwt = require('jsonwebtoken');
 const moment = require('moment');
 const helpers = require("../helpers/helpers")
 const orcamentoController = {
-    // Validações para o formulário de orçamento
-    regrasValidacaoFormOrcamento: [
+    // Validações para o formulário de orçamento      
+    regrasValidacaoFormOrcamento: [  
         body("nome_cliente")
             .isString({ min: 3, max: 45 }).withMessage("O nome do cliente é obrigatório."),
             body('valor_orcamento')
-            .isCurrency({
+            .isCurrency({  
                 allow_negatives: false, // Não permite valores negativos
                 allow_blank: false,      // Não permite campos em branco
                 decimal_separator: '.',   // Separa decimais com vírgula
