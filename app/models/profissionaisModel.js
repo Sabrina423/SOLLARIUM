@@ -59,6 +59,7 @@ const profissionaisModel = {
                     profissionais.cep_prof,
                     profissionais.area_prof,
                     profissionais.senha_prof,
+                    profissionais.imagem_prof,
                    
                 ]
             );

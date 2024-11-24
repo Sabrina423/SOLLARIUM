@@ -21,19 +21,50 @@
                 <th>ação</th>
             </tr>
         </thead>
-        <tbody>
-            <% listaOrcamentos.forEach(function(orcamento){ %>
-                <tr>
-                  <td><%= orcamento.NOME_PROF %></td>
-                  <td><%= moment(orcamento.DATA_ORCAMENTO).format("DD/MM/YYYY HH:mm") %></td>
-                  <td><%= orcamento.VALOR_ORCAMENTO %></td>
-                  <td><%= orcamento.STATUS_ORCAMENTO %></td>
-                  <td><button class="btn-accept">Aceitar</button></td>
-                  <td><button class="btn-excluir">Excluir</button></td>
-                </tr>
-              <% }); %>
-              
-    
-
-        </tbody>
+        
+<tbody>
+  <% listaOrcamentos.forEach(function(orcamento){ %>
+    <tr>
+      <td><%= orcamento.NOME_PROF %></td>
+      <td><%= helpers.formatDate(orcamento.DATA_ORCAMENTO)%></td>
+      <td><%= orcamento.VALOR_ORCAMENTO %></td>
+      <td><%= orcamento.STATUS_ORCAMENTO %></td>
+      <td><button type="button" class="btn-accept" data-id="<%=orcamento.ID_ORCAMENTO%>">Aceitar</button></td>
+    </tr>
+  <% }); %>
+</tbody>
     </table>
+
+    <script>
+    const btnAceitar = document.querySelectorAll('.btn-accept');
+
+btnAceitar.forEach(btn => {
+  btn.addEventListener('click', async (e) => {
+    const idOrcamento = e.target.getAttribute('data-id');
+    const url = '/aprovar-orcamento';
+    const metodo = 'POST';
+    const cabecalhos = {
+      'Content-Type': 'application/json'
+    };
+    const corpo = JSON.stringify({ id_orcamento: idOrcamento });
+
+    try {
+      const resposta = await fetch(url, {
+        method: metodo,
+        headers: cabecalhos,
+        body: corpo
+      });
+
+      if (resposta.ok) {
+        alert('Orçamento aprovado com sucesso!');
+        location.reload();
+      } else {
+        alert('Erro ao aprovar orçamento!');
+      }
+    } catch (erro) {
+      console.error('Erro ao aprovar orçamento:', erro);
+    }
+  });
+});
+
+    </script>

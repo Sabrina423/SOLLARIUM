@@ -1,203 +1,70 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="/images/favicon.ico">
-    <link rel="stylesheet" href="/css/perfilcliente.css">
-    <title>Perfil do Usuário</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="/images/favicon.ico">
+  <link rel="stylesheet" href="/css/perfilcliente.css">
+  <title>Perfil do Usuário</title>
 </head>
-
 <body>
-    <header class="site-header">
-        <section class="header-container">
-            <section class="logo">SOLLARIUM</section>
-            <nav class="main-nav">
-                <a href="/">Home</a>
-                <a href="/listaClienteorc">
-                    <span class="material-icons-sharp">
-                        receipt_long
-                    </span>
-                    <h3>Orçamentos</h3>
-                    <span class="message-count">1</span>
-                </a>
-            </nav>
-            <button class="menu-toggle" aria-label="Toggle menu">&#9776;</button>
-        </section>
-    </header>
-    
-    <form action="/perfilcliente" method="post" enctype="multipart/form-data">
-        <section class="profile-container">
-            <section class="profile-left">
-                <section class="profile-header">
-                    <section>
-                        <h1 id="user-name">Nome do Usuário</h1>
-                        <p id="user-state">Estado</p>
-                        <nav class="photo-actions">
-                        
-                            <%
-                                 arquivo = { imagem: "/imagens/perfil/imgperfil.png" };
-                                if (autenticado.imagem != null) {
-                                    arquivo.imagem = imagem;
-                                } 
-                            %>
-                            <input type="file" id="inputArquivo" style="display: none;" accept="image/*" onchange="loadImg(event)" />
-                            <img id="img-preview" src="<%= arquivo.imagem %>" alt="Clique para mudar a imagem" />
-
-                            <script>
-                                const inputArquivo = document.getElementById('inputArquivo');
-                                const imagem = document.getElementById('imagem');
-
-                                imagem.addEventListener('click', () => {
-                                    inputArquivo.click();
-                                });
-
-                                inputArquivo.addEventListener('change', (event) => {
-                                    const arquivo = event.target.files[0];
-                                    if (arquivo) {
-                                        const url = URL.createObjectURL(arquivo);
-                                        imagem.src = url;
-                                    }
-                                });
-
-                                function mascaraCep(input) {
-            let cep = input.value.replace(/\D/g, "");
-            if (cep.length > 5) {
-                cep = cep.replace(/(\d{5})(\d)/, "$1-$2");
-            }
-            input.value = cep;
-        }
-                            </script>
-                    <img id="profile-pic" src="default-profile.jpg">
-                    <nav class="edit-photo-button">
-                        <button type="button" id="edit-photo-button" onclick="togglePhotoMenu()">Editar Foto</button>
-                    </nav>
-                    <div id="photo-menu" class="photo-menu" style="display: none;">
-                        <nav class="close-menu">
-                            <button type="button" onclick="togglePhotoMenu(event)">×</button>
-                        </nav>
-                        <input type="file" id="file-input" accept="image/*" style="display: none;">
-                        <nav class="options">
-                            <button type="button" onclick="removePhoto()">Excluir Foto</button>
-                        </nav>
-                        <nav>
-                            <button type="button" id="edit-photo-button" onclick="togglePhotoMenu()">Editar Foto</button>
-                        </nav>
-                    </div>
-                </section>
-            </section>
-
-            <section>
-                <nav>
-                    <button type="button" class="btn-accept" onclick="window.location='/listaClienteorc?id_cliente=<%=autenticado.ID_CLIENTE%> '">Orçamentos</button>
-                </nav>
-
-            </section>
-
-            <section class="profile-right">
-                <nav class="profile-details">
-                    <h2>Informações do Perfil</h2>
-                    <input type="text" id="full-name" name="nome" placeholder="Nome Completo" value="<%= valores.nome %>">
-                    <input type="text" id="email" name="email" placeholder="Email" value="<%= valores.email %>">
-                    <input type="text" id="cep" name="cep" placeholder="CEP" value="<%= valores.cep %>">
-                    <input type="text" id="complemento" name="complemento" placeholder="complemento" value="<%= valores.complemento%>">
-                    <input type="text" id="numero" name="numero" placeholder="Número da residência" value="<%= valores.numero %>">
-                    <input type="tel" id="phone" name="fone" placeholder="Telefone" value="<%= valores.fone %>" maxlength="15" oninput="validatePhone(this.value)">
-                    <span id="phone-error" style="color: red; display: none; font-family: sans-serif; padding: 10px;"></span>
-                    <span id="phone-success" style="color: green; display: none; font-family: sans-serif; padding: 10px;">Telefone válido!</span>
-                    <button type="submit">Salvar</button>
-                </nav>
-            </section>
-        </section>
-    </form>
-
-    <section class="professionals-carousel">
-        <h2>Profissionais contratados</h2>
-        <nav class="carousel-wrapper">
-            <button class="carousel-button carousel-prev" onclick="prevSlide()">&#10094;</button>
-            <button class="carousel-button carousel-next" onclick="nextSlide()">&#10095;</button>
-            <nav class="carousel-container">
-                <nav class="professional-card">
-                    <img src="/imagens/perfil/imgperfil.png" alt="Profissional 1">
-                    <h3>João Silva</h3>
-                    <p>Especialização: Instalador de Painéis Solares</p>
-                </nav>
-                <nav class="professional-card">
-                    <img src="/imagens/perfil/imgperfil.png" alt="Profissional 2">
-                    <h3>Maria Oliveira</h3>
-                    <p>Especialização: Consultora de Energia Solar</p>
-                </nav>
-                <nav class="professional-card">
-                    <img src="/imagens/perfil/imgperfil.png" alt="Profissional 3">
-                    <h3>Pedro Santos</h3>
-                    <p>Especialização: Projetista de Sistemas Solares</p>
-                </nav>
-                <!-- Adicione mais cartões conforme necessário -->
-            </nav>
-        </nav>
+  <header class="site-header">
+    <div class="header-container">
+      <a href="/" class="logo">SOLLARIUM</a>
+      <nav class="main-nav">
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/listaClienteorc">Orçamentos</a></li>
+        </ul>
+      </nav>
+      <button class="menu-toggle" aria-label="Toggle menu">&#9776;</button>
+    </div>
+  </header>
+  <main class="perfil-container">
+    <section class="perfil-left">
+      <div class="perfil-header">
+        <h1 id="user-name">Nome do Usuário</h1>
+        <div class="photo-actions">
+          <img id="img-preview" src="/imagens/perfil/imgperfil.png" alt="Foto de perfil">
+          <button class="edit-photo-button">Editar Foto</button>
+        </div>
+      </div>
+      <nav class="perfil-nav">
+        <ul>
+          <li><a href="/listaClienteorc?id_cliente=<%=autenticado.ID_CLIENTE%>">Orçamentos</a></li>
+        </ul>
+      </nav>
     </section>
-    <script src="/js/perfilcliente.js">
-        
-    </script>
-<style>
-      .edit-photo-button button {
-            background-color: #e5890b;
-            border: none;
-            font-family: sans-serif;
-            color: white;
-            padding: 10px;
-            margin-top: 10px;
-            border-radius: 5px;
-            width: 200px;
-        }
-        .profile-header {
-            position: relative; /* Permite que o menu use a posição relativa do cabeçalho */
-        }
-
-        .photo-menu {
-            width: 250px;
-            position: absolute;
-            background: rgb(17, 17, 17); /* Muda o fundo do menu para preto */
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            padding: 10px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-            z-index: 10;
-            display: flex;
-            flex-direction: column; /* Alinha opções em coluna */
-            left: 49%; /* Centraliza o menu em relação ao botão */
-            transform: translateX(-50%); /* Ajusta a posição do menu */
-            margin-top: 5px; /* Espaço acima do menu */
-        }
-
-        .close-menu {
-            background: none; /* Fundo transparente */
-            border: none;
-            font-size: 20px;
-            align-self: flex-end; /* Alinha o botão de fechar à direita */
-            cursor: pointer;
-            color: white; /* Texto branco */
-        }
-
-        .close-menu button {
-            background: none; /* Remove o fundo */
-            color: white; /* Mantém o texto branco */
-            border: none; /* Remove a borda, se houver */
-            cursor: pointer; /* Muda o cursor para indicar que é clicável */
-            font-size: 20px;
-        }
-
-        .options button {
-            font-family: sans-serif;
-            background-color: #e5890b;
-            margin: 5px 0; /* Espaçamento entre os botões */
-            width: 100%; /* Para ocupar toda a largura do menu */
-            height: 30px;
-            border: none;
-            border-radius: 5px;
-            color: #ffffff; /* Texto do botão branco */
-        }
-    </style>
+    <section class="perfil-right">
+      <form action="/perfilcliente" method="post" enctype="multipart/form-data">
+        <h2>Informações do Perfil</h2>
+        <div class="form-group">
+          <label for="nome">Nome Completo:</label>
+          <input type="text" id="nome" name="nome" value="<%= valores.nome %>">
+        </div>
+        <div class="form-group">
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email" value="<%= valores.email %>">
+        </div>
+        <div class="form-group">
+          <label for="cep">CEP:</label>
+          <input type="text" id="cep" name="cep" value="<%= valores.cep %>">
+        </div>
+        <div class="form-group">
+          <label for="complemento">Complemento:</label>
+          <input type="text" id="complemento" name="complemento" value="<%= valores.complemento %>">
+        </div>
+        <div class="form-group">
+          <label for="numero">Número da residência:</label>
+          <input type="text" id="numero" name="numero" value="<%= valores.numero %>">
+        </div>
+        <div class="form-group">
+          <label for="fone">Telefone:</label>
+          <input type="tel" id="fone" name="fone" value="<%= valores.fone %>">
+        </div>
+        <button type="submit">Salvar</button>
+      </form>
+    </section>
+  </main>
 </body>
 </html>

@@ -6,7 +6,8 @@ const { removeImg } = require("../util/removeImg");
 const fetch = require('node-fetch');
 const https = require('https');
 const jwt = require('jsonwebtoken');
-const moment = require('moment')
+const moment = require('moment');
+const helpers = require("../helpers/helpers")
 const orcamentoController = {
     // Validações para o formulário de orçamento
     regrasValidacaoFormOrcamento: [
@@ -131,7 +132,7 @@ const orcamentoController = {
                 return res.redirect("/orcprof")
             }
             results = await orcamentoModel.findAll();
-            res.render("pages/orcprof", {listaOrcamentos: results,
+            res.render("pages/orcprof", {listaOrcamentos: results, helpers:helpers,
                 listaErros: null,
                 dadosNotificacao: { titulo: "Sucesso!", mensagem: "Orçamento atualizado com sucesso.", tipo: "success" },
                 valores: dadosAtualizados
@@ -150,13 +151,8 @@ const orcamentoController = {
         res.locals.moment = moment;
         try {
           results = await orcamentoModel.findAllById(req.session.autenticado.id);
-          
-        results.forEach((orcamento) =>{
-            orcamento.data =
-            moment(orcamento.data).format("DD/MM/YYYY HH:mm")
-        });
-
-          res.render("pages/listaClienteorc", { listaOrcamentos: results });
+       
+          res.render("pages/listaClienteorc", { listaOrcamentos: results, helpers: helpers });
     } catch (e) {
           console.log(e); // exibir os erros no console do vs code
           res.json({ erro: "Falha ao acessar dados" });
@@ -169,12 +165,8 @@ const orcamentoController = {
         try {
           results = await orcamentoModel.findAll();
          
-        results.forEach((orcamento) =>{
-            orcamento.data =
-            moment(orcamento.data).format("DD/MM/YYYY HH:mm")
-        });
-
-          res.render("pages/orcprof", { listaOrcamentos: results });
+          console.log
+          res.render("pages/orcprof", { listaOrcamentos: results, helpers:helpers });
     } catch (e) {
           console.log(e); // exibir os erros no console do vs code
           res.json({ erro: "Falha ao acessar dados" });
@@ -209,6 +201,25 @@ const orcamentoController = {
       res.json({ erro: "Falha ao acessar dados" });
     }
 },
+
+aceitarOrcamentoCliente: async (req, res) => {
+    try {
+      const { id_orcamento } = req.body;
+      const orcamento = await orcamentoModel.findById(id_orcamento);
+  
+      if (!orcamento) {
+        return res.status(404).json({ message: 'Orçamento não encontrado!' });
+      }
+  
+      const dadosForm = { status_orcamento: 2 };
+      await orcamentoModel.update(dadosForm, id_orcamento);
+  
+      res.json({ message: 'Orçamento aprovado com sucesso!' });
+    } catch (error) {
+      console.error('Erro ao aprovar orçamento:', error);
+      res.status(500).json({ message: 'Erro ao aprovar orçamento!' });
+    }
+  },
 
 recusarOrcamento: async (req, res) => {
     let { id } = req.query;
@@ -252,5 +263,4 @@ excluirOrcamento: async (req, res) => {
 
     
 };
-
-module.exports = orcamentoController;
+module.exports = orcamentoController

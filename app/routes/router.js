@@ -213,28 +213,28 @@ router.get("/feedback", function (req, res) {
 });
 
 
-router.get("/recuperar-senha", verificarClienteAutenticado, function (req, res) {
-    res.render("pages/recsenha", { listaErros: null, dadosNotificacao: null });
-});
+// router.get("/recuperar-senha", verificarClienteAutenticado, function (req, res) {
+//     res.render("pages/recsenha", { listaErros: null, dadosNotificacao: null });
+// });
 
-router.post("/recuperar-senha",
-    verificarClienteAutenticado,
-    clienteController.regrasValidacaoFormRecSenha,
-    function (req, res) {
-        clienteController.recuperarSenha(req, res);
-    });
+// router.post("/recuperar-senha",
+//     verificarClienteAutenticado,
+//     clienteController.regrasValidacaoFormRecSenha,
+//     function (req, res) {
+//         clienteController.recuperarSenha(req, res);
+//     });
 
 
-router.get("/resetarsenha",
-    function (req, res) {
-        clienteController.validarTokenNovaSenha(req, res);
-    });
+// router.get("/resetarsenha",
+//     function (req, res) {
+//         clienteController.validarTokenNovaSenha(req, res);
+//     });
 
-router.post("/resetarenha",
-    // clienteController.regrasValidacaoFormNovaSenha,
-    function (req, res) {
-        clienteController.resetarSenha(req, res);
-    });
+// router.post("/resetarenha",
+//     // clienteController.regrasValidacaoFormNovaSenha,
+//     function (req, res) {
+//         clienteController.resetarSenha(req, res);
+//     });
 
 
 
@@ -314,9 +314,13 @@ router.post("/orcamento", orcamentoController.regrasValidacaoFormOrcamento, (req
 
 });
 
-router.post("/updateorc", (req,res)=>{
-    orcamentoController.atualizarOrcamento(req,res)
+router.post('/aprovar-orcamento',(req,res) => {
+    orcamentoController.aceitarOrcamentoCliente
 });
+
+router.post('/updateorc', (req,res)=>{
+    orcamentoController.atualizarOrcamento(req,res)
+  });
 
 router.post(
     "/perfilprof",

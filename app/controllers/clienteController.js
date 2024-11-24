@@ -351,9 +351,9 @@ const clienteController = {
                 img_perfil_cliente: req.session.autenticado.imagem,
             };
 
-            if (req.body.senha_cliente != "") {
-                dadosForm.senha_cliente = bcrypt.hashSync(req.body.senha, salt);
-            }
+            // if (req.body.senha_cliente != "") {
+            //     dadosForm.senha_cliente = bcrypt.hashSync(req.body.senha, salt);
+            // }
 
             if (!req.file) {
                 console.log("Falha no carregamento");
