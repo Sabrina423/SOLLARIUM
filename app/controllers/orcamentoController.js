@@ -125,7 +125,7 @@ const orcamentoController = {
             valor_orcamento: req.body.valor,
             data_orcamento: req.body.data,
             // status_orcamento: 2,
-            status_orcamento: status === 2 ? "Atualizado": "Pendente", // Testando nova condição
+            status_orcamento: status === 2 ? "Atualizado": "Pendente", // Testando nova condição -
             profissionais_id_prof: req.session.autenticado.id
         }
         try {
