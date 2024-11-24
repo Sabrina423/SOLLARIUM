@@ -3,23 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
   <link rel="icon" href="/images/favicon.ico">
   <link rel="stylesheet" href="/css/perfilcliente.css">
   <title>Perfil do Usuário</title>
 </head>
 <body>
-  <header class="site-header">
-    <div class="header-container">
-      <a href="/" class="logo">SOLLARIUM</a>
-      <nav class="main-nav">
-        <ul>
-          <li><a href="/">Home</a></li>
-          <li><a href="/listaClienteorc">Orçamentos</a></li>
-        </ul>
-      </nav>
-      <button class="menu-toggle" aria-label="Toggle menu">&#9776;</button>
-    </div>
-  </header>
   <main class="perfil-container">
     <section class="perfil-left">
       <div class="perfil-header">
@@ -31,8 +20,24 @@
       </div>
       <nav class="perfil-nav">
         <ul>
-          <li><a href="/listaClienteorc?id_cliente=<%=autenticado.ID_CLIENTE%>">Orçamentos</a></li>
+          <li>
+            <a href="/listaClienteorc?id_cliente=<%=autenticado.ID_CLIENTE%>">
+              <span class="material-icons-sharp">receipt_long</span>
+              Orçamentos
+            </a>
+          </li>
+          <li>
+            <a href="/orcamento">
+              <span class="material-icons-sharp">add</span>
+              Criar novo orçamento
+            </a>
+          </li>
+          <a href="#" class="logout-link">
+            <span class="material-icons-sharp">logout</span>
+            <h3>Desconectar</h3>
+          </a>
         </ul>
+        
       </nav>
     </section>
     <section class="perfil-right">

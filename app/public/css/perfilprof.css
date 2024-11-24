@@ -3,282 +3,241 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Arial', sans-serif;
 }
 
 body {
-  background-color: #121212; /* Fundo do modo escuro */
-  color: #e0e0e0; /* Texto neutro para modo escuro */
-  font-size: 16px;
-}
-
-a {
-  text-decoration: none;
-  color: inherit;
-}
-
-header.site-header {
-  background-color: #1f1f1f; /* Header mais escuro */
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-  padding: 10px 20px;
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-}
-
-.header-container {
+  font-family: Arial, sans-serif;
+  background-color: #121212; /* Fundo dark */
+  color: #fff;
+  line-height: 1.6;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
+  min-height: 100vh;
+  padding: 20px;
 }
 
-.logo {
-  font-size: 22px;
-  font-weight: bold;
-  color: #ff9f1c; /* Laranja neutro para logo */
-}
-
-nav.main-nav {
-  display: flex;
-  gap: 25px;
-}
-
-nav.main-nav a {
-  color: #e0e0e0;
-  font-weight: 500;
-}
-
-nav.main-nav img {
-  width: 24px;
-  height: 24px;
-  filter: brightness(0.8);
-}
-
-.menu-toggle {
-  display: none;
-  color: #ff9f1c;
-}
-
-/* Container do perfil */
-.profile-container {
-  display: flex;
+form {
+  width: 100%;
   max-width: 1200px;
-  margin: 40px auto;
-  padding: 20px;
-  background-color: #1c1c1c; /* Fundo do container em modo escuro */
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
+}
+
+/* Contêiner principal */
+.perfil-container {
+  display: flex;
+  gap: 20px;
+  background: #1e1e1e; /* Fundo escuro para o contêiner */
   border-radius: 10px;
-  gap: 30px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
 }
 
-.profile-left {
-  flex: 0 0 300px;
-  padding: 20px;
-  border-right: 1px solid #333; /* Borda sutil em modo escuro */
-}
-
-.profile-right {
+/* Seção esquerda */
+.perfil-left {
   flex: 1;
   padding: 20px;
-}
-
-.profile-header {
+  background-color: #202020; /* Fundo escuro */
+  color: #fff;
   text-align: center;
-  margin-bottom: 20px;
 }
 
-.profile-header img {
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  cursor: pointer;
-  transition: box-shadow 0.3s ease;
-}
-
-.profile-header h1 {
-  font-size: 24px;
-  color: #ff9f1c; /* Laranja neutro */
-  margin-bottom: 10px;
-  font-weight: 600;
-}
-
-.profile-header p {
-  color: #bdbdbd;
-  font-size: 16px;
-}
-
-.photo-actions img {
-  cursor: pointer;
+.perfil-header img {
   width: 120px;
   height: 120px;
   border-radius: 50%;
   object-fit: cover;
-}
-
-.profile-right h2 {
-  font-size: 20px;
-  margin-bottom: 20px;
-  color: #ff9f1c;
-  font-weight: 600;
-}
-
-.profile-right input {
-  width: 100%;
-  padding: 12px;
   margin-bottom: 15px;
-  border: 1px solid #333;
-  border-radius: 5px;
-  font-size: 16px;
-  background-color: #333;
-  color: #e0e0e0;
-  transition: border-color 0.3s;
+  border: 4px solid #ff9800; /* Borda laranja */
 }
 
-.profile-right input:focus {
-  border-color: #ff9f1c;
+.perfil-header h1 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.edit-photo-button {
+  background-color: #ff9800; /* Botão laranja */
+  color: #fff;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 25px; /* Arredondado */
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.edit-photo-button:hover {
+  background-color: #e58900; /* Tom mais escuro de laranja */
+}
+
+/* Navegação */
+.perfil-nav ul {
+  list-style: none;
+  padding: 20px 0;
+}
+
+.perfil-nav ul li {
+  margin-bottom: 15px;
+}
+
+.perfil-nav ul a {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #fff;
+  font-size: 1rem;
+  transition: color 0.3s ease;
+}
+
+.perfil-nav ul a:hover {
+  color: #ff9800;
+}
+
+.perfil-nav ul a .material-icons-sharp {
+  margin-right: 10px;
+}
+
+/* Botão logout */
+.logout-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  margin-top: 20px;
+  text-decoration: none;
+  font-size: 1rem;
+  background: rgba(128, 128, 128, 0.349); /* Vermelho para logout */
+  padding: 10px 15px;
+  border-radius: 25px; /* Arredondado */
+  transition: background-color 0.3s ease;
+}
+
+.logout-link:hover {
+  background-color: #c0392b;
+}
+
+/* Seção direita */
+.perfil-right {
+  flex: 2;
+  padding: 20px;
+  background-color: #181818; /* Fundo ainda mais escuro */
+}
+
+.perfil-detalhes h2 {
+  margin-bottom: 20px;
+  font-size: 1.8rem;
+  color: #ff9800; /* Laranja para destaque */
+  text-align: center;
+}
+
+/* Campos do formulário */
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #fff; /* Texto em branco */
+}
+
+.form-group input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 25px; /* Arredondado */
+  background-color: #202020; /* Fundo escuro para inputs */
+  color: #fff; /* Texto branco */
+  font-size: 1rem;
+  border: none; /* Sem borda */
+  transition: background-color 0.3s ease;
+}
+
+.form-group input:focus {
+  background-color: #333; /* Fundo mais claro quando em foco */
   outline: none;
 }
 
-
-.profile-right button {
-  width: 100%;
-  padding: 12px;
-  background-color: #ff9f1c; /* Laranja neutro no botão */
-  border: none;
-  border-radius: 5px;
+/* Botão salvar */
+.save-button {
+  display: block;
+  width: auto;
+  padding: 8px 16px;
+  background-color: #ff9800; /* Laranja */
   color: #fff;
-  font-size: 16px;
+  border: none;
+  border-radius: 25px; /* Arredondado */
+  font-size: 0.9rem; /* Botão menor */
   cursor: pointer;
-  transition: background-color 0.3s;
-  font-weight: 600;
+  transition: background-color 0.3s ease;
+  text-transform: uppercase;
+  margin: 0 auto;
 }
 
-.profile-right button:hover {
-  background-color: #e5890b;
+.save-button:hover {
+  background-color: #e58900;
 }
 
-/* Carrossel de profissionais */
-.cliente-carousel {
-  max-width: 1200px;
-  margin: 40px auto;
-  padding: 20px;
-  background-color: #1c1c1c; /* Fundo do carrossel em modo escuro */
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
-  border-radius: 10px;
-}
-
-.cliente-carousel h2 {
-  text-align: center;
-  font-size: 22px;
-  margin-bottom: 20px;
-  color: #ff9f1c;
-  font-weight: 600;
-}
-
-.carousel-wrapper {
-  display: flex;
-  overflow: hidden;
-  padding-bottom: 20px;
-  position: relative;
-  margin-left: 200px;
-}
-
-.carousel-container {
-  display: flex;
-  gap: 15px;
-  transition: transform 0.5s ease;
-  margin: 0; /* Remover margens para centralizar corretamente */
-  width: max-content; /* Ajusta a largura do contêiner com base no conteúdo */
-}
-
-
-.cliente-card {
-  flex: 0 0 250px;
-  padding: 15px;
-  background-color: #2b2b2b; /* Cartão de profissional em modo escuro */
-  border-radius: 8px;
-  text-align: center;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
-  transition: transform 0.3s ease;
-}
-
-.cliente-card:hover {
-  transform: translateY(-5px);
-}
-
-.cliente-card img {
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  object-fit: cover;
-  margin-bottom: 10px;
-}
-
-.cliente-card h3 {
-  font-size: 18px;
-  color: #ff9f1c;
-  margin-bottom: 5px;
-  font-weight: 600;
-}
-
-.cliente-card p {
-  color: #bdbdbd;
-  font-size: 14px;
-}
-
-.carousel-button {
+/* Menu de foto */
+.photo-menu {
+  background-color: rgba(0, 0, 0, 0.8);
+  color: #fff;
   position: absolute;
   top: 50%;
-  transform: translateY(-50%);
-  background-color: rgba(0, 0, 0, 0.5);
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 300px;
+  text-align: center;
+  z-index: 1000;
+}
+
+.photo-menu button {
+  background-color: #ff9800;
   color: #fff;
   border: none;
   padding: 10px;
+  margin: 10px 0;
+  border-radius: 25px; /* Arredondado */
   cursor: pointer;
-  border-radius: 50%;
-  font-size: 18px;
-  transition: background-color 0.3s;
+  transition: background-color 0.3s ease;
 }
 
-.carousel-prev {
-  left: 10px;
-}
-
-.carousel-next {
-  right: 10px;
-}
-
-.carousel-button:hover {
-  background-color: rgba(0, 0, 0, 0.8);
+.photo-menu button:hover {
+  background-color: #e58900;
 }
 
 /* Responsividade */
 @media (max-width: 768px) {
-  .profile-container {
+  .perfil-container {
       flex-direction: column;
   }
 
-  .profile-left {
-      border-right: none;
+  .perfil-left {
+      text-align: center;
   }
 
-  .main-nav {
+  .perfil-right {
+      padding: 10px;
+  }
+
+  .perfil-nav ul a h3 {
       display: none;
   }
 
-  .menu-toggle {
-      display: block;
-      background-color: transparent;
-      font-size: 24px;
-      border: none;
-      cursor: pointer;
+  .perfil-nav ul a .material-icons-sharp {
+      font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .perfil-header img {
+      width: 100px;
+      height: 100px;
   }
 
-  .carousel-wrapper {
-      overflow-x: scroll;
-  }
-
-.cliente-card {
-      flex: 0 0 80%;
+  .save-button {
+      font-size: 0.9rem;
   }
 }
