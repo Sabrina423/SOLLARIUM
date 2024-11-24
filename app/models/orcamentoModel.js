@@ -35,10 +35,14 @@ const orcamentoModel = {
 
     create: async (orcamento) => {
         try {
+
+            var status = 1;
+
+            
             const {  data_orcamento, valor_orcamento, id_cliente, servicos_prof_id_servico } = orcamento;
             const result = await pool.query(
-                'INSERT INTO ORCAMENTO ( VALOR_ORCAMENTO,STATUS_ORCAMENTO, DATA_ORCAMENTO,ID_CLIENTE,SERVICOS_PROF_ID_SERVICO) VALUES (?, 1, ?,?, ?)',
-                [ valor_orcamento,data_orcamento, id_cliente, servicos_prof_id_servico]
+                'INSERT INTO ORCAMENTO ( VALOR_ORCAMENTO,STATUS_ORCAMENTO, DATA_ORCAMENTO,ID_CLIENTE,SERVICOS_PROF_ID_SERVICO) VALUES (?, ?, ?,?, ?)',
+                [ valor_orcamento, status === 1 ? "Pendente": "Atualizado",  data_orcamento, id_cliente, servicos_prof_id_servico]
             );
             return result;
         } catch (error) {

@@ -117,12 +117,18 @@ const orcamentoController = {
                 valores: req.body
             });
         }
+  
+        var status = 2
+
+        
 
         const dadosAtualizados = {
+
+            
            
             valor_orcamento: req.body.valor,
             data_orcamento: req.body.data,
-            status_orcamento: 2,
+            status_orcamento: status === 2 ? "Atualizado": "Pendente", //
             profissionais_id_prof: req.session.autenticado.id
         }
         try {
@@ -179,7 +185,7 @@ const orcamentoController = {
         const errors = validationResult(req);
     if (!errors.isEmpty()) {
       console.log(errors);
-      return res.render("pages/", {
+      return res.render("pages/listaClienteorc", {
         dados: req.body,
         listaErros: errors,
       });

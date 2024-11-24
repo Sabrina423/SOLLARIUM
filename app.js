@@ -9,7 +9,7 @@ const { isObject } = require('util');
 
 
 const app = express();
-const port = process.env.APP_PORT || 5000;
+const port = process.env.APP_PORT || 3000;
 
 // Configuração do middleware
 app.use(express.static("app/public/"));
@@ -21,7 +21,7 @@ app.use(express.json());
 
 // Configuração da sessão
 app.use(session({ 
-  secret: process.env.SESSION_SECRET || 'default_secret', // Defina um valor padrão se a variável não estiver definida
+  secret: process.env.SESSION_SECRET || 'site',
   resave: false,
   saveUninitialized: true 
 }));
