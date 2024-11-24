@@ -13,7 +13,7 @@ const orcamentoController = {
     regrasValidacaoFormOrcamento: [
         body("nome_cliente")
             .isString({ min: 3, max: 45 }).withMessage("O nome do cliente é obrigatório."),
-            body('valor_orcamento')
+        body('valor_orcamento')
             .isCurrency({
                 allow_negatives: false, // Não permite valores negativos
                 allow_blank: false,      // Não permite campos em branco
@@ -24,25 +24,25 @@ const orcamentoController = {
         body('data_orcamento')
             .isISO8601().withMessage('A data para execução do serviço deve ser válida.')
     ],
-    
-    
-    solicitarOrcamento: async (req, res)=>{
-        try{
-        // usar o model para listar os serviços
-        const results = await servicoModel.findAll();
-          
 
-        res.render('pages/orcamento',{listaServicos:results});
-        }catch(e){
+
+    solicitarOrcamento: async (req, res) => {
+        try {
+            // usar o model para listar os serviços
+            const results = await servicoModel.findAll();
+
+
+            res.render('pages/orcamento', { listaServicos: results });
+        } catch (e) {
             console.log(e);
 
         }
-},
+    },
 
 
     cadastrarOrcamento: async (req, res) => {
         const erros = validationResult(req);
-       
+
         if (!erros.isEmpty()) {
             console.log(erros);
             return res.render("pages/orcamento", { listaErros: erros, dadosNotificacao: null, valores: req.body, autenticado: req.session.autenticado });
@@ -57,8 +57,8 @@ const orcamentoController = {
         };
 
         try {
-        var results =  await orcamentoModel.create(dadosForm);
-        console.log(results);
+            var results = await orcamentoModel.create(dadosForm);
+            console.log(results);
             res.render("pages/home", {
                 listaErros: null, carrinho: null, autenticado: req.session.autenticado, dadosNotificacao: {
                     titulo: "Orçamento realizado!",
@@ -118,30 +118,31 @@ const orcamentoController = {
             });
         }
 
-        let status = 0;
+        let status = 2;
 
         const dadosAtualizados = {
-           
+
             valor_orcamento: req.body.valor,
             data_orcamento: req.body.data,
             // status_orcamento: 2,
-            status_orcamento: status === 2 ? "Atualizado": "Pendente", // Testando nova condição -
+            status_orcamento: status === 2 ? "Atualizado" : "Pendente", // Testando nova condição -
             profissionais_id_prof: req.session.autenticado.id
         }
         try {
             const resultado = await orcamentoModel.update(dadosAtualizados, req.body.id_orcamento);
-               console.log(resultado)
+            console.log(resultado)
             if (resultado.affectedRows === 0) {
                 return res.redirect("/orcprof")
             }
             results = await orcamentoModel.findAll();
-            res.render("pages/orcprof", {listaOrcamentos: results, helpers:helpers,
+            res.render("pages/orcprof", {
+                listaOrcamentos: results, helpers: helpers,
                 listaErros: null,
                 dadosNotificacao: { titulo: "Sucesso!", mensagem: "Orçamento atualizado com sucesso.", tipo: "success" },
                 valores: dadosAtualizados
             });
-        }catch (e){
-         console.log(e);
+        } catch (e) {
+            console.log(e);
             // res.render("pages/updateorc", {
             //     listaErros: [{ msg: 'Erro ao atualizar o orçamento.' }],
             //     dadosNotificacao: null,
@@ -150,94 +151,103 @@ const orcamentoController = {
         }
     },
 
-    listaOrcamentoCliente : async (req, res) => {
+    listaOrcamentoCliente: async (req, res) => {
         res.locals.moment = moment;
         try {
-          results = await orcamentoModel.findAllById(req.session.autenticado.id);
-       
-          res.render("pages/listaClienteorc", { listaOrcamentos: results, helpers: helpers });
-    } catch (e) {
-          console.log(e); // exibir os erros no console do vs code
-          res.json({ erro: "Falha ao acessar dados" });
+            results = await orcamentoModel.findAllById(req.session.autenticado.id);
+
+            res.render("pages/listaClienteorc", { listaOrcamentos: results, helpers: helpers });
+        } catch (e) {
+            console.log(e); // exibir os erros no console do vs code
+            res.json({ erro: "Falha ao acessar dados" });
         }
-      },
+    },
 
 
-      listaOrcamentoProf: async (req, res) => {
+    listaOrcamentoProf: async (req, res) => {
         res.locals.moment = moment;
         try {
-          results = await orcamentoModel.findAll();
-         
-          console.log
-          res.render("pages/orcprof", { listaOrcamentos: results, helpers:helpers });
-    } catch (e) {
-          console.log(e); // exibir os erros no console do vs code
-          res.json({ erro: "Falha ao acessar dados" });
-        }
-      },
-      
+            results = await orcamentoModel.findAll();
 
-     aceitarOrcamento: async(req,res) => {
+            console.log
+            res.render("pages/orcprof", { listaOrcamentos: results, helpers: helpers });
+        } catch (e) {
+            console.log(e); // exibir os erros no console do vs code
+            res.json({ erro: "Falha ao acessar dados" });
+        }
+    },
+
+
+    aceitarOrcamento: async (req, res) => {
         res.local.moment = moment;
         const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      console.log(errors);
-      return res.render("pages/", {
-        dados: req.body,
-        listaErros: errors,
-      });
-     }
-     var dadosForm = {
-        valor_orcamento: req.body.valor_orcamento,
-        data_orcamento: req.body.data_orcamento,
-        
-      };
-      let id_orcamento = req.body.id_orcamento;
-      try {
-       
+        if (!errors.isEmpty()) {
+            console.log(errors);
+            return res.render("pages/", {
+                dados: req.body,
+                listaErros: errors,
+            });
+        }
+        var dadosForm = {
+            valor_orcamento: req.body.valor_orcamento,
+            data_orcamento: req.body.data_orcamento,
 
-            results = await orcamentoModel.update(dadosForm,id_orcamento);
-        
-      res.redirect("/");
-    } catch (e) {
-      console.log(e);
-      res.json({ erro: "Falha ao acessar dados" });
-    }
-},
+        };
+        let id_orcamento = req.body.id_orcamento;
+        try {
 
-aceitarOrcamentoCliente: async (req, res) => {
-    try {
-      const { id_orcamento } = req.body;
-      const orcamento = await orcamentoModel.findById(id_orcamento);
-  
-      if (!orcamento) {
-        return res.status(404).json({ message: 'Orçamento não encontrado!' });
-      }
-  
-      const dadosForm = { status_orcamento: 2 };
-      await orcamentoModel.update(dadosForm, id_orcamento);
-  
-      res.json({ message: 'Orçamento aprovado com sucesso!' });
-    } catch (error) {
-      console.error('Erro ao aprovar orçamento:', error);
-      res.status(500).json({ message: 'Erro ao aprovar orçamento!' });
-    }
-  },
 
-recusarOrcamento: async (req, res) => {
-    let { id } = req.query;
-    try {
-      results = await orcamentoModel.delete(id);
-      res.redirect("/");
-    } catch (e) {
-      console.log(e);
-      res.json({ erro: "Falha ao acessar dados" });
-    }
-  },
- 
+            results = await orcamentoModel.update(dadosForm, id_orcamento);
 
-// Excluir orçamento
-excluirOrcamento: async (req, res) => {
+            res.redirect("/");
+        } catch (e) {
+            console.log(e);
+            res.json({ erro: "Falha ao acessar dados" });
+        }
+    },
+
+    aceitarOrcamentoCliente: async (req, res) => {
+        try {
+            //   const { id_orcamento } = req.body;
+            const { id_orcamento } = req.params;
+            const orcamento = await orcamentoModel.findById(id_orcamento);
+
+            if (!orcamento) {
+                return res.status(404).json({ message: 'Orçamento não encontrado!' });
+            }
+
+            console.log(orcamento.STATUS_ORCAMENTO)
+
+            //   if(dadosForm.status_orcamento === "Atualizado") {
+            if (orcamento.STATUS_ORCAMENTO === "Atualizado") {
+                const dadosForm = { status_orcamento: "Ok" };
+                await orcamentoModel.update(dadosForm, id_orcamento);
+                res.json({ message: 'Orçamento aprovado com sucesso!' });
+            }
+
+            else { return }
+
+            //   res.json({ message: 'Orçamento aprovado com sucesso!' });
+        } catch (error) {
+            console.error('Erro ao aprovar orçamento:', error);
+            res.status(500).json({ message: 'Erro ao aprovar orçamento!' });
+        }
+    },
+
+    recusarOrcamento: async (req, res) => {
+        let { id } = req.query;
+        try {
+            results = await orcamentoModel.delete(id);
+            res.redirect("/");
+        } catch (e) {
+            console.log(e);
+            res.json({ erro: "Falha ao acessar dados" });
+        }
+    },
+
+
+    // Excluir orçamento
+    excluirOrcamento: async (req, res) => {
         try {
             const resultado = await orcamento.delete(req.params.id);
 
@@ -264,6 +274,6 @@ excluirOrcamento: async (req, res) => {
         }
     },
 
-    
+
 };
 module.exports = orcamentoController

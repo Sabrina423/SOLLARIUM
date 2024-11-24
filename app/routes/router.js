@@ -314,8 +314,9 @@ router.post("/orcamento", orcamentoController.regrasValidacaoFormOrcamento, (req
 
 });
 
-router.post('/aprovar-orcamento',(req,res) => {
-    orcamentoController.aceitarOrcamentoCliente
+// router.post('/aprovar-orcamento',(req,res) => {
+router.post('/aprovar-orcamento/:id_orcamento',(req,res) => {
+    orcamentoController.aceitarOrcamentoCliente(req, res)
 });
 
 router.post('/updateorc', (req,res)=>{
