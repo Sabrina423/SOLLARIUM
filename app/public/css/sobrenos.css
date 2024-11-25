@@ -1,5 +1,25 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap');
 
+:root{
+    --color-primary: #f5ba4d;
+    --color-danger: #f5ba4d;
+    --color-success: #f5ba4d;
+    --color-warning: #F7D060;
+    --color-white: #202528;
+    --color-info-dark: #edeffd;
+    --color-dark: #edeffd;
+    --color-light: rgba(0, 0, 0, 0.4);
+    --color-dark-variant: #a3bdcc;
+    --color-background: #181a1e;
+ 
+    --card-border-radius: 2rem;
+    --border-radius-1: 0.4rem;
+    --border-radius-2: 1.2rem;
+ 
+    --card-padding: 1.8rem;
+    --padding-1: 1.2rem;
+}
+
 *{
     margin: 0;
     padding: 0;
@@ -8,13 +28,14 @@
     color: #edeffd;
 }
 
+
+
 header {
     height: 70px;
     width: 100%;
     display: grid;
     position: relative;
     z-index: 100;
-    background-color: transparent; /* Garantindo o fundo transparente */
 }
 
 .navbar {
@@ -23,15 +44,19 @@ header {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    background-color: rgb(5, 5, 5);
     padding: 0 10px;
-    background-color: rgba(0, 0, 0, 0.3); /* Cor escura com opacidade */
-    backdrop-filter: blur(10px); /* Desfoque sutil de fundo para melhorar visibilidade */
+    text-decoration: none;
 }
 
 .navbar .logo a {
     font-size: 1.5rem;
     font-weight: bold;
-    color: #fff; /* Logo em branco */
+    text-decoration: none;
+}
+
+.navbar li{
+    list-style: none;
 }
 
 .navbar .links {
@@ -40,6 +65,21 @@ header {
     justify-content: center;
     flex-grow: 1;
     flex-wrap: wrap;
+    text-decoration: none;
+}
+.navbar .links a {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    flex-grow: 1;
+    flex-wrap: wrap;
+    text-decoration: none;
+}
+.navbar .toggle_btn {
+    color: #fff;
+    font-size: 1.5rem;
+    cursor: pointer;
+    display: none;    
 }
 
 .navbar .toggle_btn {
@@ -74,7 +114,7 @@ header {
 .section {
     width: 100%;
     min-height: 73vh;
-    background-color: #181a1e;
+    background-color: #000000;
 }
 
 .material-symbols-outlined {
@@ -86,6 +126,7 @@ header {
     }
 
 .container {
+    
     width: 80%;
     display: block;
     margin: auto;
@@ -137,7 +178,27 @@ header {
     font-size: 16px;
     letter-spacing: 1.5px;
 }
-
+.text li{transition: background-color 0.3s, transform 0.3s;
+    font-family: sans-serif;
+    width: 500px;
+    height: 170px;
+    background-color: var(--color-white);
+    box-shadow: var(--box-shadow);
+    padding: 1.5rem;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    margin-left: 20px;
+    text-align: center;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    margin-left: 10px;
+    position: relative;
+    left: 300px;
+}
+.text li:hover{
+    transform: scale(1.05); /* Efeito de crescimento */
+}
 .content-section .content .button a:hover {
     background-color: #f5ba4d;
     color: #fff;
@@ -148,7 +209,7 @@ header {
 }
 
 .content-section .social i {
-    color: #f5ba4d;
+    color: #ffac40;
     font-size: 18px;
     padding: 0px 10px;
 }
@@ -158,7 +219,9 @@ header {
 }
 
 .faq .accordion{
-    font-size: 16px;
+    font-size: 14px;
+    height:40px ;
+    margin-bottom: 20px;
 }
 
 .content-section .social i:hover {
@@ -220,7 +283,7 @@ header {
 .wrapper {
     max-width: 75%;
     margin: auto;
-    background-color: #181a1e;
+    background-color: #000000;
   }
   
   .wrapper > p,
@@ -231,7 +294,7 @@ header {
   }
 
   .wrapper p {
-    color: #f5ba4d;
+    color: #ffac40;
   }
   
   .wrapper > h1 {
@@ -246,6 +309,7 @@ header {
     font-size: 1.2rem;
     width: 100%;
     padding: 2rem 2.5rem;
+    border-radius: 25px;
     border: none;
     outline: none;
     transition: 0.4s;
@@ -261,7 +325,7 @@ header {
   
   
   .accordion:hover {
-    background-color: #f5ba4d;
+    background-color: #ffac40;
   }
   .pannel {
     padding: 0 2rem 2.5rem 2rem;

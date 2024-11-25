@@ -64,8 +64,8 @@
                 </div>
                 
                 <div class="input-field">
-                  <input type="tel" id="contato_cliente" name="contato_cliente" placeholder="Contato (XX) XXXXX-XXXX" required oninput="mascaraTelefone(input)">
-                  <nav id="telefone-error" class="error-message">Telefone inválido.</nav>
+                    <input type="tel" id="contato_cliente" name="contato_cliente" placeholder="Contato (XX) XXXXX-XXXX" required oninput="mascaraTelefone(this)">
+                    <div id="telefone-error" class="error-message">Telefone inválido. Deve começar com 8 ou 9, ter 11 dígitos e não pode ter todos os números iguais.</div>
                 </div>
                 
                 <div class="input-field">
@@ -115,10 +115,16 @@
             }
         });
 
-        // Validação em tempo real para telefone
-        document.getElementById('contato_cliente').addEventListener('input', function () {
+           // Validação em tempo real para telefone
+       document.getElementById('contato_cliente').addEventListener('input', function() {
             let telefoneInput = this.value.replace(/\D/g, '');
             const telefoneError = document.getElementById('telefone-error');
+
+            // Limitar a 11 caracteres
+            if (telefoneInput.length > 11) {
+                telefoneInput = telefoneInput.substring(0, 11);
+                this.value = telefoneInput; // Atualiza o valor do input
+            }
 
             if (telefoneInput.length >= 10) {
                 if (validarTelefone(telefoneInput)) {
@@ -129,7 +135,27 @@
             } else {
                 telefoneError.style.display = 'none';
             }
-        });
+
+            this.value = telefoneInput.replace(/(\d{2})(\d{5})(\d)/, '($1) $2-$3');
+        }); // Validação de telefone
+        function validarTelefone(telefone) {
+            // Checa se o telefone tem 10 ou 11 dígitos
+            if (telefone.length !== 10 && telefone.length !== 11) {
+                return false;
+            }
+
+            // Verifica se todos os dígitos são iguais
+            if (/^(\d)\1+$/.test(telefone)) {
+                return false;
+            }
+
+            // Verifica se o terceiro dígito é 8 ou 9 (considerando DDD)
+            if (telefone.length === 11 && telefone[2] !== '8' && telefone[2] !== '9') {
+                return false;
+            }
+
+            return true; // Se passar em todas as validações
+        }
 
         // Verificação de e-mail
         document.getElementById('email_cliente').addEventListener('input', function () {
