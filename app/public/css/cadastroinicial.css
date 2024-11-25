@@ -10,7 +10,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #1e1e1e;
+    background-color:  #030303;
     min-height: 100vh;
 }
 .material-symbols-outlined {
@@ -28,12 +28,12 @@ body {
     height: 500px;
     max-width: 900px;
     align-content: center;
-    background-color: #0a0a0a;
+    background-color: #0a0a0a94;
     backdrop-filter: blur(2px);
-    border: solid 1px;
-    border-color: #0a0a0a;
-    border-radius: 20px;
-    box-shadow: 0 0 140px rgba(0, 0, 0, 0.753);
+    border: none;
+    border-color: none;
+    border-radius: 50px;
+    box-shadow: none;
 }
 
 /* O Hero é a parte esquerda e o formulário é a parte direita */
@@ -44,8 +44,10 @@ body {
     justify-content: center;
     color: white;
     padding: 40px;
-    background-image: url(/imagens/painelsolar_.png);
- 
+    background-image: url(/imagens/normal_u0.png);
+    background-repeat: no-repeat;
+    background-size: cover; /* Ajusta a imagem para cobrir todo o espaço disponível */
+    background-position: center; /* Centraliza a imagem */
 
 }
 .hero h2 {
@@ -70,10 +72,10 @@ main {
     max-width: 300px;
     height: 50px;
     margin-top: 40px;
-    background-color: #ffac40;
+    background-color: #fda93bfd;
     color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: 25px;
 }
 
 .cliente {
@@ -84,22 +86,23 @@ main {
     text-align: center;
     margin-top: 50px;
     margin-bottom: 20px;
-    background-color: #ffac40;
+    background-color: #fda93bfd;
     color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: 25px;
 }
 
 .profissional:hover, .cliente:hover {
     background-color: white;
     border: 2px solid black;
+    border-radius: 25px;
 }
 
 .profissional a{
     color: white;
     padding: 1rem;
     text-decoration: none;
-    border-radius: 15px;
+    border-radius: 5px;
     font-size: 0.9rem;
     cursor: pointer;
     transition: 0.2s ease;
@@ -125,6 +128,7 @@ h3 {
     text-align: center;
     margin-top: 45px;
     color: white;
+    
 }
 
 .login {
@@ -132,7 +136,7 @@ h3 {
     width: 100%;
     max-width: 300px;
     height: 50px;
-    border-radius: 5px;
+    border-radius: 25px;
     background-color: rgb(255, 255, 255);
     text-align: center;
     margin-top: 40px;

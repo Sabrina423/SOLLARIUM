@@ -12,11 +12,11 @@ body {
     align-items: center;
     background-color: rgb(0, 0, 0);
 }
-.password-container {
+.input-field password {
     position: relative; /* Permite que o ícone seja posicionado dentro do input */
 }
 
-.password-container input {
+.input-field password {
     width: 100%; /* Faz o input ocupar toda a largura do contêiner */
     padding-right: 40px; /* Espaço para o ícone à direita */
     box-sizing: border-box; /* Inclui padding no cálculo da largura */
@@ -53,9 +53,10 @@ body {
     align-items: center;
     justify-content: center;
     padding: 10px;
-    background-image: url(/imagens/painelsolar_.png);
+    background-image: url(/imagens/normal_u0.png);
     background-size: cover ; /* Ajusta a imagem ao tamanho do contêiner */
     background-position: center; /* Centraliza a imagem */
+    background-repeat: no-repeat;
 }
 .material-symbols-outlined {
     align-self: flex-start;
@@ -67,7 +68,7 @@ body {
     height: auto;
     border-radius: 10px;
 }
-.password-container .error-message{
+.input-field .error-message{
     display: none;
     margin-top: 10px;
     margin-bottom: 20px;
@@ -87,24 +88,24 @@ main {
     padding: 20px;
 }
 
-.input-group {
+.input-field {
     margin-top: 20px;
     margin-bottom: 12px;
 }
 
-.input-group input{
+.input-field input{
     width: 100%;
     padding: 10px;
     margin-bottom: 10px;
     color: #fff;
     background-color: #1d1a1a;
     border: 1px solid #1d1a1a;
-    border-radius: 5px;
+    border-radius: 25px;
     font-size: 14px;
     height: 40px;
 
 }
-.input-group select {
+.input-field select {
     width: 100%;
     padding: 10px;
     margin-bottom: 10px;
@@ -121,7 +122,7 @@ main {
     position: relative;
 }
 
-.password-container input {
+.password-container .input-field {
     width: 100%;
     padding-right: 30px;
 }
@@ -133,14 +134,15 @@ button[type="submit"] {
     background-color: #ffac40;
     color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: 25px;
     font-size: 16px;
     cursor: pointer;
     transition: background-color 0.3s;
+    justify-content: center;
 }
 button:hover{
-    background-color: #fff;
-    color: #e0ad4c;
+    background-color: #ffffff00;
+    color: #f7f7f7;
 }
 
 button[type="submit"] a {

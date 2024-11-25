@@ -37,12 +37,15 @@ body {
 
 .hero {
     width: 40%;
-    background-image: url(/imagens/3.png);
+    background-image: url(/imagens/normal_u0.png);
     display: flex;
     align-items: center;
     justify-content: center;
     color: white;
     padding: 40px;
+    background-repeat: no-repeat;
+    background-size: cover; /* Ajusta a imagem para cobrir todo o espaço disponível */
+    background-position: center;
 }
 
 .hero img {

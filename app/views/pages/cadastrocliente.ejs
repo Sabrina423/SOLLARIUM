@@ -49,42 +49,44 @@
         <main>
             <form action="/cadastrocliente" method="POST" id="cadastroFormcliente">
                 <nav class="logo"></nav>
-                <nav class="input-group">
-                    <input type="text" name="nome_cliente" id="nome_cliente" placeholder="Nome Completo" required>
-                    <input type="text" name="cpf_cliente" id="cpf_cliente" placeholder="CPF" required maxlength="14">
-                    <span id="cpf-validity-message" class="error-message"></span>
-                </nav>
-                <nav class="input-group">
-                   
-                </nav>
-                <nav class="input-group">
-                    <input type="email" name="email_cliente" id="email_cliente" placeholder="E-mail" required>
-                    <input type="tel" id="contato_cliente" name="contato_cliente" placeholder="Contato (XX) XXXXX-XXXX"
-                        required oninput="mascaraTelefone(this)">
-                    <nav id="telefone-error" class="error-message">Telefone inválido. Deve começar com 8 ou 9, ter 7 ou
-                        8 dígitos e não pode ter todos os números iguais.</nav>
-                        <input type="text" id="cep_cliente" name="cep_cliente" placeholder="Cep XXXXX-XXX" required oninput="mascaraCep(this)"> 
-                </nav>
                 
-                <nav class="input-group">
-                    <nav class="password-container">
-                        <input type="password" id="senha_cliente" name="senha_cliente" placeholder="Senha"
-                            onfocus="showMessage()" onblur="hideMessage()" oninput="validatePassword()"
-                            oncopy="return false;" onpaste="return false;">
-                        <nav id="message" class="invalid">A senha deve ter pelo menos 8 caracteres, uma letra maiúscula
-                            e um caractere especial.</nav>
-                    </nav>
-                    <nav class="password-container">
-                        <input type="password" id="confirmarsenha_cliente" name="confirmarsenha_cliente"
-                            placeholder="Confirme sua senha" required oncopy="return false;" onpaste="return false;">
-                        <nav id="error-message" class="error-message">As senhas não coincidem.</nav>
-                    </nav>
-                </nav>
+                <div class="input-field">
+                  <input type="text" name="nome_cliente" id="nome_cliente" placeholder="Nome Completo" required>
+                </div>
+                
+                <div class="input-field">
+                  <input type="text" name="cpf_cliente" id="cpf_cliente" placeholder="CPF" required maxlength="14">
+                  <span id="cpf-validity-message" class="error-message"></span>
+                </div>
+                
+                <div class="input-field">
+                  <input type="email" name="email_cliente" id="email_cliente" placeholder="E-mail" required>
+                </div>
+                
+                <div class="input-field">
+                  <input type="tel" id="contato_cliente" name="contato_cliente" placeholder="Contato (XX) XXXXX-XXXX" required oninput="mascaraTelefone(input)">
+                  <nav id="telefone-error" class="error-message">Telefone inválido.</nav>
+                </div>
+                
+                <div class="input-field">
+                  <input type="text" id="cep_cliente" name="cep_cliente" placeholder="Cep XXXXX-XXX" required oninput="mascaraCep(this)">
+                </div>
+                
+                <div class="password-container">
+                  <input type="password" id="senha_cliente" name="senha_cliente" placeholder="Senha" onfocus="showMessage()" onblur="hideMessage()" oninput="validatePassword()" oncopy="return false;" onpaste="return false;">
+                  <nav id="message" class="invalid">A senha deve ter pelo menos 8 caracteres, uma letra maiúscula e um caractere especial.</nav>
+                </div>
+                
+                <div class="password-container">
+                  <input type="password" id="confirmarsenha_cliente" name="confirmarsenha_cliente" placeholder="Confirme sua senha" required oncopy="return false;" onpaste="return false;">
+                  <nav id="error-message" class="error-message">As senhas não coincidem.</nav>
+                </div>
+                
                 <div id="email-error" class="error-message">Este e-mail já está em uso.</div>
+                
                 <button type="submit">Criar Conta</button>
-            </form>
-        </main>
-    </nav>
+              </form>
+              
 
 
     <script>
