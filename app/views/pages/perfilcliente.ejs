@@ -4,19 +4,28 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
   <link rel="icon" href="/images/favicon.ico">
   <link rel="stylesheet" href="/css/perfilcliente.css">
   <title>Perfil do Usuário</title>
 </head>
 <body>
+
   <main class="perfil-container">
     <section class="perfil-left">
+          <a href="/" class="material-symbols-outlined">
+          keyboard_backspace
+          <h3> Voltar </h3>
+      <a>
+      
       <div class="perfil-header">
-        <h1 id="user-name">Nome do Usuário</h1>
+
+        <h1 id="user-name">Bem-Vindo!</h1>
         <div class="photo-actions">
           <img id="img-preview" src="/imagens/perfil/imgperfil.png" alt="Foto de perfil">
-          <button class="edit-photo-button">Editar Foto</button>
         </div>
+        <nav class="button-photo">
+           <button >Editar Foto</button></nav>
       </div>
       <nav class="perfil-nav">
         <ul>
@@ -32,10 +41,10 @@
               Criar novo orçamento
             </a>
           </li>
-          <a href="#" class="logout-link">
-            <span class="material-icons-sharp">logout</span>
+          <nav class="sair">
+          <a href="#" id="logout"><span class="material-icons-sharp">logout</span></a>
             <h3>Desconectar</h3>
-          </a>
+            </nav>
         </ul>
         
       </nav>
@@ -71,5 +80,25 @@
       </form>
     </section>
   </main>
+  <script> document.getElementById('logout').addEventListener('click', function(event) {
+    event.preventDefault(); // Evita o comportamento padrão do link
+
+    // Realiza uma requisição para o endpoint de logout
+    fetch('/logout', { method: 'POST' })
+        .then(response => {
+            if (response.ok) {
+                // Redireciona para a página inicial ou de login
+                window.location.href = '/';
+            } else {
+                // Trate o erro de logout (opcional)
+                alert('Erro ao fazer logout. Tente novamente.');
+            }
+        })
+        .catch(error => {
+            console.error('Erro ao fazer logout:', error);
+            alert('Erro ao fazer logout. Tente novamente.');
+        });
+      })
+        </script>
 </body>
 </html>

@@ -21,6 +21,13 @@ body {
     
 }
 
+.material-symbols-outlined {
+    align-self: flex-start;
+    text-decoration: none;
+    color: #ffffff;
+    }
+
+
 .container {
     color: #fff;
     display: flex;

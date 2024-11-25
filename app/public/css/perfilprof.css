@@ -5,6 +5,33 @@
   box-sizing: border-box;
 }
 
+.material-symbols-outlined {
+  align-self: flex-start;
+  text-decoration: none;
+  color: #ffffff;
+  margin-left: 20px;
+  margin-bottom: 30px;
+margin-top: -110px;
+display: flex;
+  }
+
+  .material-symbols-outlined h3{
+font-family: sans-serif;
+font-size: 14px;
+margin-top: 5px;
+margin-left: 10px;
+  }
+
+
+  .material-symbols-outlined:hover {
+   color: #e58900;
+   transition: background-color 0.3s ease, color 0.3s ease;
+    }
+  
+    .material-symbols-outlined h3:hover{
+ color: #e58900;
+ transition: background-color 0.3s ease, color 0.3s ease;
+    }
 body {
   font-family:  sans-serif;
   background-color: #121212; /* Fundo escuro */
@@ -21,7 +48,6 @@ body {
 
 form {
   width: 100%;
-  max-width: 1200px;
 }
 
 /* Contêiner principal */
@@ -57,25 +83,57 @@ form {
   border-radius: 50%;
   object-fit: cover;
   margin-bottom: 15px;
+  margin-left: 0px;
  
 }
-
 .perfil-header h1 {
   font-size: 1.5rem;
   margin-bottom: 10px;
 }
 
-.edit-photo-button {
+.sair{
+display: flex;
+margin-top: 50px;
+background-color: rgba(128, 128, 128, 0.616); /* Botão laranja */
+color: #fff;
+height: 40px;
+width: 200px;
+border: none;
+padding: 5px 25px;
+border-radius: 25px; /* Arredondado */
+cursor: pointer;
+transition: background-color 0.3s ease, color 0.3s ease;
+margin-top: 15px;
+margin-right:0px;
+
+}
+
+
+.sair h3{
+font-size: 0.8rem;
+margin-top: 5px;
+  
+  }
+
+.button-photo button {
   background-color: rgba(128, 128, 128, 0.616); /* Botão laranja */
   color: #fff;
+  height: 40px;
+  width: 200px;
   border: none;
   padding: 10px 15px;
   border-radius: 25px; /* Arredondado */
   cursor: pointer;
   transition: background-color 0.3s ease, color 0.3s ease;
   margin-top: 15px;
+  margin-right:0px;
 }
 
+.button-photo button:hover{
+  background-color: #fafafa;
+  color: #e58900;
+
+}
 .edit-photo-button:hover {
   background-color: #ffffff; /* Tom mais escuro de laranja */
 }
@@ -116,13 +174,15 @@ form {
   color: #ffffff00;
   margin-top: 20px;
   text-decoration: none;
-  font-size: 1rem;
   background: rgba(128, 128, 128, 0.616); /* Vermelho para logout */
   padding: 10px 15px;
   border-radius: 25px; /* Arredondado */
   transition: background-color 0.3s ease;
 }
 
+.logout-link h3{
+font-size: 0.8rem;
+}
 .logout-link:hover {
   background-color: #ffffff;
 }
@@ -179,26 +239,24 @@ form {
   outline: none;
 }
 
-/* Botão salvar */
-.save-button {
-  display: block;
-  width: auto;
-  padding: 8px 16px;
-  background-color: #ff9800; /* Laranja */
-  color: #fff;
-  border: none;
+.perfil-right button{
+  display: flex;
+  margin-left: 240px;
+  width: 200px;
+  color: #ffffff;
+  margin-top: 30px;
+  height: 40px;
+  text-decoration: none;
+  background: rgba(128, 128, 128, 0.616); /* Vermelho para logout */
+  padding: 13px 80px;
   border-radius: 25px; /* Arredondado */
-  font-size: 0.9rem; /* Botão menor */
-  cursor: pointer;
   transition: background-color 0.3s ease;
-  text-transform: uppercase;
-  margin: 0 auto;
+  border: none;
 }
-
-.save-button:hover {
-  background-color: #e58900;
+.perfil-right button:hover{
+background-color: #fafafa;
+color: #e58900;
 }
-
 /* Menu de foto */
 .photo-menu {
   background-color: rgba(0, 0, 0, 0.8);

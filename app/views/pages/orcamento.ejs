@@ -20,12 +20,32 @@
             <h1>Faça seu orcamento com a gente</h1>
            <p>Nossa plataforma, oferece serviços como instalação de placa solar, limpeza, vistoria, consultoria e manutençã. <br>Procuraremos
         para voce, o melhor profissional de acordo com sua região, atendemos todas as suas necessidades, pois para nós, sua satisfação é o que realemnte importa.</p>
-        <h1>Mas por quê escolher a energia solar?</h1>
-        <p>Escolher energia solar é investir em uma fonte de energia limpa, econômica e sustentável. Ao adotar essa tecnologia, você não apenas reduz significativamente suas despesas com eletricidade, mas também contribui para um planeta mais verde, diminuindo as emissões de CO₂. Com a alta durabilidade dos sistemas solares, você garante uma solução confiável para o futuro, além de valorizar o seu imóvel. Além disso,
-             ao gerar sua própria energia, você se torna menos dependente de tarifas e reajustes, transformando o sol em uma fonte inesgotável de economia e autonomia.</p>
+<section class="passos">
+    <h1>Passo a passo
+        <a>
+    </h1>
+</section>
+<ul style="display: flex; align-items: center; gap: 20px;">
+    <li style="display: flex; align-items: center;">
+        <h2 style="margin: 0;">1</h2>
+        <p style="margin: 0 10px 0 0;">Preencha o formulário com seus dados</p>
+        <span class="material-symbols-outlined" style="color: orange; font-size: 36px;margin-top: 32px;">edit_note</span>
+    </li>
+ 
+    <li style="display: flex; align-items: center;">
+        <h2 style="margin: 0;">2</h2>
+        <p style="margin: 0 10px 0 0;">Envie o formulário.</p>
+        <span class="material-symbols-outlined" style="color: orange; font-size: 36px;margin-top: 60px;">check_circle</span>
+    </li>
+ 
+    <li style="display: flex; align-items: center;">
+        <h2 style="margin: 0;">3</h2>
+        <p style="margin: 0 10px 0 0;">Pronto! O profissional ideal para você estará a caminho.</p>
+        <span class="material-symbols-outlined" style="color: orange; font-size: 36px;">person</span>
+    </li>
+</ul>
+ 
         </section>
-         
-
     <section id="contact" class="contact-section">
             <form id="orcamento-form" method="post" action="/orcamento">
                 <h2>Solicite seu Orçamento</h2>
@@ -33,27 +53,27 @@
                     <label for="name">Nome:</label>
                     <input type="text" id="name" name="nome_cliente" placeholder="Nome completo" required>
                 </nav>
-
+ 
                 <nav class="form-group">
                     <select name="id_servico" id="">
-                        <% 
+                        <%
                         listaServicos.forEach(function(servico){ %>
                                  <option value="<%=servico.ID_SERVICO%>"> <%=servico.TITULO_SERVICO%></option>
-                                
+                               
                          <% }); %>
                     </select>
             </nav>
-
+ 
                 <nav class="form-group">
                     <label for="valor">Valor esperado:</label>
                     <input type="text" id="valor_orcamento" name="valor_orcamento" placeholder="ex:300">
                 </nav>
-
+ 
                 <nav class="form-group">
                     <label for="data">Dia e horário que o serviço deve ser realizado:</label>
                     <input type="datetime-local" id="data_orcamento" name="data_orcamento" required>
                 </nav>
-
+ 
                 <button type="submit">Enviar Solicitação</button>
                 <div id="success-message" style="display: none; color: green; margin-top: 1rem;">
                     Sua solicitação foi enviada com sucesso! Logo um profissional será encontrado para a realização do serviço.
@@ -64,45 +84,6 @@
             </form>
         </section>
     </nav>
-
-    <footer>
-        <section class="footer">
-            <nav class="footer-content">
-                <h2>Sollarium</h2>
-                <p>Sua plataforma de serviços solares em suas mãos.</p>
-                <nav class="icons">
-                    <a href=""><i class='bx bxl-facebook-circle'></i></a>
-                    <a href=""><i class='bx bxl-twitter'></i></a>
-                    <a href=""><i class='bx bxl-instagram-alt'></i></a>
-                    <a href=""><i class='bx bxl-youtube'></i></a>
-                </nav>
-            </nav>
-            
-            <nav class="footer-content">
-                <h4>Serviços</h4>
-                <li><a href="">Instalação</a></li>
-                <li><a href="">Vistoria</a></li>
-                <li><a href="">Manutenção</a></li>
-                <li><a href="">Consultoria</a></li>
-                <li><a href="">Limpeza</a></li>
-            </nav>
-
-            <nav class="footer-content">
-                <h4>Menu</h4>
-                <li><a href="">Orçamento</a></li>
-                <li><a href="">Sobre Nós</a></li>
-                <li><a href="">Início</a></li>
-                <li><a href="">Consultoria</a></li>
-            </nav>
-
-            <nav class="footer-content">
-                <h4>Ajuda</h4>
-                <li><a href="">Contato email</a></li>
-                <li><a href="">Contato telefone</a></li>
-            </nav>
-            <p>&copy; 2024 Sollarium. Todos os direitos reservados.</p>
-        </section>
-    </footer>
-
+ 
 </body>
 </html>
