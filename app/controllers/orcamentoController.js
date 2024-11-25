@@ -9,6 +9,7 @@ const jwt = require('jsonwebtoken');
 const moment = require('moment');
 const helpers = require("../helpers/helpers")
 const orcamentoController = {
+    
     // Validações para o formulário de orçamento      
     regrasValidacaoFormOrcamento: [  
         body("nome_cliente")
@@ -128,7 +129,7 @@ const orcamentoController = {
            
             valor_orcamento: req.body.valor,
             data_orcamento: req.body.data,
-            status_orcamento: status === 2 ? "Atualizado": "Pendente", //
+            status_orcamento: status === 2 ? "Atualizado": "Pendente", 
             profissionais_id_prof: req.session.autenticado.id
         }
         try {
@@ -185,7 +186,7 @@ const orcamentoController = {
         const errors = validationResult(req);
     if (!errors.isEmpty()) {
       console.log(errors);
-      return res.render("pages/listaClienteorc", {
+      return res.render("pages/lista ", {
         dados: req.body,
         listaErros: errors,
       });
@@ -193,6 +194,7 @@ const orcamentoController = {
      var dadosForm = {
         valor_orcamento: req.body.valor_orcamento,
         data_orcamento: req.body.data_orcamento,
+    
         
       };
       let id_orcamento = req.body.id_orcamento;
@@ -207,66 +209,80 @@ const orcamentoController = {
       res.json({ erro: "Falha ao acessar dados" });
     }
 },
-
-aceitarOrcamentoCliente: async (req, res) => {
-    try {
-      const { id_orcamento } = req.body;
-      const orcamento = await orcamentoModel.findById(id_orcamento);
-  
-      if (!orcamento) {
-        return res.status(404).json({ message: 'Orçamento não encontrado!' });
-      }
-  
-      const dadosForm = { status_orcamento: 2 };
-      await orcamentoModel.update(dadosForm, id_orcamento);
-  
-      res.json({ message: 'Orçamento aprovado com sucesso!' });
-    } catch (error) {
-      console.error('Erro ao aprovar orçamento:', error);
-      res.status(500).json({ message: 'Erro ao aprovar orçamento!' });
-    }
-  },
-
-recusarOrcamento: async (req, res) => {
-    let { id } = req.query;
-    try {
-      results = await orcamentoModel.delete(id);
-      res.redirect("/");
-    } catch (e) {
-      console.log(e);
-      res.json({ erro: "Falha ao acessar dados" });
-    }
-  },
- 
-
-// Excluir orçamento
-excluirOrcamento: async (req, res) => {
+    aceitarOrcamentoCliente: async (req, res) => {
         try {
-            const resultado = await orcamento.delete(req.params.id);
+            const { id_orcamento } = req.params; // Obtém o ID do orçamento a partir dos parâmetros da rota.
+            const orcamento = await orcamentoModel.findById(id_orcamento); // Busca o orçamento pelo ID.
 
-            if (resultado.affectedRows === 0) {
-                return res.render("pages/listarO", {
-                    listaErros: [{ msg: 'Orçamento não encontrado.' }],
-                    dadosNotificacao: null,
-                    valores: {}
-                });
+            if (!orcamento) {
+                return res.status(404).json({ message: 'Orçamento não encontrado!' });
             }
 
-            res.render("pages/listarOrcamentos", {
-                listaErros: null,
-                dadosNotificacao: { titulo: "Sucesso!", mensagem: "Orçamento excluído com sucesso.", tipo: "success" },
-                valores: {}
-            });
-        } catch (e) {
-            console.log(e);
-            res.render("pagesa/listarOrcamentos", {
-                listaErros: [{ msg: 'Erro ao excluir o orçamento.' }],
-                dadosNotificacao: null,
-                valores: {}
-            });
+            console.log(orcamento.STATUS_ORCAMENTO); // Apenas para debug, pode ser removido depois.
+
+            // Verifica se o orçamento já está "Atualizado" para então aprová-lo.
+            if (orcamento.STATUS_ORCAMENTO === "Atualizado") {
+                const dadosForm = { status_orcamento: "Aprovado!" }; // Atualiza o status para "Aprovado!".
+                await orcamentoModel.update(dadosForm, id_orcamento);
+
+                // Adicionando a lógica para buscar o nome do profissional, caso seja necessário.
+                const orcamentoAtualizado = await orcamentoModel.findById(id_orcamento);
+                return res.json({ 
+                    message: 'Orçamento aprovado com sucesso!',
+                    nomeProfissional: orcamentoAtualizado.NOME_PROF // Inclui o nome do profissional na resposta, se necessário.
+                });
+            } else {
+                return res.status(400).json({ message: 'Orçamento não está no status "Atualizado".' });
+            }
+        } catch (error) {
+            console.error('Erro ao aprovar orçamento:', error);
+            res.status(500).json({ message: 'Erro ao aprovar orçamento!' });
         }
-    },
+    }
+};
+
+
+
+// recusarOrcamento: async (req, res) => {
+//     let { id } = req.query;
+//     try {
+//       results = await orcamentoModel.delete(id);
+//       res.redirect("/");
+//     } catch (e) {
+//       console.log(e);
+//       res.json({ erro: "Falha ao acessar dados" });
+//     }
+//   },
+ 
+
+// // Excluir orçamento
+// excluirOrcamento: async (req, res) => {
+//         try {
+//             const resultado = await orcamento.delete(req.params.id);
+
+//             if (resultado.affectedRows === 0) {
+//                 return res.render("pages/listarO", {
+//                     listaErros: [{ msg: 'Orçamento não encontrado.' }],
+//                     dadosNotificacao: null,
+//                     valores: {}
+//                 });
+//             }
+
+//             res.render("pages/listarOrcamentos", {
+//                 listaErros: null,
+//                 dadosNotificacao: { titulo: "Sucesso!", mensagem: "Orçamento excluído com sucesso.", tipo: "success" },
+//                 valores: {}
+//             });
+//         } catch (e) {
+//             console.log(e);
+//             res.render("pagesa/listarOrcamentos", {
+//                 listaErros: [{ msg: 'Erro ao excluir o orçamento.' }],
+//                 dadosNotificacao: null,
+//                 valores: {}
+//             });
+//         }
+//     },
 
     
-};
+// };
 module.exports = orcamentoController

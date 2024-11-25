@@ -1,71 +1,86 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-    
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Solicitações de Orçamento</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"></link>
-    <link rel="stylesheet" href="/css/orcprof.css"></link>
-  </head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Solicitações de Orçamento</title>
+  <link rel="stylesheet"
+    href="https:fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap">
+  </link>
+  <link rel="stylesheet" href="/css/orcprof.css">
+  </link>
+</head>
 
 <body>
-    <h1>Solicitações de Orçamento</h1>
-    <table>
-        <thead>
-            <tr>
-                <th>Nome do Profissional</th>
-                <th>Data do Serviço</th>
-                <th>Valor do Serviço</th>
-                <th>Status</th>
-                <th>ação</th>
-            </tr>
-        </thead>
-        
-<tbody>
-  <% listaOrcamentos.forEach(function(orcamento){ %>
-    <tr>
-      <td><%= orcamento.NOME_PROF %></td>
-      <td><%= helpers.formatDate(orcamento.DATA_ORCAMENTO)%></td>
-      <td><%= orcamento.VALOR_ORCAMENTO %></td>
-      <td><%= orcamento.STATUS_ORCAMENTO %></td>
-      <!-- <td><button type="button" class="btn-accept teste" id="teste" data-id="<%=orcamento.ID_ORCAMENTO%>">Aceitar</button></td> -->
-      <td><button class="btn-accept" onclick="window.location='<%=orcamento.ID_ORCAMENTO%>'">Aceitar</button></td>
-    </tr>
-  <% }); %>
-</tbody>
-    </table>
+  <h1>Solicitações de Orçamento</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Nome do Profissional</th>
+        <th>Data do Serviço</th>
+        <th>Valor do Serviço</th>
+        <th>Status</th>
+        <th>ação</th>
+      </tr>
+    </thead>
 
-    <script>
-//     const btnAceitar = document.querySelectorAll('.teste id');
+    <tbody>
+      <% listaOrcamentos.forEach(function(orcamento){ %>
+        <tr>
+          <td>
+            <%= orcamento.NOME_PROF %>
+          </td>
+          <td>
+            <%= helpers.formatDate(orcamento.DATA_ORCAMENTO)%>
+          </td>
+          <td>
+            <%= orcamento.VALOR_ORCAMENTO %>
+          </td>
+          <td>
+            <%= orcamento.STATUS_ORCAMENTO %>
+          </td>
+          <td><button type="button" class="btn-accept teste" id="teste"
+              data-id="<%=orcamento.ID_ORCAMENTO%>">Aceitar</button></td>
+        </tr>
+        <% }); %>
+    </tbody>
+  </table>
 
-// btnAceitar.forEach(btn => {
-//   btn.addEventListener('click', async (e) => {
-//     const idOrcamento = e.target.getAttribute('data-id');
-//     const url = '/aprovar-orcamento';
-//     const metodo = 'POST';
-//     const cabecalhos = {
-//       'Content-Type': 'application/json'
-//     };
-//     const corpo = JSON.stringify({ id_orcamento: idOrcamento });
-  
-//     try {
-//       const resposta = await fetch(url, {
-//         method: metodo,
-//         headers: cabecalhos,
-//         body: corpo
-//       });
+  <script>
 
-//       if (resposta.ok) { 
-//         alert('Orçamento aprovado com sucesso!');
-//         location.reload();
-//       } else {
-//         alert('Erro ao aprovar orçamento!');
-//       }
-//     } catch (erro) {
-//       console.error('Erro ao aprovar orçamento:', erro);
-//     }
-//   });
-// });
+         const btnAceitar = document.querySelectorAll('.teste');
 
-    </script>
+ btnAceitar.forEach(btn => {
+   btn.addEventListener('click', async (e) => {
+     const idOrcamento = e.target.getAttribute('data-id');
+     const url = `/aprovar-orcamento/${idOrcamento}`;
+     const metodo = 'POST';
+     const cabecalhos = {
+       'Content-Type': 'application/json'
+     };
+     const corpo = JSON.stringify({ id_orcamento: idOrcamento });
+     
+     try {
+       const resposta = await fetch(url, {
+         method: metodo,
+         headers: cabecalhos,
+         body: corpo
+       });
+
+       console.log(resposta)
+
+       if (resposta.ok) { 
+         alert('Orçamento aprovado com sucesso!');
+         location.reload();
+       } else {
+         alert('Erro ao aprovar orçamento!');
+       }
+     } catch (erro) {
+       console.error('Erro ao aprovar orçamento:', erro);
+     }
+   });
+ });
+
+
+  </script>
